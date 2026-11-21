@@ -282,20 +282,21 @@ void ApplicationSettings::saveDisplay(Session session, const DisplayConfig& disp
 {
     QSettings settings = sessionSettings(session);
 
-    settings.setValue("display/outer_contour/visible", displayConfig.outerContourVisible);
-    settings.setValue("display/outer_contour/rgb", rgbToString(displayConfig.outerContourColor));
+    settings.setValue("display/outer_contour/visible", displayConfig.contour.outerVisible);
+    settings.setValue("display/outer_contour/rgb", rgbToString(displayConfig.contour.outerColor));
 
-    settings.setValue("display/inner_contour/visible", displayConfig.innerContourVisible);
-    settings.setValue("display/inner_contour/rgb", rgbToString(displayConfig.innerContourColor));
+    settings.setValue("display/inner_contour/visible", displayConfig.contour.innerVisible);
+    settings.setValue("display/inner_contour/rgb", rgbToString(displayConfig.contour.innerColor));
 
-    settings.setValue("display/algorithm_overlay/enabled", displayConfig.algorithmOverlayEnabled);
-    settings.setValue("display/mini_map/enabled", displayConfig.miniMapEnabled);
+    settings.setValue("display/algorithm_overlay/enabled",
+                      displayConfig.view.algorithmOverlayEnabled);
+    settings.setValue("display/mini_map/enabled", displayConfig.view.miniMapEnabled);
 
     settings.setValue("display/mode", to_string(displayConfig.displayMode));
 
-    settings.setValue("display/mirror_mode", displayConfig.mirrorMode);
+    settings.setValue("display/mirror_mode", displayConfig.view.mirrorMode);
 
-    settings.setValue("display/smooth_display", displayConfig.smoothDisplay);
+    settings.setValue("display/smooth_display", displayConfig.view.smoothDisplay);
 }
 
 void ApplicationSettings::loadImageSessionSettings()
@@ -516,32 +517,30 @@ void ApplicationSettings::loadDisplay(Session session, DisplayConfig& displayCon
 {
     QSettings settings = sessionSettings(session);
 
-    displayConfig.outerContourVisible =
-        settings.value("display/outer_contour/visible", DisplayConfig::kDefaultContourVisible)
+    displayConfig.contour.outerVisible =
+        settings.value("display/outer_contour/visible", ContourStyleConfig::kDefaultVisible)
             .toBool();
-    displayConfig.outerContourColor =
-        rgbFromString(settings
-                          .value("display/outer_contour/rgb",
-                                 rgbToString(DisplayConfig::kDefaultOuterContourColor))
-                          .toString(),
-                      DisplayConfig::kDefaultOuterContourColor);
+    displayConfig.contour.outerColor = rgbFromString(
+        settings
+            .value("display/outer_contour/rgb", rgbToString(ContourStyleConfig::kDefaultOuterColor))
+            .toString(),
+        ContourStyleConfig::kDefaultOuterColor);
 
-    displayConfig.innerContourVisible =
-        settings.value("display/inner_contour/visible", DisplayConfig::kDefaultContourVisible)
+    displayConfig.contour.innerVisible =
+        settings.value("display/inner_contour/visible", ContourStyleConfig::kDefaultVisible)
             .toBool();
-    displayConfig.innerContourColor =
-        rgbFromString(settings
-                          .value("display/inner_contour/rgb",
-                                 rgbToString(DisplayConfig::kDefaultInnerContourColor))
-                          .toString(),
-                      DisplayConfig::kDefaultInnerContourColor);
+    displayConfig.contour.innerColor = rgbFromString(
+        settings
+            .value("display/inner_contour/rgb", rgbToString(ContourStyleConfig::kDefaultInnerColor))
+            .toString(),
+        ContourStyleConfig::kDefaultInnerColor);
 
-    displayConfig.algorithmOverlayEnabled =
-        settings.value("display/algorithm_overlay/enabled", DisplayConfig::kDefaultOverlayEnabled)
+    displayConfig.view.algorithmOverlayEnabled =
+        settings.value("display/algorithm_overlay/enabled", ViewConfig::kDefaultOverlayEnabled)
             .toBool();
 
-    displayConfig.miniMapEnabled =
-        settings.value("display/mini_map/enabled", DisplayConfig::kDefaultOverlayEnabled).toBool();
+    displayConfig.view.miniMapEnabled =
+        settings.value("display/mini_map/enabled", ViewConfig::kDefaultOverlayEnabled).toBool();
 
     const QString s =
         settings
@@ -551,11 +550,11 @@ void ApplicationSettings::loadDisplay(Session session, DisplayConfig& displayCon
 
     displayConfig.displayMode = imageDisplayModeFromString(s.toStdString());
 
-    displayConfig.mirrorMode =
-        settings.value("display/mirror_mode", DisplayConfig::kDefaultOptionDisabled).toBool();
+    displayConfig.view.mirrorMode =
+        settings.value("display/mirror_mode", ViewConfig::kDefaultOptionDisabled).toBool();
 
-    displayConfig.smoothDisplay =
-        settings.value("display/smooth_display", DisplayConfig::kDefaultOptionDisabled).toBool();
+    displayConfig.view.smoothDisplay =
+        settings.value("display/smooth_display", ViewConfig::kDefaultOptionDisabled).toBool();
 }
 
 QDir ApplicationSettings::settingsDirectory()

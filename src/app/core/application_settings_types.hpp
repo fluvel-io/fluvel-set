@@ -159,35 +159,50 @@ inline ImageDisplayMode imageDisplayModeFromString(std::string_view s)
 }
 
 /**
- * @brief Display configuration for rendering images and contours.
- *
- * Controls visualization options such as contour visibility, colors,
- * and rendering effects.
+ * @brief Style of the contour layers (content, also visible in exports).
  */
-struct DisplayConfig
+struct ContourStyleConfig
 {
-    static constexpr ImageDisplayMode kDefaultDisplayMode{ImageDisplayMode::Preprocessed};
+    static constexpr bool kDefaultVisible{true};
+    static constexpr fluvel_ip::Rgb_uc kDefaultOuterColor{64u, 0u, 255u};
+    static constexpr fluvel_ip::Rgb_uc kDefaultInnerColor{0u, 230u, 118u};
 
-    static constexpr bool kDefaultContourVisible{true};
-    static constexpr fluvel_ip::Rgb_uc kDefaultOuterContourColor{64u, 0u, 255u};
-    static constexpr fluvel_ip::Rgb_uc kDefaultInnerContourColor{0u, 230u, 118u};
+    bool outerVisible = kDefaultVisible;
+    fluvel_ip::Rgb_uc outerColor{kDefaultOuterColor};
 
+    bool innerVisible = kDefaultVisible;
+    fluvel_ip::Rgb_uc innerColor{kDefaultInnerColor};
+};
+
+/**
+ * @brief Presentation options of the image viewer (screen only, never exported).
+ */
+struct ViewConfig
+{
     static constexpr bool kDefaultOptionDisabled{false};
     static constexpr bool kDefaultOverlayEnabled{true};
-
-    ImageDisplayMode displayMode = kDefaultDisplayMode;
-
-    bool outerContourVisible = kDefaultContourVisible;
-    fluvel_ip::Rgb_uc outerContourColor{kDefaultOuterContourColor};
-
-    bool innerContourVisible = kDefaultContourVisible;
-    fluvel_ip::Rgb_uc innerContourColor{kDefaultInnerContourColor};
 
     bool mirrorMode{kDefaultOptionDisabled};
     bool smoothDisplay{kDefaultOptionDisabled};
 
     bool algorithmOverlayEnabled{kDefaultOverlayEnabled};
     bool miniMapEnabled{kDefaultOverlayEnabled};
+};
+
+/**
+ * @brief Display configuration for rendering images and contours.
+ *
+ * Content options (displayMode, contour) decide what is shown and also
+ * apply to exports. View options only change how the viewer presents it.
+ */
+struct DisplayConfig
+{
+    static constexpr ImageDisplayMode kDefaultDisplayMode{ImageDisplayMode::Preprocessed};
+
+    ImageDisplayMode displayMode = kDefaultDisplayMode;
+
+    ContourStyleConfig contour{};
+    ViewConfig view{};
 };
 
 /**

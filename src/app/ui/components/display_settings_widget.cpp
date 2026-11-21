@@ -34,9 +34,11 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
     displayModeLayout->addWidget(preprocessedRadioButton_);
     displayModeGroupBox_->setLayout(displayModeLayout);
 
-    outerContourColorSelector_ = new ColorSelectorWidget(this, toQColor(config_.outerContourColor));
+    outerContourColorSelector_ =
+        new ColorSelectorWidget(this, toQColor(config_.contour.outerColor));
 
-    innerContourColorSelector_ = new ColorSelectorWidget(this, toQColor(config_.innerContourColor));
+    innerContourColorSelector_ =
+        new ColorSelectorWidget(this, toQColor(config_.contour.innerColor));
 
     QVBoxLayout* outerLayout = new QVBoxLayout;
     outerLayout->addWidget(outerContourColorSelector_);
@@ -45,7 +47,7 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
     QGroupBox* outerColorGroupBox = new QGroupBox(tr("Outer Contour"));
     outerColorGroupBox->setLayout(outerLayout);
     outerColorGroupBox->setCheckable(true);
-    outerColorGroupBox->setChecked(config_.outerContourVisible);
+    outerColorGroupBox->setChecked(config_.contour.outerVisible);
 
     outerColorGroupBox->setFlat(true);
     outerColorGroupBox->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
@@ -57,16 +59,16 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
     QGroupBox* innerColorGroupBox = new QGroupBox(tr("Inner Contour"));
     innerColorGroupBox->setLayout(innerLayout);
     innerColorGroupBox->setCheckable(true);
-    innerColorGroupBox->setChecked(config_.innerContourVisible);
+    innerColorGroupBox->setChecked(config_.contour.innerVisible);
 
     innerColorGroupBox->setFlat(true);
     innerColorGroupBox->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
 
     mirrorModeCheckBox_ = new QCheckBox(tr("Selfie Mirror"));
-    mirrorModeCheckBox_->setChecked(config_.mirrorMode);
+    mirrorModeCheckBox_->setChecked(config_.view.mirrorMode);
 
     smoothDisplayCheckBox_ = new QCheckBox(tr("Smooth Display"));
-    smoothDisplayCheckBox_->setChecked(config_.smoothDisplay);
+    smoothDisplayCheckBox_->setChecked(config_.view.smoothDisplay);
 
     QGroupBox* renderingGroupBox = new QGroupBox(tr("Rendering:"));
     QVBoxLayout* renderingLayout = new QVBoxLayout;
@@ -75,10 +77,10 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
     renderingGroupBox->setLayout(renderingLayout);
 
     overlayCheckBox_ = new QCheckBox(tr("Overlay"));
-    overlayCheckBox_->setChecked(config_.algorithmOverlayEnabled);
+    overlayCheckBox_->setChecked(config_.view.algorithmOverlayEnabled);
 
     miniMapCheckBox_ = new QCheckBox(tr("Mini-map"));
-    miniMapCheckBox_->setChecked(config_.miniMapEnabled);
+    miniMapCheckBox_->setChecked(config_.view.miniMapEnabled);
 
     auto* title = new QLabel(tr("View"));
     title->setStyleSheet("font-weight: bold; font-size: 14px;");
@@ -101,42 +103,42 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
     connect(outerColorGroupBox, &QGroupBox::toggled, this,
             [this](bool checked)
             {
-                config_.outerContourVisible = checked;
+                config_.contour.outerVisible = checked;
                 emit displayConfigChanged(config_);
             });
 
     connect(outerContourColorSelector_, &ColorSelectorWidget::colorSelected, this,
             [this](const QColor& color)
             {
-                config_.outerContourColor = toRgb_uc(color);
+                config_.contour.outerColor = toRgb_uc(color);
                 emit displayConfigChanged(config_);
             });
 
     connect(innerColorGroupBox, &QGroupBox::toggled, this,
             [this](bool checked)
             {
-                config_.innerContourVisible = checked;
+                config_.contour.innerVisible = checked;
                 emit displayConfigChanged(config_);
             });
 
     connect(innerContourColorSelector_, &ColorSelectorWidget::colorSelected, this,
             [this](const QColor& color)
             {
-                config_.innerContourColor = toRgb_uc(color);
+                config_.contour.innerColor = toRgb_uc(color);
                 emit displayConfigChanged(config_);
             });
 
     connect(overlayCheckBox_, &QCheckBox::toggled, this,
             [this](bool checked)
             {
-                config_.algorithmOverlayEnabled = checked;
+                config_.view.algorithmOverlayEnabled = checked;
                 emit displayConfigChanged(config_);
             });
 
     connect(miniMapCheckBox_, &QCheckBox::toggled, this,
             [this](bool checked)
             {
-                config_.miniMapEnabled = checked;
+                config_.view.miniMapEnabled = checked;
                 emit displayConfigChanged(config_);
             });
 
@@ -163,14 +165,14 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
     connect(mirrorModeCheckBox_, &QCheckBox::toggled, this,
             [this](bool checked)
             {
-                config_.mirrorMode = checked;
+                config_.view.mirrorMode = checked;
                 emit displayConfigChanged(config_);
             });
 
     connect(smoothDisplayCheckBox_, &QCheckBox::toggled, this,
             [this](bool checked)
             {
-                config_.smoothDisplay = checked;
+                config_.view.smoothDisplay = checked;
                 emit displayConfigChanged(config_);
             });
 }

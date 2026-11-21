@@ -13,11 +13,11 @@ QVector<PointLayer> make(const QVector<QPointF>& outer, const QVector<QPointF>& 
 {
     QVector<PointLayer> layers(2);
 
-    layers[kOuter] = {outer, toQColor(displayConfig.outerContourColor),
-                      displayConfig.outerContourVisible};
+    layers[kOuter] = {outer, toQColor(displayConfig.contour.outerColor),
+                      displayConfig.contour.outerVisible};
 
-    layers[kInner] = {inner, toQColor(displayConfig.innerContourColor),
-                      displayConfig.innerContourVisible};
+    layers[kInner] = {inner, toQColor(displayConfig.contour.innerColor),
+                      displayConfig.contour.innerVisible};
 
     return layers;
 }

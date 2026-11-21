@@ -142,9 +142,9 @@ QScrollBar:horizontal {
     smoothButton_->setCheckable(true);
     overlayButton_->setCheckable(true);
 
-    mirrorButton_->setChecked(config.mirrorMode);
-    smoothButton_->setChecked(config.smoothDisplay);
-    overlayButton_->setChecked(config.algorithmOverlayEnabled);
+    mirrorButton_->setChecked(config.view.mirrorMode);
+    smoothButton_->setChecked(config.view.smoothDisplay);
+    overlayButton_->setChecked(config.view.algorithmOverlayEnabled);
 
     mirrorButton_->setIcon(il::loadIcon(":/icons/view/mirror-symbolic.svg", il::IconMode::Light));
     smoothButton_->setIcon(

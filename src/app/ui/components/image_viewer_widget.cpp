@@ -1055,8 +1055,8 @@ void ImageViewerWidget::upscaleItems()
 
 void ImageViewerWidget::applyDisplayConfig(const DisplayConfig& display)
 {
-    const bool previousMirrorMode = displayConfig_.mirrorMode;
-    const bool previousSmoothDisplay = displayConfig_.smoothDisplay;
+    const bool previousMirrorMode = displayConfig_.view.mirrorMode;
+    const bool previousSmoothDisplay = displayConfig_.view.smoothDisplay;
 
     displayConfig_ = display;
 
@@ -1065,15 +1065,15 @@ void ImageViewerWidget::applyDisplayConfig(const DisplayConfig& display)
     if (!hasImage())
         return;
 
-    if (previousMirrorMode != displayConfig_.mirrorMode)
+    if (previousMirrorMode != displayConfig_.view.mirrorMode)
     {
-        showNotification(displayConfig_.mirrorMode ? tr("Mirror On") : tr("Mirror Off"));
+        showNotification(displayConfig_.view.mirrorMode ? tr("Mirror On") : tr("Mirror Off"));
     }
 
-    if (previousSmoothDisplay != displayConfig_.smoothDisplay)
+    if (previousSmoothDisplay != displayConfig_.view.smoothDisplay)
     {
-        showNotification(displayConfig_.smoothDisplay ? tr("Smooth Display On")
-                                                      : tr("Smooth Display Off"));
+        showNotification(displayConfig_.view.smoothDisplay ? tr("Smooth Display On")
+                                                           : tr("Smooth Display Off"));
     }
 }
 
@@ -1092,7 +1092,7 @@ void ImageViewerWidget::updateFlip()
 
     contentRoot_->setTransformOriginPoint(0.0, 0.0);
 
-    if (displayConfig_.mirrorMode)
+    if (displayConfig_.view.mirrorMode)
     {
         QTransform t;
         t.scale(-1.0, 1.0);
@@ -1113,7 +1113,7 @@ void ImageViewerWidget::updateSmoothDisplay()
 {
     assert(useEnhancedDisplayConfig_ && pixmapItem_);
 
-    if (displayConfig_.smoothDisplay)
+    if (displayConfig_.view.smoothDisplay)
         pixmapItem_->setTransformationMode(Qt::SmoothTransformation);
     else
         pixmapItem_->setTransformationMode(Qt::FastTransformation);
@@ -1123,7 +1123,7 @@ void ImageViewerWidget::updateTextOverlayVisibility()
 {
     assert(infoOverlay_ && useEnhancedDisplayConfig_);
 
-    infoOverlay_->setVisible(displayConfig_.algorithmOverlayEnabled);
+    infoOverlay_->setVisible(displayConfig_.view.algorithmOverlayEnabled);
 }
 
 void ImageViewerWidget::updateMiniMapVisibility()
@@ -1133,7 +1133,7 @@ void ImageViewerWidget::updateMiniMapVisibility()
     if (!hasImage())
         return;
 
-    miniMap_->setVisible(displayConfig_.miniMapEnabled);
+    miniMap_->setVisible(displayConfig_.view.miniMapEnabled);
 }
 
 void ImageViewerWidget::applyDownscaleConfig(const DownscaleParams& downscale)
@@ -1252,7 +1252,7 @@ void ImageViewerWidget::updateMiniMapThumbnail()
     if (thumbnail_.isNull())
         return;
 
-    if (useEnhancedDisplayConfig_ && displayConfig_.mirrorMode)
+    if (useEnhancedDisplayConfig_ && displayConfig_.view.mirrorMode)
         miniMap_->setImage(thumbnail_.flipped(Qt::Horizontal));
     else
         miniMap_->setImage(thumbnail_);
