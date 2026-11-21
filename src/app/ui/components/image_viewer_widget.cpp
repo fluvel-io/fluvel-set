@@ -1044,7 +1044,7 @@ void ImageViewerWidget::upscaleItems()
 
     qreal factor = 1.0;
 
-    if (has_ds && displayConfig_.displayMode == ImageDisplayMode::Source)
+    if (has_ds && displayConfig_.background == BackgroundImage::Source)
         factor = qreal(df);
 
     layerScale_ = factor;

@@ -306,7 +306,7 @@ void VideoController::onVideoDisplaySettingsChanged(const DisplayConfig& display
 {
     displayConfig_ = display;
 
-    processingThread_.setDisplayMode(display.displayMode);
+    processingThread_.setBackground(display.background);
 
     // Contour colors and visibility may have changed: restyle the displayed contour,
     // which also applies when no new frame arrives (paused or stopped stream).

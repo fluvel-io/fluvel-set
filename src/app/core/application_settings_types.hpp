@@ -121,41 +121,42 @@ enum class Session
 };
 
 /**
- * @brief Image display mode.
+ * @brief Image drawn under the contours.
  *
- * Controls which image representation is shown in the UI.
+ * Selects which image representation is shown in the UI and used for
+ * exports (snapshots, recordings).
  */
-enum class ImageDisplayMode
+enum class BackgroundImage
 {
     Source,      ///< Original input image
     Preprocessed ///< Processed image after pipeline
 };
 
 /**
- * @brief Convert display mode to string.
+ * @brief Convert background image to string.
  */
-inline constexpr const char* to_string(ImageDisplayMode mode)
+inline constexpr const char* to_string(BackgroundImage mode)
 {
     switch (mode)
     {
-        case ImageDisplayMode::Source:
+        case BackgroundImage::Source:
             return "source";
-        case ImageDisplayMode::Preprocessed:
+        case BackgroundImage::Preprocessed:
             return "preprocessed";
     }
     return "source";
 }
 
 /**
- * @brief Convert string to display mode.
+ * @brief Convert string to background image.
  */
-inline ImageDisplayMode imageDisplayModeFromString(std::string_view s)
+inline BackgroundImage backgroundImageFromString(std::string_view s)
 {
     if (s == "source")
-        return ImageDisplayMode::Source;
+        return BackgroundImage::Source;
     if (s == "preprocessed")
-        return ImageDisplayMode::Preprocessed;
-    return ImageDisplayMode::Source;
+        return BackgroundImage::Preprocessed;
+    return BackgroundImage::Source;
 }
 
 /**
@@ -192,14 +193,14 @@ struct ViewConfig
 /**
  * @brief Display configuration for rendering images and contours.
  *
- * Content options (displayMode, contour) decide what is shown and also
+ * Content options (background, contour) decide what is shown and also
  * apply to exports. View options only change how the viewer presents it.
  */
 struct DisplayConfig
 {
-    static constexpr ImageDisplayMode kDefaultDisplayMode{ImageDisplayMode::Preprocessed};
+    static constexpr BackgroundImage kDefaultBackground{BackgroundImage::Preprocessed};
 
-    ImageDisplayMode displayMode = kDefaultDisplayMode;
+    BackgroundImage background = kDefaultBackground;
 
     ContourStyleConfig contour{};
     ViewConfig view{};

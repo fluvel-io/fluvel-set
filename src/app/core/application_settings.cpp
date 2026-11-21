@@ -292,7 +292,7 @@ void ApplicationSettings::saveDisplay(Session session, const DisplayConfig& disp
                       displayConfig.view.algorithmOverlayEnabled);
     settings.setValue("display/mini_map/enabled", displayConfig.view.miniMapEnabled);
 
-    settings.setValue("display/mode", to_string(displayConfig.displayMode));
+    settings.setValue("display/background", to_string(displayConfig.background));
 
     settings.setValue("display/mirror_mode", displayConfig.view.mirrorMode);
 
@@ -544,11 +544,11 @@ void ApplicationSettings::loadDisplay(Session session, DisplayConfig& displayCon
 
     const QString s =
         settings
-            .value("display/mode",
-                   QString::fromStdString(to_string(DisplayConfig::kDefaultDisplayMode)))
+            .value("display/background",
+                   QString::fromStdString(to_string(DisplayConfig::kDefaultBackground)))
             .toString();
 
-    displayConfig.displayMode = imageDisplayModeFromString(s.toStdString());
+    displayConfig.background = backgroundImageFromString(s.toStdString());
 
     displayConfig.view.mirrorMode =
         settings.value("display/mirror_mode", ViewConfig::kDefaultOptionDisabled).toBool();

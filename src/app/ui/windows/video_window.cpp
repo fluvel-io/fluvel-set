@@ -692,7 +692,7 @@ void VideoWindow::setupConnections()
                                         conf.compute.spatialFilteringEnabled ||
                                         conf.compute.temporalFilteringEnabled;
 
-                displayBar_->updateDisplayModeAvailability(hasPreprocessing);
+                displayBar_->updateBackgroundAvailability(hasPreprocessing);
             });
 
     connect(videoController_, &VideoController::downscaleChanged, this,
@@ -900,7 +900,7 @@ void VideoWindow::applyInitialSettings()
     bool preprocessing = app.videoSettings().compute.downscale.downscaleEnabled ||
                          app.videoSettings().compute.temporalFilteringEnabled;
 
-    displayBar_->updateDisplayModeAvailability(preprocessing);
+    displayBar_->updateBackgroundAvailability(preprocessing);
 
     applyInitialAudioSettings();
 

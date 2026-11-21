@@ -54,7 +54,7 @@ public:
      *
      * @param hasPreprocessing True if a preprocessed image is available.
      */
-    void updateDisplayModeAvailability(bool hasPreprocessing);
+    void updateBackgroundAvailability(bool hasPreprocessing);
 
     /**
      * @brief Enables or disables the selfie mirror display.
@@ -113,7 +113,7 @@ private:
 
     QPointer<QPropertyAnimation> animation_;
 
-    QGroupBox* displayModeGroupBox_{nullptr};
+    QGroupBox* backgroundGroupBox_{nullptr};
     QRadioButton* sourceRadioButton_{nullptr};
     QRadioButton* preprocessedRadioButton_{nullptr};
 

@@ -105,12 +105,12 @@ QImage VideoProcessingThread::applyDownscale(const QImage& input,
 ProcessedFrame VideoProcessingThread::processFrame(const QVideoFrame& frame)
 {
     VideoComputeConfig config;
-    ImageDisplayMode displayMode;
+    BackgroundImage background;
 
     {
         QMutexLocker locker(&configMutex_);
         config = config_;
-        displayMode = displayMode_;
+        background = background_;
         if (configChanged_)
         {
             configChanged_ = false;
@@ -185,11 +185,11 @@ ProcessedFrame VideoProcessingThread::processFrame(const QVideoFrame& frame)
         activeContour_->runCycles(1);
     }
 
-    if (displayMode == ImageDisplayMode::Source)
+    if (background == BackgroundImage::Source)
     {
         df.image = inputImage;
     }
-    else if (displayMode == ImageDisplayMode::Preprocessed)
+    else if (background == BackgroundImage::Preprocessed)
     {
         if (config.spatialFilteringEnabled || config.temporalFilteringEnabled)
             exportFilteredImage(algoImage, df);
@@ -235,10 +235,10 @@ void VideoProcessingThread::setAlgoConfig(const VideoComputeConfig& config)
     configChanged_ = true;
 }
 
-void VideoProcessingThread::setDisplayMode(ImageDisplayMode mode)
+void VideoProcessingThread::setBackground(BackgroundImage mode)
 {
     QMutexLocker locker(&configMutex_);
-    displayMode_ = mode;
+    background_ = mode;
 }
 
 } // namespace fluvel

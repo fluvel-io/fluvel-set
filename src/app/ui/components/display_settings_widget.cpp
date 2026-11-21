@@ -23,16 +23,16 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
 {
     setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
 
-    displayModeGroupBox_ = new QGroupBox(tr("Image:"));
+    backgroundGroupBox_ = new QGroupBox(tr("Image:"));
     sourceRadioButton_ = new QRadioButton(tr("Source"));
     preprocessedRadioButton_ = new QRadioButton(tr("Preprocessed"));
-    sourceRadioButton_->setChecked(config_.displayMode == ImageDisplayMode::Source);
-    preprocessedRadioButton_->setChecked(config_.displayMode == ImageDisplayMode::Preprocessed);
+    sourceRadioButton_->setChecked(config_.background == BackgroundImage::Source);
+    preprocessedRadioButton_->setChecked(config_.background == BackgroundImage::Preprocessed);
 
-    QVBoxLayout* displayModeLayout = new QVBoxLayout;
-    displayModeLayout->addWidget(sourceRadioButton_);
-    displayModeLayout->addWidget(preprocessedRadioButton_);
-    displayModeGroupBox_->setLayout(displayModeLayout);
+    QVBoxLayout* backgroundLayout = new QVBoxLayout;
+    backgroundLayout->addWidget(sourceRadioButton_);
+    backgroundLayout->addWidget(preprocessedRadioButton_);
+    backgroundGroupBox_->setLayout(backgroundLayout);
 
     outerContourColorSelector_ =
         new ColorSelectorWidget(this, toQColor(config_.contour.outerColor));
@@ -88,7 +88,7 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
     QVBoxLayout* widgetLayout = new QVBoxLayout;
     widgetLayout->addWidget(title);
     widgetLayout->addSpacing(12);
-    widgetLayout->addWidget(displayModeGroupBox_);
+    widgetLayout->addWidget(backgroundGroupBox_);
     widgetLayout->addWidget(outerColorGroupBox);
     widgetLayout->addWidget(innerColorGroupBox);
     widgetLayout->addWidget(renderingGroupBox);
@@ -148,7 +148,7 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
                 if (!checked)
                     return;
 
-                config_.displayMode = ImageDisplayMode::Source;
+                config_.background = BackgroundImage::Source;
                 emit displayConfigChanged(config_);
             });
 
@@ -158,7 +158,7 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
                 if (!checked)
                     return;
 
-                config_.displayMode = ImageDisplayMode::Preprocessed;
+                config_.background = BackgroundImage::Preprocessed;
                 emit displayConfigChanged(config_);
             });
 
@@ -177,9 +177,9 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
             });
 }
 
-void DisplaySettingsWidget::updateDisplayModeAvailability(bool hasPreprocessing)
+void DisplaySettingsWidget::updateBackgroundAvailability(bool hasPreprocessing)
 {
-    displayModeGroupBox_->setEnabled(hasPreprocessing);
+    backgroundGroupBox_->setEnabled(hasPreprocessing);
 
     if (!hasPreprocessing)
     {

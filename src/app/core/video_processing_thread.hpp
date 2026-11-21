@@ -79,7 +79,7 @@ public:
     /**
      * @brief Set display mode.
      */
-    void setDisplayMode(ImageDisplayMode mode);
+    void setBackground(BackgroundImage mode);
 
 signals:
     /// Emitted after processing a frame (contour size for diagnostics).
@@ -129,7 +129,7 @@ private:
     VideoComputeConfig config_{};
 
     /// Current display mode.
-    ImageDisplayMode displayMode_;
+    BackgroundImage background_;
 
     /// Mutex protecting frame access.
     QMutex frameMutex_;

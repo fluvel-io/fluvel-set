@@ -15,7 +15,7 @@ namespace fluvel::frame_rendering_utils
 
 qreal contourScaleFactor(const DisplayConfig& displayConfig, const DownscaleParams& downscaleParams)
 {
-    if (downscaleParams.downscaleEnabled && displayConfig.displayMode == ImageDisplayMode::Source)
+    if (downscaleParams.downscaleEnabled && displayConfig.background == BackgroundImage::Source)
     {
         return static_cast<qreal>(downscaleParams.downscaleFactor);
     }

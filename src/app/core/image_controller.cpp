@@ -161,7 +161,7 @@ void ImageController::onImageSettingsChanged(const ImageSessionSettings& session
 
 void ImageController::onImageDisplaySettingsChanged(const DisplayConfig& display)
 {
-    bool needs_refresh = (displayConfig_.displayMode != display.displayMode);
+    bool needs_refresh = (displayConfig_.background != display.background);
 
     displayConfig_ = display;
 
@@ -183,9 +183,9 @@ void ImageController::refreshView()
 
     QImage img;
 
-    if (displayConfig_.displayMode == ImageDisplayMode::Source)
+    if (displayConfig_.background == BackgroundImage::Source)
         img = inputImage_;
-    else if (displayConfig_.displayMode == ImageDisplayMode::Preprocessed)
+    else if (displayConfig_.background == BackgroundImage::Preprocessed)
         img = processedImage_;
 
     emit displayedImageReady(img);
