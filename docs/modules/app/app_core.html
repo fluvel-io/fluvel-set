@@ -1447,7 +1447,7 @@ used throughout the application.</p>
 <em>#include &lt;image_processing_worker.hpp&gt;</em></div>
 <p>Qt worker managing image processing and segmentation execution. </p>
 <p>This class acts as a bridge between the UI layer and the image processing pipeline. It handles processing initialization, execution control (start, pause, step), and result propagation through Qt signals.</p>
-<p>Execution is driven by a QTimer in interactive mode, allowing periodic updates suitable for UI rendering. In converge mode, processing runs continuously until completion without intermediate updates.</p>
+<p>Execution is driven by a QTimer in both modes. In interactive mode, each tick runs a short time slice and publishes the result, allowing periodic updates suitable for UI rendering. In converge mode, ticks use a slightly longer time slice and run until completion without intermediate updates.</p>
 <p>Responsibilities:<ul class="simple">
 <li><p>Manage image processing and segmentation lifecycle</p></li>
 <li><p>Control execution flow (interactive vs converge)</p></li>
@@ -1457,7 +1457,7 @@ used throughout the application.</p>
 </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This class is intended to be used from the Qt event loop. </p>
+<p>Despite its name, this class does not own a thread. It lives in the thread of its owner (the GUI thread) and is driven by the Qt event loop. Both modes keep the interface responsive by splitting the contour iterations into short time slices. The preprocessing filters run synchronously during <a class="reference internal" href="#classfluvel_1_1ImageProcessingWorker_1addf4df5295202e997402d8e43d6f06f5"><span class="std std-ref">initialize()</span></a> and <a class="reference internal" href="#classfluvel_1_1ImageProcessingWorker_1a22ee094ca3f45aa4156b97d34fe678bf"><span class="std std-ref">restart()</span></a>, so the interface waits until they are done. </p>
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
