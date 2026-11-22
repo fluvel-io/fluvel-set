@@ -154,6 +154,29 @@ source of settings.
      </a>
    </div>
 
+Settings dialogs
+~~~~~~~~~~~~~~~~
+
+The session dialogs (image and video) never read or write the singleton. A
+dialog receives its configuration once, when it is created, and keeps two
+copies: the *committed* one, which is what the application uses, and the
+*edited* one, which follows the widgets while the dialog is open.
+
+* **OK** copies the edited configuration to the committed one and emits a
+  signal. The window connects that signal to the setter of
+  ``ApplicationSettings``, which then notifies the controllers.
+* **Cancel** restores the edited configuration from the committed one and
+  refreshes every widget, so the dialog always shows the configuration that is
+  really applied when it is opened again.
+
+The dialog keeps its own copy, and nothing refreshes it afterwards. This is
+correct as long as the dialog is the only code that changes these settings,
+which is the case today: the only writers of the session settings are the two
+windows, and each of them only forwards the signal of its own dialog. If a new
+path starts to modify them (loading a preset, resetting the settings, another
+window), the owner of the dialog must give it the new configuration, otherwise
+the dialog would show and later commit a stale copy.
+
 .. toctree::
    :maxdepth: 2
 

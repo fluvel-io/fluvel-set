@@ -62,6 +62,12 @@ enum class TabIndex
  * ImageViewerWidget and InitializationBehavior.
  *
  * @note The dialog maintains both committed and edited configurations.
+ *       It never reads or writes the application settings. It receives its
+ *       configuration once, at construction, and keeps its own copy. When the dialog
+ *       is accepted it emits a signal and the owner applies the configuration;
+ *       cancelling restores the last accepted configuration. The copy is only
+ *       refreshed by the dialog itself, so if another code path starts to change
+ *       these settings, the owner must give the new configuration to the dialog.
  */
 class SettingsDialog : public QDialog
 {
