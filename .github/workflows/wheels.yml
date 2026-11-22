@@ -26,14 +26,17 @@ on:
 jobs:
 
   build:
-    name: Wheels (${{ matrix.os }})
+    name: Wheels (${{ matrix.platform }})
 
     runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, windows-2022, macos-15]
+        include:
+          - { os: ubuntu-24.04, platform: linux }
+          - { os: windows-2022, platform: windows }
+          - { os: macos-15, platform: macos }
 
     steps:
 
@@ -41,12 +44,26 @@ jobs:
 
       - uses: pypa/cibuildwheel@v3.2.1
 
+      - name: Generate checksums
+        shell: bash
+        run: |
+          PY=$(command -v python3 || command -v python)
+          "$PY" .github/scripts/wheel-checksums.py wheelhouse
+
+      - name: Generate commit info
+        shell: bash
+        run: printf '%s' "${GITHUB_SHA}" > wheelhouse/commit-wheels-${{ matrix.platform }}.txt
+
       - uses: actions/upload-artifact@v4
         with:
-          name: wheels-${{ matrix.os }}
-          path: wheelhouse/*.whl
+          name: wheels-${{ matrix.platform }}
+          path: |
+            wheelhouse/*.whl
+            wheelhouse/*.whl.sha256
+            wheelhouse/commit-wheels-${{ matrix.platform }}.txt
 
-  # Attaches the wheels to the "latest" release (same release as the applications).
+  # Verifies the wheels and attaches them, with their bill, to the "latest"
+  # release (same release as the applications).
   publish-latest:
     needs: build
 
@@ -62,13 +79,27 @@ jobs:
 
     steps:
 
+      - uses: actions/checkout@v4
+
       - uses: actions/download-artifact@v4
         with:
           pattern: wheels-*
           path: wheelhouse
           merge-multiple: true
 
-      - name: Upload wheels to the latest release
+      - name: Debug files
+        run: ls -R wheelhouse
+
+      - name: Verify wheels
+        run: .github/scripts/verify-wheels.sh
+
+      - name: Generate BUILD_INFO-python.txt
+        run: .github/scripts/generate-wheels-build-info.sh
+
+      - name: Show BUILD_INFO-python.txt
+        run: cat BUILD_INFO-python.txt
+
+      - name: Ensure the release exists
         run: |
           # The release is normally created by the application workflow.
           gh release view latest --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
@@ -76,5 +107,22 @@ jobs:
               --title "Latest Development Build" --notes "Auto release" \
               --target "$GITHUB_SHA" --latest
 
-          gh release upload latest wheelhouse/*.whl \
+      - name: Upload wheels and bill
+        run: |
+          gh release upload latest wheelhouse/*.whl BUILD_INFO-python.txt \
             --repo "$GITHUB_REPOSITORY" --clobber
+
+      # The bill must describe exactly the wheels of the release: remove the
+      # wheels of previous builds that are not part of this one.
+      - name: Remove stale wheels
+        run: |
+          ls wheelhouse/*.whl | xargs -n1 basename | sort > current.txt
+
+          gh release view latest --repo "$GITHUB_REPOSITORY" --json assets \
+            --jq '.assets[].name | select(endswith(".whl"))' | sort > published.txt
+
+          comm -13 current.txt published.txt | while read -r stale
+          do
+            echo "Removing stale asset: $stale"
+            gh release delete-asset latest "$stale" --repo "$GITHUB_REPOSITORY" --yes
+          done
