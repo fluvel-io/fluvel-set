@@ -219,6 +219,27 @@ cmake --build build
 
 ---
 
+### Install the Python package
+
+Pre-built wheels (Linux x86_64, Windows x64) are attached to the
+[latest release](https://github.com/fluvel-io/fluvel-set/releases/tag/latest):
+
+```bash
+pip install fluvel-set --find-links https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest
+pip install "fluvel-set[examples]"   # adds OpenCV, used by the scripts of examples/
+```
+
+Then:
+
+```python
+import fluvel
+```
+
+From a clone of the repository, `pip install .` builds the package from source
+(a C++23 compiler and CMake ≥ 3.22 are required).
+
+---
+
 ### Build Python bindings
 
 ```bash

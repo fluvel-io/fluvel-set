@@ -13,7 +13,7 @@ find_package(
 
     COMPONENTS
         Interpreter
-        Development
+        Development.Module
 )
 
 find_package(

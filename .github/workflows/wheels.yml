@@ -1,0 +1,80 @@
+# SPDX-License-Identifier: CeCILL-2.1
+# Copyright (C) 2010-2026 Fabien Bessy
+
+name: Fluvel Set Python wheels
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+  group: fluvel-wheels
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [release]
+    paths:
+      - 'src/image_processing/**'
+      - 'src/bindings/**'
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'pyproject.toml'
+      - 'tests/python/**'
+      - '.github/workflows/wheels.yml'
+
+jobs:
+
+  build:
+    name: Wheels (${{ matrix.os }})
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022]
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: pypa/cibuildwheel@v3.2.1
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-${{ matrix.os }}
+          path: wheelhouse/*.whl
+
+  # Attaches the wheels to the "latest" release (same release as the applications).
+  publish-latest:
+    needs: build
+
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    env:
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wheels-*
+          path: wheelhouse
+          merge-multiple: true
+
+      - name: Upload wheels to the latest release
+        run: |
+          # The release is normally created by the application workflow.
+          gh release view latest --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create latest --repo "$GITHUB_REPOSITORY" \
+              --title "Latest Development Build" --notes "Auto release" \
+              --target "$GITHUB_SHA" --latest
+
+          gh release upload latest wheelhouse/*.whl \
+            --repo "$GITHUB_REPOSITORY" --clobber

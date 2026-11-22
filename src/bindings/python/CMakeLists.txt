@@ -65,3 +65,13 @@ set_target_properties(
         OUTPUT_NAME
             "fluvel"
 )
+
+# Installed at the root of the wheel when built by scikit-build-core
+# (pip wheel / cibuildwheel), so that "import fluvel" works.
+if(SKBUILD)
+    install(
+        TARGETS ${PYTHON_TARGET_NAME}
+        LIBRARY DESTINATION .
+        RUNTIME DESTINATION .
+    )
+endif()
