@@ -138,8 +138,8 @@ jobs:
             echo "Creating release"
 
             gh release create latest \
-              --title "Latest Development Build" \
-              --notes "Auto release" \
+              --title "Fluvel Set Applications (development build)" \
+              --notes "Desktop applications of the development version. Python wheels: see the latest-python release." \
               --target "${{ github.sha }}" \
               --latest \
               --draft=false
