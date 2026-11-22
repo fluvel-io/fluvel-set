@@ -135,7 +135,15 @@ three listeners react independently:
   a display change is visible immediately, even when the video is paused;
 * the **window** applies the view settings (mirror, smoothing, minimap,
   overlay) directly to the viewer, without going through the controller;
-* the **window** also refreshes its own widgets.
+* the **window** also refreshes its own widgets;
+* the **capture controller** keeps its own copy of the snapshot and recording
+  preferences. It never reads the singleton: the window gives it the values at
+  start-up and whenever they change, and each snapshot request carries a copy
+  of them.
+
+The controllers do not know the singleton either. It is the window that
+connects its signals to their slots, so a controller can be used with any
+source of settings.
 
 .. raw:: html
 
