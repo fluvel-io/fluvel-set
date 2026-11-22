@@ -450,8 +450,8 @@ document.write(`
 <dd><p>Validate an image array received from Python and make it contiguous. </p>
 <p>Only 8-bit images are accepted (dtype uint8). Supported layouts are:<ul class="simple">
 <li><p>Grayscale: (H, W) or (H, W, 1)</p></li>
-<li><p>Color: (H, W, 3), channels in BGR order</p></li>
-<li><p>Color+A: (H, W, 4), channels in BGR order followed by an unused/alpha channel</p></li>
+<li><p>Color: (H, W, 3), channels in BGR order (RGB where a ChannelOrder is given)</p></li>
+<li><p>Color+A: (H, W, 4), color channels followed by an unused/alpha channel</p></li>
 </ul>
 </p>
 <p>Images must have non-zero dimensions.</p>

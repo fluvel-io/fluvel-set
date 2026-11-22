@@ -279,8 +279,12 @@ Image conventions of the Python functions:
 
 - Images are `uint8` NumPy arrays of shape `(H, W)`, `(H, W, 3)` or `(H, W, 4)`.
   Other types (`float`, `uint16`, ...) are refused with an explicit error.
-- Color channels are in **BGR** order, like OpenCV. For an RGB image, use
-  `image[..., ::-1]`.
+- Color channels are in **BGR** order by default, like OpenCV. For an RGB image
+  (Pillow, matplotlib, scikit-image, ...), pass
+  `channel_order=fluvel.ChannelOrder.RGB`: the image is read in place, without
+  being copied. The order only matters for color segmentation (`active_contour`),
+  and only when the per-channel weights are not all equal or when the color space
+  is not RGB: with the default settings, the result is the same either way.
 - Results have the same shape as the input image.
 - Segmentation results provide the contour points and the region mask (`result.mask`).
 - `hausdorff_metrics` returns exact distances (Hausdorff, modified, quantile) in absolute

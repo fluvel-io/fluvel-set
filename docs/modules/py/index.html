@@ -375,12 +375,67 @@ used to bridge Python and C++.</p></li>
 <li><p><strong>Python Bindings</strong>: public Python API exposing Fluvel IP features to
 Python applications and scripts.</p></li>
 </ul>
+<section id="image-conventions">
+<h2>Image conventions<a class="headerlink" href="#image-conventions" title="Link to this heading">#</a></h2>
+<p>Images are <code class="docutils literal notranslate"><span class="pre">uint8</span></code> NumPy arrays of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W)</span></code>, <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">3)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">4)</span></code>. The package does not depend on any imaging library.</p>
+<p>For color images, the functions where the order of the channels matters
+(<code class="docutils literal notranslate"><span class="pre">active_contour</span></code>) take a <code class="docutils literal notranslate"><span class="pre">channel_order</span></code> argument, which can be
+<code class="docutils literal notranslate"><span class="pre">fluvel.ChannelOrder.BGR</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">fluvel.ChannelOrder.RGB</span></code>.
+The image is read in place: no pixel is copied or reordered.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Image comes from</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">channel_order</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OpenCV (<code class="docutils literal notranslate"><span class="pre">cv2.imread</span></code>, camera capture)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BGR</span></code> (default)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pillow, matplotlib, scikit-image, imageio</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RGB</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>An OpenCV image converted with <code class="docutils literal notranslate"><span class="pre">cv2.cvtColor(...,</span> <span class="pre">cv2.COLOR_BGR2RGB)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RGB</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Grayscale</p></td>
+<td><p>ignored</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="when-does-the-order-matter">
+<h3>When does the order matter?<a class="headerlink" href="#when-does-the-order-matter" title="Link to this heading">#</a></h3>
+<p>The channel order changes the result only if the algorithm treats the
+channels differently:</p>
+<ul class="simple">
+<li><p>with the default settings (RGB color space, equal weights), the result
+is the same whatever the order;</p></li>
+<li><p>with unequal per-channel weights (<code class="docutils literal notranslate"><span class="pre">RegionModelParams.weights</span></code>), the
+weights are applied to the wrong channels if the order is wrong;</p></li>
+<li><p>with another color space (YUV, Lab, Luv), the conversion from RGB is
+computed on the wrong channels if the order is wrong.</p></li>
+</ul>
+<p>Grayscale images have no channel order. When in doubt, give the order of
+the library that produced the image.</p>
+<p>Example with an image loaded by Pillow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">fluvel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"input.png"</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">"RGB"</span><span class="p">))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">fluvel</span><span class="o">.</span><span class="n">active_contour</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">channel_order</span><span class="o">=</span><span class="n">fluvel</span><span class="o">.</span><span class="n">ChannelOrder</span><span class="o">.</span><span class="n">RGB</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="python_interop.html">Python Interoperability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_bindings.html">Python Bindings</a></li>
 </ul>
 </div>
+</section>
+</section>
 </section>
 
 
@@ -420,6 +475,21 @@ Python applications and scripts.</p></li>
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-conventions">Image conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-does-the-order-matter">When does the order matter?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 
