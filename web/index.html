@@ -60,6 +60,8 @@
 
   </div>
 
+  <h2 class="download-group">Desktop app</h2>
+
   <div class="platform-grid">
 
     <div class="platform" id="platform_windows">
@@ -116,6 +118,27 @@
 
       </div>
 
+    </div>
+
+  </div>
+
+  <h2 class="download-group">Python package</h2>
+
+  <div class="python-card" id="platform_python">
+
+    <pre class="platform-code"><code>pip install fluvel-set \
+  --find-links https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest</code></pre>
+
+    <div class="python-side">
+      <div class="python-platforms">
+        <img src="icons/windows.svg" class="platform-icon" alt="Windows">
+        <img src="icons/linux.svg" class="platform-icon" alt="Linux">
+        <img src="icons/apple.svg" class="platform-icon" alt="macOS">
+      </div>
+      <p class="platform-hint">
+        The same command on Windows, Linux and macOS. See
+        <em>Installation help</em> below.
+      </p>
     </div>
 
   </div>
@@ -220,6 +243,12 @@
           <code>libfuse2t64</code> on Ubuntu&nbsp;24.04), or run it without FUSE:
         </p>
         <pre><code>./FluvelSet-linux.AppImage --appimage-extract-and-run</code></pre>
+        <p>
+          The AppImage uses the system C and C++ libraries, so it needs a
+          recent distribution: glibc&nbsp;2.39 or newer, for example
+          Ubuntu&nbsp;24.04, Debian&nbsp;13 or Fedora&nbsp;40 and later. On older
+          systems, use the Flatpak.
+        </p>
       </div>
     </details>
 
@@ -237,6 +266,10 @@
         <pre><code>flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install --user FluvelSet-linux.flatpak
 flatpak run org.fluvel.FluvelSet</code></pre>
+        <p>
+          The Flatpak runs on any distribution. This bundle is not updated
+          automatically: download the new file to upgrade.
+        </p>
       </div>
     </details>
 
