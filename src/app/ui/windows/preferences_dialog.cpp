@@ -87,12 +87,15 @@ PreferencesDialog::PreferencesDialog(QWidget* parent)
     if (!geometry.isEmpty())
         restoreGeometry(geometry);
 
-    auto* dialogButtons =
-        new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    auto* dialogButtons = new QDialogButtonBox(
+        QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::RestoreDefaults, this);
     dialogButtons->setCenterButtons(true);
 
     connect(dialogButtons, &QDialogButtonBox::accepted, this, &PreferencesDialog::accept);
     connect(dialogButtons, &QDialogButtonBox::rejected, this, &PreferencesDialog::reject);
+
+    connect(dialogButtons->button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked, this,
+            &PreferencesDialog::restoreDefaults);
 
     auto* layout = new QVBoxLayout(this);
 
@@ -296,17 +299,30 @@ void PreferencesDialog::loadFromSettings()
 {
     const auto& settings = ApplicationSettings::instance();
 
+    showValues(settings.appLanguage(), settings.snapshotPreferences(),
+               settings.videoRecordingPreferences(), settings.recordingBufferSettings());
+}
+
+void PreferencesDialog::restoreDefaults()
+{
+    // The language goes back to the system one; as for any language change,
+    // it only takes effect after restarting the application.
+    showValues(Language::System, ApplicationSettings::defaultSnapshotPreferences(),
+               ApplicationSettings::defaultVideoRecordingPreferences(), RecordingBufferSettings{});
+}
+
+void PreferencesDialog::showValues(Language language, const SnapshotPreferences& snapshot,
+                                   const VideoRecordingPreferences& video,
+                                   const RecordingBufferSettings& buffer)
+{
     // Language
 
-    const int languageIndex =
-        languageCombo_->findData(QVariant::fromValue(int(settings.appLanguage())));
+    const int languageIndex = languageCombo_->findData(QVariant::fromValue(int(language)));
 
     if (languageIndex >= 0)
         languageCombo_->setCurrentIndex(languageIndex);
 
     // Snapshots
-
-    const auto& snapshot = settings.snapshotPreferences();
 
     snapshotDirectoryEdit_->setText(snapshot.directory);
     snapshotBaseNameEdit_->setText(snapshot.baseName);
@@ -319,8 +335,6 @@ void PreferencesDialog::loadFromSettings()
     snapshotTimestampCheck_->setChecked(snapshot.appendTimestamp);
 
     // Video recording
-
-    const auto& video = settings.videoRecordingPreferences();
 
     videoDirectoryEdit_->setText(video.directory);
     videoBaseNameEdit_->setText(video.baseName);
@@ -339,8 +353,6 @@ void PreferencesDialog::loadFromSettings()
     segmentCountSpin_->setValue(video.segmentCount);
 
     // Recording buffer
-
-    const auto& buffer = settings.recordingBufferSettings();
 
     recordingRamSpin_->setValue(int(buffer.maxRamUsage / (1024 * 1024)));
     recordingDiskSpin_->setValue(int(buffer.maxDiskUsage / (1024 * 1024 * 1024)));

@@ -9,9 +9,9 @@
 
 #include "recording_buffer_settings.hpp"
 
-#include <QObject>
-#include <QImage>
 #include <QDir>
+#include <QImage>
+#include <QObject>
 
 namespace fluvel
 {
@@ -105,6 +105,22 @@ public:
      * @brief Update video display configuration only.
      */
     void setVideoDisplayConfig(const DisplayConfig& displayConfig);
+
+    /**
+     * @brief Factory snapshot preferences.
+     *
+     * The directory is the platform's standard pictures location, resolved
+     * through Qt, so it depends on the platform.
+     */
+    static SnapshotPreferences defaultSnapshotPreferences();
+
+    /**
+     * @brief Factory video recording preferences.
+     *
+     * The directory is the platform's standard movies location, resolved
+     * through Qt, so it depends on the platform.
+     */
+    static VideoRecordingPreferences defaultVideoRecordingPreferences();
 
     /**
      * @brief Get persistent snapshot preferences.

@@ -3,6 +3,9 @@
 
 #pragma once
 
+#include "application_settings_types.hpp"
+#include "recording_buffer_settings.hpp"
+
 #include <QDialog>
 
 class QCheckBox;
@@ -95,6 +98,18 @@ private:
      * edit was cancelled.
      */
     void loadFromSettings();
+
+    /**
+     * @brief Fills every widget from the given values.
+     *
+     * Nothing is written to the application settings: the values only reach
+     * them when the user accepts the dialog.
+     */
+    void showValues(Language language, const SnapshotPreferences& snapshot,
+                    const VideoRecordingPreferences& video, const RecordingBufferSettings& buffer);
+
+    /// Fills every widget with the factory values (applied only on OK).
+    void restoreDefaults();
 
     /// Shows the MP4 conversion option only for codecs that record to MP4.
     void updateConvertOption();

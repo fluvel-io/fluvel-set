@@ -651,6 +651,24 @@ void ApplicationSettings::setAppLanguage(Language language)
     appLanguage_ = language;
 }
 
+SnapshotPreferences ApplicationSettings::defaultSnapshotPreferences()
+{
+    SnapshotPreferences preferences;
+
+    preferences.directory = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+
+    return preferences;
+}
+
+VideoRecordingPreferences ApplicationSettings::defaultVideoRecordingPreferences()
+{
+    VideoRecordingPreferences preferences;
+
+    preferences.directory = QStandardPaths::writableLocation(QStandardPaths::MoviesLocation);
+
+    return preferences;
+}
+
 void ApplicationSettings::loadUserPreferences()
 {
     QSettings settings = userSettings();
@@ -659,9 +677,7 @@ void ApplicationSettings::loadUserPreferences()
     appLanguage_ = language_from_string(language.toStdString());
 
     snapshotPreferences_.directory =
-        settings
-            .value("preferences/snapshot/directory",
-                   QStandardPaths::writableLocation(QStandardPaths::PicturesLocation))
+        settings.value("preferences/snapshot/directory", defaultSnapshotPreferences().directory)
             .toString();
 
     snapshotPreferences_.baseName =
@@ -692,11 +708,10 @@ void ApplicationSettings::loadUserPreferences()
                    VideoRecordingPreferences::kDefaultSegmentCount)
             .toInt();
 
-    videoRecordingPreferences_.directory =
-        settings
-            .value("preferences/video_recording/directory",
-                   QStandardPaths::writableLocation(QStandardPaths::MoviesLocation))
-            .toString();
+    videoRecordingPreferences_.directory = settings
+                                               .value("preferences/video_recording/directory",
+                                                      defaultVideoRecordingPreferences().directory)
+                                               .toString();
 
     videoRecordingPreferences_.baseName =
         settings.value("preferences/video_recording/base_name", "video").toString();

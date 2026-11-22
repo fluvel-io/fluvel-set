@@ -189,6 +189,14 @@ writes ``ApplicationSettings`` itself.
   saves them to disk.
 * **Cancel** (or closing the window) writes nothing. The edits are discarded
   by the reload of the next opening.
+* **Restore Defaults** fills the widgets with the factory values, like the
+  same button of the session dialogs. Nothing is applied until OK, and Cancel
+  discards it. The default folders depend on the platform (standard pictures
+  and movies locations given by Qt), so they come from
+  ``ApplicationSettings::defaultSnapshotPreferences()`` and
+  ``defaultVideoRecordingPreferences()``, which the loading of the settings
+  also uses. The language goes back to *System*, which, as any language change,
+  takes effect after a restart.
 
 Reloading at each opening replaces the *committed*/*edited* copies: there is no
 second copy that could become stale, so the limit described above does not
