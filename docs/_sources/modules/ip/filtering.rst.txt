@@ -35,11 +35,36 @@ Related Components
 - :cpp:class:`fluvel_ip::filter::TemporalMean`
 
 
-Filter
-------
+Smoothing
+---------
 
-.. doxygennamespace:: fluvel_ip::filter
-   :members:
+Each filter is available as stateless functions, convenient for one-off
+use, and as a class that keeps its buffers between calls, which is faster
+when many images are filtered.
+
+.. doxygenfile:: mean_filter.hpp
+
+.. doxygenfile:: mean_filter_3x3.hpp
+
+.. doxygenfile:: mean_filter_sliding.hpp
+
+.. doxygenfile:: median_filter.hpp
+
+.. doxygenfile:: temporal_mean.hpp
+
+Anisotropic Diffusion
+---------------------
+
+.. doxygenfile:: anisotropic_diffusion.hpp
+
+Morphology
+----------
+
+.. doxygenfile:: morpho.hpp
+
+.. doxygenfile:: naive_morpho.hpp
+
+.. doxygenfile:: van_herk_morpho.hpp
 
 Noise
 -----

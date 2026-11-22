@@ -22,6 +22,8 @@ segmentation and analysis algorithms.
 
 .. doxygenfile:: image_conversions.hpp
 
+.. doxygenfile:: image_alpha.hpp
+
 
 .. doxygenfile:: point.hpp
 
