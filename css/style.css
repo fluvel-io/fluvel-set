@@ -886,3 +886,68 @@ code {
 .contact-error.visible {
   display: block;
 }
+/* ===== PLATFORM CARD DETAILS ===== */
+
+.download-group {
+  margin: 28px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #86868b;
+}
+
+.download-group + .platform-grid {
+  margin-top: 12px;
+}
+
+.python-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 12px;
+  padding: 18px;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+}
+
+.python-card .platform-code {
+  flex: 1 1 auto;
+  margin: 0;
+}
+
+.python-side {
+  flex: 0 0 260px;
+}
+
+.python-platforms {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 700px) {
+  .python-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .python-side {
+    flex: none;
+  }
+}
+
+.platform-code {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  font-size: 12px;
+  background: #f5f5f7;
+  border-radius: 8px;
+  white-space: pre-wrap;
+}
+
+.platform-hint {
+  margin: 0;
+  font-size: 13px;
+  color: #6e6e73;
+}
