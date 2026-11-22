@@ -5,7 +5,8 @@
 
 #include <stdexcept>
 
-fluvel_ip::ImageView pyArrayToImageView(const py::array_t<uint8_t, py::array::c_style>& input)
+fluvel_ip::ImageView pyArrayToImageView(const py::array_t<uint8_t, py::array::c_style>& input,
+                                        ChannelOrder order)
 {
     auto buf = input.request();
 
@@ -14,7 +15,16 @@ fluvel_ip::ImageView pyArrayToImageView(const py::array_t<uint8_t, py::array::c_
     const int c = static_cast<int>(buf.shape.size() == 3 ? buf.shape[2] : 1);
     const int stride = static_cast<int>(buf.strides[0]);
 
-    const auto format = fluvel_ip::formatFromChannelCount(c);
+    auto format = fluvel_ip::formatFromChannelCount(c);
+
+    // formatFromChannelCount() assumes BGR: switch to the RGB layouts when asked.
+    if (order == ChannelOrder::Rgb)
+    {
+        if (format == fluvel_ip::ImageFormat::Bgr24)
+            format = fluvel_ip::ImageFormat::Rgb24;
+        else if (format == fluvel_ip::ImageFormat::Bgr32)
+            format = fluvel_ip::ImageFormat::Rgba32;
+    }
 
     if (format == fluvel_ip::ImageFormat::Unknown)
     {

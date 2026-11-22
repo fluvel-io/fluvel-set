@@ -25,9 +25,14 @@ phi2 = utils.resize_phi_to_image(img, phi2)
 # Run segmentation
 start = time.time()
 
-lists0 = fluvel.active_contour(img)
-lists1 = fluvel.active_contour(img, phi)
-lists2 = fluvel.active_contour(img, phi2)
+# OpenCV images are in BGR order, which is the default of Fluvel.
+# For an RGB image (Pillow, matplotlib...), pass
+# channel_order=fluvel.ChannelOrder.RGB instead.
+order = fluvel.ChannelOrder.BGR
+
+lists0 = fluvel.active_contour(img, channel_order=order)
+lists1 = fluvel.active_contour(img, phi, channel_order=order)
+lists2 = fluvel.active_contour(img, phi2, channel_order=order)
 
 elapsed = time.time() - start
 

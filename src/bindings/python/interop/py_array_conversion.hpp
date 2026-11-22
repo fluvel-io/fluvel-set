@@ -11,6 +11,18 @@
 namespace py = pybind11;
 
 /**
+ * @brief Order of the color channels of an image coming from Python.
+ *
+ * Only meaningful for 3 and 4 channel images. The alpha (or padding) channel,
+ * when present, always comes last.
+ */
+enum class ChannelOrder
+{
+    Bgr, ///< Blue, green, red (OpenCV convention).
+    Rgb  ///< Red, green, blue (NumPy, Pillow, matplotlib, scikit-image convention).
+};
+
+/**
  * @brief Convert a C-contiguous NumPy array into an ImageView.
  *
  * Creates a non-owning view over the memory contained in the provided
@@ -21,9 +33,11 @@ namespace py = pybind11;
  * the ImageView.
  *
  * @param input C-contiguous uint8 array (see toImageArray()).
+ * @param order Order of the color channels (ignored for grayscale images).
  * @return Non-owning image view referencing the NumPy array memory.
  */
-fluvel_ip::ImageView pyArrayToImageView(const py::array_t<uint8_t, py::array::c_style>& input);
+fluvel_ip::ImageView pyArrayToImageView(const py::array_t<uint8_t, py::array::c_style>& input,
+                                        ChannelOrder order = ChannelOrder::Bgr);
 
 /**
  * @brief Convert an ImageOwner into a NumPy array.

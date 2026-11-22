@@ -352,6 +352,84 @@ def test_active_contour_accepts_all_image_layouts():
         assert fluvel.active_contour(image).mask.shape == gray.shape
 
 
+def _colored_image():
+    """Two disks: the left one is visible in channel 0 only, the right one in channel 2 only."""
+    height, width = 96, 128
+    y, x = np.ogrid[:height, :width]
+
+    left = (x - 40) ** 2 + (y - 48) ** 2 < 22**2
+    right = (x - 90) ** 2 + (y - 48) ** 2 < 22**2
+
+    image = np.full((height, width, 3), 60, np.uint8)
+    image[..., 0] = np.where(left, 220, 60)
+    image[..., 2] = np.where(right, 220, 60)
+
+    return image
+
+
+def _asymmetric_params():
+    """Strong weight on the first color component, which is red in the RGB space."""
+    params = fluvel.RegionModelParams()
+    params.color_space = fluvel.ColorSpaceOption.RGB
+    params.weights = fluvel.Components3i(30, 1, 1)
+    return params
+
+
+def test_active_contour_channel_order_is_bgr_by_default():
+    bgr = _colored_image()
+    params = _asymmetric_params()
+
+    default = fluvel.active_contour(bgr, region_model_params=params)
+    explicit = fluvel.active_contour(
+        bgr, region_model_params=params, channel_order=fluvel.ChannelOrder.BGR
+    )
+
+    np.testing.assert_array_equal(default.mask, explicit.mask)
+
+
+@pytest.mark.parametrize("channels", [3, 4])
+def test_active_contour_rgb_image_with_rgb_order_matches_bgr_image(channels):
+    bgr = _colored_image()
+    params = _asymmetric_params()
+
+    rgb = np.ascontiguousarray(bgr[..., ::-1])
+
+    if channels == 4:
+        alpha = np.full(bgr.shape[:2] + (1,), 255, np.uint8)
+        bgr = np.concatenate([bgr, alpha], axis=2)
+        rgb = np.concatenate([rgb, alpha], axis=2)
+
+    expected = fluvel.active_contour(bgr, region_model_params=params)
+    result = fluvel.active_contour(
+        rgb, region_model_params=params, channel_order=fluvel.ChannelOrder.RGB
+    )
+
+    np.testing.assert_array_equal(result.mask, expected.mask)
+
+
+def test_active_contour_channel_order_has_an_effect_on_color_images():
+    image = _colored_image()
+    params = _asymmetric_params()
+
+    as_bgr = fluvel.active_contour(image, region_model_params=params)
+    as_rgb = fluvel.active_contour(
+        image, region_model_params=params, channel_order=fluvel.ChannelOrder.RGB
+    )
+
+    assert not np.array_equal(as_bgr.mask, as_rgb.mask)
+
+
+def test_active_contour_channel_order_is_ignored_for_grayscale():
+    gray = make_gray()
+
+    np.testing.assert_array_equal(
+        fluvel.active_contour(gray).mask,
+        fluvel.active_contour(
+            gray, channel_order=fluvel.ChannelOrder.RGB
+        ).mask,
+    )
+
+
 def test_active_contour_with_an_initial_mask():
     image = make_gray()
 

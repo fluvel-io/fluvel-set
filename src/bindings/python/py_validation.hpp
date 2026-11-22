@@ -20,8 +20,8 @@ using PyImageArray = py::array_t<uint8_t, py::array::c_style>;
  *
  * Only 8-bit images are accepted (dtype uint8). Supported layouts are:
  * - Grayscale: (H, W) or (H, W, 1)
- * - Color:     (H, W, 3), channels in BGR order
- * - Color+A:   (H, W, 4), channels in BGR order followed by an unused/alpha channel
+ * - Color:     (H, W, 3), channels in BGR order (RGB where a ChannelOrder is given)
+ * - Color+A:   (H, W, 4), color channels followed by an unused/alpha channel
  *
  * Images must have non-zero dimensions.
  *

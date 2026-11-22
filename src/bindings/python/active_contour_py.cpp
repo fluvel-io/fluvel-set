@@ -92,6 +92,52 @@ RecoverOnFailure
 
 )";
 
+constexpr auto kChannelOrderDoc = R"(
+
+Order of the color channels of an image.
+
+Only used for color images (3 or 4 channels). It tells how the
+channels of the NumPy array are stored, so that the image is
+interpreted correctly without being copied or reordered.
+
+Attributes
+----------
+BGR
+    Blue, green, red. The order of OpenCV (``cv2.imread``).
+    This is the default.
+
+RGB
+    Red, green, blue. The order of NumPy-based libraries such as
+    Pillow, matplotlib, scikit-image or imageio, and of images
+    converted with ``cv2.cvtColor(image, cv2.COLOR_BGR2RGB)``.
+
+When a fourth channel is present (alpha or padding), it always
+comes last.
+
+When does the order matter?
+---------------------------
+The channel order changes the result only if the algorithm treats
+the channels differently:
+
+- with the default settings (RGB color space, equal weights), the
+  result is the same whatever the order;
+- with unequal per-channel weights (``RegionModelParams.weights``),
+  the weights are applied to the wrong channels if the order is wrong;
+- with another color space (YUV, Lab, Luv), the conversion from RGB
+  is computed on the wrong channels if the order is wrong.
+
+Grayscale images have no channel order.
+
+Examples
+--------
+>>> result = fluvel.active_contour(image_from_opencv)
+
+>>> result = fluvel.active_contour(
+...     image_from_pillow,
+...     channel_order=fluvel.ChannelOrder.RGB,
+... )
+)";
+
 constexpr auto kColorSpaceOptionDoc = R"(
 
 Color spaces supported by region-based models.
@@ -353,9 +399,8 @@ Parameters
 ----------
 image
     Input image: uint8 array of shape (H, W), (H, W, 1),
-    (H, W, 3) or (H, W, 4). Color channels are in BGR order
-    (the order used by OpenCV). For an RGB image, reverse the
-    channels first: ``image[..., ::-1]``.
+    (H, W, 3) or (H, W, 4). The order of the color channels is
+    given by ``channel_order``.
 
 phi_mask : numpy.ndarray, optional
     Initial contour mask (uint8, pixels >= 128 are inside).
@@ -377,6 +422,13 @@ active_contour_params : ActiveContourParams, optional
 
 region_model_params : RegionModelParams, optional
     Parameters controlling the region-based energy model.
+
+channel_order : ChannelOrder, optional
+    Order of the color channels of ``image``: ``ChannelOrder.BGR``
+    (default, OpenCV) or ``ChannelOrder.RGB``. Ignored for
+    grayscale images. It changes the result for color images
+    when the per-channel weights are not all equal or when
+    a color space other than RGB is used.
 
 Returns
 -------
@@ -590,6 +642,10 @@ void bindActiveContour(py::module_& m)
         .value("StopOnFailure", fluvel_ip::FailureHandlingMode::StopOnFailure)
         .value("RecoverOnFailure", fluvel_ip::FailureHandlingMode::RecoverOnFailure);
 
+    py::enum_<ChannelOrder>(m, "ChannelOrder", kChannelOrderDoc)
+        .value("BGR", ChannelOrder::Bgr)
+        .value("RGB", ChannelOrder::Rgb);
+
     py::enum_<fluvel_ip::ColorSpaceOption>(m, "ColorSpaceOption", kColorSpaceOptionDoc)
         .value("RGB", fluvel_ip::ColorSpaceOption::RGB)
         .value("YUV", fluvel_ip::ColorSpaceOption::YUV)
@@ -664,14 +720,14 @@ void bindActiveContour(py::module_& m)
 
         [](const py::array& image, const py::object& phiMask,
            const fluvel_ip::ActiveContourParams& acParams,
-           const fluvel_ip::RegionColorParams& regionParams)
+           const fluvel_ip::RegionColorParams& regionParams, ChannelOrder channelOrder)
         {
             const auto imageArray = toImageArray(image);
 
             validateActiveContourParams(acParams);
             validateRegionParams(regionParams);
 
-            const auto img = pyArrayToImageView(imageArray);
+            const auto img = pyArrayToImageView(imageArray, channelOrder);
 
             // Both arrays must stay alive while the views are used.
             std::optional<PyImageArray> phiArray;
@@ -724,7 +780,8 @@ void bindActiveContour(py::module_& m)
 
         py::arg("image"), py::arg("phi_mask") = py::none(),
         py::arg("active_contour_params") = fluvel_ip::ActiveContourParams{},
-        py::arg("region_model_params") = fluvel_ip::RegionColorParams{}, kActiveContourDoc);
+        py::arg("region_model_params") = fluvel_ip::RegionColorParams{},
+        py::arg("channel_order") = ChannelOrder::Bgr, kActiveContourDoc);
 
     m.def(
         "find_contours",
