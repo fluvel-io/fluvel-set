@@ -124,6 +124,8 @@ jobs:
 
       # =========================
       # CREATE OR UPDATE RELEASE
+      # Development builds are pre-releases: the "Latest" badge is kept for
+      # stable versions.
       # =========================
       - name: Ensure release exists and is published
         run: |
@@ -132,7 +134,7 @@ jobs:
 
             gh release edit latest \
               --draft=false \
-              --latest
+              --prerelease
 
           else
             echo "Creating release"
@@ -141,7 +143,7 @@ jobs:
               --title "Fluvel Set Applications (development build)" \
               --notes "Desktop applications of the development version. Python wheels: see the latest-python release." \
               --target "${{ github.sha }}" \
-              --latest \
+              --prerelease \
               --draft=false
           fi
 

@@ -109,9 +109,8 @@ jobs:
           git tag -f latest-python "$GITHUB_SHA"
           git push origin latest-python --force
 
-      # Pre-release: it must never take the "Latest" badge of the application
-      # release, which the download links of the page (releases/latest/download)
-      # rely on.
+      # Development builds are pre-releases: the "Latest" badge is kept for
+      # stable versions.
       - name: Ensure the release exists
         run: |
           gh release view latest-python --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
