@@ -16,6 +16,80 @@ The application is organized into four main areas:
 - **Interoperability**: adapters and integration layers connecting the application
   to external libraries and processing backends.
 
+Architecture
+------------
+
+Fluvel Set follows a mixed MVC/MVP architecture. The controllers drive the
+session (sources, threads, workers, settings) and also play the role of
+presenter: they turn the results of the algorithm into what the view
+displays. The view is passive and the windows only connect the components
+together. The algorithm itself, in Fluvel IP, does not depend on Qt.
+
+.. raw:: html
+
+   <div style="text-align:center;">
+     <a href="../../mermaid/architecture_layers.svg" target="_blank">
+       <img src="../../mermaid/architecture_layers.svg"
+            style="max-width:420px; width:100%; height:auto;">
+     </a>
+   </div>
+
+Video session
+-------------
+
+Commands go from the window to the algorithm. Frames go the other way: the
+video source delivers a frame, the processing thread keeps only the latest
+one, runs the filters and the active contour within a time budget, and the
+controller prepares the display data for the viewer.
+
+.. raw:: html
+
+   <div style="text-align:center;">
+     <a href="../../mermaid/video_session_sequence.svg" target="_blank">
+       <img src="../../mermaid/video_session_sequence.svg"
+            style="max-width:760px; width:100%; height:auto;">
+     </a>
+   </div>
+
+Image session
+-------------
+
+The image worker is driven by a timer: each tick runs a short time slice of
+the active contour, so the interface stays responsive while the contour
+evolves.
+
+.. raw:: html
+
+   <div style="text-align:center;">
+     <a href="../../mermaid/image_session_sequence.svg" target="_blank">
+       <img src="../../mermaid/image_session_sequence.svg"
+            style="max-width:700px; width:100%; height:auto;">
+     </a>
+   </div>
+
+Configuration
+-------------
+
+Settings do not follow the data path. They are stored in the
+``ApplicationSettings`` singleton, which emits a signal when they change, and
+three listeners react independently:
+
+* the **controller** forwards the processing settings to the thread or worker
+  (they are applied from the next frame) and restyles the current layers, so
+  a display change is visible immediately, even when the video is paused;
+* the **window** applies the view settings (mirror, smoothing, minimap,
+  overlay) directly to the viewer, without going through the controller;
+* the **window** also refreshes its own widgets.
+
+.. raw:: html
+
+   <div style="text-align:center;">
+     <a href="../../mermaid/config_flow.svg" target="_blank">
+       <img src="../../mermaid/config_flow.svg"
+            style="max-width:620px; width:100%; height:auto;">
+     </a>
+   </div>
+
 .. toctree::
    :maxdepth: 2
 

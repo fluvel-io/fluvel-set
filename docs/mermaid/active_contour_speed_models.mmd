@@ -4,11 +4,9 @@ class ActiveContour {
     +update(image)
     +converge()
     +step()
+    +runCycles(n)
     -stepCycle1() [image-driven]
     -stepCycle2() [internal/geometric-driven]
-    -contourData
-    -externalSpeedModel
-    -internalSpeedModel
 }
 
 class ContourData {
@@ -17,7 +15,7 @@ class ContourData {
     -levelSet [phi]
 }
 
-ActiveContour *-- ContourData
+ActiveContour *-- ContourData : contour data
 
 class ContourPoint {
     -x
@@ -34,6 +32,7 @@ class ISpeedModel {
     +onStepCycle1()
     +onSwitch(contourPoint, direction)
     +fillDiagnostics(diagnostics)
+    +status()
 }
 
 class RegionGraySpeedModel {
@@ -60,11 +59,9 @@ ISpeedModel <|.. RegionGraySpeedModel
 ISpeedModel <|.. RegionColorSpeedModel
 ISpeedModel <|.. MajorityInternalSpeed
 
-RegionGraySpeedModel --> ActiveContour
+ActiveContour o-- ISpeedModel : external model (image-driven)
 
-RegionColorSpeedModel --> ActiveContour
-
-ActiveContour *-- MajorityInternalSpeed
+ActiveContour *-- MajorityInternalSpeed : internal model (smoothing)
 
 %% Active Contour Engine
 style ActiveContour fill:#f4f5ff,color:#1d1d1f,stroke:#6b6fcf,stroke-width:2px
