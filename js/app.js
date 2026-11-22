@@ -111,7 +111,7 @@ if (pipButton) {
   setupCopyButton(
     pipButton,
     "pip install fluvel-set --find-links " +
-    "https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest"
+    "https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest-python"
   );
 }
 
