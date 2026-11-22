@@ -65,6 +65,11 @@ void PreferencesDialog::showDialog()
 {
     static PreferencesDialog dialog;
 
+    // Show the preferences actually applied, not the leftovers of an earlier
+    // cancelled edit. A dialog that is already visible keeps its pending edits.
+    if (!dialog.isVisible())
+        dialog.loadFromSettings();
+
     dialog.show();
     dialog.raise();
     dialog.activateWindow();
@@ -99,6 +104,8 @@ PreferencesDialog::PreferencesDialog(QWidget* parent)
     layout->addWidget(dialogButtons);
 
     layout->setSizeConstraint(QLayout::SetMinimumSize);
+
+    loadFromSettings();
 }
 
 QWidget* PreferencesDialog::createLanguageSection()
@@ -116,13 +123,6 @@ QWidget* PreferencesDialog::createLanguageSection()
     languageCombo_->addItem(tr("English"), QVariant::fromValue(int(Language::English)));
     languageCombo_->addItem(tr("French"), QVariant::fromValue(int(Language::French)));
 
-    const Language language = ApplicationSettings::instance().appLanguage();
-
-    const int index = languageCombo_->findData(QVariant::fromValue(int(language)));
-
-    if (index >= 0)
-        languageCombo_->setCurrentIndex(index);
-
     auto* restartLabel = new QLabel(
         tr("The language change will take effect after restarting the application."), group);
 
@@ -136,13 +136,11 @@ QWidget* PreferencesDialog::createLanguageSection()
 
 QWidget* PreferencesDialog::createSnapshotSection()
 {
-    const auto& preferences = ApplicationSettings::instance().snapshotPreferences();
-
     auto* group = new QGroupBox(tr("Snapshots"), this);
     auto* layout = new QFormLayout(group);
 
-    snapshotDirectoryEdit_ = new QLineEdit(preferences.directory, group);
-    snapshotBaseNameEdit_ = new QLineEdit(preferences.baseName, group);
+    snapshotDirectoryEdit_ = new QLineEdit(group);
+    snapshotBaseNameEdit_ = new QLineEdit(group);
     snapshotFormatCombo_ = new QComboBox(group);
     snapshotTimestampCheck_ = new QCheckBox(tr("Append timestamp"), group);
     snapshotPreviewLabel_ = new QLabel(group);
@@ -157,13 +155,6 @@ QWidget* PreferencesDialog::createSnapshotSection()
     {
         snapshotFormatCombo_->addItem(QString::fromLatin1(format).toUpper(), format);
     }
-
-    const int formatIndex = snapshotFormatCombo_->findData(preferences.preferredFormat);
-
-    if (formatIndex >= 0)
-        snapshotFormatCombo_->setCurrentIndex(formatIndex);
-
-    snapshotTimestampCheck_->setChecked(preferences.appendTimestamp);
 
     layout->addRow(tr("Directory:"), directoryLayout);
     layout->addRow(tr("Base name:"), snapshotBaseNameEdit_);
@@ -182,20 +173,16 @@ QWidget* PreferencesDialog::createSnapshotSection()
     connect(snapshotTimestampCheck_, &QCheckBox::toggled, this,
             &PreferencesDialog::updateSnapshotPreview);
 
-    updateSnapshotPreview();
-
     return group;
 }
 
 QWidget* PreferencesDialog::createVideoRecordingSection()
 {
-    const auto& preferences = ApplicationSettings::instance().videoRecordingPreferences();
-
     auto* group = new QGroupBox(tr("Video recording"), this);
     auto* layout = new QFormLayout(group);
 
-    videoDirectoryEdit_ = new QLineEdit(preferences.directory, group);
-    videoBaseNameEdit_ = new QLineEdit(preferences.baseName, group);
+    videoDirectoryEdit_ = new QLineEdit(group);
+    videoBaseNameEdit_ = new QLineEdit(group);
     videoCodecCombo_ = new QComboBox(group);
     videoTimestampCheck_ = new QCheckBox(tr("Append timestamp"), group);
     videoPreviewLabel_ = new QLabel(group);
@@ -213,13 +200,6 @@ QWidget* PreferencesDialog::createVideoRecordingSection()
         videoCodecCombo_->addItem(exporter_utils::toString(codec), int(codec));
     }
 
-    const int codecIndex = videoCodecCombo_->findData(int(preferences.preferredCodec));
-
-    if (codecIndex >= 0)
-        videoCodecCombo_->setCurrentIndex(codecIndex);
-
-    videoTimestampCheck_->setChecked(preferences.appendTimestamp);
-
     convertMp4Check_ = new QCheckBox(tr("Convert to standard MP4 when recording ends"), group);
     convertMp4Check_->setToolTip(
         tr("MP4 files are recorded in a fragmented form so they stay playable after a crash. "
@@ -227,24 +207,19 @@ QWidget* PreferencesDialog::createVideoRecordingSection()
            "improves compatibility with some players and editors. The conversion does not "
            "re-encode the video, but it rewrites the whole file: it takes extra time and "
            "extra disk writes, especially for long recordings."));
-    convertMp4Check_->setChecked(preferences.convertToStandardMp4);
 
     recordingModeCombo_ = new QComboBox(group);
     recordingModeCombo_->addItem(tr("Single file"), int(RecordingMode::SingleFile));
     recordingModeCombo_->addItem(tr("Circular"), int(RecordingMode::Circular));
-    recordingModeCombo_->setCurrentIndex(
-        recordingModeCombo_->findData(int(preferences.recordingMode)));
 
     retentionTimeLabel_ = new QLabel(tr("Retention time:"), group);
     retentionTimeSpin_ = new QSpinBox(group);
     retentionTimeSpin_->setRange(1, 24 * 60);
     retentionTimeSpin_->setSuffix(tr(" min"));
-    retentionTimeSpin_->setValue(preferences.retentionTimeMinutes);
 
     segmentCountLabel_ = new QLabel(tr("Segments:"), group);
     segmentCountSpin_ = new QSpinBox(group);
     segmentCountSpin_->setRange(2, 1000);
-    segmentCountSpin_->setValue(preferences.segmentCount);
 
     segmentDurationTextLabel_ = new QLabel(tr("Segment duration:"), group);
     segmentDurationLabel_ = new QLabel(group);
@@ -260,38 +235,8 @@ QWidget* PreferencesDialog::createVideoRecordingSection()
     layout->addRow(segmentCountLabel_, segmentCountSpin_);
     layout->addRow(segmentDurationTextLabel_, segmentDurationLabel_);
 
-    updateVideoPreview();
-    updateSegmentDuration();
-
-    // Only MP4 recordings can be converted (FFV1 uses MKV, VP9 uses WebM).
-    auto updateConvertOption = [this]
-    {
-        const auto codec = static_cast<VideoCodec>(videoCodecCombo_->currentData().toInt());
-
-        convertMp4Check_->setVisible(exporter_utils::preferredContainer(codec) ==
-                                     VideoContainer::Mp4);
-    };
-
-    updateConvertOption();
-
-    connect(videoCodecCombo_, &QComboBox::currentIndexChanged, this, updateConvertOption);
-
-    auto updateCircularControls = [this]
-    {
-        const bool circular =
-            recordingModeCombo_->currentData().toInt() == int(RecordingMode::Circular);
-
-        retentionTimeLabel_->setEnabled(circular);
-        retentionTimeSpin_->setEnabled(circular);
-
-        segmentCountLabel_->setEnabled(circular);
-        segmentCountSpin_->setEnabled(circular);
-
-        segmentDurationTextLabel_->setEnabled(circular);
-        segmentDurationLabel_->setEnabled(circular);
-    };
-
-    updateCircularControls();
+    connect(videoCodecCombo_, &QComboBox::currentIndexChanged, this,
+            &PreferencesDialog::updateConvertOption);
 
     connect(browseButton, &QPushButton::clicked, this, &PreferencesDialog::selectVideoDirectory);
 
@@ -313,15 +258,14 @@ QWidget* PreferencesDialog::createVideoRecordingSection()
     connect(recordingModeCombo_, &QComboBox::currentIndexChanged, this,
             &PreferencesDialog::updateVideoPreview);
 
-    connect(recordingModeCombo_, &QComboBox::currentIndexChanged, this, updateCircularControls);
+    connect(recordingModeCombo_, &QComboBox::currentIndexChanged, this,
+            &PreferencesDialog::updateCircularControls);
 
     return group;
 }
 
 QWidget* PreferencesDialog::createRecordingBufferSection()
 {
-    const auto& bufferSettings = ApplicationSettings::instance().recordingBufferSettings();
-
     auto* groupBox = new QGroupBox(tr("Recording buffer"));
 
     auto* layout = new QFormLayout(groupBox);
@@ -341,18 +285,102 @@ QWidget* PreferencesDialog::createRecordingBufferSection()
     recordingOverflowCombo_->addItem(tr("Discard oldest frames"),
                                      int(BufferOverflowPolicy::DiscardOldest));
 
-    recordingRamSpin_->setValue(int(bufferSettings.maxRamUsage / (1024 * 1024)));
-
-    recordingDiskSpin_->setValue(int(bufferSettings.maxDiskUsage / (1024 * 1024 * 1024)));
-
-    recordingOverflowCombo_->setCurrentIndex(
-        recordingOverflowCombo_->findData(int(bufferSettings.overflowPolicy)));
-
     layout->addRow(tr("Maximum RAM usage:"), recordingRamSpin_);
     layout->addRow(tr("Maximum temporary storage usage:"), recordingDiskSpin_);
     layout->addRow(tr("When buffer is full:"), recordingOverflowCombo_);
 
     return groupBox;
+}
+
+void PreferencesDialog::loadFromSettings()
+{
+    const auto& settings = ApplicationSettings::instance();
+
+    // Language
+
+    const int languageIndex =
+        languageCombo_->findData(QVariant::fromValue(int(settings.appLanguage())));
+
+    if (languageIndex >= 0)
+        languageCombo_->setCurrentIndex(languageIndex);
+
+    // Snapshots
+
+    const auto& snapshot = settings.snapshotPreferences();
+
+    snapshotDirectoryEdit_->setText(snapshot.directory);
+    snapshotBaseNameEdit_->setText(snapshot.baseName);
+
+    const int formatIndex = snapshotFormatCombo_->findData(snapshot.preferredFormat);
+
+    if (formatIndex >= 0)
+        snapshotFormatCombo_->setCurrentIndex(formatIndex);
+
+    snapshotTimestampCheck_->setChecked(snapshot.appendTimestamp);
+
+    // Video recording
+
+    const auto& video = settings.videoRecordingPreferences();
+
+    videoDirectoryEdit_->setText(video.directory);
+    videoBaseNameEdit_->setText(video.baseName);
+
+    const int codecIndex = videoCodecCombo_->findData(int(video.preferredCodec));
+
+    if (codecIndex >= 0)
+        videoCodecCombo_->setCurrentIndex(codecIndex);
+
+    videoTimestampCheck_->setChecked(video.appendTimestamp);
+    convertMp4Check_->setChecked(video.convertToStandardMp4);
+
+    recordingModeCombo_->setCurrentIndex(recordingModeCombo_->findData(int(video.recordingMode)));
+
+    retentionTimeSpin_->setValue(video.retentionTimeMinutes);
+    segmentCountSpin_->setValue(video.segmentCount);
+
+    // Recording buffer
+
+    const auto& buffer = settings.recordingBufferSettings();
+
+    recordingRamSpin_->setValue(int(buffer.maxRamUsage / (1024 * 1024)));
+    recordingDiskSpin_->setValue(int(buffer.maxDiskUsage / (1024 * 1024 * 1024)));
+
+    recordingOverflowCombo_->setCurrentIndex(
+        recordingOverflowCombo_->findData(int(buffer.overflowPolicy)));
+
+    // Setting a value emits a change signal only when it differs from the
+    // current one, so refresh the derived state explicitly.
+    updateSnapshotPreview();
+    updateVideoPreview();
+    updateSegmentDuration();
+    updateConvertOption();
+    updateCircularControls();
+}
+
+void PreferencesDialog::updateConvertOption()
+{
+    if (videoCodecCombo_->currentIndex() < 0)
+        return;
+
+    // Only MP4 recordings can be converted (FFV1 uses MKV, VP9 uses WebM).
+    const auto codec = static_cast<VideoCodec>(videoCodecCombo_->currentData().toInt());
+
+    convertMp4Check_->setVisible(exporter_utils::preferredContainer(codec) == VideoContainer::Mp4);
+}
+
+void PreferencesDialog::updateCircularControls()
+{
+    const bool circular =
+        recordingModeCombo_->currentData().toInt() == int(RecordingMode::Circular);
+
+    retentionTimeLabel_->setEnabled(circular);
+    retentionTimeSpin_->setEnabled(circular);
+
+    segmentCountLabel_->setEnabled(circular);
+    segmentCountSpin_->setEnabled(circular);
+
+    segmentDurationTextLabel_->setEnabled(circular);
+    segmentDurationLabel_->setEnabled(circular);
 }
 
 void PreferencesDialog::selectSnapshotDirectory()

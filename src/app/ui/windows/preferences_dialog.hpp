@@ -28,6 +28,16 @@ namespace fluvel
  *
  * Unlike session settings, these preferences are shared by all windows and
  * apply globally to the application.
+ *
+ * @note The widgets are reloaded from the application settings each time the
+ *       dialog is opened, so Cancel (or closing the window) discards the edits
+ *       and the next opening shows the applied state. OK writes the values to
+ *       the application settings and saves them.
+ *
+ *       Unlike the session dialogs, this dialog reads and writes the
+ *       singleton itself, because it is a single global dialog with no owning
+ *       window to relay its values. Reloading at each opening is what keeps its
+ *       copy in step, without the limit of the session dialogs.
  */
 class PreferencesDialog : public QDialog
 {
@@ -76,6 +86,21 @@ private:
 
     /// Creates the recording buffer preferences section.
     QWidget* createRecordingBufferSection();
+
+    /**
+     * @brief Fills every widget from the current application settings.
+     *
+     * Called when the dialog is built and each time it is opened, so that it
+     * always shows the preferences actually applied, even after an earlier
+     * edit was cancelled.
+     */
+    void loadFromSettings();
+
+    /// Shows the MP4 conversion option only for codecs that record to MP4.
+    void updateConvertOption();
+
+    /// Enables the circular-recording controls only in circular mode.
+    void updateCircularControls();
 
     /// Opens a directory selection dialog for snapshots.
     void selectSnapshotDirectory();

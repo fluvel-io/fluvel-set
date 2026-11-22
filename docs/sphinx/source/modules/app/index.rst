@@ -177,6 +177,23 @@ path starts to modify them (loading a preset, resetting the settings, another
 window), the owner of the dialog must give it the new configuration, otherwise
 the dialog would show and later commit a stale copy.
 
+The preferences dialog (language, snapshots, video recording, recording buffer)
+follows the same user-visible behavior, with a different mechanism. It is a
+single global dialog with no owning window to relay its values, so it reads and
+writes ``ApplicationSettings`` itself.
+
+* **Opening** the dialog reloads every widget from the application settings, so
+  it always shows what is really applied. Opening it again while it is already
+  visible keeps the pending edits.
+* **OK** writes the values to the singleton, which notifies the windows, and
+  saves them to disk.
+* **Cancel** (or closing the window) writes nothing. The edits are discarded
+  by the reload of the next opening.
+
+Reloading at each opening replaces the *committed*/*edited* copies: there is no
+second copy that could become stale, so the limit described above does not
+apply to this dialog.
+
 .. toctree::
    :maxdepth: 2
 
