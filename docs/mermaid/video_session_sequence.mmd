@@ -1,0 +1,43 @@
+%%{init: {"theme": "base", "themeVariables": {
+  "primaryColor": "#f4f5ff", "primaryBorderColor": "#6b6fcf", "primaryTextColor": "#1d1d1f",
+  "lineColor": "#6b6fcf", "actorBkg": "#f4f5ff", "actorBorder": "#6b6fcf", "actorTextColor": "#1d1d1f",
+  "noteBkgColor": "#eef8f2", "noteBorderColor": "#4fc98a", "noteTextColor": "#1d1d1f",
+  "signalColor": "#444444", "signalTextColor": "#1d1d1f", "labelBoxBkgColor": "#ffffff",
+  "labelBoxBorderColor": "#c8c8c8", "loopTextColor": "#444444"}}}%%
+sequenceDiagram
+    autonumber
+
+    participant V as ImageViewerWidget<br/>(passive view)
+    participant W as VideoWindow<br/>(wiring)
+    participant C as VideoController<br/>(GUI thread)
+    participant S as Video source<br/>(camera or media file)
+    participant T as VideoProcessingThread<br/>(worker thread)
+    participant A as ActiveContour
+
+    Note over W,T: Commands: from the window to the algorithm
+
+    W->>C: start streaming, apply session settings
+    C->>S: open and play
+    C->>T: setAlgoConfig(session)
+
+    Note over S,V: For each video frame
+
+    loop while streaming
+        S-->>C: videoFrameChanged(frame)
+        C->>T: submitFrame(frame)
+        Note right of T: only the latest frame is kept,<br/>older frames are dropped
+        T->>T: convert, downscale, filter
+        T->>A: update(image)
+        loop until the time budget is spent
+            T->>A: runCycles(1)
+        end
+        T-->>C: processedFrameReady(image, contours)
+        C->>C: build the point layers (presentation)
+        C-->>V: displayFrameReady(image, layers)
+        Note over C,V: connected by VideoWindow
+        V-->>C: frameDisplayed(timestamps)
+        Note left of C: statistics: received, processed,<br/>displayed frames
+    end
+
+    W->>C: stop
+    C->>S: stop

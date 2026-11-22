@@ -1,0 +1,29 @@
+%%{init: {"theme": "base", "themeVariables": {"lineColor": "#6b6fcf", "edgeLabelBackground": "#ffffff", "fontSize": "14px"}}}%%
+flowchart TB
+
+    subgraph UI["User interface (Qt Widgets)"]
+        View["Viewer and widgets<br/>passive: they draw what they receive"]
+        Win["Windows<br/>wiring only"]
+    end
+
+    Ctl["Controllers (ImageController, VideoController)<br/>orchestrate the session and prepare what is displayed"]
+
+    Exe["Execution (ImageProcessingWorker, VideoProcessingThread)<br/>run the algorithm outside the interface"]
+
+    Algo["Fluvel IP (no Qt)<br/>filters, active contour, speed models, analysis"]
+
+    Win -- "commands" --> Ctl
+    Ctl -- "frames and layers" --> View
+    View -. "frame displayed" .-> Ctl
+    Ctl -- "commands" --> Exe
+    Exe -- "results" --> Ctl
+    Exe -- "images" --> Algo
+    Algo -- "contours" --> Exe
+
+    style UI fill:#ffffff,color:#444444,stroke:#c8c8c8,stroke-width:2px
+
+    style Win fill:#eef8f2,color:#1d1d1f,stroke:#4fc98a,stroke-width:2px
+    style View fill:#eef8f2,color:#1d1d1f,stroke:#4fc98a,stroke-width:2px
+    style Ctl fill:#f4f5ff,color:#1d1d1f,stroke:#6b6fcf,stroke-width:2px
+    style Exe fill:#f4f5ff,color:#1d1d1f,stroke:#6b6fcf,stroke-width:2px
+    style Algo fill:#f4f5ff,color:#1d1d1f,stroke:#6b6fcf,stroke-width:2px
