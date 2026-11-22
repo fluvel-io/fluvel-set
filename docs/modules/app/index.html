@@ -391,8 +391,8 @@ presenter: they turn the results of the algorithm into what the view
 displays. The view is passive and the windows only connect the components
 together. The algorithm itself, in Fluvel IP, does not depend on Qt.</p>
 <div style="text-align:center;">
-  <a href="../../mermaid/architecture_layers.svg" target="_blank">
-    <img src="../../mermaid/architecture_layers.svg"
+  <a href="../../_static/architecture_layers.svg" target="_blank">
+    <img src="../../_static/architecture_layers.svg"
          style="max-width:420px; width:100%; height:auto;">
   </a>
 </div></section>
@@ -409,8 +409,8 @@ processing thread runs the algorithm. A dashed arrow that crosses a frame is
 a signal delivered across threads: the receiver handles it later, in its own
 thread.</p>
 <div style="text-align:center;">
-  <a href="../../mermaid/video_session_sequence.svg" target="_blank">
-    <img src="../../mermaid/video_session_sequence.svg"
+  <a href="../../_static/video_session_sequence.svg" target="_blank">
+    <img src="../../_static/video_session_sequence.svg"
          style="max-width:760px; width:100%; height:auto;">
   </a>
 </div></section>
@@ -425,9 +425,41 @@ synchronously when the image is initialized or restarted, so the interface
 waits until they are done. Only the active contour iterations are split into
 time slices.</p>
 <div style="text-align:center;">
-  <a href="../../mermaid/image_session_sequence.svg" target="_blank">
-    <img src="../../mermaid/image_session_sequence.svg"
+  <a href="../../_static/image_session_sequence.svg" target="_blank">
+    <img src="../../_static/image_session_sequence.svg"
          style="max-width:700px; width:100%; height:auto;">
+  </a>
+</div></section>
+<section id="recording">
+<h2>Recording<a class="headerlink" href="#recording" title="Link to this heading">#</a></h2>
+<p>Recording is handled by the capture controller, independently of the video
+session: it only receives the frames that the window gives it, so it can be
+reused with other sources. The window draws the contour layers on the
+displayed image before submitting it, so the recorded video shows what the
+user sees.</p>
+<p>The frames go through a buffer protected by a mutex: the GUI thread pushes
+them and a dedicated recorder thread pops and encodes them with FFmpeg. The
+buffer keeps frames in memory and spills them to disk when its limit is
+reached. When the recording stops, the recorder thread first drains the
+buffer, then closes the file and, if requested, converts the segments to
+standard MP4. Its signals reach the controller in the GUI thread.</p>
+<div style="text-align:center;">
+  <a href="../../_static/recording_sequence.svg" target="_blank">
+    <img src="../../_static/recording_sequence.svg"
+         style="max-width:900px; width:100%; height:auto;">
+  </a>
+</div></section>
+<section id="snapshot">
+<h2>Snapshot<a class="headerlink" href="#snapshot" title="Link to this heading">#</a></h2>
+<p>A snapshot is simpler. The window copies the displayed image, draws the
+contour layers on the copy and gives it to the capture controller. The
+controller puts it in a small bounded queue, and a dedicated thread writes the
+files one at a time, so saving never blocks the interface. The result, a file
+name or an error, comes back to the controller and is shown to the user.</p>
+<div style="text-align:center;">
+  <a href="../../_static/snapshot_sequence.svg" target="_blank">
+    <img src="../../_static/snapshot_sequence.svg"
+         style="max-width:900px; width:100%; height:auto;">
   </a>
 </div></section>
 <section id="configuration">
@@ -444,8 +476,8 @@ overlay) directly to the viewer, without going through the controller;</p></li>
 <li><p>the <strong>window</strong> also refreshes its own widgets.</p></li>
 </ul>
 <div style="text-align:center;">
-  <a href="../../mermaid/config_flow.svg" target="_blank">
-    <img src="../../mermaid/config_flow.svg"
+  <a href="../../_static/config_flow.svg" target="_blank">
+    <img src="../../_static/config_flow.svg"
          style="max-width:620px; width:100%; height:auto;">
   </a>
 </div><div class="toctree-wrapper compound">
@@ -534,6 +566,8 @@ overlay) directly to the viewer, without going through the controller;</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-session">Video session</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-session">Image session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recording">Recording</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot">Snapshot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 </ul>
   </nav></div>

@@ -1,0 +1,47 @@
+%%{init: {"theme": "base", "themeVariables": {
+  "primaryColor": "#f4f5ff", "primaryBorderColor": "#6b6fcf", "primaryTextColor": "#1d1d1f",
+  "lineColor": "#6b6fcf", "actorBkg": "#f4f5ff", "actorBorder": "#6b6fcf", "actorTextColor": "#1d1d1f",
+  "noteBkgColor": "#eef8f2", "noteBorderColor": "#4fc98a", "noteTextColor": "#1d1d1f",
+  "signalColor": "#444444", "signalTextColor": "#1d1d1f", "labelBoxBkgColor": "#ffffff",
+  "labelBoxBorderColor": "#c8c8c8", "loopTextColor": "#444444", "sequenceNumberColor": "#ffffff"}}}%%
+sequenceDiagram
+    autonumber
+
+
+    box rgb(238,248,242) GUI thread
+        participant B as Capture button
+        participant C as CaptureController
+        participant W as Window<br/>(wiring)
+        participant V as ImageViewerWidget
+        participant X as CaptureStatusPresenter
+    end
+    box rgb(244,245,255) Snapshot thread
+        participant Q as SnapshotWorker
+    end
+
+    B->>C: requestSnapshot()
+    C-->>W: snapshotRequested
+    Note over C,W: connected by the window
+    W->>V: displayFrame()
+
+    alt no frame displayed yet
+        W->>C: saveSnapshot(empty image)
+        C-->>X: snapshotError(no frame available)
+    else a frame is displayed
+        W->>W: draw the contour layers on a copy
+        W->>C: saveSnapshot(image)
+        alt the queue is full
+            C-->>X: snapshotError(queue is full)
+        else the image is queued
+            C->>Q: enqueue(image)
+            Note right of Q: bounded queue, protected by a mutex,<br/>written one image at a time
+            Q->>Q: build the file name and save the image
+            alt saved
+                Q-->>C: snapshotSaved(file name)
+            else write failed
+                Q-->>C: snapshotError(file name)
+            end
+            C-->>X: the result is forwarded
+        end
+    end
+    X->>X: show the result to the user

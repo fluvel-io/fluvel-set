@@ -28,8 +28,8 @@ together. The algorithm itself, in Fluvel IP, does not depend on Qt.
 .. raw:: html
 
    <div style="text-align:center;">
-     <a href="../../mermaid/architecture_layers.svg" target="_blank">
-       <img src="../../mermaid/architecture_layers.svg"
+     <a href="../../_static/architecture_layers.svg" target="_blank">
+       <img src="../../_static/architecture_layers.svg"
             style="max-width:420px; width:100%; height:auto;">
      </a>
    </div>
@@ -52,8 +52,8 @@ thread.
 .. raw:: html
 
    <div style="text-align:center;">
-     <a href="../../mermaid/video_session_sequence.svg" target="_blank">
-       <img src="../../mermaid/video_session_sequence.svg"
+     <a href="../../_static/video_session_sequence.svg" target="_blank">
+       <img src="../../_static/video_session_sequence.svg"
             style="max-width:760px; width:100%; height:auto;">
      </a>
    </div>
@@ -74,9 +74,52 @@ time slices.
 .. raw:: html
 
    <div style="text-align:center;">
-     <a href="../../mermaid/image_session_sequence.svg" target="_blank">
-       <img src="../../mermaid/image_session_sequence.svg"
+     <a href="../../_static/image_session_sequence.svg" target="_blank">
+       <img src="../../_static/image_session_sequence.svg"
             style="max-width:700px; width:100%; height:auto;">
+     </a>
+   </div>
+
+Recording
+---------
+
+Recording is handled by the capture controller, independently of the video
+session: it only receives the frames that the window gives it, so it can be
+reused with other sources. The window draws the contour layers on the
+displayed image before submitting it, so the recorded video shows what the
+user sees.
+
+The frames go through a buffer protected by a mutex: the GUI thread pushes
+them and a dedicated recorder thread pops and encodes them with FFmpeg. The
+buffer keeps frames in memory and spills them to disk when its limit is
+reached. When the recording stops, the recorder thread first drains the
+buffer, then closes the file and, if requested, converts the segments to
+standard MP4. Its signals reach the controller in the GUI thread.
+
+.. raw:: html
+
+   <div style="text-align:center;">
+     <a href="../../_static/recording_sequence.svg" target="_blank">
+       <img src="../../_static/recording_sequence.svg"
+            style="max-width:900px; width:100%; height:auto;">
+     </a>
+   </div>
+
+Snapshot
+--------
+
+A snapshot is simpler. The window copies the displayed image, draws the
+contour layers on the copy and gives it to the capture controller. The
+controller puts it in a small bounded queue, and a dedicated thread writes the
+files one at a time, so saving never blocks the interface. The result, a file
+name or an error, comes back to the controller and is shown to the user.
+
+.. raw:: html
+
+   <div style="text-align:center;">
+     <a href="../../_static/snapshot_sequence.svg" target="_blank">
+       <img src="../../_static/snapshot_sequence.svg"
+            style="max-width:900px; width:100%; height:auto;">
      </a>
    </div>
 
@@ -97,8 +140,8 @@ three listeners react independently:
 .. raw:: html
 
    <div style="text-align:center;">
-     <a href="../../mermaid/config_flow.svg" target="_blank">
-       <img src="../../mermaid/config_flow.svg"
+     <a href="../../_static/config_flow.svg" target="_blank">
+       <img src="../../_static/config_flow.svg"
             style="max-width:620px; width:100%; height:auto;">
      </a>
    </div>

@@ -24,9 +24,9 @@ while internal regularization is handled by a dedicated internal model.
 .. raw:: html
 
    <div style="text-align:center;">
-     <a href="../../mermaid/active_contour_speed_models.svg"
+     <a href="../../_static/active_contour_speed_models.svg"
         target="_blank">
-       <img src="../../mermaid/active_contour_speed_models.svg"
+       <img src="../../_static/active_contour_speed_models.svg"
             style="max-width:300px; width:100%; height:auto;">
      </a>
    </div>

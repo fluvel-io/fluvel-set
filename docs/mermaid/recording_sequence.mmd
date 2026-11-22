@@ -1,0 +1,61 @@
+%%{init: {"theme": "base", "themeVariables": {
+  "primaryColor": "#f4f5ff", "primaryBorderColor": "#6b6fcf", "primaryTextColor": "#1d1d1f",
+  "lineColor": "#6b6fcf", "actorBkg": "#f4f5ff", "actorBorder": "#6b6fcf", "actorTextColor": "#1d1d1f",
+  "noteBkgColor": "#eef8f2", "noteBorderColor": "#4fc98a", "noteTextColor": "#1d1d1f",
+  "signalColor": "#444444", "signalTextColor": "#1d1d1f", "labelBoxBkgColor": "#ffffff",
+  "labelBoxBorderColor": "#c8c8c8", "loopTextColor": "#444444", "sequenceNumberColor": "#ffffff"}}}%%
+sequenceDiagram
+    autonumber
+
+
+    box rgb(238,248,242) GUI thread
+        participant W as VideoWindow<br/>(wiring)
+        participant C as CaptureController
+        participant R as VideoRecorderWorker<br/>(API side)
+    end
+    box rgb(255,246,236) Shared, protected by a mutex
+        participant B as VideoFrameBuffer
+    end
+    box rgb(244,245,255) Recorder thread
+        participant P as VideoRecorderWorker<br/>(encoding loop)
+        participant S as RecordingSession<br/>(FFmpeg)
+    end
+
+    Note over W,C: Start: button, or automatic with the stream
+
+    W->>C: start recording
+    C->>R: start(export settings)
+    R->>S: open(settings)
+    Note over R,S: the output file is opened<br/>before the thread starts
+    R->>P: start the recorder thread
+    R-->>C: stateChanged(Recording)
+
+    Note over W,S: For each displayed frame
+
+    loop while recording
+        W->>W: draw the contour layers on the image
+        W->>C: submitFrame(frame)
+        C->>R: addFrame(frame)
+        R->>B: push(frame)
+        Note right of B: kept in memory, then spilled to disk<br/>if the memory limit is reached
+        R-->>P: wake up (condition variable)
+        P->>B: pop()
+        P->>S: addFrame(frame)
+        Note right of S: encodes the frame, starts a new<br/>segment when needed
+        P-->>C: statsChanged(every second)
+    end
+
+    Note over W,S: Stop: user, stream lost, error or full buffer
+
+    W->>C: stop
+    C->>R: stop()
+    R-->>C: stateChanged(Draining)
+    P->>B: pop() until empty
+    P->>S: close()
+    opt conversion to standard MP4 requested
+        P-->>C: conversionStarted
+        P->>S: convertFiles()
+        Note right of S: fragmented MP4 to standard MP4
+    end
+    P-->>C: recordingFinalized(path)
+    P-->>C: stateChanged(Stopped)

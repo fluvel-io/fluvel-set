@@ -22,9 +22,9 @@ from the controllers, and displays them according to a view configuration.
 .. raw:: html
 
    <div style="text-align:center;">
-     <a href="../../../mermaid/image_viewer_behaviors.svg"
+     <a href="../../../_static/image_viewer_behaviors.svg"
         target="_blank">
-       <img src="../../../mermaid/image_viewer_behaviors.svg"
+       <img src="../../../_static/image_viewer_behaviors.svg"
             style="max-width:300px; width:100%; height:auto;">
      </a>
    </div>
