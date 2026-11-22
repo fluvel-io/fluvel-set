@@ -64,3 +64,9 @@ manylinux-x86_64-image = "manylinux_2_34"
 
 [tool.cibuildwheel.windows]
 archs = ["AMD64"]
+
+[tool.cibuildwheel.macos]
+# One wheel for Apple Silicon and Intel Macs (tested on the Apple Silicon runner).
+archs = ["universal2"]
+# The C++23 standard library needs a recent deployment target.
+environment = { MACOSX_DEPLOYMENT_TARGET = "13.0" }
