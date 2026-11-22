@@ -54,6 +54,33 @@ target_include_directories(${PYTHON_TARGET_NAME} PRIVATE
     ${PROJECT_SOURCE_DIR}/src/image_processing
 )
 
+# --- Build traceability (same information as the application) ---
+# Priority: -DFLUVEL_GIT_COMMIT, then GITHUB_SHA (CI), then git, then "unknown".
+if(NOT DEFINED FLUVEL_GIT_COMMIT OR FLUVEL_GIT_COMMIT STREQUAL "")
+    if(DEFINED ENV{GITHUB_SHA} AND NOT "$ENV{GITHUB_SHA}" STREQUAL "")
+        string(SUBSTRING "$ENV{GITHUB_SHA}" 0 7 FLUVEL_GIT_COMMIT)
+    else()
+        execute_process(
+            COMMAND git rev-parse --short=7 HEAD
+            WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+            OUTPUT_VARIABLE FLUVEL_GIT_COMMIT
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            ERROR_QUIET
+        )
+    endif()
+endif()
+
+if(NOT FLUVEL_GIT_COMMIT)
+    set(FLUVEL_GIT_COMMIT "unknown")
+endif()
+
+message(STATUS "Python bindings commit: ${FLUVEL_GIT_COMMIT}")
+
+target_compile_definitions(${PYTHON_TARGET_NAME} PRIVATE
+    FLUVEL_VERSION="${PROJECT_VERSION}"
+    FLUVEL_GIT_COMMIT="${FLUVEL_GIT_COMMIT}"
+)
+
 set_target_properties(
     ${PYTHON_TARGET_NAME}
 

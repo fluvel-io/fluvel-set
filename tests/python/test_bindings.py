@@ -528,3 +528,13 @@ def test_the_gil_is_released_during_the_computation():
     # With the GIL held, the counting thread could not run at all during the
     # computation. With the GIL released, it ticks hundreds of thousands of times.
     assert ticks > 1000
+
+
+#
+# Build traceability
+#
+
+
+def test_the_module_reports_its_version_and_commit():
+    assert isinstance(fluvel.__version__, str) and fluvel.__version__
+    assert isinstance(fluvel.__commit__, str) and fluvel.__commit__

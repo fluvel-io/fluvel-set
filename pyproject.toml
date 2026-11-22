@@ -58,6 +58,8 @@ test-command = "python -c \"import fluvel\" && pytest {project}/tests/python -q"
 
 [tool.cibuildwheel.linux]
 archs = ["x86_64"]
+# The build runs in a container: give it the commit to record in the module.
+environment-pass = ["GITHUB_SHA"]
 manylinux-x86_64-image = "manylinux_2_34"
 
 [tool.cibuildwheel.windows]
