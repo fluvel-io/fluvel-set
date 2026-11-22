@@ -12,10 +12,6 @@
 namespace fluvel
 {
 
-struct DisplayFrame;
-struct DisplayConfig;
-struct DownscaleParams;
-
 namespace frame_rendering_utils
 {
 
@@ -26,41 +22,10 @@ namespace frame_rendering_utils
  * Hidden layers are skipped.
  *
  * @param image Image onto which the layers are rendered.
- * @param layers Layers of points, in processing image coordinates.
- * @param scale Scale applied to the point coordinates.
+ * @param layers Layers of points. Each layer carries its own style
+ *        (color, visibility) and its scale to the image coordinates.
  */
-void drawLayers(QImage& image, const QVector<PointLayer>& layers, qreal scale);
-
-/**
- * @brief Draws the layers of a display frame onto an image.
- *
- * Layers carry their own style (color, visibility), set by the controller.
- * They are expressed in processing image coordinates and are scaled to the
- * represented image space according to the current display and downscale
- * configuration.
- *
- * @param image Image onto which the layers are rendered.
- * @param frame Display frame containing the layers.
- * @param displayConfig Display configuration (image representation).
- * @param downscaleParams Processing downscale parameters.
- */
-void drawContourOverlay(QImage& image, const DisplayFrame& frame,
-                        const DisplayConfig& displayConfig, const DownscaleParams& downscaleParams);
-
-/**
- * @brief Computes the contour scale factor for the represented image.
- *
- * Contours are expressed in processing image coordinates. When the source
- * image is displayed while downscaled processing is enabled, contour
- * coordinates must be scaled back to the source image space.
- *
- * @param displayConfig Display configuration.
- * @param downscaleParams Processing downscale parameters.
- *
- * @return Contour scale factor.
- */
-[[nodiscard]] qreal contourScaleFactor(const DisplayConfig& displayConfig,
-                                       const DownscaleParams& downscaleParams);
+void drawLayers(QImage& image, const QVector<PointLayer>& layers);
 
 } // namespace frame_rendering_utils
 

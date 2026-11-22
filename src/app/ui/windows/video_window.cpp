@@ -419,8 +419,7 @@ void VideoWindow::setupView()
 {
     const auto& app = ApplicationSettings::instance();
 
-    imageViewer_ = new ImageViewerWidget(app.videoSettings().display,
-                                         app.videoSettings().compute.downscale, central_);
+    imageViewer_ = new ImageViewerWidget(app.videoSettings().display.view, central_);
 
     imageViewer_->setMaxDisplayFps(30.0);
     constexpr qreal kDebugOverlayMinWidth = 160.0;
@@ -878,10 +877,7 @@ void VideoWindow::setupConnections()
 
                 QImage image = frame.image;
 
-                const auto& config = ApplicationSettings::instance().videoSettings();
-
-                frame_rendering_utils::drawContourOverlay(image, frame, config.display,
-                                                          config.compute.downscale);
+                frame_rendering_utils::drawLayers(image, frame.layers);
 
                 captureController_->saveSnapshot(image);
             });
@@ -892,10 +888,8 @@ void VideoWindow::applyInitialSettings()
     assert(imageViewer_ && displayBar_);
 
     const auto& app = ApplicationSettings::instance();
-    const auto& downscaleParams = app.videoSettings().compute.downscale;
 
-    imageViewer_->applyDownscaleConfig(downscaleParams);
-    imageViewer_->applyDisplayConfig(app.videoSettings().display);
+    imageViewer_->applyViewConfig(app.videoSettings().display.view);
 
     bool preprocessing = app.videoSettings().compute.downscale.downscaleEnabled ||
                          app.videoSettings().compute.temporalFilteringEnabled;
@@ -909,7 +903,7 @@ void VideoWindow::applyInitialSettings()
     refreshSourceUi();
     refreshUi();
 
-    onDownscaleChanged(downscaleParams);
+    onDownscaleChanged(app.videoSettings().compute.downscale);
 }
 
 void VideoWindow::bindApplicationSettingsToController()
@@ -935,14 +929,11 @@ void VideoWindow::bindApplicationSettingsToView()
 
     const auto& app = ApplicationSettings::instance();
 
-    connect(&app, &ApplicationSettings::videoSettingsChanged, this,
-            [this](const VideoSessionSettings& conf)
+    connect(&app, &ApplicationSettings::videoDisplaySettingsChanged, this,
+            [this](const DisplayConfig& display)
             {
-                imageViewer_->applyDownscaleConfig(conf.compute.downscale);
+                imageViewer_->applyViewConfig(display.view);
             });
-
-    connect(&app, &ApplicationSettings::videoDisplaySettingsChanged, imageViewer_,
-            &ImageViewerWidget::applyDisplayConfig);
 }
 
 void VideoWindow::bindUiToApplicationSettings()
@@ -2447,14 +2438,11 @@ void VideoWindow::connectFrameToCapture()
                     if (!captureController_->isAcceptingFrames())
                         return;
 
-                    const auto& config = ApplicationSettings::instance().videoSettings();
-
                     VideoFrame videoFrame;
                     videoFrame.image = displayFrame.image;
                     videoFrame.presentationTimestampNs = displayFrame.receiveTimestampNs;
 
-                    frame_rendering_utils::drawContourOverlay(
-                        videoFrame.image, displayFrame, config.display, config.compute.downscale);
+                    frame_rendering_utils::drawLayers(videoFrame.image, displayFrame.layers);
 
                     captureController_->submitFrame(videoFrame);
                 });

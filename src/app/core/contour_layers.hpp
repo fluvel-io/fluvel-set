@@ -11,6 +11,7 @@
 namespace fluvel
 {
 struct DisplayConfig;
+struct DownscaleParams;
 
 /**
  * @brief Mapping between the active contour and generic point layers.
@@ -29,29 +30,46 @@ inline constexpr int kOuter = 0;
 inline constexpr int kInner = 1;
 
 /**
+ * @brief Computes the scale from contour coordinates to the displayed image.
+ *
+ * Contours are expressed in processing image coordinates. When the source
+ * image is displayed while downscaled processing is enabled, they must be
+ * scaled back to the source image space. This is the single place of that rule.
+ *
+ * @param displayConfig Display configuration (background image).
+ * @param downscaleParams Processing downscale parameters.
+ *
+ * @return Layer scale.
+ */
+[[nodiscard]] qreal scaleFor(const DisplayConfig& displayConfig,
+                             const DownscaleParams& downscaleParams);
+
+/**
  * @brief Builds the styled layers of an active contour.
  *
  * @param outer Outer contour points.
  * @param inner Inner contour points.
  * @param displayConfig Display configuration (contour colors and visibility).
+ * @param scale Layer scale, see scaleFor().
  *
  * @return Layers, indexed by kOuter and kInner.
  */
 [[nodiscard]] QVector<PointLayer> make(const QVector<QPointF>& outer, const QVector<QPointF>& inner,
-                                       const DisplayConfig& displayConfig);
+                                       const DisplayConfig& displayConfig, qreal scale);
 
 /**
  * @brief Applies a new display configuration to existing contour layers.
  *
- * Points are kept, only the styles change.
+ * Points are kept, only the styles and the scale change.
  *
  * @param layers Layers built by make().
  * @param displayConfig Display configuration (contour colors and visibility).
+ * @param scale Layer scale, see scaleFor().
  *
  * @return Restyled layers.
  */
 [[nodiscard]] QVector<PointLayer> restyle(const QVector<PointLayer>& layers,
-                                          const DisplayConfig& displayConfig);
+                                          const DisplayConfig& displayConfig, qreal scale);
 
 } // namespace contour_layers
 

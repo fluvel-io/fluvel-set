@@ -26,6 +26,10 @@ struct PointLayer
 
     /// Hidden layers keep their points but are not drawn.
     bool visible{true};
+
+    /// Scale from the layer coordinates to the displayed image coordinates.
+    /// Set by the controller (e.g. downscale factor when the source image is shown).
+    qreal scale{1.0};
 };
 
 } // namespace fluvel

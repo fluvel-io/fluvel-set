@@ -70,8 +70,7 @@ public:
     // --- Public API (external users) ---
     explicit ImageViewerWidget(QWidget* parent = nullptr);
 
-    explicit ImageViewerWidget(const DisplayConfig& displayConfig, const DownscaleParams& downscaleParams,
-                       QWidget* parent = nullptr);
+    explicit ImageViewerWidget(const ViewConfig& viewConfig, QWidget* parent = nullptr);
 
     ~ImageViewerWidget() override;
 
@@ -101,13 +100,13 @@ public:
 
     /**
      * @name Configuration
-     * @brief Runtime configuration of display and processing parameters.
+     * @brief Runtime configuration of the presentation.
      *
-* These functions update internal rendering behavior without recreating the widget.
+     * The viewer only knows how it presents what it is given (mirror, smoothing,
+     * overlays). What is drawn (image, styled layers) is decided by the caller.
      * @{
      */
-    void applyDisplayConfig(const fluvel::DisplayConfig& display);
-    void applyDownscaleConfig(const fluvel::DownscaleParams& downscale);
+    void applyViewConfig(const fluvel::ViewConfig& view);
     /** @} */
 
     /**
@@ -405,8 +404,7 @@ private:
     void updateCursor(const QMouseEvent* e);
     double currentZoom() const;
 
-    void updateDisplayWithConfig();
-    void upscaleItems();
+    void updateViewOptions();
     void updateFlip();
     void updateSmoothDisplay();
     void updateTextOverlayVisibility();
@@ -459,8 +457,7 @@ private:
     QGraphicsPixmapItem* pixmapItem_{nullptr};
     QImage lastDisplayedImage_;
 
-    DisplayConfig displayConfig_{};
-    DownscaleParams downscaleConfig_{};
+    ViewConfig viewConfig_{};
 
     /// One graphics item per layer (created on demand, never destroyed).
     QVector<ContourPointsItem*> layerItems_;
@@ -470,9 +467,6 @@ private:
 
     /// Visibility requested for each layer.
     QVector<bool> layerVisible_;
-
-    /// Scale applied to the layer items (downscale factor in source mode).
-    qreal layerScale_{1.0};
 
     OverlayTextItem* infoOverlay_{nullptr};
 
@@ -507,8 +501,6 @@ private:
     bool placeholderVisible_{false};
 
     bool dragHighlight_{false};
-
-    const bool useEnhancedDisplayConfig_{false};
 
     bool previousAutoFitEnabled_{true};
     QTransform previousTransform_;

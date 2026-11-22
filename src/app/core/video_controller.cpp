@@ -236,8 +236,9 @@ void VideoController::onProcessedFrameReady(const ProcessedFrame& frame)
     if (displayFrame.image.isNull())
         return;
 
-    displayFrame.layers = contour_layers::make(convertToQVector(frame.outerContour),
-                                               convertToQVector(frame.innerContour), displayConfig_);
+    displayFrame.layers = contour_layers::make(
+        convertToQVector(frame.outerContour), convertToQVector(frame.innerContour), displayConfig_,
+        contour_layers::scaleFor(displayConfig_, downscaleParams_));
 
     displayFrame.receiveTimestampNs = frame.receiveTimestampNs;
     displayFrame.processTimestampNs = frame.processTimestampNs;
@@ -300,6 +301,9 @@ void VideoController::onVideoSettingsChanged(const VideoSessionSettings& session
     processingThread_.setAlgoConfig(session.compute);
 
     emit downscaleChanged(session.compute.downscale);
+
+    // The layer scale depends on the downscale parameters.
+    refreshLastLayers();
 }
 
 void VideoController::onVideoDisplaySettingsChanged(const DisplayConfig& display)
@@ -308,14 +312,21 @@ void VideoController::onVideoDisplaySettingsChanged(const DisplayConfig& display
 
     processingThread_.setBackground(display.background);
 
-    // Contour colors and visibility may have changed: restyle the displayed contour,
+    // Contour style or scale may have changed: refresh the displayed contour,
     // which also applies when no new frame arrives (paused or stopped stream).
-    if (!lastDisplayFrame_.layers.isEmpty())
-    {
-        lastDisplayFrame_.layers = contour_layers::restyle(lastDisplayFrame_.layers, displayConfig_);
+    refreshLastLayers();
+}
 
-        emit layersUpdated(lastDisplayFrame_.layers);
-    }
+void VideoController::refreshLastLayers()
+{
+    if (lastDisplayFrame_.layers.isEmpty())
+        return;
+
+    lastDisplayFrame_.layers =
+        contour_layers::restyle(lastDisplayFrame_.layers, displayConfig_,
+                                contour_layers::scaleFor(displayConfig_, downscaleParams_));
+
+    emit layersUpdated(lastDisplayFrame_.layers);
 }
 
 bool VideoController::isStreaming() const

@@ -20,7 +20,6 @@
 #include <QWheelEvent>
 
 #include <cassert>
-#include <utility>
 
 namespace
 {
@@ -30,18 +29,26 @@ constexpr QPoint kCursorOverlayOffset{8, -8};
 namespace fluvel
 {
 
-ImageViewerWidget::ImageViewerWidget(QWidget* parent)
-    : QGraphicsView(parent)
+namespace
 {
-    initializeView();
+/// Presentation of a plain viewer: mini-map only, no algorithm overlay.
+fluvel::ViewConfig plainViewConfig()
+{
+    fluvel::ViewConfig view;
+    view.algorithmOverlayEnabled = false;
+    view.miniMapEnabled = true;
+    return view;
+}
+} // namespace
+
+ImageViewerWidget::ImageViewerWidget(QWidget* parent)
+    : ImageViewerWidget(plainViewConfig(), parent)
+{
 }
 
-ImageViewerWidget::ImageViewerWidget(const DisplayConfig& displayConfig,
-                                     const DownscaleParams& downscaleParams, QWidget* parent)
+ImageViewerWidget::ImageViewerWidget(const ViewConfig& viewConfig, QWidget* parent)
     : QGraphicsView(parent)
-    , displayConfig_(displayConfig)
-    , downscaleConfig_(downscaleParams)
-    , useEnhancedDisplayConfig_{true}
+    , viewConfig_(viewConfig)
 {
     initializeView();
 
@@ -140,12 +147,8 @@ void ImageViewerWidget::setupMiniMap()
 
     miniMap_->resize(160, 160);
 
-    // Enhanced display views restore the mini-map visibility
-    // from the display configuration after initialization.
-    if (useEnhancedDisplayConfig_)
-        miniMap_->hide();
-    else
-        miniMap_->show();
+    // The mini-map visibility follows the view configuration once an image is shown.
+    miniMap_->hide();
 
     connect(horizontalScrollBar(), &QScrollBar::valueChanged, this,
             &ImageViewerWidget::updateMiniMap);
@@ -175,7 +178,6 @@ ContourPointsItem* ImageViewerWidget::layerItem(int index)
     {
         auto* item = new ContourPointsItem(contentRoot_);
         item->setZValue(100.0);
-        item->setScale(layerScale_);
 
         layerItems_.push_back(item);
         layerColors_.push_back(Qt::red);
@@ -311,7 +313,9 @@ void ImageViewerWidget::setLayers(const QVector<PointLayer>& layers)
 {
     for (int i = 0; i < layers.size(); ++i)
     {
-        layerItem(i)->setPoints(layers[i].points);
+        ContourPointsItem* item = layerItem(i);
+        item->setPoints(layers[i].points);
+        item->setScale(layers[i].scale);
         layerColors_[i] = layers[i].color;
         layerVisible_[i] = layers[i].visible;
     }
@@ -336,7 +340,8 @@ DisplayFrame ImageViewerWidget::displayFrame() const
     frame.layers.reserve(layerItems_.size());
 
     for (int i = 0; i < layerItems_.size(); ++i)
-        frame.layers.push_back({layerItems_[i]->points(), layerColors_[i], layerVisible_[i]});
+        frame.layers.push_back(
+            {layerItems_[i]->points(), layerColors_[i], layerVisible_[i], layerItems_[i]->scale()});
 
     return frame;
 }
@@ -405,8 +410,7 @@ void ImageViewerWidget::handleImageSizeChanged()
         moveOverlay(infoOverlay_, kDefaultOverlayPos);
     }
 
-    if (useEnhancedDisplayConfig_)
-        updateDisplayWithConfig();
+    updateViewOptions();
 
     applyAutoFit();
 
@@ -1035,51 +1039,32 @@ bool ImageViewerWidget::isGrayscale() const
            lastDisplayedImage_.format() == QImage::Format_Grayscale16;
 }
 
-void ImageViewerWidget::upscaleItems()
+void ImageViewerWidget::applyViewConfig(const ViewConfig& view)
 {
-    assert(useEnhancedDisplayConfig_);
+    const bool previousMirrorMode = viewConfig_.mirrorMode;
+    const bool previousSmoothDisplay = viewConfig_.smoothDisplay;
 
-    const bool has_ds = downscaleConfig_.downscaleEnabled;
-    const int df = downscaleConfig_.downscaleFactor;
+    viewConfig_ = view;
 
-    qreal factor = 1.0;
-
-    if (has_ds && displayConfig_.background == BackgroundImage::Source)
-        factor = qreal(df);
-
-    layerScale_ = factor;
-
-    for (ContourPointsItem* item : std::as_const(layerItems_))
-        item->setScale(factor);
-}
-
-void ImageViewerWidget::applyDisplayConfig(const DisplayConfig& display)
-{
-    const bool previousMirrorMode = displayConfig_.view.mirrorMode;
-    const bool previousSmoothDisplay = displayConfig_.view.smoothDisplay;
-
-    displayConfig_ = display;
-
-    updateDisplayWithConfig();
+    updateViewOptions();
 
     if (!hasImage())
         return;
 
-    if (previousMirrorMode != displayConfig_.view.mirrorMode)
+    if (previousMirrorMode != viewConfig_.mirrorMode)
     {
-        showNotification(displayConfig_.view.mirrorMode ? tr("Mirror On") : tr("Mirror Off"));
+        showNotification(viewConfig_.mirrorMode ? tr("Mirror On") : tr("Mirror Off"));
     }
 
-    if (previousSmoothDisplay != displayConfig_.view.smoothDisplay)
+    if (previousSmoothDisplay != viewConfig_.smoothDisplay)
     {
-        showNotification(displayConfig_.view.smoothDisplay ? tr("Smooth Display On")
-                                                           : tr("Smooth Display Off"));
+        showNotification(viewConfig_.smoothDisplay ? tr("Smooth Display On")
+                                                   : tr("Smooth Display Off"));
     }
 }
 
-void ImageViewerWidget::updateDisplayWithConfig()
+void ImageViewerWidget::updateViewOptions()
 {
-    upscaleItems();
     updateFlip();
     updateSmoothDisplay();
     updateTextOverlayVisibility();
@@ -1088,11 +1073,9 @@ void ImageViewerWidget::updateDisplayWithConfig()
 
 void ImageViewerWidget::updateFlip()
 {
-    assert(useEnhancedDisplayConfig_);
-
     contentRoot_->setTransformOriginPoint(0.0, 0.0);
 
-    if (displayConfig_.view.mirrorMode)
+    if (viewConfig_.mirrorMode)
     {
         QTransform t;
         t.scale(-1.0, 1.0);
@@ -1111,9 +1094,9 @@ void ImageViewerWidget::updateFlip()
 
 void ImageViewerWidget::updateSmoothDisplay()
 {
-    assert(useEnhancedDisplayConfig_ && pixmapItem_);
+    assert(pixmapItem_);
 
-    if (displayConfig_.view.smoothDisplay)
+    if (viewConfig_.smoothDisplay)
         pixmapItem_->setTransformationMode(Qt::SmoothTransformation);
     else
         pixmapItem_->setTransformationMode(Qt::FastTransformation);
@@ -1121,26 +1104,19 @@ void ImageViewerWidget::updateSmoothDisplay()
 
 void ImageViewerWidget::updateTextOverlayVisibility()
 {
-    assert(infoOverlay_ && useEnhancedDisplayConfig_);
+    assert(infoOverlay_);
 
-    infoOverlay_->setVisible(displayConfig_.view.algorithmOverlayEnabled);
+    infoOverlay_->setVisible(viewConfig_.algorithmOverlayEnabled);
 }
 
 void ImageViewerWidget::updateMiniMapVisibility()
 {
-    assert(miniMap_ && useEnhancedDisplayConfig_);
+    assert(miniMap_);
 
     if (!hasImage())
         return;
 
-    miniMap_->setVisible(displayConfig_.view.miniMapEnabled);
-}
-
-void ImageViewerWidget::applyDownscaleConfig(const DownscaleParams& downscale)
-{
-    downscaleConfig_ = downscale;
-
-    upscaleItems();
+    miniMap_->setVisible(viewConfig_.miniMapEnabled);
 }
 
 void ImageViewerWidget::setText(const QString& text)
@@ -1252,7 +1228,7 @@ void ImageViewerWidget::updateMiniMapThumbnail()
     if (thumbnail_.isNull())
         return;
 
-    if (useEnhancedDisplayConfig_ && displayConfig_.view.mirrorMode)
+    if (viewConfig_.mirrorMode)
         miniMap_->setImage(thumbnail_.flipped(Qt::Horizontal));
     else
         miniMap_->setImage(thumbnail_);

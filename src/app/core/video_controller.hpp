@@ -532,6 +532,9 @@ private:
 
     /// Last processed frame available for snapshot capture.
     DisplayFrame lastDisplayFrame_{};
+
+    /// Restyles and rescales the layers of the last frame, then emits them.
+    void refreshLastLayers();
 };
 
 /**

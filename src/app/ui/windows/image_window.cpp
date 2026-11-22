@@ -183,7 +183,7 @@ void ImageWindow::setupUi()
     // --- Image view ---
 
     const auto& config = ApplicationSettings::instance().imageSettings();
-    imageViewer_ = new ImageViewerWidget(config.display, config.compute.downscale, central);
+    imageViewer_ = new ImageViewerWidget(config.display.view, central);
     imageViewer_->setMaxDisplayFps(60.0);
 
     constexpr qreal kDebugOverlayMinWidth = 160.0;
@@ -403,8 +403,7 @@ void ImageWindow::applyInitialSettings()
     currentDownscale_ = config.compute.downscale;
     updateWindowTitle();
 
-    imageViewer_->applyDownscaleConfig(config.compute.downscale);
-    imageViewer_->applyDisplayConfig(config.display);
+    imageViewer_->applyViewConfig(config.display.view);
 
     bool preprocessing =
         config.compute.downscale.downscaleEnabled || config.compute.processing.hasActiveProcessing();
@@ -456,8 +455,6 @@ void ImageWindow::setupConnections()
             if (captureImage_.isNull())
                 return;
 
-            const auto& config = ApplicationSettings::instance().imageSettings();
-
             DisplayFrame displayFrame;
             displayFrame.image = captureImage_;
             displayFrame.layers = layers;
@@ -465,8 +462,7 @@ void ImageWindow::setupConnections()
             VideoFrame videoFrame;
             videoFrame.image = captureImage_;
 
-            frame_rendering_utils::drawContourOverlay(videoFrame.image, displayFrame,
-                                                      config.display, config.compute.downscale);
+            frame_rendering_utils::drawLayers(videoFrame.image, displayFrame.layers);
 
             captureController_->submitFrame(videoFrame);
         },
@@ -506,10 +502,7 @@ void ImageWindow::setupConnections()
 
                 QImage image = frame.image;
 
-                const auto& config = ApplicationSettings::instance().imageSettings();
-
-                frame_rendering_utils::drawContourOverlay(image, frame, config.display,
-                                                          config.compute.downscale);
+                frame_rendering_utils::drawLayers(image, frame.layers);
 
                 captureController_->saveSnapshot(image);
             });
@@ -605,14 +598,11 @@ void ImageWindow::bindApplicationSettingsToView()
 {
     const auto& config = ApplicationSettings::instance();
 
-    connect(&config, &ApplicationSettings::imgSettingsChanged, this,
-            [this](const ImageSessionSettings& conf)
+    connect(&config, &ApplicationSettings::imgDisplaySettingsChanged, this,
+            [this](const DisplayConfig& display)
             {
-                imageViewer_->applyDownscaleConfig(conf.compute.downscale);
+                imageViewer_->applyViewConfig(display.view);
             });
-
-    connect(&config, &ApplicationSettings::imgDisplaySettingsChanged, imageViewer_,
-            &ImageViewerWidget::applyDisplayConfig);
 }
 
 void ImageWindow::bindUiToApplicationSettings()

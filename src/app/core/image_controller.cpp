@@ -171,8 +171,7 @@ void ImageController::onImageDisplaySettingsChanged(const DisplayConfig& display
     // Contour colors and visibility may have changed: restyle the displayed contour.
     if (hasContour_)
     {
-        emit contourUpdated(
-            contour_layers::make(lastOuterContour_, lastInnerContour_, displayConfig_));
+        emit contourUpdated(currentLayers());
     }
 }
 
@@ -198,7 +197,13 @@ void ImageController::onContourUpdated(const fluvel_ip::Contour& outerContour,
     lastInnerContour_ = convertToQVector(innerContour);
     hasContour_ = true;
 
-    emit contourUpdated(contour_layers::make(lastOuterContour_, lastInnerContour_, displayConfig_));
+    emit contourUpdated(currentLayers());
+}
+
+QVector<PointLayer> ImageController::currentLayers() const
+{
+    return contour_layers::make(lastOuterContour_, lastInnerContour_, displayConfig_,
+                                contour_layers::scaleFor(displayConfig_, computeConfig_.downscale));
 }
 
 void ImageController::restart()

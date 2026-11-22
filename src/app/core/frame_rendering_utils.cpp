@@ -3,9 +3,6 @@
 
 #include "frame_rendering_utils.hpp"
 
-#include "application_settings_types.hpp"
-#include "frame_pipeline.hpp"
-
 #include <QPainter>
 
 #include <algorithm>
@@ -13,17 +10,7 @@
 namespace fluvel::frame_rendering_utils
 {
 
-qreal contourScaleFactor(const DisplayConfig& displayConfig, const DownscaleParams& downscaleParams)
-{
-    if (downscaleParams.downscaleEnabled && displayConfig.background == BackgroundImage::Source)
-    {
-        return static_cast<qreal>(downscaleParams.downscaleFactor);
-    }
-
-    return 1.0;
-}
-
-void drawLayers(QImage& image, const QVector<PointLayer>& layers, qreal scale)
+void drawLayers(QImage& image, const QVector<PointLayer>& layers)
 {
     if (image.isNull())
         return;
@@ -42,8 +29,6 @@ void drawLayers(QImage& image, const QVector<PointLayer>& layers, qreal scale)
 
     painter.setBrush(Qt::NoBrush);
 
-    painter.scale(scale, scale);
-
     QPen pen;
     pen.setWidthF(1.1);
     pen.setCosmetic(false);
@@ -56,14 +41,11 @@ void drawLayers(QImage& image, const QVector<PointLayer>& layers, qreal scale)
         pen.setColor(layer.color);
         painter.setPen(pen);
 
+        painter.save();
+        painter.scale(layer.scale, layer.scale);
         painter.drawPoints(layer.points.data(), static_cast<int>(layer.points.size()));
+        painter.restore();
     }
-}
-
-void drawContourOverlay(QImage& image, const DisplayFrame& frame,
-                        const DisplayConfig& displayConfig, const DownscaleParams& downscaleParams)
-{
-    drawLayers(image, frame.layers, contourScaleFactor(displayConfig, downscaleParams));
 }
 
 } // namespace fluvel::frame_rendering_utils

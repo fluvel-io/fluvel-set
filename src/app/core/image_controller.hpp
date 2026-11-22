@@ -128,6 +128,9 @@ private:
     /// Reinitialize the worker with current configuration.
     void reinitializeWorker();
 
+    /// Builds the styled layers of the last contour with the current configuration.
+    [[nodiscard]] QVector<PointLayer> currentLayers() const;
+
     /// Refresh displayed image and overlays.
     void refreshView();
 
