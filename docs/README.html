@@ -393,10 +393,36 @@ document.write(`
   </a>
 </p>
 </section>
-<section id="downloads">
-<h2>🚀 Downloads<a class="headerlink" href="#downloads" title="Link to this heading">#</a></h2>
-<p>Latest builds and packages for all supported platforms:</p>
-<p><a class="reference external" href="https://fluvel-io.github.io/fluvel-set/">Download page</a></p>
+<section id="install">
+<h2>🚀 Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h2>
+<section id="desktop-application">
+<h3>Desktop application<a class="headerlink" href="#desktop-application" title="Link to this heading">#</a></h3>
+<p>Latest builds for Windows, macOS and Linux (with per-platform instructions) are
+available on the <a class="reference external" href="https://fluvel-io.github.io/fluvel-set/">download page</a>.</p>
+<p>On Linux, two packages are provided:</p>
+<ul class="simple">
+<li><p><strong>Flatpak</strong> (recommended): runs on any distribution that supports Flatpak.</p></li>
+<li><p><strong>AppImage</strong>: uses the host’s C and C++ libraries, so it needs glibc 2.39 or
+newer (for example Ubuntu 24.04, Debian 13 or Fedora 40 and later). On older
+systems, use the Flatpak.</p></li>
+</ul>
+</section>
+<section id="python-package">
+<h3>Python package<a class="headerlink" href="#python-package" title="Link to this heading">#</a></h3>
+<p>Pre-built wheels (Linux x86_64, Windows x64, macOS 13+) are attached to the
+<a class="reference external" href="https://github.com/fluvel-io/fluvel-set/releases/tag/latest">latest release</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w">   </span><span class="c1"># Windows: .venv\Scripts\activate</span>
+pip<span class="w"> </span>install<span class="w"> </span>fluvel-set<span class="w"> </span>--find-links<span class="w"> </span>https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"fluvel-set[examples]"</span><span class="w">   </span><span class="c1"># adds OpenCV, used by the scripts of examples/</span>
+</pre></div>
+</div>
+<p>Then:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">fluvel</span>
+</pre></div>
+</div>
+<p>From a clone of the repository, <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code> builds the package from source
+(a C++23 compiler and CMake ≥ 3.22 are required).</p>
+</section>
 </section>
 <hr class="docutils" />
 <section id="documentation">
@@ -509,8 +535,8 @@ Qt is used only for visualization and interaction.</p>
 <li><p>C++23 compiler (tested with Clang, GCC and MSVC)</p></li>
 </ul>
 </section>
-<section id="desktop-application">
-<h4>Desktop application<a class="headerlink" href="#desktop-application" title="Link to this heading">#</a></h4>
+<section id="id1">
+<h4>Desktop application<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
 <p>Additional dependencies:</p>
 <ul class="simple">
 <li><p>Qt6 (Core, Gui, Widgets, Multimedia, MultimediaWidgets, Svg, LinguistTools),
@@ -550,23 +576,6 @@ cmake<span class="w"> </span>--build<span class="w"> </span>build
 ./build/src/app/fluvel-set
 </pre></div>
 </div>
-</section>
-<hr class="docutils" />
-<section id="install-the-python-package">
-<h3>Install the Python package<a class="headerlink" href="#install-the-python-package" title="Link to this heading">#</a></h3>
-<p>Pre-built wheels (Linux x86_64, Windows x64, macOS 13+) are attached to the
-<a class="reference external" href="https://github.com/fluvel-io/fluvel-set/releases/tag/latest">latest release</a>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w">   </span><span class="c1"># Windows: .venv\Scripts\activate</span>
-pip<span class="w"> </span>install<span class="w"> </span>fluvel-set<span class="w"> </span>--find-links<span class="w"> </span>https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest
-pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"fluvel-set[examples]"</span><span class="w">   </span><span class="c1"># adds OpenCV, used by the scripts of examples/</span>
-</pre></div>
-</div>
-<p>Then:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">fluvel</span>
-</pre></div>
-</div>
-<p>From a clone of the repository, <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code> builds the package from source
-(a C++23 compiler and CMake ≥ 3.22 are required).</p>
 </section>
 <hr class="docutils" />
 <section id="build-python-bindings">
@@ -620,17 +629,6 @@ cmake<span class="w"> </span>--build<span class="w"> </span>build
 </pre></div>
 </div>
 </section>
-<hr class="docutils" />
-<section id="linux-packages">
-<h3>Linux packages<a class="headerlink" href="#linux-packages" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Flatpak</strong> (recommended): runs on any distribution that supports Flatpak.</p></li>
-<li><p><strong>AppImage</strong>: built on Ubuntu 25.10 so that the FFmpeg headers match the
-FFmpeg version used by Qt. Because AppImages rely on the host’s glibc and
-C++ standard library, it requires a recent distribution (roughly the
-versions released since late 2025). On older systems, use the Flatpak.</p></li>
-</ul>
-</section>
 </section>
 <hr class="docutils" />
 <section id="license">
@@ -673,7 +671,11 @@ widely used in research and academic software.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-time-tracking">Real-time tracking</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mri-contour-evolution">MRI contour evolution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloads">🚀 Downloads</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install">🚀 Install</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desktop-application">Desktop application</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-package">Python package</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">📚 Documentation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">✨ Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">🧠 Overview</a></li>
@@ -684,15 +686,13 @@ widely used in research and academic software.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build">🛠️ Build</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#core-library">Core library</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#desktop-application">Desktop application</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Desktop application</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-bindings">Python bindings</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-desktop-application">Build desktop application</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-python-package">Install the Python package</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-python-bindings">Build Python bindings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-everything">Build everything</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux-packages">Linux packages</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">📜 License</a></li>
