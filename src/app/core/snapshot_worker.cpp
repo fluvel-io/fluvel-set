@@ -3,7 +3,6 @@
 
 #include "snapshot_worker.hpp"
 
-#include "application_settings.hpp"
 #include "file_utils.hpp"
 
 namespace fluvel
@@ -27,7 +26,7 @@ SnapshotWorker::~SnapshotWorker()
         workerThread_.join();
 }
 
-bool SnapshotWorker::enqueue(const QImage& image)
+bool SnapshotWorker::enqueue(const QImage& image, const SnapshotPreferences& preferences)
 {
     {
         QMutexLocker locker(&mutex_);
@@ -35,10 +34,10 @@ bool SnapshotWorker::enqueue(const QImage& image)
         if (stopping_)
             return false;
 
-        if (imageQueue_.size() >= kMaxPendingSnapshots)
+        if (requestQueue_.size() >= kMaxPendingSnapshots)
             return false;
 
-        imageQueue_.push_back(image);
+        requestQueue_.push_back(Request{image, preferences});
     }
 
     condition_.wakeOne();
@@ -50,34 +49,34 @@ void SnapshotWorker::processQueue()
 {
     for (;;)
     {
-        QImage image;
+        Request request;
 
         {
             QMutexLocker locker(&mutex_);
 
-            while (imageQueue_.empty() && !stopping_)
+            while (requestQueue_.empty() && !stopping_)
                 condition_.wait(&mutex_);
 
-            if (imageQueue_.empty() && stopping_)
+            if (requestQueue_.empty() && stopping_)
                 break;
 
-            image = std::move(imageQueue_.front());
-            imageQueue_.pop_front();
+            request = std::move(requestQueue_.front());
+            requestQueue_.pop_front();
         }
 
-        saveImage(image);
+        saveImage(request);
     }
 }
 
-void SnapshotWorker::saveImage(const QImage& image)
+void SnapshotWorker::saveImage(const Request& request)
 {
-    const auto& preferences = ApplicationSettings::instance().snapshotPreferences();
+    const SnapshotPreferences& preferences = request.preferences;
 
     const QString fileName = file_utils::buildOutputFileName(
         preferences.directory, preferences.baseName,
         QString::fromLatin1(preferences.preferredFormat), preferences.appendTimestamp);
 
-    if (!image.save(fileName, preferences.preferredFormat.constData()))
+    if (!request.image.save(fileName, preferences.preferredFormat.constData()))
     {
         emit snapshotError(tr("Failed to save snapshot: %1").arg(fileName));
         return;

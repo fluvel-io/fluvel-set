@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "application_settings_types.hpp"
+
 #include <QImage>
 #include <QMutex>
 #include <QObject>
@@ -18,9 +20,13 @@ namespace fluvel
 /**
  * @brief Asynchronously saves captured images to disk.
  *
- * SnapshotWorker owns a dedicated worker thread and a FIFO queue of images.
+ * SnapshotWorker owns a dedicated worker thread and a FIFO queue of requests.
  * Snapshot requests are queued and processed sequentially so that image
  * encoding and file I/O do not block the caller thread.
+ *
+ * Each request carries its own copy of the snapshot preferences, taken by the
+ * caller when the request is queued. The worker thread never reads the
+ * application settings, so it cannot race with the thread that edits them.
  *
  * The queue has a bounded capacity to prevent an excessive number of
  * pending snapshots from accumulating in memory.
@@ -52,9 +58,10 @@ public:
      * @brief Queues an image for asynchronous saving.
      *
      * @param image Image to save.
+     * @param preferences Snapshot preferences to use for this image (copied).
      * @return true if the image was queued, false if the queue is full.
      */
-    bool enqueue(const QImage& image);
+    bool enqueue(const QImage& image, const SnapshotPreferences& preferences);
 
 signals:
     /**
@@ -78,18 +85,27 @@ private:
     void processQueue();
 
     /**
-     * @brief Saves one image according to the current snapshot preferences.
-     *
-     * @param image Image to save.
+     * @brief One queued snapshot: the image and the preferences to save it with.
      */
-    void saveImage(const QImage& image);
+    struct Request
+    {
+        QImage image;
+        SnapshotPreferences preferences;
+    };
+
+    /**
+     * @brief Saves one request according to its own preferences.
+     *
+     * @param request Image and preferences.
+     */
+    void saveImage(const Request& request);
 
     std::thread workerThread_;
 
     QMutex mutex_;
     QWaitCondition condition_;
 
-    std::deque<QImage> imageQueue_;
+    std::deque<Request> requestQueue_;
 
     bool stopping_{false};
 };

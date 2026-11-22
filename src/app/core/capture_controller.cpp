@@ -213,7 +213,9 @@ void CaptureController::saveSnapshot(const QImage& image)
         return;
     }
 
-    if (!snapshotWorker_.enqueue(image))
+    // The preferences are copied here, in the GUI thread, so that the worker
+    // thread never reads the application settings.
+    if (!snapshotWorker_.enqueue(image, ApplicationSettings::instance().snapshotPreferences()))
     {
         emit snapshotError(tr("Snapshot queue is full."));
     }
