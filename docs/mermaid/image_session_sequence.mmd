@@ -7,7 +7,7 @@
 sequenceDiagram
     autonumber
 
-    box rgb(238,248,242) GUI thread only (the worker is driven by a timer)
+    box rgb(238,248,242) GUI thread only, the worker is driven by a timer
         participant V as ImageViewerWidget<br/>(passive view)
         participant W as ImageWindow<br/>(wiring)
         participant C as ImageController
