@@ -527,6 +527,23 @@ cmake<span class="w"> </span>--build<span class="w"> </span>build
 </div>
 </section>
 <hr class="docutils" />
+<section id="install-the-python-package">
+<h3>Install the Python package<a class="headerlink" href="#install-the-python-package" title="Link to this heading">#</a></h3>
+<p>Pre-built wheels (Linux x86_64, Windows x64, macOS 13+) are attached to the
+<a class="reference external" href="https://github.com/fluvel-io/fluvel-set/releases/tag/latest">latest release</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w">   </span><span class="c1"># Windows: .venv\Scripts\activate</span>
+pip<span class="w"> </span>install<span class="w"> </span>fluvel-set<span class="w"> </span>--find-links<span class="w"> </span>https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"fluvel-set[examples]"</span><span class="w">   </span><span class="c1"># adds OpenCV, used by the scripts of examples/</span>
+</pre></div>
+</div>
+<p>Then:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">fluvel</span>
+</pre></div>
+</div>
+<p>From a clone of the repository, <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code> builds the package from source
+(a C++23 compiler and CMake ≥ 3.22 are required).</p>
+</section>
+<hr class="docutils" />
 <section id="build-python-bindings">
 <h3>Build Python bindings<a class="headerlink" href="#build-python-bindings" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span><span class="se">\</span>
@@ -777,6 +794,7 @@ widely used in research and academic software.</p>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-desktop-application">Build desktop application</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-python-package">Install the Python package</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-python-bindings">Build Python bindings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-everything">Build everything</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux-packages">Linux packages</a></li>
