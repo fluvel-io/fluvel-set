@@ -263,12 +263,20 @@ python -m venv .venv
         <p>Then install the package:</p>
         <pre><code>pip install fluvel-set --find-links https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest
 pip install "fluvel-set[examples]"   # adds OpenCV, used by the example scripts</code></pre>
-        <p>Check the installation (the commit tells which build you have):</p>
+        <p>Check the installation and find out which code is running:</p>
         <pre><code>python -c "import fluvel; print(fluvel.__version__, fluvel.__commit__)"</code></pre>
+        <p>
+          <code>fluvel.__commit__</code> is the commit the installed module was
+          built from. The source of that exact version is at
+          <code>https://github.com/fluvel-io/fluvel-set/commit/&lt;commit&gt;</code>.
+          Note that it can be older than the commit shown at the top of the
+          page, which is the one of the applications: the Python wheels are
+          rebuilt only when the library or the bindings change.
+        </p>
         <p>
           The example scripts are in the
           <a href="https://github.com/fluvel-io/fluvel-set/tree/main/examples" target="_blank" rel="noopener noreferrer">examples</a>
-          folder of the repository. The checksums of the wheels are listed in
+          folder of the repository. The commit and the checksum of every wheel are listed in
           <a href="https://github.com/fluvel-io/fluvel-set/releases/download/latest/BUILD_INFO-python.txt" target="_blank" rel="noopener noreferrer">BUILD_INFO-python.txt</a>.
         </p>
       </div>
