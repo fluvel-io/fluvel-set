@@ -383,7 +383,72 @@ processing library.</p>
 <li><p><strong>Interoperability</strong>: adapters and integration layers connecting the application
 to external libraries and processing backends.</p></li>
 </ul>
-<div class="toctree-wrapper compound">
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">#</a></h2>
+<p>Fluvel Set follows a mixed MVC/MVP architecture. The controllers drive the
+session (sources, threads, workers, settings) and also play the role of
+presenter: they turn the results of the algorithm into what the view
+displays. The view is passive and the windows only connect the components
+together. The algorithm itself, in Fluvel IP, does not depend on Qt.</p>
+<div style="text-align:center;">
+  <a href="../../mermaid/architecture_layers.svg" target="_blank">
+    <img src="../../mermaid/architecture_layers.svg"
+         style="max-width:420px; width:100%; height:auto;">
+  </a>
+</div></section>
+<section id="video-session">
+<h2>Video session<a class="headerlink" href="#video-session" title="Link to this heading">#</a></h2>
+<p>Commands go from the window to the algorithm. Frames go the other way: the
+video source delivers a frame, the processing thread keeps only the latest
+one, runs the filters and the active contour within a time budget, and the
+controller prepares the display data for the viewer.</p>
+<p>The colored frames show where each component runs. The interface, the
+controller and the viewer live in the GUI thread. The video source belongs to
+the Qt Multimedia backend, which delivers frames from its own threads. The
+processing thread runs the algorithm. A dashed arrow that crosses a frame is
+a signal delivered across threads: the receiver handles it later, in its own
+thread.</p>
+<div style="text-align:center;">
+  <a href="../../mermaid/video_session_sequence.svg" target="_blank">
+    <img src="../../mermaid/video_session_sequence.svg"
+         style="max-width:760px; width:100%; height:auto;">
+  </a>
+</div></section>
+<section id="image-session">
+<h2>Image session<a class="headerlink" href="#image-session" title="Link to this heading">#</a></h2>
+<p>The image worker is driven by a timer: each tick runs a short time slice of
+the active contour, so the interface stays responsive while the contour
+evolves.</p>
+<p>Unlike the video session, everything runs in the GUI thread: the worker is a
+plain object driven by a timer, not a thread. The preprocessing filters run
+synchronously when the image is initialized or restarted, so the interface
+waits until they are done. Only the active contour iterations are split into
+time slices.</p>
+<div style="text-align:center;">
+  <a href="../../mermaid/image_session_sequence.svg" target="_blank">
+    <img src="../../mermaid/image_session_sequence.svg"
+         style="max-width:700px; width:100%; height:auto;">
+  </a>
+</div></section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<p>Settings do not follow the data path. They are stored in the
+<code class="docutils literal notranslate"><span class="pre">ApplicationSettings</span></code> singleton, which emits a signal when they change, and
+three listeners react independently:</p>
+<ul class="simple">
+<li><p>the <strong>controller</strong> forwards the processing settings to the thread or worker
+(they are applied from the next frame) and restyles the current layers, so
+a display change is visible immediately, even when the video is paused;</p></li>
+<li><p>the <strong>window</strong> applies the view settings (mirror, smoothing, minimap,
+overlay) directly to the viewer, without going through the controller;</p></li>
+<li><p>the <strong>window</strong> also refreshes its own widgets.</p></li>
+</ul>
+<div style="text-align:center;">
+  <a href="../../mermaid/config_flow.svg" target="_blank">
+    <img src="../../mermaid/config_flow.svg"
+         style="max-width:620px; width:100%; height:auto;">
+  </a>
+</div><div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="ui/index.html">UI</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ui/index.html#image-viewer-architecture">Image Viewer Architecture</a></li>
@@ -417,6 +482,7 @@ to external libraries and processing backends.</p></li>
 </li>
 </ul>
 </div>
+</section>
 </section>
 
 
@@ -456,6 +522,21 @@ to external libraries and processing backends.</p></li>
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-session">Video session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-session">Image session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

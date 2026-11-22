@@ -16,12 +16,15 @@ ImageViewerInteraction implementation. Interactions are composed
 from independent behaviors such as panning, color picking,
 drag-and-drop and fullscreen support.
 
+The viewer is passive: it draws the image and the point layers it receives
+from the controllers, and displays them according to a view configuration.
+
 .. raw:: html
 
    <div style="text-align:center;">
-     <a href="/fluvel/mermaid/image_viewer_behaviors.svg"
+     <a href="../../../mermaid/image_viewer_behaviors.svg"
         target="_blank">
-       <img src="/fluvel/mermaid/image_viewer_behaviors.svg"
+       <img src="../../../mermaid/image_viewer_behaviors.svg"
             style="max-width:300px; width:100%; height:auto;">
      </a>
    </div>

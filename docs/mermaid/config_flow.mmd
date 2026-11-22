@@ -1,0 +1,33 @@
+%%{init: {"theme": "base", "themeVariables": {"lineColor": "#6b6fcf", "edgeLabelBackground": "#ffffff", "fontSize": "14px"}}}%%
+flowchart TB
+
+    Dialogs["Settings dialogs and display bar<br/>the user changes a setting"]
+
+    Settings["ApplicationSettings (singleton)<br/>stores and saves the settings<br/>emits a signal when they change"]
+
+    Ctl["Controller<br/>onSettingsChanged / onDisplaySettingsChanged"]
+
+    Win["Window<br/>wiring"]
+
+    Exe["Processing thread or worker<br/>keeps the configuration under a mutex"]
+
+    View["Viewer<br/>passive"]
+
+    Dialogs -- "update" --> Settings
+
+    Settings -- "session settings changed<br/>algorithm, filters, downscale" --> Ctl
+    Settings -- "display settings changed<br/>background, contour style" --> Ctl
+    Settings -- "settings changed" --> Win
+
+    Ctl -- "setAlgoConfig, setBackground<br/>applied from the next frame" --> Exe
+    Ctl -- "layersUpdated<br/>restyled layers, even when paused" --> View
+
+    Win -- "applyViewConfig<br/>mirror, smooth, minimap, overlay" --> View
+    Win -. "updates the interface" .-> Dialogs
+
+    style Dialogs fill:#eef8f2,color:#1d1d1f,stroke:#4fc98a,stroke-width:2px
+    style View fill:#eef8f2,color:#1d1d1f,stroke:#4fc98a,stroke-width:2px
+    style Win fill:#eef8f2,color:#1d1d1f,stroke:#4fc98a,stroke-width:2px
+    style Settings fill:#fff6ec,color:#1d1d1f,stroke:#f5a04a,stroke-width:2px
+    style Ctl fill:#f4f5ff,color:#1d1d1f,stroke:#6b6fcf,stroke-width:2px
+    style Exe fill:#f4f5ff,color:#1d1d1f,stroke:#6b6fcf,stroke-width:2px
