@@ -29,3 +29,5 @@ FFmpeg Backend
 .. doxygenfile:: ffmpeg_codec_utils.hpp
 
 .. doxygenfile:: ffmpeg_utils.hpp
+
+.. doxygenfile:: ffmpeg_remux.hpp

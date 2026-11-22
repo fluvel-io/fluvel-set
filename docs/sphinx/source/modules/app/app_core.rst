@@ -72,6 +72,14 @@ Video Processing
 .. doxygenfile:: frame_stats_collector.hpp
 
 
+Display Layers
+--------------
+
+.. doxygenfile:: point_layer.hpp
+
+.. doxygenfile:: contour_layers.hpp
+
+
 Recording
 ---------
 
