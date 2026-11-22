@@ -116,8 +116,8 @@ jobs:
         run: |
           gh release view latest-python --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
             gh release create latest-python --repo "$GITHUB_REPOSITORY" \
-              --title "Latest Python Wheels (development build)" \
-              --notes "Python wheels of the development version. Applications: see the latest release." \
+              --title "Fluvel Set Python Wheels (development build)" \
+              --notes "Python wheels of the development version. Desktop applications: see the latest release." \
               --target "$GITHUB_SHA" --prerelease
 
       - name: Upload wheels and bill
