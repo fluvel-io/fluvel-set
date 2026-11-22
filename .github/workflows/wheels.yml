@@ -62,8 +62,10 @@ jobs:
             wheelhouse/*.whl.sha256
             wheelhouse/commit-wheels-${{ matrix.platform }}.txt
 
-  # Verifies the wheels and attaches them, with their bill, to the "latest"
-  # release (same release as the applications).
+  # Verifies the wheels and attaches them, with their bill, to the
+  # "latest-python" release. It has its own tag, moved to the commit the wheels
+  # were built from, so that the source archives of the release match the
+  # wheels. The applications keep their own "latest" release.
   publish-latest:
     needs: build
 
@@ -99,17 +101,28 @@ jobs:
       - name: Show BUILD_INFO-python.txt
         run: cat BUILD_INFO-python.txt
 
+      - name: Update latest-python tag
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          git tag -f latest-python "$GITHUB_SHA"
+          git push origin latest-python --force
+
+      # Pre-release: it must never take the "Latest" badge of the application
+      # release, which the download links of the page (releases/latest/download)
+      # rely on.
       - name: Ensure the release exists
         run: |
-          # The release is normally created by the application workflow.
-          gh release view latest --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
-            gh release create latest --repo "$GITHUB_REPOSITORY" \
-              --title "Latest Development Build" --notes "Auto release" \
-              --target "$GITHUB_SHA" --latest
+          gh release view latest-python --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create latest-python --repo "$GITHUB_REPOSITORY" \
+              --title "Latest Python Wheels (development build)" \
+              --notes "Python wheels of the development version. Applications: see the latest release." \
+              --target "$GITHUB_SHA" --prerelease
 
       - name: Upload wheels and bill
         run: |
-          gh release upload latest wheelhouse/*.whl BUILD_INFO-python.txt \
+          gh release upload latest-python wheelhouse/*.whl BUILD_INFO-python.txt \
             --repo "$GITHUB_REPOSITORY" --clobber
 
       # The bill must describe exactly the wheels of the release: remove the
@@ -118,11 +131,11 @@ jobs:
         run: |
           ls wheelhouse/*.whl | xargs -n1 basename | sort > current.txt
 
-          gh release view latest --repo "$GITHUB_REPOSITORY" --json assets \
+          gh release view latest-python --repo "$GITHUB_REPOSITORY" --json assets \
             --jq '.assets[].name | select(endswith(".whl"))' | sort > published.txt
 
           comm -13 current.txt published.txt | while read -r stale
           do
             echo "Removing stale asset: $stale"
-            gh release delete-asset latest "$stale" --repo "$GITHUB_REPOSITORY" --yes
+            gh release delete-asset latest-python "$stale" --repo "$GITHUB_REPOSITORY" --yes
           done

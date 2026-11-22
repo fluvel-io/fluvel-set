@@ -72,11 +72,11 @@ On Linux, two packages are provided:
 ### Python package
 
 Pre-built wheels (Linux x86_64, Windows x64, macOS 13+) are attached to the
-[latest release](https://github.com/fluvel-io/fluvel-set/releases/tag/latest):
+[latest-python release](https://github.com/fluvel-io/fluvel-set/releases/tag/latest-python):
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install fluvel-set --find-links https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest
+pip install fluvel-set --find-links https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest-python
 pip install "fluvel-set[examples]"   # adds OpenCV, used by the scripts of examples/
 ```
 
