@@ -369,6 +369,28 @@ void ImageWindow::setupControllers()
     imageController_ = new ImageController(config, this);
 
     captureController_ = new CaptureController(this);
+
+    // The capture controller does not read the application settings itself:
+    // it receives the preferences now and whenever they change.
+    {
+        auto& settings = ApplicationSettings::instance();
+
+        captureController_->setSnapshotPreferences(settings.snapshotPreferences());
+
+        connect(&settings, &ApplicationSettings::snapshotPreferencesChanged, captureController_,
+                &CaptureController::setSnapshotPreferences);
+
+#ifdef FLUVEL_USE_FFMPEG
+        captureController_->setVideoRecordingPreferences(settings.videoRecordingPreferences());
+        captureController_->setRecordingBufferSettings(settings.recordingBufferSettings());
+
+        connect(&settings, &ApplicationSettings::videoRecordingPreferencesChanged,
+                captureController_, &CaptureController::setVideoRecordingPreferences);
+
+        connect(&settings, &ApplicationSettings::recordingBufferSettingsChanged,
+                captureController_, &CaptureController::setRecordingBufferSettings);
+#endif
+    }
     captureWidget_->setCaptureController(captureController_);
 
 #ifdef FLUVEL_USE_FFMPEG

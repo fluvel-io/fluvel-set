@@ -3,7 +3,6 @@
 
 #include "capture_controller.hpp"
 
-#include "application_settings.hpp"
 #include "file_utils.hpp"
 
 #ifdef FLUVEL_USE_FFMPEG
@@ -99,9 +98,19 @@ bool CaptureController::isStreaming() const noexcept
 
 #ifdef FLUVEL_USE_FFMPEG
 
+void CaptureController::setVideoRecordingPreferences(const VideoRecordingPreferences& preferences)
+{
+    videoRecordingPreferences_ = preferences;
+}
+
+void CaptureController::setRecordingBufferSettings(const RecordingBufferSettings& settings)
+{
+    recordingBufferSettings_ = settings;
+}
+
 void CaptureController::startRecording()
 {
-    const auto& preferences = ApplicationSettings::instance().videoRecordingPreferences();
+    const VideoRecordingPreferences& preferences = videoRecordingPreferences_;
 
     VideoExportSettings settings;
 
@@ -121,7 +130,7 @@ void CaptureController::startRecording()
     settings.segmentCount = preferences.segmentCount;
     settings.convertToStandardMp4 = preferences.convertToStandardMp4;
 
-    settings.bufferSettings = ApplicationSettings::instance().recordingBufferSettings();
+    settings.bufferSettings = recordingBufferSettings_;
 
     recordingSettings_ = exporter_utils::resolveSettings(settings);
 
@@ -205,6 +214,11 @@ void CaptureController::requestSnapshot()
     emit snapshotRequested();
 }
 
+void CaptureController::setSnapshotPreferences(const SnapshotPreferences& preferences)
+{
+    snapshotPreferences_ = preferences;
+}
+
 void CaptureController::saveSnapshot(const QImage& image)
 {
     if (image.isNull())
@@ -214,8 +228,8 @@ void CaptureController::saveSnapshot(const QImage& image)
     }
 
     // The preferences are copied here, in the GUI thread, so that the worker
-    // thread never reads the application settings.
-    if (!snapshotWorker_.enqueue(image, ApplicationSettings::instance().snapshotPreferences()))
+    // thread never shares them with the code that edits them.
+    if (!snapshotWorker_.enqueue(image, snapshotPreferences_))
     {
         emit snapshotError(tr("Snapshot queue is full."));
     }

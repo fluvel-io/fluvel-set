@@ -186,6 +186,21 @@ signals:
      */
     void videoDisplaySettingsChanged(const fluvel::DisplayConfig& conf);
 
+    /**
+     * @brief Emitted when the snapshot preferences change.
+     */
+    void snapshotPreferencesChanged(const fluvel::SnapshotPreferences& preferences);
+
+    /**
+     * @brief Emitted when the video recording preferences change.
+     */
+    void videoRecordingPreferencesChanged(const fluvel::VideoRecordingPreferences& preferences);
+
+    /**
+     * @brief Emitted when the recording buffer settings change.
+     */
+    void recordingBufferSettingsChanged(const fluvel::RecordingBufferSettings& settings);
+
 private:
     /// Load image session settings from storage.
     void loadImageSessionSettings();

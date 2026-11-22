@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "application_settings_types.hpp"
 #include "frame_pipeline.hpp"
 #include "snapshot_worker.hpp"
 
@@ -79,16 +80,47 @@ public:
     /**
      * @brief Saves a snapshot image.
      *
-     * The image is saved according to the persistent snapshot preferences.
+     * The image is saved according to the snapshot preferences given to
+     * setSnapshotPreferences(). A copy of these preferences is taken when the
+     * snapshot is queued.
      *
      * @param image Image to save.
      */
     void saveSnapshot(const QImage& image);
 
+    /**
+     * @brief Sets the preferences used for the next snapshots.
+     *
+     * The controller does not read the application settings itself: the owner
+     * gives the preferences once at start-up and again whenever they change.
+     *
+     * @param preferences Snapshot preferences.
+     */
+    void setSnapshotPreferences(const SnapshotPreferences& preferences);
+
 #ifdef FLUVEL_USE_FFMPEG
 
     /**
+     * @brief Sets the preferences used for the next recordings.
+     *
+     * A recording already in progress keeps the preferences it started with.
+     *
+     * @param preferences Video recording preferences.
+     */
+    void setVideoRecordingPreferences(const VideoRecordingPreferences& preferences);
+
+    /**
+     * @brief Sets the buffer settings used for the next recordings.
+     *
+     * @param settings Recording buffer settings.
+     */
+    void setRecordingBufferSettings(const RecordingBufferSettings& settings);
+
+    /**
      * @brief Starts video recording.
+     *
+     * Uses the preferences given to setVideoRecordingPreferences() and
+     * setRecordingBufferSettings().
      */
     void startRecording();
 
@@ -238,6 +270,9 @@ private:
      */
     void onRecordingStateChanged(RecorderState state);
 
+    VideoRecordingPreferences videoRecordingPreferences_{};
+    RecordingBufferSettings recordingBufferSettings_{};
+
     VideoExportSettings recordingSettings_{};
     VideoRecorderWorker recorder_;
 
@@ -252,6 +287,7 @@ private:
 
     bool streaming_{false};
 
+    SnapshotPreferences snapshotPreferences_{};
     SnapshotWorker snapshotWorker_;
 };
 

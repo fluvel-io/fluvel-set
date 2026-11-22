@@ -777,11 +777,13 @@ const VideoRecordingPreferences& ApplicationSettings::videoRecordingPreferences(
 void ApplicationSettings::setSnapshotPreferences(const SnapshotPreferences& preferences)
 {
     snapshotPreferences_ = preferences;
+    emit snapshotPreferencesChanged(snapshotPreferences_);
 }
 
 void ApplicationSettings::setVideoRecordingPreferences(const VideoRecordingPreferences& preferences)
 {
     videoRecordingPreferences_ = preferences;
+    emit videoRecordingPreferencesChanged(videoRecordingPreferences_);
 }
 
 RecordingBufferSettings ApplicationSettings::recordingBufferSettings() const
@@ -792,6 +794,7 @@ RecordingBufferSettings ApplicationSettings::recordingBufferSettings() const
 void ApplicationSettings::setRecordingBufferSettings(const RecordingBufferSettings& settings)
 {
     recordingBufferSettings_ = settings;
+    emit recordingBufferSettingsChanged(recordingBufferSettings_);
 }
 
 } // namespace fluvel
