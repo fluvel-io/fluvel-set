@@ -5,7 +5,7 @@
 
 py::array_t<int> contourToPyArray(const fluvel_ip::ContourPoints& contour)
 {
-    py::array_t<int> out({static_cast<ssize_t>(contour.size()), ssize_t(2)});
+    py::array_t<int> out({static_cast<py::ssize_t>(contour.size()), py::ssize_t(2)});
 
     auto view = out.mutable_unchecked<2>();
 
