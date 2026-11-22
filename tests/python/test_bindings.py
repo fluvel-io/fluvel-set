@@ -506,12 +506,13 @@ def test_the_gil_is_released_during_the_computation():
     ticks = 0
     running = True
 
+    # Busy loop rather than sleep(): the resolution of sleep() is about 15 ms on
+    # Windows, longer than the computation, so a sleeping thread may not tick at all.
     def count():
         nonlocal ticks
 
         while running:
             ticks += 1
-            time.sleep(0.002)
 
     thread = threading.Thread(target=count)
     thread.start()
@@ -519,12 +520,11 @@ def test_the_gil_is_released_during_the_computation():
     time.sleep(0.05)
     ticks = 0
 
-    start = time.perf_counter()
     fluvel.active_contour(image)
-    duration = time.perf_counter() - start
 
     running = False
     thread.join()
 
-    # With the GIL held, the counting thread would be almost frozen.
-    assert ticks > 0.2 * duration / 0.002
+    # With the GIL held, the counting thread could not run at all during the
+    # computation. With the GIL released, it ticks hundreds of thousands of times.
+    assert ticks > 1000
