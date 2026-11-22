@@ -204,7 +204,12 @@ code {
   margin-top: 35px;
 }
 
-.checksums-section summary {
+.help-section {
+  margin-top: 14px;
+}
+
+.checksums-section summary,
+.help-section summary {
   cursor: pointer;
 
   font-size: 15px;
@@ -217,22 +222,26 @@ code {
   user-select: none;
 }
 
-.checksums-section summary:hover {
+.checksums-section summary:hover,
+.help-section summary:hover {
   color: var(--fluvel-primary);
 }
 
-.checksums-section summary::-webkit-details-marker {
+.checksums-section summary::-webkit-details-marker,
+.help-section summary::-webkit-details-marker {
   display: none;
 }
 
-.checksums-section summary::before {
+.checksums-section summary::before,
+.help-section summary::before {
   content: "+";
   margin-right: 8px;
 
   color: var(--fluvel-primary);
 }
 
-.checksums-section[open] summary::before {
+.checksums-section[open] summary::before,
+.help-section[open] summary::before {
   content: "−";
 }
 
@@ -340,6 +349,49 @@ code {
 .architecture-section,
 .demo-section {
   margin-top: 60px;
+}
+
+/* installation help */
+
+.install-section {
+  margin-top: 14px;
+}
+
+.install-section > .help-section {
+  margin-left: 20px;
+}
+
+.help-body {
+  margin-top: 12px;
+  padding-left: 20px;
+
+  max-width: 760px;
+
+  color: #444;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.help-body ol {
+  padding-left: 20px;
+}
+
+.help-body pre {
+  overflow-x: auto;
+
+  margin: 10px 0 14px;
+  padding: 12px 14px;
+
+  background: #ececf1;
+  border-radius: 8px;
+
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.help-body pre code {
+  background: none;
+  padding: 0;
 }
 
 .about-section p {
