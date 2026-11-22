@@ -55,9 +55,10 @@ enum class WorkerState
  * pipeline. It handles processing initialization, execution control
  * (start, pause, step), and result propagation through Qt signals.
  *
- * Execution is driven by a QTimer in interactive mode, allowing periodic updates
- * suitable for UI rendering. In converge mode, processing runs continuously
- * until completion without intermediate updates.
+ * Execution is driven by a QTimer in both modes. In interactive mode, each tick
+ * runs a short time slice and publishes the result, allowing periodic updates
+ * suitable for UI rendering. In converge mode, ticks use a slightly longer
+ * time slice and run until completion without intermediate updates.
  *
  * Responsibilities:
  * - Manage image processing and segmentation lifecycle
@@ -65,7 +66,12 @@ enum class WorkerState
  * - Emit processed images and contour updates
  * - Provide diagnostics and performance measurements
  *
- * @note This class is intended to be used from the Qt event loop.
+ * @note Despite its name, this class does not own a thread. It lives in the
+ *       thread of its owner (the GUI thread) and is driven by the Qt event
+ *       loop. Both modes keep the interface responsive by splitting the
+ *       contour iterations into short time slices. The preprocessing filters
+ *       run synchronously during initialize() and restart(), so the interface
+ *       waits until they are done.
  */
 class ImageProcessingWorker : public QObject
 {
