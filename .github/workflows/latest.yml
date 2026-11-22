@@ -162,17 +162,23 @@ jobs:
             --clobber
 
   deploy:
-    needs: [changes, release]
+    needs: [changes, prepare, release]
 
+    # With a build: deploy only if the whole chain succeeded.
+    # Without a build: deploy only if the web content changed.
     if: |
       always() &&
+      needs.prepare.result != 'failure' &&
+      needs.release.result != 'failure' &&
       (
-        needs.changes.outputs.build == 'true' ||
-        needs.changes.outputs.web == 'true'
-      ) &&
-      (
-        needs.release.result == 'success' ||
-        needs.release.result == 'skipped'
+        (
+          needs.changes.outputs.build == 'true' &&
+          needs.release.result == 'success'
+        ) ||
+        (
+          needs.changes.outputs.build != 'true' &&
+          needs.changes.outputs.web == 'true'
+        )
       )
 
     runs-on: ubuntu-latest
@@ -204,6 +210,12 @@ jobs:
           git fetch origin gh-pages || true
           git checkout gh-pages || git checkout -b gh-pages
 
+          # web/latest.json is a demo file for local testing only:
+          # keep the published one when no build was made.
+          if [ "${{ needs.changes.outputs.build }}" != "true" ]; then
+            cp latest.json /tmp/latest.json.keep 2>/dev/null || true
+          fi
+
           cp -r ../web/* .
 
           rm -rf media
@@ -213,8 +225,9 @@ jobs:
 
           if [ "${{ needs.changes.outputs.build }}" = "true" ]; then
             cp ../prepared/latest.json .
-          else
+          elif [ -f /tmp/latest.json.keep ]; then
             echo "Keeping existing latest.json"
+            cp /tmp/latest.json.keep latest.json
           fi
 
           git config user.name "GitHub Actions"
