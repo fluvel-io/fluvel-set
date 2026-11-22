@@ -55,11 +55,39 @@
   </a>
 </p>
 
-## 🚀 Downloads
+## 🚀 Install
 
-Latest builds and packages for all supported platforms:
+### Desktop application
 
-[Download page](https://fluvel-io.github.io/fluvel-set/)
+Latest builds for Windows, macOS and Linux (with per-platform instructions) are
+available on the [download page](https://fluvel-io.github.io/fluvel-set/).
+
+On Linux, two packages are provided:
+
+- **Flatpak** (recommended): runs on any distribution that supports Flatpak.
+- **AppImage**: uses the host's C and C++ libraries, so it needs glibc 2.39 or
+  newer (for example Ubuntu 24.04, Debian 13 or Fedora 40 and later). On older
+  systems, use the Flatpak.
+
+### Python package
+
+Pre-built wheels (Linux x86_64, Windows x64, macOS 13+) are attached to the
+[latest release](https://github.com/fluvel-io/fluvel-set/releases/tag/latest):
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install fluvel-set --find-links https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest
+pip install "fluvel-set[examples]"   # adds OpenCV, used by the scripts of examples/
+```
+
+Then:
+
+```python
+import fluvel
+```
+
+From a clone of the repository, `pip install .` builds the package from source
+(a C++23 compiler and CMake ≥ 3.22 are required).
 
 ---
 
@@ -219,28 +247,6 @@ cmake --build build
 
 ---
 
-### Install the Python package
-
-Pre-built wheels (Linux x86_64, Windows x64, macOS 13+) are attached to the
-[latest release](https://github.com/fluvel-io/fluvel-set/releases/tag/latest):
-
-```bash
-python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install fluvel-set --find-links https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest
-pip install "fluvel-set[examples]"   # adds OpenCV, used by the scripts of examples/
-```
-
-Then:
-
-```python
-import fluvel
-```
-
-From a clone of the repository, `pip install .` builds the package from source
-(a C++23 compiler and CMake ≥ 3.22 are required).
-
----
-
 ### Build Python bindings
 
 ```bash
@@ -303,16 +309,6 @@ cmake --build build
 
 ---
 
-### Linux packages
-
-- **Flatpak** (recommended): runs on any distribution that supports Flatpak.
-- **AppImage**: built on Ubuntu 25.10 so that the FFmpeg headers match the
-  FFmpeg version used by Qt. Because AppImages rely on the host's glibc and
-  C++ standard library, it requires a recent distribution (roughly the
-  versions released since late 2025). On older systems, use the Flatpak.
-
----
-  
 ## 📜 License
 
 Fluvel is licensed under the CeCILL 2.1 license
