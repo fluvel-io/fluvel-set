@@ -142,6 +142,148 @@
 
   </details>
 
+  <details class="checksums-section install-section">
+
+    <summary>
+      Installation help
+      <span class="section-subtitle">(Windows, macOS, Linux, Python)</span>
+    </summary>
+
+    <details class="help-section">
+      <summary>
+        Windows
+        <span class="section-subtitle">(installer or portable)</span>
+      </summary>
+
+      <div class="help-body">
+        <p>
+          Fluvel Set is not code-signed yet, so Windows may show
+          <em>Windows protected your PC</em> the first time you run it.
+          This is expected.
+        </p>
+        <ol>
+          <li>Click <strong>More info</strong>.</li>
+          <li>Click <strong>Run anyway</strong>.</li>
+        </ol>
+        <p>
+          You only need to do this once. The portable version needs no
+          installation: unzip it and run <code>FluvelSet.exe</code>.
+        </p>
+      </div>
+    </details>
+
+    <details class="help-section">
+      <summary>
+        macOS
+        <span class="section-subtitle">(DMG)</span>
+      </summary>
+
+      <div class="help-body">
+        <ol>
+          <li>Drag Fluvel Set to the <strong>Applications</strong> folder.</li>
+          <li>
+            Open Fluvel Set. macOS shows a warning and does not start it:
+            this is expected, because the app is not notarized by Apple.
+            Close the dialog.
+          </li>
+          <li>
+            Open <strong>System Settings &gt; Privacy &amp; Security</strong>
+            and scroll down to the Security section.
+          </li>
+          <li>
+            Click <strong>Open Anyway</strong> next to Fluvel Set and enter
+            your password.
+          </li>
+          <li>Open Fluvel Set again and confirm.</li>
+        </ol>
+        <p>
+          You only need to do this once. On macOS Sonoma or earlier, you can
+          also right-click Fluvel Set and choose <strong>Open</strong>.
+        </p>
+      </div>
+    </details>
+
+    <details class="help-section">
+      <summary>
+        Linux
+        <span class="section-subtitle">(AppImage)</span>
+      </summary>
+
+      <div class="help-body">
+        <p>Make the file executable, then run it:</p>
+        <pre><code>chmod +x FluvelSet-linux.AppImage
+./FluvelSet-linux.AppImage</code></pre>
+        <p>
+          AppImages need FUSE&nbsp;2. If the application does not start on
+          Ubuntu or Debian, install it
+          (<code>sudo apt install libfuse2</code>, or
+          <code>libfuse2t64</code> on Ubuntu&nbsp;24.04), or run it without FUSE:
+        </p>
+        <pre><code>./FluvelSet-linux.AppImage --appimage-extract-and-run</code></pre>
+      </div>
+    </details>
+
+    <details class="help-section">
+      <summary>
+        Linux
+        <span class="section-subtitle">(Flatpak)</span>
+      </summary>
+
+      <div class="help-body">
+        <p>
+          The bundle needs the KDE runtime from Flathub, which Flatpak
+          installs for you if the Flathub remote is configured:
+        </p>
+        <pre><code>flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install --user FluvelSet-linux.flatpak
+flatpak run org.fluvel.FluvelSet</code></pre>
+      </div>
+    </details>
+
+    <details class="help-section">
+      <summary>
+        Python
+        <span class="section-subtitle">(pip)</span>
+      </summary>
+
+      <div class="help-body">
+        <p>
+          Fluvel Set is also available as a Python package, to script the
+          processing of many images. Wheels are provided for Linux (x86_64),
+          Windows (x64) and macOS 13+, for Python 3.10 to 3.13.
+          Create a virtual environment first:
+        </p>
+        <pre><code># Linux / macOS
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Windows (PowerShell)
+python -m venv .venv
+.venv\Scripts\Activate.ps1</code></pre>
+        <p>Then install the package:</p>
+        <pre><code>pip install fluvel-set --find-links https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest
+pip install "fluvel-set[examples]"   # adds OpenCV, used by the example scripts</code></pre>
+        <p>Check the installation and find out which code is running:</p>
+        <pre><code>python -c "import fluvel; print(fluvel.__version__, fluvel.__commit__)"</code></pre>
+        <p>
+          <code>fluvel.__commit__</code> is the commit the installed module was
+          built from. The source of that exact version is at
+          <code>https://github.com/fluvel-io/fluvel-set/commit/&lt;commit&gt;</code>.
+          Note that it can be older than the commit shown at the top of the
+          page, which is the one of the applications: the Python wheels are
+          rebuilt only when the library or the bindings change.
+        </p>
+        <p>
+          The example scripts are in the
+          <a href="https://github.com/fluvel-io/fluvel-set/tree/main/examples" target="_blank" rel="noopener noreferrer">examples</a>
+          folder of the repository. The commit and the checksum of every wheel are listed in
+          <a href="https://github.com/fluvel-io/fluvel-set/releases/download/latest/BUILD_INFO-python.txt" target="_blank" rel="noopener noreferrer">BUILD_INFO-python.txt</a>.
+        </p>
+      </div>
+    </details>
+
+  </details>
+
   <section class="about-section">
     <h2>About Fluvel Set</h2>
 
@@ -168,8 +310,8 @@
       <div class="interface-card">
 
         <div class="interface-header">
-          <img src="icons/fluvel_app.svg" class="arch-icon" alt="Fluvel Set">
-          <h3 class="header-title">Fluvel Set</h3>
+          <img src="icons/fluvel_app.svg" class="arch-icon" alt="Fluvel Set App">
+          <h3 class="header-title">Fluvel Set App</h3>
           <p class="header-subtitle">Qt6 / C++</p>
         </div>
 
@@ -271,9 +413,9 @@
       <div class="interface-card">
 
         <div class="interface-header">
-          <img src="icons/fluvel_api.svg" class="arch-icon" alt="Python API">
+          <img src="icons/fluvel_api.svg" class="arch-icon" alt="Fluvel Set Python">
           <div class="header-text">
-            <h3 class="header-title">Python API</h3>
+            <h3 class="header-title">Fluvel Set Python</h3>
             <p class="header-subtitle">pybind11 / C++</p>
           </div>
         </div>
