@@ -21,6 +21,34 @@ function checkIcon() {
   </svg>`;
 }
 
+// ===== COPY BUTTON =====
+function setupCopyButton(btn, text) {
+  btn.innerHTML = copyIcon();
+
+  btn.onclick = async () => {
+
+    try {
+
+      await navigator.clipboard.writeText(text);
+
+      const oldIcon = btn.innerHTML;
+
+      btn.innerHTML = checkIcon();
+      btn.classList.add("copied");
+
+      setTimeout(() => {
+        btn.innerHTML = oldIcon;
+        btn.classList.remove("copied");
+      }, 1000);
+
+    } catch (err) {
+
+      console.error("Copy failed:", err);
+
+    }
+  };
+}
+
 // ===== OS DETECTION =====
 function detectOS() {
   const ua = navigator.userAgent.toLowerCase();
@@ -76,6 +104,17 @@ function hidePlatformIfEmpty(platformId, linkIds) {
 }
 
 // ===== LOAD JSON =====
+// ===== PYTHON INSTALL COMMAND =====
+const pipButton = document.getElementById("copy-pip");
+
+if (pipButton) {
+  setupCopyButton(
+    pipButton,
+    "pip install fluvel-set --find-links " +
+    "https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest"
+  );
+}
+
 fetch("latest.json")
   .then(r => r.json())
   .then(data => {
@@ -139,30 +178,7 @@ fetch("latest.json")
 
         const btn = document.createElement("button");
         btn.className = "copy-btn";
-        btn.innerHTML = copyIcon();
-
-        btn.onclick = async () => {
-
-          try {
-
-            await navigator.clipboard.writeText(hash);
-
-            const oldIcon = btn.innerHTML;
-
-            btn.innerHTML = checkIcon();
-            btn.classList.add("copied");
-
-            setTimeout(() => {
-              btn.innerHTML = oldIcon;
-              btn.classList.remove("copied");
-            }, 1000);
-
-          } catch (err) {
-
-            console.error("Copy failed:", err);
-
-          }
-        };
+        setupCopyButton(btn, hash);
 
         div.appendChild(hashText);
         div.appendChild(btn);
