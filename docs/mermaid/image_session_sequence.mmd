@@ -3,20 +3,23 @@
   "lineColor": "#6b6fcf", "actorBkg": "#f4f5ff", "actorBorder": "#6b6fcf", "actorTextColor": "#1d1d1f",
   "noteBkgColor": "#eef8f2", "noteBorderColor": "#4fc98a", "noteTextColor": "#1d1d1f",
   "signalColor": "#444444", "signalTextColor": "#1d1d1f", "labelBoxBkgColor": "#ffffff",
-  "labelBoxBorderColor": "#c8c8c8", "loopTextColor": "#444444"}}}%%
+  "labelBoxBorderColor": "#c8c8c8", "loopTextColor": "#444444", "sequenceNumberColor": "#ffffff"}}}%%
 sequenceDiagram
     autonumber
 
-    participant V as ImageViewerWidget<br/>(passive view)
-    participant W as ImageWindow<br/>(wiring)
-    participant C as ImageController
-    participant P as ImageProcessingWorker<br/>(timer driven)
-    participant A as ActiveContour
+    box rgb(238,248,242) GUI thread only (the worker is driven by a timer)
+        participant V as ImageViewerWidget<br/>(passive view)
+        participant W as ImageWindow<br/>(wiring)
+        participant C as ImageController
+        participant P as ImageProcessingWorker<br/>(timer driven)
+        participant A as ActiveContour
+    end
 
     Note over W,P: Commands: from the window to the algorithm
 
     W->>C: open an image, apply settings
     C->>P: initialize(image, config)
+    Note over C,P: preprocessing (filters) runs here, synchronously:<br/>the interface waits until it is done
     W->>C: start (or step, pause, converge)
     C->>P: restart()
 

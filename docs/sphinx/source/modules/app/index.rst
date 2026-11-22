@@ -42,6 +42,13 @@ video source delivers a frame, the processing thread keeps only the latest
 one, runs the filters and the active contour within a time budget, and the
 controller prepares the display data for the viewer.
 
+The colored frames show where each component runs. The interface, the
+controller and the viewer live in the GUI thread. The video source belongs to
+the Qt Multimedia backend, which delivers frames from its own threads. The
+processing thread runs the algorithm. A dashed arrow that crosses a frame is
+a signal delivered across threads: the receiver handles it later, in its own
+thread.
+
 .. raw:: html
 
    <div style="text-align:center;">
@@ -57,6 +64,12 @@ Image session
 The image worker is driven by a timer: each tick runs a short time slice of
 the active contour, so the interface stays responsive while the contour
 evolves.
+
+Unlike the video session, everything runs in the GUI thread: the worker is a
+plain object driven by a timer, not a thread. The preprocessing filters run
+synchronously when the image is initialized or restarted, so the interface
+waits until they are done. Only the active contour iterations are split into
+time slices.
 
 .. raw:: html
 

@@ -3,16 +3,22 @@
   "lineColor": "#6b6fcf", "actorBkg": "#f4f5ff", "actorBorder": "#6b6fcf", "actorTextColor": "#1d1d1f",
   "noteBkgColor": "#eef8f2", "noteBorderColor": "#4fc98a", "noteTextColor": "#1d1d1f",
   "signalColor": "#444444", "signalTextColor": "#1d1d1f", "labelBoxBkgColor": "#ffffff",
-  "labelBoxBorderColor": "#c8c8c8", "loopTextColor": "#444444"}}}%%
+  "labelBoxBorderColor": "#c8c8c8", "loopTextColor": "#444444", "sequenceNumberColor": "#ffffff"}}}%%
 sequenceDiagram
     autonumber
 
-    participant V as ImageViewerWidget<br/>(passive view)
-    participant W as VideoWindow<br/>(wiring)
-    participant C as VideoController<br/>(GUI thread)
-    participant S as Video source<br/>(camera or media file)
-    participant T as VideoProcessingThread<br/>(worker thread)
-    participant A as ActiveContour
+    box rgb(238,248,242) GUI thread
+        participant V as ImageViewerWidget<br/>(passive view)
+        participant W as VideoWindow<br/>(wiring)
+        participant C as VideoController
+    end
+    box rgb(255,246,236) Qt Multimedia backend
+        participant S as Video source<br/>(camera or media file)
+    end
+    box rgb(244,245,255) Processing thread
+        participant T as VideoProcessingThread
+        participant A as ActiveContour
+    end
 
     Note over W,T: Commands: from the window to the algorithm
 
