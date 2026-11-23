@@ -175,7 +175,7 @@ void ImageWindow::setupUi()
     controlLayout->addWidget(togglePauseButton_);
     controlLayout->addWidget(stepButton_);
     controlLayout->addWidget(convergeButton_);
-    controlLayout->addSpacing(kControlSpacing);
+    controlLayout->addSpacing(3 * kControlSpacing);
     controlLayout->addWidget(captureWidget_);
     controlLayout->addStretch();
     controlLayout->addWidget(configurationActions_);
