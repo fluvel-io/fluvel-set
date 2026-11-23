@@ -178,6 +178,16 @@ private:
      */
     void updateColumnsHisto(int colIndex, uint8_t valRemove, uint8_t valAdd);
 
+    /**
+     * @brief Add one value to a column histogram.
+     */
+    void addToColumnsHisto(int colIndex, uint8_t valAdd);
+
+    /**
+     * @brief Remove one value from a column histogram.
+     */
+    void removeFromColumnsHisto(int colIndex, uint8_t valRemove);
+
     ImageOwner output_; ///< Output buffer.
 
     std::vector<int> columnsHisto_;                 ///< Column histograms (size = width * 256).

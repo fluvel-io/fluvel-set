@@ -34,56 +34,51 @@ template <bool IsMax>
 void vanHerkHorizontal(const uint8_t* src, uint8_t* dst, int width, int channels,
                        int activeChannels, int radius)
 {
-    const int kernelSize = 2 * radius + 1;
-
     for (int ch = 0; ch < activeChannels; ++ch)
     {
         std::deque<int> dq;
 
-        for (int i = 0; i < width; ++i)
+        // Next input index to push in the window.
+        int next = 0;
+
+        for (int out = 0; out < width; ++out)
         {
-            // Remove indices outside the sliding window
-            if (!dq.empty() && dq.front() <= i - kernelSize)
+            // Window of the output pixel, clipped to the image: [out - radius, out + radius].
+            // (written as differences: no overflow, whatever the radius)
+            while (next < width && next - out <= radius)
+            {
+                const uint8_t b = src[next * channels + ch];
+
+                // Maintain monotonic deque
+                while (!dq.empty())
+                {
+                    const uint8_t a = src[dq.back() * channels + ch];
+
+                    if constexpr (IsMax)
+                    {
+                        if (a <= b)
+                            dq.pop_back();
+                        else
+                            break;
+                    }
+                    else
+                    {
+                        if (a >= b)
+                            dq.pop_back();
+                        else
+                            break;
+                    }
+                }
+
+                dq.push_back(next);
+                ++next;
+            }
+
+            // Remove indices left of the window
+            while (out - dq.front() > radius)
                 dq.pop_front();
 
-            const int idx = i * channels + ch;
-
-            // Maintain monotonic deque
-            while (!dq.empty())
-            {
-                const uint8_t a = src[dq.back() * channels + ch];
-                const uint8_t b = src[idx];
-
-                if constexpr (IsMax)
-                {
-                    if (a <= b)
-                        dq.pop_back();
-                    else
-                        break;
-                }
-                else
-                {
-                    if (a >= b)
-                        dq.pop_back();
-                    else
-                        break;
-                }
-            }
-
-            dq.push_back(i);
-
-            // Write centered result
-            if (i >= radius)
-            {
-                const int out_i = i - radius;
-                dst[out_i * channels + ch] = src[dq.front() * channels + ch];
-            }
-        }
-
-        // Handle right border (tail)
-        for (int i = width - radius; i < width; ++i)
-        {
-            dst[i * channels + ch] = src[dq.front() * channels + ch];
+            dst[out * channels + ch] = src[dq.front() * channels + ch];
         }
     }
 }
@@ -107,66 +102,52 @@ template <bool IsMax>
 void vanHerkVertical(const ImageOwner& buffer, ImageOwner& output, int width, int height,
                      int channels, int activeChannels, int radius)
 {
-    const int kernelSize = 2 * radius + 1;
-
     for (int x = 0; x < width; ++x)
     {
         for (int ch = 0; ch < activeChannels; ++ch)
         {
+            const int idx = x * channels + ch;
+
             std::deque<int> dq;
 
-            for (int y = 0; y < height; ++y)
+            // Next input row to push in the window.
+            int next = 0;
+
+            for (int out = 0; out < height; ++out)
             {
-                if (!dq.empty() && dq.front() <= y - kernelSize)
+                // Window of the output row, clipped to the image: [out - radius, out + radius].
+                while (next < height && next - out <= radius)
+                {
+                    const uint8_t b = buffer.rowPtr(next)[idx];
+
+                    while (!dq.empty())
+                    {
+                        const uint8_t a = buffer.rowPtr(dq.back())[idx];
+
+                        if constexpr (IsMax)
+                        {
+                            if (a <= b)
+                                dq.pop_back();
+                            else
+                                break;
+                        }
+                        else
+                        {
+                            if (a >= b)
+                                dq.pop_back();
+                            else
+                                break;
+                        }
+                    }
+
+                    dq.push_back(next);
+                    ++next;
+                }
+
+                while (out - dq.front() > radius)
                     dq.pop_front();
 
-                const uint8_t* row = buffer.rowPtr(y);
-                const int idx = x * channels + ch;
-
-                while (!dq.empty())
-                {
-                    const uint8_t* rowBack = buffer.rowPtr(dq.back());
-
-                    const uint8_t a = rowBack[idx];
-                    const uint8_t b = row[idx];
-
-                    if constexpr (IsMax)
-                    {
-                        if (a <= b)
-                            dq.pop_back();
-                        else
-                            break;
-                    }
-                    else
-                    {
-                        if (a >= b)
-                            dq.pop_back();
-                        else
-                            break;
-                    }
-                }
-
-                dq.push_back(y);
-
-                if (y >= radius)
-                {
-                    const int out_y = y - radius;
-
-                    uint8_t* dst = output.rowPtr(out_y);
-                    const uint8_t* rowFront = buffer.rowPtr(dq.front());
-
-                    dst[idx] = rowFront[idx];
-                }
-            }
-
-            // Handle bottom border (tail)
-            for (int y = height - radius; y < height; ++y)
-            {
-                uint8_t* dst = output.rowPtr(y);
-                const uint8_t* rowFront = buffer.rowPtr(dq.front());
-
-                const int idx = x * channels + ch;
-                dst[idx] = rowFront[idx];
+                output.rowPtr(out)[idx] = buffer.rowPtr(dq.front())[idx];
             }
         }
     }
@@ -205,19 +186,8 @@ void vanHerk(const ImageView& input, ImageOwner& output, int radius)
     const int w = input.width();
     const int h = input.height();
 
-    // Degenerate case: no spatial neighborhood
-    if (w == 1 || h == 1)
-    {
-        output.copyFrom(input);
-        return;
-    }
-
     const int channels = input.channels();
     const int activeChannels = std::min(channels, 3);
-
-    // Clamp radius to valid range
-    const int maxRadius = std::min((w - 1) / 2, (h - 1) / 2);
-    radius = std::min(radius, maxRadius);
 
     // Intermediate buffer
     ImageOwner buffer(w, h, input.format());

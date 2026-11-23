@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <cstdint>
 
 namespace fluvel_ip::filter
 {
@@ -42,15 +43,19 @@ void MeanSliding::apply(const ImageView& input, int radius)
 
     reset(input);
 
-    const int maxValidRadius = std::min(width_ - 1, height_ - 1);
-
-    // clamp radius to avoid out-of-bounds when kernel exceeds image size
-    radius = std::min(radius, maxValidRadius);
-
     const int channels = input.channels();
     const int activeChannels = std::min(channels, 3);
 
-    const int kernelSize = 2 * radius + 1;
+    // The borders are replicated (all the indices below are clamped), so any radius
+    // is valid, even larger than the image.
+    const int64_t kernelSize = 2 * static_cast<int64_t>(radius) + 1;
+
+    // Ranges of the three loops of a pass: border, fast path, border.
+    // They never overlap, even when the kernel is larger than the image.
+    const int leftEndX = std::min(radius, width_);
+    const int centerEndX = std::max(leftEndX, width_ - radius - 1);
+    const int topEndY = std::min(radius, height_);
+    const int centerEndY = std::max(topEndY, height_ - radius - 1);
 
     // =========================
     // PASS 1 — Horizontal (sliding + fast path)
@@ -62,7 +67,7 @@ void MeanSliding::apply(const ImageView& input, int radius)
 
         for (int c = 0; c < activeChannels; ++c)
         {
-            int sum = 0;
+            int64_t sum = 0;
 
             // init window (avec clamp uniquement ici)
             for (int k = -radius; k <= radius; ++k)
@@ -72,7 +77,7 @@ void MeanSliding::apply(const ImageView& input, int radius)
             }
 
             // -------- LEFT BORDER --------
-            for (int x = 0; x < radius; ++x)
+            for (int x = 0; x < leftEndX; ++x)
             {
                 const int idx = x * channels + c;
                 dst[idx] = static_cast<uint8_t>((sum + kernelSize / 2) / kernelSize);
@@ -85,7 +90,7 @@ void MeanSliding::apply(const ImageView& input, int radius)
             }
 
             // -------- CENTER (FAST PATH) --------
-            for (int x = radius; x < width_ - radius - 1; ++x)
+            for (int x = leftEndX; x < centerEndX; ++x)
             {
                 const int idx = x * channels + c;
                 dst[idx] = static_cast<uint8_t>((sum + kernelSize / 2) / kernelSize);
@@ -98,7 +103,7 @@ void MeanSliding::apply(const ImageView& input, int radius)
             }
 
             // -------- RIGHT BORDER --------
-            for (int x = width_ - radius - 1; x < width_; ++x)
+            for (int x = centerEndX; x < width_; ++x)
             {
                 const int idx = x * channels + c;
                 dst[idx] = static_cast<uint8_t>((sum + kernelSize / 2) / kernelSize);
@@ -119,7 +124,7 @@ void MeanSliding::apply(const ImageView& input, int radius)
     {
         for (int c = 0; c < activeChannels; ++c)
         {
-            int sum = 0;
+            int64_t sum = 0;
 
             // init window
             for (int k = -radius; k <= radius; ++k)
@@ -131,7 +136,7 @@ void MeanSliding::apply(const ImageView& input, int radius)
             }
 
             // -------- TOP BORDER --------
-            for (int y = 0; y < radius; ++y)
+            for (int y = 0; y < topEndY; ++y)
             {
                 uint8_t* dst = buffer2_.rowPtr(y);
 
@@ -149,7 +154,7 @@ void MeanSliding::apply(const ImageView& input, int radius)
             }
 
             // -------- CENTER (FAST PATH) --------
-            for (int y = radius; y < height_ - radius - 1; ++y)
+            for (int y = topEndY; y < centerEndY; ++y)
             {
                 uint8_t* dst = buffer2_.rowPtr(y);
 
@@ -167,7 +172,7 @@ void MeanSliding::apply(const ImageView& input, int radius)
             }
 
             // -------- BOTTOM BORDER --------
-            for (int y = height_ - radius - 1; y < height_; ++y)
+            for (int y = centerEndY; y < height_; ++y)
             {
                 uint8_t* dst = buffer2_.rowPtr(y);
 

@@ -128,15 +128,23 @@ def test_erosion_is_below_the_image_and_dilation_above(shape, radius, channels):
     assert (image <= dilated).all()
 
 
-def reference_filter(plane, radius, reduce):
-    """Brute-force square window, replicated borders (as the library does)."""
+def reference_filter(plane, radius, reduce, clipped=False):
+    """
+    Brute-force square window.
+
+    The borders are replicated, or the window is clipped to the image (clipped=True).
+    """
     height, width = plane.shape
     padded = np.pad(plane.astype(np.int64), radius, mode="edge")
     out = np.empty_like(plane)
 
     for y in range(height):
         for x in range(width):
-            window = padded[y : y + 2 * radius + 1, x : x + 2 * radius + 1]
+            if clipped:
+                window = plane[max(0, y - radius) : y + radius + 1, max(0, x - radius) : x + radius + 1]
+            else:
+                window = padded[y : y + 2 * radius + 1, x : x + 2 * radius + 1]
+
             out[y, x] = reduce(window)
 
     return out
@@ -149,37 +157,28 @@ REFERENCES = {
     "mean": lambda w: int(round(w.mean())),
 }
 
-# Known bug: the right/bottom border of dilate/erode is wrong for radius >= 2
-# (van Herk tail), and the radius is clamped to the smaller side.
-KNOWN_MORPHO_BUG = pytest.mark.xfail(
-    strict=False, reason="van Herk tail / radius clamp (dilate, erode)"
-)
-
-
-@pytest.mark.parametrize("name", ["dilate", "erode"])
+@pytest.mark.parametrize("name", ["dilate", "erode", "mean", "median"])
 @pytest.mark.parametrize("radius", [1, 2, 3, 5, 50])
 @pytest.mark.parametrize("shape", [(1, 1), (2, 2), (3, 3), (2, 5), (5, 2), (1, 6), (6, 1), (8, 8), (9, 13)])
-def test_filters_match_a_brute_force_reference(name, shape, radius, request):
+def test_filters_match_a_brute_force_reference(name, shape, radius):
     image = random_image(shape, None, seed=4)
 
     out = FILTERS[name](image, radius)
-    expected = reference_filter(image, radius, REFERENCES[name])
+    # The median uses the window clipped to the image, the others replicate the borders
+    # (identical for dilate and erode).
+    expected = reference_filter(image, radius, REFERENCES[name], clipped=(name == "median"))
 
-    if name in ("dilate", "erode") and (radius >= 2 or min(shape) == 1 or shape == (1, 1)):
-        request.applymarker(KNOWN_MORPHO_BUG)
+    # The mean is computed in two rounded passes: one level of difference is allowed.
+    tolerance = 1 if name == "mean" else 0
 
-    assert np.array_equal(out, expected)
+    assert (np.abs(out.astype(int) - expected.astype(int)) <= tolerance).all()
 
 
 @pytest.mark.parametrize("channels", CHANNELS)
 @pytest.mark.parametrize("name", ["mean", "median"])
 @pytest.mark.parametrize("radius", RADII)
 @pytest.mark.parametrize("shape", TINY_SHAPES)
-def test_mean_and_median_stay_within_the_input_range(shape, radius, channels, name, request):
-    if name == "mean" and radius >= 2:
-        # Known bug: on small images the mean can fall below the minimum of the input.
-        request.applymarker(pytest.mark.xfail(strict=False, reason="mean out of range at borders"))
-
+def test_mean_and_median_stay_within_the_input_range(shape, radius, channels, name):
     # Whatever the border rule, an average of input values cannot leave their range.
     image = random_image(shape, channels, seed=6)
 
@@ -406,3 +405,92 @@ def test_active_contour_color_spaces_on_tiny_images(shape, space):
     image = random_image(shape, 3, seed=11)
 
     check_well_formed(fluvel.active_contour(image, region_model_params=params), shape)
+
+
+@pytest.mark.parametrize("channels", CHANNELS)
+@pytest.mark.parametrize("name", ["dilate", "erode"])
+@pytest.mark.parametrize("radius", [1, 2, 3, 7, 40])
+@pytest.mark.parametrize("shape", [(5, 5), (17, 9), (30, 64), (96, 128)])
+def test_dilate_and_erode_match_the_reference_on_regular_images(shape, radius, name, channels):
+    image = random_image(shape, channels, seed=8)
+
+    out = FILTERS[name](image, radius)
+
+    # The alpha channel of a 4-channel image is copied, not filtered.
+    for plane_in, plane_out in list(zip(planes(image), planes(out)))[:3]:
+        expected = reference_filter(plane_in, radius, REFERENCES[name])
+        assert np.array_equal(plane_out, expected)
+
+
+# Only the pixels whose window is entirely inside the image are compared here.
+@pytest.mark.parametrize("radius", [1, 2, 3, 4, 7])
+@pytest.mark.parametrize("shape", [(9, 9), (15, 20), (31, 17), (64, 48)])
+def test_median_matches_the_reference_inside_the_image(shape, radius):
+    image = random_image(shape, None, seed=10)
+
+    out = fluvel.median(image, radius)
+    expected = reference_filter(image, radius, REFERENCES["median"], clipped=True)
+
+    inside = (slice(radius, shape[0] - radius), slice(radius, shape[1] - radius))
+
+    assert np.array_equal(out[inside], expected[inside])
+
+
+@pytest.mark.parametrize("radius", [1, 2, 3, 4, 7])
+@pytest.mark.parametrize("shape", [(9, 9), (15, 20), (31, 17), (64, 48)])
+def test_median_matches_the_reference_up_to_the_borders(shape, radius):
+    image = random_image(shape, None, seed=10)
+
+    out = fluvel.median(image, radius)
+
+    assert np.array_equal(out, reference_filter(image, radius, REFERENCES["median"], clipped=True))
+
+
+#
+# Gray, 3-channel and 4-channel images must give the same result
+#
+
+SMOOTHING_AND_MORPHOLOGY = ["mean", "median", "dilate", "erode", "opening", "closing", "top_hat", "black_top_hat", "gradient"]
+
+
+@pytest.mark.parametrize("radius", [1, 2, 3, 5])
+@pytest.mark.parametrize("shape", [(1, 1), (2, 2), (3, 7), (8, 8), (30, 41)])
+@pytest.mark.parametrize("name", SMOOTHING_AND_MORPHOLOGY)
+def test_each_channel_is_filtered_like_a_gray_image(name, shape, radius):
+    rng = np.random.default_rng(12)
+    rgb = rng.integers(0, 256, (*shape, 3), dtype=np.uint8)
+    rgba = np.concatenate([rgb, rng.integers(0, 256, (*shape, 1), dtype=np.uint8)], axis=2)
+
+    out_rgb = FILTERS[name](rgb, radius)
+    out_rgba = FILTERS[name](rgba, radius)
+
+    for c in range(3):
+        gray = FILTERS[name](np.ascontiguousarray(rgb[..., c]), radius)
+
+        assert np.array_equal(out_rgb[..., c], gray)
+        assert np.array_equal(out_rgba[..., c], gray)
+
+    # The alpha channel is copied.
+    assert np.array_equal(out_rgba[..., 3], rgba[..., 3])
+
+
+@pytest.mark.parametrize("shape", [(1, 1), (2, 2), (3, 7), (30, 41)])
+def test_anisotropic_diffusion_filters_each_channel_like_a_gray_image(shape):
+    rng = np.random.default_rng(13)
+    rgb = rng.integers(0, 256, (*shape, 3), dtype=np.uint8)
+    rgba = np.concatenate([rgb, rng.integers(0, 256, (*shape, 1), dtype=np.uint8)], axis=2)
+
+    params = fluvel.AnisoParams()
+    params.iterations = 5
+
+    out_rgb = fluvel.anisotropic_diffusion(rgb, params)
+    out_rgba = fluvel.anisotropic_diffusion(rgba, params)
+
+    for c in range(3):
+        gray = fluvel.anisotropic_diffusion(np.ascontiguousarray(rgb[..., c]), params)
+
+        # Each channel is diffused on its own.
+        assert np.array_equal(out_rgb[..., c], gray)
+        assert np.array_equal(out_rgba[..., c], gray)
+
+    assert np.array_equal(out_rgba[..., 3], rgba[..., 3])

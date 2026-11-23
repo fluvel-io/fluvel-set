@@ -2,6 +2,7 @@
 // Copyright (C) 2010-2026 Fabien Bessy
 
 #include "mean_filter_3x3.hpp"
+#include "image_alpha.hpp"
 
 #include <algorithm>
 
@@ -69,6 +70,9 @@ void Mean3x3::apply(const ImageView& input)
     }
 
     std::swap(buffer1_, buffer2_);
+
+    // Like the other filters: the alpha channel is copied, not averaged.
+    copyAlpha(input, buffer1_);
 }
 
 void Mean3x3::horizontalPass(const uint8_t* src, uint8_t* dst, int width, int channels)
