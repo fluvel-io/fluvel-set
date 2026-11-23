@@ -12,7 +12,8 @@
 
 #include "elapsed_timer.hpp"
 
-#include <QTimer>
+#include <QMetaObject>
+#include <QMutexLocker>
 
 #ifdef FLUVEL_DEBUG
 #include <QDebug>
@@ -27,13 +28,66 @@ namespace fluvel
 ImageProcessingWorker::ImageProcessingWorker()
     : QObject(nullptr)
 {
-    workerTimer_.setInterval(kWorkerPeriodMs);
-    connect(&workerTimer_, &QTimer::timeout, this, &ImageProcessingWorker::onTimeout);
+    // Needed to queue these types across threads.
+    qRegisterMetaType<fluvel_ip::Contour>("fluvel_ip::Contour");
+    qRegisterMetaType<fluvel_ip::ContourDiagnostics>("fluvel_ip::ContourDiagnostics");
+    qRegisterMetaType<fluvel::WorkerState>("fluvel::WorkerState");
+
+    moveToThread(&thread_);
+    thread_.start();
+}
+
+ImageProcessingWorker::~ImageProcessingWorker()
+{
+    // Pending events are discarded when the event loop exits.
+    thread_.quit();
+    thread_.wait();
+}
+
+template <typename F>
+void ImageProcessingWorker::post(F&& f)
+{
+    QMetaObject::invokeMethod(this, std::forward<F>(f), Qt::QueuedConnection);
+}
+
+void ImageProcessingWorker::acknowledgeFrame() noexcept
+{
+    frameInFlight_.store(false, std::memory_order_release);
 }
 
 void ImageProcessingWorker::restart()
 {
-    if (state_ == WorkerState::Initializing)
+    post([this] { restartImpl(); });
+}
+
+void ImageProcessingWorker::togglePause()
+{
+    post([this] { togglePauseImpl(); });
+}
+
+void ImageProcessingWorker::stepImpl()
+{
+    post([this] { stepImpl(); });
+}
+
+void ImageProcessingWorker::convergeImpl()
+{
+    post([this] { convergeImpl(); });
+}
+
+void ImageProcessingWorker::initialize(const QImage& image, const ImageComputeConfig& config)
+{
+    {
+        const QMutexLocker lock(&requestMutex_);
+        pendingInit_ = InitRequest{image, config};
+    }
+
+    post([this] { initializeImpl(); });
+}
+
+void ImageProcessingWorker::restartImpl()
+{
+    if (state_ == WorkerState::Uninitialized || state_ == WorkerState::Initializing)
         return;
 
     setMode(RunMode::Interactive);
@@ -50,8 +104,7 @@ void ImageProcessingWorker::restart()
     if (state_ != WorkerState::Ready)
         return;
 
-    updateDiagnostics();
-    emitContour();
+    publish(true);
 
     initialShown_ = true;
 
@@ -64,10 +117,10 @@ void ImageProcessingWorker::start()
         return;
 
     setState(WorkerState::Running);
-    workerTimer_.start();
+    scheduleTick();
 }
 
-void ImageProcessingWorker::togglePause()
+void ImageProcessingWorker::togglePauseImpl()
 {
     if (state_ == WorkerState::Uninitialized || state_ == WorkerState::Initializing)
         return;
@@ -86,8 +139,7 @@ void ImageProcessingWorker::togglePause()
     {
         if (!initialShown_)
         {
-            updateDiagnostics();
-            emitContour();
+            publish(true);
 
             initialShown_ = true;
         }
@@ -117,8 +169,7 @@ void ImageProcessingWorker::step()
     {
         if (!initialShown_)
         {
-            updateDiagnostics();
-            emitContour();
+            publish(true);
 
             initialShown_ = true;
         }
@@ -138,8 +189,7 @@ void ImageProcessingWorker::performStep()
     }
     else
     {
-        updateDiagnostics();
-        emitContour();
+        publish(true);
     }
 }
 
@@ -150,8 +200,7 @@ void ImageProcessingWorker::converge()
 
     if (state_ == WorkerState::Ready)
     {
-        updateDiagnostics();
-        emitContour();
+        publish(true);
 
         initialShown_ = true;
     }
@@ -186,7 +235,6 @@ bool ImageProcessingWorker::stepOnceAlgo()
 
 void ImageProcessingWorker::applyProcessing()
 {
-    workerTimer_.stop();
     setState(WorkerState::Initializing);
 
     processedImage_ = image_;
@@ -218,13 +266,23 @@ void ImageProcessingWorker::applyProcessing()
     processingDirty_ = false;
 }
 
-void ImageProcessingWorker::initialize(const QImage& image, const ImageComputeConfig& config)
+void ImageProcessingWorker::initializeImpl()
 {
-    workerTimer_.stop();
+    std::optional<InitRequest> request;
+
+    {
+        const QMutexLocker lock(&requestMutex_);
+        request.swap(pendingInit_);
+    }
+
+    // Already handled by a previous call: only the latest request is run.
+    if (!request)
+        return;
+
     setState(WorkerState::Initializing);
 
-    image_ = image;
-    config_ = config;
+    image_ = std::move(request->image);
+    config_ = std::move(request->config);
     processingDirty_ = true;
 
     applyProcessing();
@@ -234,8 +292,7 @@ void ImageProcessingWorker::initialize(const QImage& image, const ImageComputeCo
     if (state_ != WorkerState::Ready)
         return;
 
-    updateDiagnostics();
-    emitContour();
+    publish(true);
 
     initialShown_ = true;
 }
@@ -245,7 +302,6 @@ void ImageProcessingWorker::initializeActiveContour()
     if (processedImage_.isNull())
         return;
 
-    workerTimer_.stop();
     setState(WorkerState::Initializing);
 
     activeContour_.reset();
@@ -292,7 +348,6 @@ void ImageProcessingWorker::initializeActiveContour()
 
 void ImageProcessingWorker::finish()
 {
-    workerTimer_.stop();
     setState(WorkerState::Finished);
 }
 
@@ -300,8 +355,7 @@ void ImageProcessingWorker::finalizeAndPrepareNextRun()
 {
     finish();
 
-    updateDiagnostics();
-    emitContour();
+    publish(true);
 
     initializeActiveContour();
 }
@@ -310,11 +364,9 @@ void ImageProcessingWorker::suspend()
 {
     if (state_ == WorkerState::Running)
     {
-        workerTimer_.stop();
         setState(WorkerState::Suspended);
 
-        updateDiagnostics();
-        emitContour();
+        publish(true);
     }
 }
 
@@ -324,10 +376,24 @@ void ImageProcessingWorker::resume()
         start();
 }
 
-void ImageProcessingWorker::onTimeout()
+void ImageProcessingWorker::scheduleTick()
 {
-    assert(activeContour_ != nullptr);
-    assert(state_ == WorkerState::Running);
+    if (tickScheduled_)
+        return;
+
+    tickScheduled_ = true;
+
+    post([this] {
+        tickScheduled_ = false;
+        onTick();
+    });
+}
+
+void ImageProcessingWorker::onTick()
+{
+    // A tick may still be queued after a pause or a new initialization.
+    if (state_ != WorkerState::Running || !activeContour_)
+        return;
 
     fluvel_ip::ElapsedTimer timeSliceBudget;
     timeSliceBudget.start();
@@ -342,10 +408,37 @@ void ImageProcessingWorker::onTimeout()
     }
 
     if (mode_ == RunMode::Interactive)
+        publish(false);
+
+    // Yield to the event loop so that pending commands are handled.
+    scheduleTick();
+}
+
+void ImageProcessingWorker::publish(bool force)
+{
+    if (!activeContour_)
+        return;
+
+    const auto now = Clock::now();
+
+    if (!force)
     {
-        updateDiagnostics();
-        emitContour();
+        const auto sinceLast = now - lastPublish_;
+
+        if (sinceLast < kMinPublishIntervalMs)
+            return;
+
+        // The consumer is still busy with the previous frame: keep computing
+        // and publish a more recent one later.
+        if (frameInFlight_.load(std::memory_order_acquire) && sinceLast < kAckTimeoutMs)
+            return;
     }
+
+    lastPublish_ = now;
+    frameInFlight_.store(true, std::memory_order_release);
+
+    updateDiagnostics();
+    emitContour();
 }
 
 void ImageProcessingWorker::updateDiagnostics()

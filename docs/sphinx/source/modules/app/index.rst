@@ -61,15 +61,13 @@ thread.
 Image session
 -------------
 
-The image worker is driven by a timer: each tick runs a short time slice of
-the active contour, so the interface stays responsive while the contour
-evolves.
-
-Unlike the video session, everything runs in the GUI thread: the worker is a
-plain object driven by a timer, not a thread. The preprocessing filters run
-synchronously when the image is initialized or restarted, so the interface
-waits until they are done. Only the active contour iterations are split into
-time slices.
+The image worker lives in its own thread. The controller only posts commands
+to it, so the interface never waits for the filters or for the contour
+iterations. In interactive mode the active contour iterates as fast as it can
+and a frame is published only once the previous one has been consumed (and at
+most every 16 ms): intermediate iterations are skipped, so the display always
+shows the most recent contour. In converge mode the worker runs at full speed
+and publishes only the final result.
 
 .. raw:: html
 

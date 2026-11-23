@@ -198,6 +198,9 @@ void ImageController::onContourUpdated(const fluvel_ip::Contour& outerContour,
     hasContour_ = true;
 
     emit contourUpdated(currentLayers());
+
+    // Let the worker publish the next frame.
+    processingWorker_.acknowledgeFrame();
 }
 
 QVector<PointLayer> ImageController::currentLayers() const
