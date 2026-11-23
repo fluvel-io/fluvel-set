@@ -48,6 +48,10 @@ function(fluvel_configure_target target)
     elseif(MSVC)
 
         target_compile_options(${target} PRIVATE
+            # Compile the files of a target in parallel (MSBuild only
+            # parallelizes between targets).
+            /MP
+
             $<$<CONFIG:Debug>:/Od /Zi>
             $<$<CONFIG:Release>:/O2>
             $<$<CONFIG:RelWithDebInfo>:/O2 /Zi>
