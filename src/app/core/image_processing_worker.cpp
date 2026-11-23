@@ -425,7 +425,7 @@ void ImageProcessingWorker::onTick()
         fluvel_ip::ElapsedTimer budget;
         budget.start();
 
-        while (budget.elapsedLessThan(timeSliceMs_))
+        while (budget.elapsedLessThan(kTimeSliceConvergeMs))
         {
             if (!stepOnceAlgo())
             {
@@ -463,9 +463,6 @@ void ImageProcessingWorker::onTick()
     // If a frame took longer than the interval, do not try to catch up.
     nextFrameDue_ = std::max(nextFrameDue_ + kFrameIntervalMs, now);
 
-    fluvel_ip::ElapsedTimer budget;
-    budget.start();
-
     for (int i = 0; i < kIterationsPerFrame; ++i)
     {
         if (!stepOnceAlgo())
@@ -473,9 +470,6 @@ void ImageProcessingWorker::onTick()
             finalizeAndPrepareNextRun();
             return;
         }
-
-        if (!budget.elapsedLessThan(timeSliceMs_))
-            break;
     }
 
     publish();
@@ -523,11 +517,6 @@ void ImageProcessingWorker::emitContour()
 void ImageProcessingWorker::setMode(RunMode mode)
 {
     mode_ = mode;
-
-    if (mode_ == RunMode::Interactive)
-        timeSliceMs_ = kTimeSliceInteractiveMs;
-    else if (mode_ == RunMode::Converge)
-        timeSliceMs_ = kTimeSliceConvergeMs;
 }
 
 void ImageProcessingWorker::setState(WorkerState state)

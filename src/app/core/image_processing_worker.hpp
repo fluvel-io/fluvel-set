@@ -264,18 +264,17 @@ private:
     QImage processedImage_;
     fluvel_ip::ImageOwner processedOwner_;
 
-    /// Time slice of one tick for converge mode.
-    static constexpr std::chrono::milliseconds kTimeSliceConvergeMs{15};
-
-    /// Time slice of one tick for interactive mode.
-    static constexpr std::chrono::milliseconds kTimeSliceInteractiveMs{10};
+    /// Time slice of one tick in converge mode. The worker has its own thread,
+    /// so a slice only bounds the delay before a pending command (pause,
+    /// restart, ...) is handled.
+    static constexpr std::chrono::milliseconds kTimeSliceConvergeMs{50};
 
     /// Delay between two published frames in interactive mode (~60 FPS).
     static constexpr std::chrono::milliseconds kFrameIntervalMs{16};
 
     /// Maximum number of iterations computed between two published frames
     /// in interactive mode.
-    static constexpr int kIterationsPerFrame{2};
+    static constexpr int kIterationsPerFrame{10};
 
     /// Delay before checking again if the consumer has acknowledged a frame.
     static constexpr std::chrono::milliseconds kAckPollMs{2};
@@ -283,7 +282,6 @@ private:
     /// Safety net: go on if a frame has not been acknowledged after this delay.
     static constexpr std::chrono::milliseconds kAckTimeoutMs{250};
 
-    std::chrono::milliseconds timeSliceMs_{kTimeSliceInteractiveMs};
     Clock::time_point lastPublish_{};
     Clock::time_point nextFrameDue_{};
     bool tickScheduled_{false};

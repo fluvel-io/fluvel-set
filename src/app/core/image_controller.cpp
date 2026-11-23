@@ -276,12 +276,28 @@ void ImageController::onDiagnosticsUpdated(const fluvel_ip::ContourDiagnostics& 
 
     s += QString(tr("Hausdorff: %1 %\n")).arg(diag.hausdorffDistance, 0, 'f', 2);
 
-    s += QString(tr("Elapsed: %1 s\n")).arg(diag.elapsedSec, 0, 'f', 2);
+    // Time spent computing iterations (waits and pauses excluded).
+    s += QString(tr("Compute time: %1 s\n")).arg(diag.elapsedSec, 0, 'f', 2);
 
-    // Computation speed (waits excluded) and rate of the frames received.
-    const double iterationsPerSec = diag.elapsedSec > 0.0 ? diag.stepCount / diag.elapsedSec : 0.0;
+    // Speed since the start of the run, and speed since the previous update.
+    const double averageSpeed = diag.elapsedSec > 0.0 ? diag.stepCount / diag.elapsedSec : 0.0;
 
-    s += QString(tr("Speed: %1 it/s\n")).arg(iterationsPerSec, 0, 'f', 0);
+    // A new run restarts the counters from zero.
+    if (diag.stepCount < lastStepCount_ || diag.elapsedSec < lastComputeSec_)
+    {
+        lastStepCount_ = 0;
+        lastComputeSec_ = 0.0;
+    }
+
+    const int stepsSincePrevious = diag.stepCount - lastStepCount_;
+    const double secSincePrevious = diag.elapsedSec - lastComputeSec_;
+    const double currentSpeed = secSincePrevious > 0.0 ? stepsSincePrevious / secSincePrevious : 0.0;
+
+    lastStepCount_ = diag.stepCount;
+    lastComputeSec_ = diag.elapsedSec;
+
+    s += QString(tr("Speed (avg): %1 it/s\n")).arg(averageSpeed, 0, 'f', 0);
+    s += QString(tr("Speed (now): %1 it/s\n")).arg(currentSpeed, 0, 'f', 0);
 
     if (diagnosticsTimer_.isValid())
     {
@@ -303,6 +319,7 @@ void ImageController::onDiagnosticsUpdated(const fluvel_ip::ContourDiagnostics& 
     }
 
     s += QString(tr("Frames: %1 /s\n")).arg(receivedFps_, 0, 'f', 0);
+    s += QString(tr("Steps/frame: %1\n")).arg(stepsSincePrevious);
 
     s += QString(tr("Contour: %1 pts")).arg(diag.contourSize);
 

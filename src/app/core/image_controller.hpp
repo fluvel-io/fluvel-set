@@ -154,6 +154,10 @@ private:
     /// Smoothed rate of the updates received from the worker, in frames/s.
     double receivedFps_{0.0};
 
+    /// Step count and compute time of the previous diagnostics update.
+    int lastStepCount_{0};
+    double lastComputeSec_{0.0};
+
     QVector<QPointF> lastOuterContour_;
     QVector<QPointF> lastInnerContour_;
     bool hasContour_{false};
