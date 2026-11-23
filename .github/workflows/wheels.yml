@@ -62,7 +62,10 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - uses: pypa/cibuildwheel@v3.2.1
+      # Builds one wheel per Python version, then installs each one in a clean
+      # environment and runs the tests on it (test-command in pyproject.toml).
+      - name: Build and test the wheels
+        uses: pypa/cibuildwheel@v3.2.1
 
       - name: Generate checksums
         shell: bash
