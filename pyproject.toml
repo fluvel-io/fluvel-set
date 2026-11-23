@@ -10,7 +10,7 @@ name = "fluvel-set"
 dynamic = ["version"]
 description = "Real-time computer vision and image analysis for research (level-set active contours)"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = "CECILL-2.1"
 license-files = ["Licence_CeCILL_V2.1-*.txt"]
 authors = [{ name = "Fabien Bessy" }]
@@ -50,7 +50,7 @@ FLUVEL_BUILD_APP = "OFF"
 FLUVEL_BUILD_BIND = "ON"
 
 [tool.cibuildwheel]
-build = "cp310-* cp311-* cp312-* cp313-*"
+build = "cp311-* cp312-* cp313-* cp314-*"
 skip = "*-musllinux_* *-win32 *_i686"
 test-requires = "pytest"
 # importorskip would silently skip every test if the import failed: check it first.
