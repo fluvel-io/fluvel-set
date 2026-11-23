@@ -162,6 +162,9 @@ fluvel-set/
 │   ├── resources/                 # Shared datasets and images used by examples
 │   └── utils.py                   # Shared utilities used across examples
 │
+├── tests/                         # Automated tests
+│   └── python/                    # pytest suite of the image processing library (via the bindings)
+│
 ├── resources/                     # Icons and application assets
 ├── translations/                  # Application translations (.ts, .qm)
 │
@@ -296,7 +299,7 @@ Image conventions of the Python functions:
 Run the tests (requires `pytest`):
 
 ```bash
-scripts/test_bindings.sh   # build in Debug, then run the tests
+PYTHONPATH=build/python python -m pytest tests/python
 ```
 
 ---
