@@ -593,6 +593,10 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel19ApplicationSettings19ApplicationSettingsEv">fluvel::ApplicationSettings::ApplicationSettings (C++ function)</a>
 </li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel19ApplicationSettings26defaultSnapshotPreferencesEv">fluvel::ApplicationSettings::defaultSnapshotPreferences (C++ function)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel19ApplicationSettings32defaultVideoRecordingPreferencesEv">fluvel::ApplicationSettings::defaultVideoRecordingPreferences (C++ function)</a>
+</li>
       <li><a href="modules/app/app_core.html#_CPPv4NK6fluvel19ApplicationSettings13imageSettingsEv">fluvel::ApplicationSettings::imageSettings (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel19ApplicationSettings14imageSettings_E">fluvel::ApplicationSettings::imageSettings_ (C++ member)</a>
@@ -622,6 +626,8 @@ document.write(`
       <li><a href="modules/app/app_core.html#_CPPv4NK6fluvel19ApplicationSettings23recordingBufferSettingsEv">fluvel::ApplicationSettings::recordingBufferSettings (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel19ApplicationSettings24recordingBufferSettings_E">fluvel::ApplicationSettings::recordingBufferSettings_ (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel19ApplicationSettings30recordingBufferSettingsChangedERKN6fluvel23RecordingBufferSettingsE">fluvel::ApplicationSettings::recordingBufferSettingsChanged (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel19ApplicationSettings4saveEv">fluvel::ApplicationSettings::save (C++ function)</a>
 </li>
@@ -663,11 +669,15 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel19ApplicationSettings20snapshotPreferences_E">fluvel::ApplicationSettings::snapshotPreferences_ (C++ member)</a>
 </li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel19ApplicationSettings26snapshotPreferencesChangedERKN6fluvel19SnapshotPreferencesE">fluvel::ApplicationSettings::snapshotPreferencesChanged (C++ function)</a>
+</li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel19ApplicationSettings27videoDisplaySettingsChangedERKN6fluvel13DisplayConfigE">fluvel::ApplicationSettings::videoDisplaySettingsChanged (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4NK6fluvel19ApplicationSettings25videoRecordingPreferencesEv">fluvel::ApplicationSettings::videoRecordingPreferences (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel19ApplicationSettings26videoRecordingPreferences_E">fluvel::ApplicationSettings::videoRecordingPreferences_ (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel19ApplicationSettings32videoRecordingPreferencesChangedERKN6fluvel25VideoRecordingPreferencesE">fluvel::ApplicationSettings::videoRecordingPreferencesChanged (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4NK6fluvel19ApplicationSettings13videoSettingsEv">fluvel::ApplicationSettings::videoSettings (C++ function)</a>
 </li>
@@ -773,9 +783,13 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel17CaptureController12saveSnapshotERK6QImage">fluvel::CaptureController::saveSnapshot (C++ function)</a>
 </li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel17CaptureController22setSnapshotPreferencesERK19SnapshotPreferences">fluvel::CaptureController::setSnapshotPreferences (C++ function)</a>
+</li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel17CaptureController12setStreamingEb">fluvel::CaptureController::setStreaming (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel17CaptureController13snapshotErrorERK7QString">fluvel::CaptureController::snapshotError (C++ function)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel17CaptureController20snapshotPreferences_E">fluvel::CaptureController::snapshotPreferences_ (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel17CaptureController17snapshotRequestedEv">fluvel::CaptureController::snapshotRequested (C++ function)</a>
 </li>
@@ -2667,6 +2681,8 @@ document.write(`
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog14languageCombo_E">fluvel::PreferencesDialog::languageCombo_ (C++ member)</a>
 </li>
+      <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog16loadFromSettingsEv">fluvel::PreferencesDialog::loadFromSettings (C++ function)</a>
+</li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog17PreferencesDialogEP7QWidget">fluvel::PreferencesDialog::PreferencesDialog (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog18recordingDiskSpin_E">fluvel::PreferencesDialog::recordingDiskSpin_ (C++ member)</a>
@@ -2676,6 +2692,8 @@ document.write(`
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog23recordingOverflowCombo_E">fluvel::PreferencesDialog::recordingOverflowCombo_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog17recordingRamSpin_E">fluvel::PreferencesDialog::recordingRamSpin_ (C++ member)</a>
+</li>
+      <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog15restoreDefaultsEv">fluvel::PreferencesDialog::restoreDefaults (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog19retentionTimeLabel_E">fluvel::PreferencesDialog::retentionTimeLabel_ (C++ member)</a>
 </li>
@@ -2695,6 +2713,8 @@ document.write(`
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog10showDialogEv">fluvel::PreferencesDialog::showDialog (C++ function)</a>
 </li>
+      <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog10showValuesE8LanguageRK19SnapshotPreferencesRK25VideoRecordingPreferencesRK23RecordingBufferSettings">fluvel::PreferencesDialog::showValues (C++ function)</a>
+</li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog21snapshotBaseNameEdit_E">fluvel::PreferencesDialog::snapshotBaseNameEdit_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog22snapshotDirectoryEdit_E">fluvel::PreferencesDialog::snapshotDirectoryEdit_ (C++ member)</a>
@@ -2704,6 +2724,10 @@ document.write(`
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog21snapshotPreviewLabel_E">fluvel::PreferencesDialog::snapshotPreviewLabel_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog23snapshotTimestampCheck_E">fluvel::PreferencesDialog::snapshotTimestampCheck_ (C++ member)</a>
+</li>
+      <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog22updateCircularControlsEv">fluvel::PreferencesDialog::updateCircularControls (C++ function)</a>
+</li>
+      <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog19updateConvertOptionEv">fluvel::PreferencesDialog::updateConvertOption (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel17PreferencesDialog21updateSegmentDurationEv">fluvel::PreferencesDialog::updateSegmentDuration (C++ function)</a>
 </li>
@@ -3001,6 +3025,8 @@ document.write(`
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14SettingsDialog13openGroupbox_E">fluvel::SettingsDialog::openGroupbox_ (C++ member)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14SettingsDialog19openKernelSizeSpin_E">fluvel::SettingsDialog::openKernelSizeSpin_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14SettingsDialog15ordinateSlider_E">fluvel::SettingsDialog::ordinateSlider_ (C++ member)</a>
@@ -3011,8 +3037,6 @@ document.write(`
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14SettingsDialog12processPage_E">fluvel::SettingsDialog::processPage_ (C++ member)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14SettingsDialog15rectangleRadio_E">fluvel::SettingsDialog::rectangleRadio_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14SettingsDialog6rejectEv">fluvel::SettingsDialog::reject (C++ function)</a>
@@ -3137,9 +3161,7 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker10condition_E">fluvel::SnapshotWorker::condition_ (C++ member)</a>
 </li>
-      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker7enqueueERK6QImage">fluvel::SnapshotWorker::enqueue (C++ function)</a>
-</li>
-      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker11imageQueue_E">fluvel::SnapshotWorker::imageQueue_ (C++ member)</a>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker7enqueueERK6QImageRK19SnapshotPreferences">fluvel::SnapshotWorker::enqueue (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker20kMaxPendingSnapshotsE">fluvel::SnapshotWorker::kMaxPendingSnapshots (C++ member)</a>
 </li>
@@ -3149,7 +3171,15 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker12processQueueEv">fluvel::SnapshotWorker::processQueue (C++ function)</a>
 </li>
-      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker9saveImageERK6QImage">fluvel::SnapshotWorker::saveImage (C++ function)</a>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker7RequestE">fluvel::SnapshotWorker::Request (C++ struct)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker7Request5imageE">fluvel::SnapshotWorker::Request::image (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker7Request11preferencesE">fluvel::SnapshotWorker::Request::preferences (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker13requestQueue_E">fluvel::SnapshotWorker::requestQueue_ (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker9saveImageERK7Request">fluvel::SnapshotWorker::saveImage (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel14SnapshotWorker13snapshotErrorERK7QString">fluvel::SnapshotWorker::snapshotError (C++ function)</a>
 </li>

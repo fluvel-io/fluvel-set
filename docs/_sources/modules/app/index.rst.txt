@@ -135,7 +135,15 @@ three listeners react independently:
   a display change is visible immediately, even when the video is paused;
 * the **window** applies the view settings (mirror, smoothing, minimap,
   overlay) directly to the viewer, without going through the controller;
-* the **window** also refreshes its own widgets.
+* the **window** also refreshes its own widgets;
+* the **capture controller** keeps its own copy of the snapshot and recording
+  preferences. It never reads the singleton: the window gives it the values at
+  start-up and whenever they change, and each snapshot request carries a copy
+  of them.
+
+The controllers do not know the singleton either. It is the window that
+connects its signals to their slots, so a controller can be used with any
+source of settings.
 
 .. raw:: html
 
@@ -145,6 +153,54 @@ three listeners react independently:
             style="max-width:620px; width:100%; height:auto;">
      </a>
    </div>
+
+Settings dialogs
+~~~~~~~~~~~~~~~~
+
+The session dialogs (image and video) never read or write the singleton. A
+dialog receives its configuration once, when it is created, and keeps two
+copies: the *committed* one, which is what the application uses, and the
+*edited* one, which follows the widgets while the dialog is open.
+
+* **OK** copies the edited configuration to the committed one and emits a
+  signal. The window connects that signal to the setter of
+  ``ApplicationSettings``, which then notifies the controllers.
+* **Cancel** restores the edited configuration from the committed one and
+  refreshes every widget, so the dialog always shows the configuration that is
+  really applied when it is opened again.
+
+The dialog keeps its own copy, and nothing refreshes it afterwards. This is
+correct as long as the dialog is the only code that changes these settings,
+which is the case today: the only writers of the session settings are the two
+windows, and each of them only forwards the signal of its own dialog. If a new
+path starts to modify them (loading a preset, resetting the settings, another
+window), the owner of the dialog must give it the new configuration, otherwise
+the dialog would show and later commit a stale copy.
+
+The preferences dialog (language, snapshots, video recording, recording buffer)
+follows the same user-visible behavior, with a different mechanism. It is a
+single global dialog with no owning window to relay its values, so it reads and
+writes ``ApplicationSettings`` itself.
+
+* **Opening** the dialog reloads every widget from the application settings, so
+  it always shows what is really applied. Opening it again while it is already
+  visible keeps the pending edits.
+* **OK** writes the values to the singleton, which notifies the windows, and
+  saves them to disk.
+* **Cancel** (or closing the window) writes nothing. The edits are discarded
+  by the reload of the next opening.
+* **Restore Defaults** fills the widgets with the factory values, like the
+  same button of the session dialogs. Nothing is applied until OK, and Cancel
+  discards it. The default folders depend on the platform (standard pictures
+  and movies locations given by Qt), so they come from
+  ``ApplicationSettings::defaultSnapshotPreferences()`` and
+  ``defaultVideoRecordingPreferences()``, which the loading of the settings
+  also uses. The language goes back to *System*, which, as any language change,
+  takes effect after a restart.
+
+Reloading at each opening replaces the *committed*/*edited* copies: there is no
+second copy that could become stale, so the limit described above does not
+apply to this dialog.
 
 .. toctree::
    :maxdepth: 2

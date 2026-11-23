@@ -2172,7 +2172,7 @@ into complete user-facing interfaces.</p>
 <p>It also provides interactive shape initialization through an <a class="reference internal" href="components.html#classfluvel_1_1ImageViewerWidget"><span class="std std-ref">ImageViewerWidget</span></a> and <a class="reference internal" href="components.html#classfluvel_1_1InitializationBehavior"><span class="std std-ref">InitializationBehavior</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The dialog maintains both committed and edited configurations. </p>
+<p>The dialog maintains both committed and edited configurations. It never reads or writes the application settings. It receives its configuration once, at construction, and keeps its own copy. When the dialog is accepted it emits a signal and the owner applies the configuration; cancelling restores the last accepted configuration. The copy is only refreshed by the dialog itself, so if another code path starts to change these settings, the owner must give the new configuration to the dialog. </p>
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
@@ -2645,7 +2645,11 @@ into complete user-facing interfaces.</p>
 <li><p>algorithm parameters via <a class="reference internal" href="components.html#classfluvel_1_1AlgoSettingsWidget"><span class="std std-ref">AlgoSettingsWidget</span></a></p></li>
 </ul>
 </p>
-<p>The configuration is applied when the dialog is accepted. </p>
+<p>The configuration is applied when the dialog is accepted.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The dialog never reads or writes the application settings. It receives its configuration once, at construction, and keeps its own copy. When the dialog is accepted it emits a signal and the owner applies the configuration; cancelling restores the last accepted configuration. The copy is only refreshed by the dialog itself, so if another code path starts to change these settings, the owner must give the new configuration to the dialog. </p>
+</div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -2787,7 +2791,13 @@ into complete user-facing interfaces.</p>
 <li><p>recording buffer behavior.</p></li>
 </ul>
 </p>
-<p>Unlike session settings, these preferences are shared by all windows and apply globally to the application. </p>
+<p>Unlike session settings, these preferences are shared by all windows and apply globally to the application.</p>
+<p>
+Unlike the session dialogs, this dialog reads and writes the singleton itself, because it is a single global dialog with no owning window to relay its values. Reloading at each opening is what keeps its copy in step, without the limit of the session dialogs. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The widgets are reloaded from the application settings each time the dialog is opened, so Cancel (or closing the window) discards the edits and the next opening shows the applied state. OK writes the values to the application settings and saves them.</p>
+</div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
@@ -2853,6 +2863,38 @@ into complete user-facing interfaces.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel17PreferencesDialog28createRecordingBufferSectionEv">
 <span id="_CPPv3N6fluvel17PreferencesDialog28createRecordingBufferSectionEv"></span><span id="_CPPv2N6fluvel17PreferencesDialog28createRecordingBufferSectionEv"></span><span id="fluvel::PreferencesDialog::createRecordingBufferSection"></span><span class="target" id="classfluvel_1_1PreferencesDialog_1a2e1c1d70885e1413768ec4d4709a5ef1"></span><span class="n"><span class="pre">QWidget</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">createRecordingBufferSection</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17PreferencesDialog28createRecordingBufferSectionEv" title="Link to this definition">#</a><br /></dt>
 <dd><p>Creates the recording buffer preferences section. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17PreferencesDialog16loadFromSettingsEv">
+<span id="_CPPv3N6fluvel17PreferencesDialog16loadFromSettingsEv"></span><span id="_CPPv2N6fluvel17PreferencesDialog16loadFromSettingsEv"></span><span id="fluvel::PreferencesDialog::loadFromSettings"></span><span class="target" id="classfluvel_1_1PreferencesDialog_1a7de7894f911570d67b800012ce53be45"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">loadFromSettings</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17PreferencesDialog16loadFromSettingsEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Fills every widget from the current application settings. </p>
+<p>Called when the dialog is built and each time it is opened, so that it always shows the preferences actually applied, even after an earlier edit was cancelled. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17PreferencesDialog10showValuesE8LanguageRK19SnapshotPreferencesRK25VideoRecordingPreferencesRK23RecordingBufferSettings">
+<span id="_CPPv3N6fluvel17PreferencesDialog10showValuesE8LanguageRK19SnapshotPreferencesRK25VideoRecordingPreferencesRK23RecordingBufferSettings"></span><span id="_CPPv2N6fluvel17PreferencesDialog10showValuesE8LanguageRK19SnapshotPreferencesRK25VideoRecordingPreferencesRK23RecordingBufferSettings"></span><span id="fluvel::PreferencesDialog::showValues__Language.SnapshotPreferencesCR.VideoRecordingPreferencesCR.RecordingBufferSettingsCR"></span><span class="target" id="classfluvel_1_1PreferencesDialog_1ae692ca44cdf547c3e8a8dc8c3c496e9f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">showValues</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel8LanguageE" title="fluvel::Language"><span class="n"><span class="pre">Language</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">language</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel19SnapshotPreferencesE" title="fluvel::SnapshotPreferences"><span class="n"><span class="pre">SnapshotPreferences</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">snapshot</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel25VideoRecordingPreferencesE" title="fluvel::VideoRecordingPreferences"><span class="n"><span class="pre">VideoRecordingPreferences</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">video</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel23RecordingBufferSettingsE" title="fluvel::RecordingBufferSettings"><span class="n"><span class="pre">RecordingBufferSettings</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">buffer</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17PreferencesDialog10showValuesE8LanguageRK19SnapshotPreferencesRK25VideoRecordingPreferencesRK23RecordingBufferSettings" title="Link to this definition">#</a><br /></dt>
+<dd><p>Fills every widget from the given values. </p>
+<p>Nothing is written to the application settings: the values only reach them when the user accepts the dialog. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17PreferencesDialog15restoreDefaultsEv">
+<span id="_CPPv3N6fluvel17PreferencesDialog15restoreDefaultsEv"></span><span id="_CPPv2N6fluvel17PreferencesDialog15restoreDefaultsEv"></span><span id="fluvel::PreferencesDialog::restoreDefaults"></span><span class="target" id="classfluvel_1_1PreferencesDialog_1a1e64e2a81ba79fa159ec927aa0e538d8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">restoreDefaults</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17PreferencesDialog15restoreDefaultsEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Fills every widget with the factory values (applied only on OK). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17PreferencesDialog19updateConvertOptionEv">
+<span id="_CPPv3N6fluvel17PreferencesDialog19updateConvertOptionEv"></span><span id="_CPPv2N6fluvel17PreferencesDialog19updateConvertOptionEv"></span><span id="fluvel::PreferencesDialog::updateConvertOption"></span><span class="target" id="classfluvel_1_1PreferencesDialog_1aa68819d8e42f381788d252b638a376d5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updateConvertOption</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17PreferencesDialog19updateConvertOptionEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Shows the MP4 conversion option only for codecs that record to MP4. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17PreferencesDialog22updateCircularControlsEv">
+<span id="_CPPv3N6fluvel17PreferencesDialog22updateCircularControlsEv"></span><span id="_CPPv2N6fluvel17PreferencesDialog22updateCircularControlsEv"></span><span id="fluvel::PreferencesDialog::updateCircularControls"></span><span class="target" id="classfluvel_1_1PreferencesDialog_1af6fbe6e62d35d768e97240338776bf1e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updateCircularControls</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17PreferencesDialog22updateCircularControlsEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Enables the circular-recording controls only in circular mode. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -3567,6 +3609,11 @@ into complete user-facing interfaces.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17PreferencesDialog21createSnapshotSectionEv"><code class="docutils literal notranslate"><span class="pre">createSnapshotSection()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17PreferencesDialog27createVideoRecordingSectionEv"><code class="docutils literal notranslate"><span class="pre">createVideoRecordingSection()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17PreferencesDialog28createRecordingBufferSectionEv"><code class="docutils literal notranslate"><span class="pre">createRecordingBufferSection()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17PreferencesDialog16loadFromSettingsEv"><code class="docutils literal notranslate"><span class="pre">loadFromSettings()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17PreferencesDialog10showValuesE8LanguageRK19SnapshotPreferencesRK25VideoRecordingPreferencesRK23RecordingBufferSettings"><code class="docutils literal notranslate"><span class="pre">showValues()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17PreferencesDialog15restoreDefaultsEv"><code class="docutils literal notranslate"><span class="pre">restoreDefaults()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17PreferencesDialog19updateConvertOptionEv"><code class="docutils literal notranslate"><span class="pre">updateConvertOption()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17PreferencesDialog22updateCircularControlsEv"><code class="docutils literal notranslate"><span class="pre">updateCircularControls()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17PreferencesDialog23selectSnapshotDirectoryEv"><code class="docutils literal notranslate"><span class="pre">selectSnapshotDirectory()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17PreferencesDialog20selectVideoDirectoryEv"><code class="docutils literal notranslate"><span class="pre">selectVideoDirectory()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17PreferencesDialog21updateSnapshotPreviewEv"><code class="docutils literal notranslate"><span class="pre">updateSnapshotPreview()</span></code></a></li>

@@ -9,6 +9,8 @@ flowchart TB
 
     Win["Window<br/>wiring"]
 
+    Cap["CaptureController<br/>keeps a copy of the preferences"]
+
     Exe["Processing thread or worker<br/>keeps the configuration under a mutex"]
 
     View["Viewer<br/>passive"]
@@ -18,6 +20,7 @@ flowchart TB
     Settings -- "session settings changed<br/>algorithm, filters, downscale" --> Ctl
     Settings -- "display settings changed<br/>background, contour style" --> Ctl
     Settings -- "settings changed" --> Win
+    Settings -- "snapshot and recording preferences changed" --> Cap
 
     Ctl -- "setAlgoConfig, setBackground<br/>applied from the next frame" --> Exe
     Ctl -- "layersUpdated<br/>restyled layers, even when paused" --> View
@@ -29,5 +32,6 @@ flowchart TB
     style View fill:#eef8f2,color:#1d1d1f,stroke:#4fc98a,stroke-width:2px
     style Win fill:#eef8f2,color:#1d1d1f,stroke:#4fc98a,stroke-width:2px
     style Settings fill:#fff6ec,color:#1d1d1f,stroke:#f5a04a,stroke-width:2px
+    style Cap fill:#f4f5ff,color:#1d1d1f,stroke:#6b6fcf,stroke-width:2px
     style Ctl fill:#f4f5ff,color:#1d1d1f,stroke:#6b6fcf,stroke-width:2px
     style Exe fill:#f4f5ff,color:#1d1d1f,stroke:#6b6fcf,stroke-width:2px

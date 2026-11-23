@@ -29,6 +29,23 @@ from the controllers, and displays them according to a view configuration.
      </a>
    </div>
 
+An input event goes from the viewer to the interaction set, which gives it to
+the behaviors in priority order. The first behavior that handles it stops the
+dispatch. While a behavior is capturing the mouse (a pan in progress, for
+example), it receives the mouse press, move and release events alone. A
+behavior acts on the viewer, or reports to the rest of the application through
+a signal or the listener.
+
+.. raw:: html
+
+   <div style="text-align:center;">
+     <a href="../../../_static/image_viewer_events.svg"
+        target="_blank">
+       <img src="../../../_static/image_viewer_events.svg"
+            style="max-width:900px; width:100%; height:auto;">
+     </a>
+   </div>
+
 .. toctree::
    :maxdepth: 1
 

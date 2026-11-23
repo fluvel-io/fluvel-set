@@ -33,8 +33,8 @@ sequenceDiagram
         alt the queue is full
             C-->>X: snapshotError(queue is full)
         else the image is queued
-            C->>Q: enqueue(image)
-            Note right of Q: bounded queue, protected by a mutex,<br/>written one image at a time
+            C->>Q: enqueue(image, preferences)
+            Note right of Q: bounded queue, protected by a mutex.<br/>Each request carries its own copy of the<br/>preferences, taken when it is queued
             Q->>Q: build the file name and save the image
             alt saved
                 Q-->>C: snapshotSaved(file name)

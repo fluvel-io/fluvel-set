@@ -1310,10 +1310,22 @@ used throughout the application.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel17CaptureController12saveSnapshotERK6QImage">
 <span id="_CPPv3N6fluvel17CaptureController12saveSnapshotERK6QImage"></span><span id="_CPPv2N6fluvel17CaptureController12saveSnapshotERK6QImage"></span><span id="fluvel::CaptureController::saveSnapshot__QImageCR"></span><span class="target" id="classfluvel_1_1CaptureController_1a52ac62b92126435703bcd840fc1f96c0"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">saveSnapshot</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QImage</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">image</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17CaptureController12saveSnapshotERK6QImage" title="Link to this definition">#</a><br /></dt>
 <dd><p>Saves a snapshot image. </p>
-<p>The image is saved according to the persistent snapshot preferences.</p>
+<p>The image is saved according to the snapshot preferences given to <a class="reference internal" href="#classfluvel_1_1CaptureController_1a872acd8dfca777ff67adc70973d28254"><span class="std std-ref">setSnapshotPreferences()</span></a>. A copy of these preferences is taken when the snapshot is queued.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>image</strong> – Image to save. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17CaptureController22setSnapshotPreferencesERK19SnapshotPreferences">
+<span id="_CPPv3N6fluvel17CaptureController22setSnapshotPreferencesERK19SnapshotPreferences"></span><span id="_CPPv2N6fluvel17CaptureController22setSnapshotPreferencesERK19SnapshotPreferences"></span><span id="fluvel::CaptureController::setSnapshotPreferences__SnapshotPreferencesCR"></span><span class="target" id="classfluvel_1_1CaptureController_1a872acd8dfca777ff67adc70973d28254"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setSnapshotPreferences</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6fluvel19SnapshotPreferencesE" title="fluvel::SnapshotPreferences"><span class="n"><span class="pre">SnapshotPreferences</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">preferences</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17CaptureController22setSnapshotPreferencesERK19SnapshotPreferences" title="Link to this definition">#</a><br /></dt>
+<dd><p>Sets the preferences used for the next snapshots. </p>
+<p>The controller does not read the application settings itself: the owner gives the preferences once at start-up and again whenever they change.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>preferences</strong> – Snapshot preferences. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -1352,6 +1364,11 @@ used throughout the application.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel17CaptureController10streaming_E">
 <span id="_CPPv3N6fluvel17CaptureController10streaming_E"></span><span id="_CPPv2N6fluvel17CaptureController10streaming_E"></span><span id="fluvel::CaptureController::streaming___b"></span><span class="target" id="classfluvel_1_1CaptureController_1a359b8ab3a36e42d971d9e361608d3ba9"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">streaming_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">false</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel17CaptureController10streaming_E" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17CaptureController20snapshotPreferences_E">
+<span id="_CPPv3N6fluvel17CaptureController20snapshotPreferences_E"></span><span id="_CPPv2N6fluvel17CaptureController20snapshotPreferences_E"></span><span id="fluvel::CaptureController::snapshotPreferences___SnapshotPreferences"></span><span class="target" id="classfluvel_1_1CaptureController_1a6ce4929ea359b55c89dead0dcb3679e4"></span><a class="reference internal" href="#_CPPv4N6fluvel19SnapshotPreferencesE" title="fluvel::SnapshotPreferences"><span class="n"><span class="pre">SnapshotPreferences</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">snapshotPreferences_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel17CaptureController20snapshotPreferences_E" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -2220,7 +2237,8 @@ used throughout the application.</p>
 <dd><div class="docutils container">
 <em>#include &lt;snapshot_worker.hpp&gt;</em></div>
 <p>Asynchronously saves captured images to disk. </p>
-<p><a class="reference internal" href="#classfluvel_1_1SnapshotWorker"><span class="std std-ref">SnapshotWorker</span></a> owns a dedicated worker thread and a FIFO queue of images. Snapshot requests are queued and processed sequentially so that image encoding and file I/O do not block the caller thread.</p>
+<p><a class="reference internal" href="#classfluvel_1_1SnapshotWorker"><span class="std std-ref">SnapshotWorker</span></a> owns a dedicated worker thread and a FIFO queue of requests. Snapshot requests are queued and processed sequentially so that image encoding and file I/O do not block the caller thread.</p>
+<p>Each request carries its own copy of the snapshot preferences, taken by the caller when the request is queued. The worker thread never reads the application settings, so it cannot race with the thread that edits them.</p>
 <p>The queue has a bounded capacity to prevent an excessive number of pending snapshots from accumulating in memory. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
@@ -2247,12 +2265,15 @@ used throughout the application.</p>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14SnapshotWorker7enqueueERK6QImage">
-<span id="_CPPv3N6fluvel14SnapshotWorker7enqueueERK6QImage"></span><span id="_CPPv2N6fluvel14SnapshotWorker7enqueueERK6QImage"></span><span id="fluvel::SnapshotWorker::enqueue__QImageCR"></span><span class="target" id="classfluvel_1_1SnapshotWorker_1a719e0d0cf4c58bf4edf3de8d4a73e07c"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enqueue</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QImage</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">image</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel14SnapshotWorker7enqueueERK6QImage" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14SnapshotWorker7enqueueERK6QImageRK19SnapshotPreferences">
+<span id="_CPPv3N6fluvel14SnapshotWorker7enqueueERK6QImageRK19SnapshotPreferences"></span><span id="_CPPv2N6fluvel14SnapshotWorker7enqueueERK6QImageRK19SnapshotPreferences"></span><span id="fluvel::SnapshotWorker::enqueue__QImageCR.SnapshotPreferencesCR"></span><span class="target" id="classfluvel_1_1SnapshotWorker_1a13254451129962b7f7fcddb225c527ef"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enqueue</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QImage</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">image</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6fluvel19SnapshotPreferencesE" title="fluvel::SnapshotPreferences"><span class="n"><span class="pre">SnapshotPreferences</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">preferences</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel14SnapshotWorker7enqueueERK6QImageRK19SnapshotPreferences" title="Link to this definition">#</a><br /></dt>
 <dd><p>Queues an image for asynchronous saving. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>image</strong> – Image to save. </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – Image to save. </p></li>
+<li><p><strong>preferences</strong> – Snapshot preferences to use for this image (copied). </p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>true if the image was queued, false if the queue is full. </p>
@@ -2304,12 +2325,12 @@ used throughout the application.</p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14SnapshotWorker9saveImageERK6QImage">
-<span id="_CPPv3N6fluvel14SnapshotWorker9saveImageERK6QImage"></span><span id="_CPPv2N6fluvel14SnapshotWorker9saveImageERK6QImage"></span><span id="fluvel::SnapshotWorker::saveImage__QImageCR"></span><span class="target" id="classfluvel_1_1SnapshotWorker_1af0cd88a738eec6f4c04faf5cd7cebdfb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">saveImage</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QImage</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">image</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel14SnapshotWorker9saveImageERK6QImage" title="Link to this definition">#</a><br /></dt>
-<dd><p>Saves one image according to the current snapshot preferences. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14SnapshotWorker9saveImageERK7Request">
+<span id="_CPPv3N6fluvel14SnapshotWorker9saveImageERK7Request"></span><span id="_CPPv2N6fluvel14SnapshotWorker9saveImageERK7Request"></span><span id="fluvel::SnapshotWorker::saveImage__RequestCR"></span><span class="target" id="classfluvel_1_1SnapshotWorker_1ad8156ad41d00056f4509aae112d50e4f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">saveImage</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6fluvel14SnapshotWorker7RequestE" title="fluvel::SnapshotWorker::Request"><span class="n"><span class="pre">Request</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">request</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel14SnapshotWorker9saveImageERK7Request" title="Link to this definition">#</a><br /></dt>
+<dd><p>Saves one request according to its own preferences. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>image</strong> – Image to save. </p>
+<dd class="field-odd"><p><strong>request</strong> – Image and preferences. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -2333,8 +2354,8 @@ used throughout the application.</p>
 <dd></dd></dl>
 
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14SnapshotWorker11imageQueue_E">
-<span id="_CPPv3N6fluvel14SnapshotWorker11imageQueue_E"></span><span id="_CPPv2N6fluvel14SnapshotWorker11imageQueue_E"></span><span id="fluvel::SnapshotWorker::imageQueue___std::deque:QImage:"></span><span class="target" id="classfluvel_1_1SnapshotWorker_1a3445563c9c3d4efb84fbec98f18314d4"></span><a class="reference internal" href="../ip/ip_core.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">deque</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">QImage</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">imageQueue_</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel14SnapshotWorker11imageQueue_E" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14SnapshotWorker13requestQueue_E">
+<span id="_CPPv3N6fluvel14SnapshotWorker13requestQueue_E"></span><span id="_CPPv2N6fluvel14SnapshotWorker13requestQueue_E"></span><span id="fluvel::SnapshotWorker::requestQueue___std::deque:Request:"></span><span class="target" id="classfluvel_1_1SnapshotWorker_1ae66d52cbdd6febe8672ce3a756390e39"></span><a class="reference internal" href="../ip/ip_core.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">deque</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6fluvel14SnapshotWorker7RequestE" title="fluvel::SnapshotWorker::Request"><span class="n"><span class="pre">Request</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">requestQueue_</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel14SnapshotWorker13requestQueue_E" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -2343,6 +2364,25 @@ used throughout the application.</p>
 <dd></dd></dl>
 
 </div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14SnapshotWorker7RequestE">
+<span id="_CPPv3N6fluvel14SnapshotWorker7RequestE"></span><span id="_CPPv2N6fluvel14SnapshotWorker7RequestE"></span><span id="fluvel::SnapshotWorker::Request"></span><span class="target" id="structfluvel_1_1SnapshotWorker_1_1Request"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Request</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel14SnapshotWorker7RequestE" title="Link to this definition">#</a><br /></dt>
+<dd><p>One queued snapshot: the image and the preferences to save it with. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14SnapshotWorker7Request5imageE">
+<span id="_CPPv3N6fluvel14SnapshotWorker7Request5imageE"></span><span id="_CPPv2N6fluvel14SnapshotWorker7Request5imageE"></span><span id="fluvel::SnapshotWorker::Request::image__QImage"></span><span class="target" id="structfluvel_1_1SnapshotWorker_1_1Request_1a7ec72adc5d97b31dd63f708606394e30"></span><span class="n"><span class="pre">QImage</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">image</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel14SnapshotWorker7Request5imageE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14SnapshotWorker7Request11preferencesE">
+<span id="_CPPv3N6fluvel14SnapshotWorker7Request11preferencesE"></span><span id="_CPPv2N6fluvel14SnapshotWorker7Request11preferencesE"></span><span id="fluvel::SnapshotWorker::Request::preferences__SnapshotPreferences"></span><span class="target" id="structfluvel_1_1SnapshotWorker_1_1Request_1a3bb740f57cc15dc93dc4717f546440d4"></span><a class="reference internal" href="#_CPPv4N6fluvel19SnapshotPreferencesE" title="fluvel::SnapshotPreferences"><span class="n"><span class="pre">SnapshotPreferences</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">preferences</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel14SnapshotWorker7Request11preferencesE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </dd></dl>
@@ -2557,6 +2597,24 @@ used throughout the application.</p>
 <dd><p>Emitted when video display settings change. </p>
 </dd></dl>
 
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel19ApplicationSettings26snapshotPreferencesChangedERKN6fluvel19SnapshotPreferencesE">
+<span id="_CPPv3N6fluvel19ApplicationSettings26snapshotPreferencesChangedERKN6fluvel19SnapshotPreferencesE"></span><span id="_CPPv2N6fluvel19ApplicationSettings26snapshotPreferencesChangedERKN6fluvel19SnapshotPreferencesE"></span><span id="fluvel::ApplicationSettings::snapshotPreferencesChanged__fluvel::SnapshotPreferencesCR"></span><span class="target" id="classfluvel_1_1ApplicationSettings_1a41ed28f06cfaaeb7380db208042f5cf5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">snapshotPreferencesChanged</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv46fluvel" title="fluvel"><span class="n"><span class="pre">fluvel</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6fluvel19SnapshotPreferencesE" title="fluvel::SnapshotPreferences"><span class="n"><span class="pre">SnapshotPreferences</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">preferences</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel19ApplicationSettings26snapshotPreferencesChangedERKN6fluvel19SnapshotPreferencesE" title="Link to this definition">#</a><br /></dt>
+<dd><p>Emitted when the snapshot preferences change. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel19ApplicationSettings32videoRecordingPreferencesChangedERKN6fluvel25VideoRecordingPreferencesE">
+<span id="_CPPv3N6fluvel19ApplicationSettings32videoRecordingPreferencesChangedERKN6fluvel25VideoRecordingPreferencesE"></span><span id="_CPPv2N6fluvel19ApplicationSettings32videoRecordingPreferencesChangedERKN6fluvel25VideoRecordingPreferencesE"></span><span id="fluvel::ApplicationSettings::videoRecordingPreferencesChanged__fluvel::VideoRecordingPreferencesCR"></span><span class="target" id="classfluvel_1_1ApplicationSettings_1ab6fcb165cbfc59a52699db88f323d024"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">videoRecordingPreferencesChanged</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv46fluvel" title="fluvel"><span class="n"><span class="pre">fluvel</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6fluvel25VideoRecordingPreferencesE" title="fluvel::VideoRecordingPreferences"><span class="n"><span class="pre">VideoRecordingPreferences</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">preferences</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel19ApplicationSettings32videoRecordingPreferencesChangedERKN6fluvel25VideoRecordingPreferencesE" title="Link to this definition">#</a><br /></dt>
+<dd><p>Emitted when the video recording preferences change. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel19ApplicationSettings30recordingBufferSettingsChangedERKN6fluvel23RecordingBufferSettingsE">
+<span id="_CPPv3N6fluvel19ApplicationSettings30recordingBufferSettingsChangedERKN6fluvel23RecordingBufferSettingsE"></span><span id="_CPPv2N6fluvel19ApplicationSettings30recordingBufferSettingsChangedERKN6fluvel23RecordingBufferSettingsE"></span><span id="fluvel::ApplicationSettings::recordingBufferSettingsChanged__fluvel::RecordingBufferSettingsCR"></span><span class="target" id="classfluvel_1_1ApplicationSettings_1aca7338a9d4accaa445b78ecba7a7f8f0"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recordingBufferSettingsChanged</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv46fluvel" title="fluvel"><span class="n"><span class="pre">fluvel</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6fluvel23RecordingBufferSettingsE" title="fluvel::RecordingBufferSettings"><span class="n"><span class="pre">RecordingBufferSettings</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">settings</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel19ApplicationSettings30recordingBufferSettingsChangedERKN6fluvel23RecordingBufferSettingsE" title="Link to this definition">#</a><br /></dt>
+<dd><p>Emitted when the recording buffer settings change. </p>
+</dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
@@ -2569,6 +2627,20 @@ used throughout the application.</p>
 <dd class="field-odd"><p>Singleton instance. </p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel19ApplicationSettings26defaultSnapshotPreferencesEv">
+<span id="_CPPv3N6fluvel19ApplicationSettings26defaultSnapshotPreferencesEv"></span><span id="_CPPv2N6fluvel19ApplicationSettings26defaultSnapshotPreferencesEv"></span><span id="fluvel::ApplicationSettings::defaultSnapshotPreferences"></span><span class="target" id="classfluvel_1_1ApplicationSettings_1a070f85142911b85e939104f247db24f9"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6fluvel19SnapshotPreferencesE" title="fluvel::SnapshotPreferences"><span class="n"><span class="pre">SnapshotPreferences</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">defaultSnapshotPreferences</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel19ApplicationSettings26defaultSnapshotPreferencesEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Factory snapshot preferences. </p>
+<p>The directory is the platform’s standard pictures location, resolved through Qt, so it depends on the platform. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel19ApplicationSettings32defaultVideoRecordingPreferencesEv">
+<span id="_CPPv3N6fluvel19ApplicationSettings32defaultVideoRecordingPreferencesEv"></span><span id="_CPPv2N6fluvel19ApplicationSettings32defaultVideoRecordingPreferencesEv"></span><span id="fluvel::ApplicationSettings::defaultVideoRecordingPreferences"></span><span class="target" id="classfluvel_1_1ApplicationSettings_1a14eb3a46c1a97221b88b22f3e103a0c7"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6fluvel25VideoRecordingPreferencesE" title="fluvel::VideoRecordingPreferences"><span class="n"><span class="pre">VideoRecordingPreferences</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">defaultVideoRecordingPreferences</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel19ApplicationSettings32defaultVideoRecordingPreferencesEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Factory video recording preferences. </p>
+<p>The directory is the platform’s standard movies location, resolved through Qt, so it depends on the platform. </p>
 </dd></dl>
 
 </div>
@@ -6562,11 +6634,13 @@ used throughout the application.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK6fluvel17CaptureController11isStreamingEv"><code class="docutils literal notranslate"><span class="pre">isStreaming()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17CaptureController15requestSnapshotEv"><code class="docutils literal notranslate"><span class="pre">requestSnapshot()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17CaptureController12saveSnapshotERK6QImage"><code class="docutils literal notranslate"><span class="pre">saveSnapshot()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17CaptureController22setSnapshotPreferencesERK19SnapshotPreferences"><code class="docutils literal notranslate"><span class="pre">setSnapshotPreferences()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17CaptureController17snapshotRequestedEv"><code class="docutils literal notranslate"><span class="pre">snapshotRequested</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17CaptureController13snapshotSavedERK7QString"><code class="docutils literal notranslate"><span class="pre">snapshotSaved</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17CaptureController13snapshotErrorERK7QString"><code class="docutils literal notranslate"><span class="pre">snapshotError</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17CaptureController16streamingChangedEb"><code class="docutils literal notranslate"><span class="pre">streamingChanged</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17CaptureController10streaming_E"><code class="docutils literal notranslate"><span class="pre">streaming_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17CaptureController20snapshotPreferences_E"><code class="docutils literal notranslate"><span class="pre">snapshotPreferences_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17CaptureController15snapshotWorker_E"><code class="docutils literal notranslate"><span class="pre">snapshotWorker_</span></code></a></li>
 </ul>
 </li>
@@ -6703,17 +6777,22 @@ used throughout the application.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorkerD0Ev"><code class="docutils literal notranslate"><span class="pre">~SnapshotWorker()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker14SnapshotWorkerERK14SnapshotWorker"><code class="docutils literal notranslate"><span class="pre">SnapshotWorker()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorkeraSERK14SnapshotWorker"><code class="docutils literal notranslate"><span class="pre">operator=()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker7enqueueERK6QImage"><code class="docutils literal notranslate"><span class="pre">enqueue()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker7enqueueERK6QImageRK19SnapshotPreferences"><code class="docutils literal notranslate"><span class="pre">enqueue()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker13snapshotSavedERK7QString"><code class="docutils literal notranslate"><span class="pre">snapshotSaved</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker13snapshotErrorERK7QString"><code class="docutils literal notranslate"><span class="pre">snapshotError</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker20kMaxPendingSnapshotsE"><code class="docutils literal notranslate"><span class="pre">kMaxPendingSnapshots</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker12processQueueEv"><code class="docutils literal notranslate"><span class="pre">processQueue()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker9saveImageERK6QImage"><code class="docutils literal notranslate"><span class="pre">saveImage()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker9saveImageERK7Request"><code class="docutils literal notranslate"><span class="pre">saveImage()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker13workerThread_E"><code class="docutils literal notranslate"><span class="pre">workerThread_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker6mutex_E"><code class="docutils literal notranslate"><span class="pre">mutex_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker10condition_E"><code class="docutils literal notranslate"><span class="pre">condition_</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker11imageQueue_E"><code class="docutils literal notranslate"><span class="pre">imageQueue_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker13requestQueue_E"><code class="docutils literal notranslate"><span class="pre">requestQueue_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker9stopping_E"><code class="docutils literal notranslate"><span class="pre">stopping_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker7RequestE"><code class="docutils literal notranslate"><span class="pre">fluvel::SnapshotWorker::Request</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker7Request5imageE"><code class="docutils literal notranslate"><span class="pre">image</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14SnapshotWorker7Request11preferencesE"><code class="docutils literal notranslate"><span class="pre">preferences</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -6744,7 +6823,12 @@ used throughout the application.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel19ApplicationSettings25imgDisplaySettingsChangedERKN6fluvel13DisplayConfigE"><code class="docutils literal notranslate"><span class="pre">imgDisplaySettingsChanged</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel19ApplicationSettings20videoSettingsChangedERKN6fluvel20VideoSessionSettingsE"><code class="docutils literal notranslate"><span class="pre">videoSettingsChanged</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel19ApplicationSettings27videoDisplaySettingsChangedERKN6fluvel13DisplayConfigE"><code class="docutils literal notranslate"><span class="pre">videoDisplaySettingsChanged</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel19ApplicationSettings26snapshotPreferencesChangedERKN6fluvel19SnapshotPreferencesE"><code class="docutils literal notranslate"><span class="pre">snapshotPreferencesChanged</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel19ApplicationSettings32videoRecordingPreferencesChangedERKN6fluvel25VideoRecordingPreferencesE"><code class="docutils literal notranslate"><span class="pre">videoRecordingPreferencesChanged</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel19ApplicationSettings30recordingBufferSettingsChangedERKN6fluvel23RecordingBufferSettingsE"><code class="docutils literal notranslate"><span class="pre">recordingBufferSettingsChanged</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel19ApplicationSettings8instanceEv"><code class="docutils literal notranslate"><span class="pre">instance()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel19ApplicationSettings26defaultSnapshotPreferencesEv"><code class="docutils literal notranslate"><span class="pre">defaultSnapshotPreferences()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel19ApplicationSettings32defaultVideoRecordingPreferencesEv"><code class="docutils literal notranslate"><span class="pre">defaultVideoRecordingPreferences()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel19ApplicationSettings24loadImageSessionSettingsEv"><code class="docutils literal notranslate"><span class="pre">loadImageSessionSettings()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel19ApplicationSettings24loadVideoSessionSettingsEv"><code class="docutils literal notranslate"><span class="pre">loadVideoSessionSettings()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel19ApplicationSettings24saveImageSessionSettingsEv"><code class="docutils literal notranslate"><span class="pre">saveImageSessionSettings()</span></code></a></li>
