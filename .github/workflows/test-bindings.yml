@@ -6,11 +6,10 @@ name: Test bindings
 # Fast check of the image processing library through its Python bindings.
 # Built in Debug so that the asserts of the library are enabled.
 #
-# Not run on main (which is only a backup of the work: run
-# scripts/test_bindings.sh locally when needed). It runs before the publication
-# of a release: it is called by the latest and stable workflows, and a failing
-# test blocks the release. It can also be started by hand.
-# (The wheels workflow runs the same tests when it builds the wheels.)
+# Not run on main nor on the latest builds: run scripts/test_bindings.sh
+# locally when needed. The wheels workflow runs the same tests before
+# publishing the wheels. It is called by the stable workflow, where a failing
+# test blocks the publication. It can also be started by hand.
 
 on:
   workflow_call:
