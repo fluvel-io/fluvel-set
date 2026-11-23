@@ -35,25 +35,11 @@ class ISpeedModel {
     +status()
 }
 
-class RegionGraySpeedModel {
-    +computeSpeed(contourPoint, ...)
-    +onImageChanged(grayImage, ...)
-    +...()
-    -meanOutside
-    -meanInside
-}
+class RegionGraySpeedModel
 
-class RegionColorSpeedModel {
-    +computeSpeed(contourPoint, ...)
-    +onImageChanged(rgbImage, ...)
-    +...()
-    -meanRgbOutside
-    -meanRgbInside
-}
+class RegionColorSpeedModel
 
-class MajorityInternalSpeed {
-    +computeSpeed(contourPoint, ...)
-}
+class MajorityInternalSpeed
 
 ISpeedModel <|.. RegionGraySpeedModel
 ISpeedModel <|.. RegionColorSpeedModel

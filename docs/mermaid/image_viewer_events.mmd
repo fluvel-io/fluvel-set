@@ -1,0 +1,49 @@
+%%{init: {"theme": "base", "themeVariables": {
+  "primaryColor": "#f4f5ff", "primaryBorderColor": "#6b6fcf", "primaryTextColor": "#1d1d1f",
+  "lineColor": "#6b6fcf", "actorBkg": "#ffffff", "actorBorder": "#6b6fcf", "actorTextColor": "#1d1d1f",
+  "noteBkgColor": "#ffffff", "noteBorderColor": "#4fc98a", "noteTextColor": "#1d1d1f",
+  "signalColor": "#444444", "signalTextColor": "#1d1d1f", "labelBoxBkgColor": "#ffffff",
+  "labelBoxBorderColor": "#c8c8c8", "loopTextColor": "#444444", "sequenceNumberColor": "#ffffff"}}}%%
+sequenceDiagram
+    autonumber
+
+    participant U as User
+
+    box rgb(238,248,242) GUI thread
+        participant W as Window<br/>(wiring)
+        participant V as ImageViewerWidget
+        participant I as InteractionSet
+        participant B as Behaviors
+        participant R as Receivers<br/>(window, dialog, listener)
+    end
+
+    W->>I: addBehavior(...) for each behavior
+    Note over I: kept sorted by priority,<br/>highest first
+    W->>V: setInteraction(interactionSet)
+    Note over V,I: the viewer owns the interaction set
+
+    W->>V: setImage / displayFrame, setLayers, applyViewConfig
+    Note over V: the viewer is passive.<br/>It only draws what it receives
+
+    U->>V: mouse, wheel or drag and drop event
+    V->>I: mousePress / mouseMove / wheel / drop(view, event)
+
+    alt a behavior is capturing (mouse press, move and release only)
+        I->>B: the capturing behavior only
+        B-->>I: handled
+    else no behavior is capturing (and for wheel and drag and drop)
+        loop behaviors in priority order
+            I->>B: handler(view, event)
+            B-->>I: handled or not
+        end
+        Note over I,B: the first behavior that returns true<br/>stops the dispatch
+    end
+
+    B->>V: acts on the viewer<br/>(pan, auto-fit, pixel info, drag highlight)
+
+    opt the behavior has something to report
+        B-->>R: signal or listener call<br/>(image dropped, fullscreen requested,<br/>color picked, shape requested)
+    end
+
+    V->>I: cursorForEvent(view, ...)
+    I-->>V: the active cursor of the capturing behavior,<br/>otherwise the available cursor of the<br/>highest-priority behavior
