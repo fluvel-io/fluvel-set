@@ -23,6 +23,8 @@ ContourData::ContourData(int phiWidth, int phiHeight, Connectivity connectivity)
 
     if (phiWidth < 2 || phiHeight < 2)
     {
+        // A zero-initialized phi holds no valid PhiValue: mark everything as outside.
+        phi_.fill(PhiValue::OutsideRegion);
         outerBoundary_.clear();
         innerBoundary_.clear();
         return;
@@ -83,6 +85,8 @@ ContourData::ContourData(ContourPoints outerBoundary, ContourPoints innerBoundar
 
     if (isTrivialDomain())
     {
+        // A zero-initialized phi holds no valid PhiValue: mark everything as outside.
+        phi_.fill(PhiValue::OutsideRegion);
         outerBoundary_.clear();
         innerBoundary_.clear();
         return;
