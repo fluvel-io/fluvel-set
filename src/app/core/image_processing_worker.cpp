@@ -19,6 +19,7 @@
 #include <QDebug>
 #endif
 
+#include <algorithm>
 #include <cassert>
 #include <utility>
 
@@ -438,9 +439,11 @@ void ImageProcessingWorker::onTick()
     const auto now = Clock::now();
     const auto sinceLast = now - lastPublish_;
 
-    if (sinceLast < kFrameIntervalMs)
+    // Frames are paced from start to start: the computation time is part of
+    // the frame interval.
+    if (now < nextFrameDue_)
     {
-        scheduleTick(std::chrono::duration_cast<std::chrono::milliseconds>(kFrameIntervalMs - sinceLast) +
+        scheduleTick(std::chrono::duration_cast<std::chrono::milliseconds>(nextFrameDue_ - now) +
                      std::chrono::milliseconds{1});
         return;
     }
@@ -451,6 +454,9 @@ void ImageProcessingWorker::onTick()
         scheduleTick(kAckPollMs);
         return;
     }
+
+    // If a frame took longer than the interval, do not try to catch up.
+    nextFrameDue_ = std::max(nextFrameDue_ + kFrameIntervalMs, now);
 
     fluvel_ip::ElapsedTimer budget;
     budget.start();
