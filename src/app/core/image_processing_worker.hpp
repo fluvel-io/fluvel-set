@@ -293,7 +293,9 @@ private:
     ImageComputeConfig config_{};
 
     fluvel_ip::ContourDiagnostics diag_;
-    fluvel_ip::ElapsedTimer measurementTimer_;
+    /// Time spent computing iterations since the start of the run (waits and
+    /// pauses excluded).
+    double computeSec_{0.0};
     bool isMeasuring_{false};
 
     bool processingDirty_{true};

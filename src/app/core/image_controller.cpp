@@ -278,6 +278,32 @@ void ImageController::onDiagnosticsUpdated(const fluvel_ip::ContourDiagnostics& 
 
     s += QString(tr("Elapsed: %1 s\n")).arg(diag.elapsedSec, 0, 'f', 2);
 
+    // Computation speed (waits excluded) and rate of the frames received.
+    const double iterationsPerSec = diag.elapsedSec > 0.0 ? diag.stepCount / diag.elapsedSec : 0.0;
+
+    s += QString(tr("Speed: %1 it/s\n")).arg(iterationsPerSec, 0, 'f', 0);
+
+    if (diagnosticsTimer_.isValid())
+    {
+        const qint64 dtMs = diagnosticsTimer_.restart();
+
+        if (dtMs > 0 && dtMs < 500)
+        {
+            const double instantFps = 1000.0 / static_cast<double>(dtMs);
+            receivedFps_ = receivedFps_ > 0.0 ? 0.9 * receivedFps_ + 0.1 * instantFps : instantFps;
+        }
+        else
+        {
+            receivedFps_ = 0.0;
+        }
+    }
+    else
+    {
+        diagnosticsTimer_.start();
+    }
+
+    s += QString(tr("Frames: %1 /s\n")).arg(receivedFps_, 0, 'f', 0);
+
     s += QString(tr("Contour: %1 pts")).arg(diag.contourSize);
 
     emit textDiagnosticsUpdated(s);

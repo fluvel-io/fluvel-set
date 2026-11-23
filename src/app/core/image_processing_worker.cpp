@@ -240,10 +240,15 @@ bool ImageProcessingWorker::stepOnceAlgo()
         if (activeContour_->isFirstIteration())
         {
             isMeasuring_ = true;
-            measurementTimer_.start();
+            computeSec_ = 0.0;
         }
 
+        fluvel_ip::ElapsedTimer iterationTimer;
+        iterationTimer.start();
+
         activeContour_->step();
+
+        computeSec_ += iterationTimer.elapsedSec();
     }
 
     return !activeContour_->isStopped();
@@ -497,7 +502,7 @@ void ImageProcessingWorker::updateDiagnostics()
     fluvel_ip::ContourDiagnostics diag;
 
     if (isMeasuring_)
-        diag.elapsedSec = measurementTimer_.elapsedSec();
+        diag.elapsedSec = computeSec_;
     else
         diag.elapsedSec = 0.0;
 
@@ -534,6 +539,7 @@ void ImageProcessingWorker::setState(WorkerState state)
 void ImageProcessingWorker::resetMeasurement()
 {
     isMeasuring_ = false;
+    computeSec_ = 0.0;
 }
 
 } // namespace fluvel
