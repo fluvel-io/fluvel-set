@@ -63,11 +63,14 @@ Image session
 
 The image worker lives in its own thread. The controller only posts commands
 to it, so the interface never waits for the filters or for the contour
-iterations. In interactive mode the active contour iterates as fast as it can
-and a frame is published only once the previous one has been consumed (and at
-most every 16 ms): intermediate iterations are skipped, so the display always
-shows the most recent contour. In converge mode the worker runs at full speed
-and publishes only the final result.
+iterations. In interactive mode the worker is paced by the clock: every 16 ms
+(about 60 frames per second) it computes one iteration and publishes the
+contour, so the evolution stays visible even on small images that would
+converge in a few milliseconds. It never computes ahead of the display: the
+controller acknowledges each frame it has consumed. When one iteration takes
+longer than a frame, the worker simply runs as fast as it can. In converge mode
+the worker runs at full speed, without pacing, and publishes only the final
+result.
 
 .. raw:: html
 

@@ -33,12 +33,27 @@ ImageProcessingWorker::ImageProcessingWorker()
     qRegisterMetaType<fluvel_ip::ContourDiagnostics>("fluvel_ip::ContourDiagnostics");
     qRegisterMetaType<fluvel::WorkerState>("fluvel::WorkerState");
 
+    // Child of this: moved to the worker thread with it.
+    tickTimer_ = new QTimer(this);
+    tickTimer_->setSingleShot(true);
+    tickTimer_->setTimerType(Qt::PreciseTimer);
+    connect(tickTimer_, &QTimer::timeout, this, &ImageProcessingWorker::onTick);
+
     moveToThread(&thread_);
     thread_.start();
 }
 
 ImageProcessingWorker::~ImageProcessingWorker()
 {
+    // No new tick from now on, then stop the timer from its own thread.
+    shuttingDown_.store(true, std::memory_order_release);
+
+    if (thread_.isRunning())
+    {
+        QMetaObject::invokeMethod(
+            this, [this] { tickTimer_->stop(); }, Qt::BlockingQueuedConnection);
+    }
+
     // Pending events are discarded when the event loop exits.
     thread_.quit();
     thread_.wait();
@@ -104,7 +119,7 @@ void ImageProcessingWorker::restartImpl()
     if (state_ != WorkerState::Ready)
         return;
 
-    publish(true);
+    publish();
 
     initialShown_ = true;
 
@@ -139,7 +154,7 @@ void ImageProcessingWorker::togglePauseImpl()
     {
         if (!initialShown_)
         {
-            publish(true);
+            publish();
 
             initialShown_ = true;
         }
@@ -169,7 +184,7 @@ void ImageProcessingWorker::step()
     {
         if (!initialShown_)
         {
-            publish(true);
+            publish();
 
             initialShown_ = true;
         }
@@ -189,7 +204,7 @@ void ImageProcessingWorker::performStep()
     }
     else
     {
-        publish(true);
+        publish();
     }
 }
 
@@ -200,7 +215,7 @@ void ImageProcessingWorker::converge()
 
     if (state_ == WorkerState::Ready)
     {
-        publish(true);
+        publish();
 
         initialShown_ = true;
     }
@@ -292,7 +307,7 @@ void ImageProcessingWorker::initializeImpl()
     if (state_ != WorkerState::Ready)
         return;
 
-    publish(true);
+    publish();
 
     initialShown_ = true;
 }
@@ -355,7 +370,7 @@ void ImageProcessingWorker::finalizeAndPrepareNextRun()
 {
     finish();
 
-    publish(true);
+    publish();
 
     initializeActiveContour();
 }
@@ -366,7 +381,7 @@ void ImageProcessingWorker::suspend()
     {
         setState(WorkerState::Suspended);
 
-        publish(true);
+        publish();
     }
 }
 
@@ -376,65 +391,92 @@ void ImageProcessingWorker::resume()
         start();
 }
 
-void ImageProcessingWorker::scheduleTick()
+void ImageProcessingWorker::scheduleTick(std::chrono::milliseconds delay)
 {
-    if (tickScheduled_)
+    if (tickScheduled_ || shuttingDown_.load(std::memory_order_acquire))
         return;
 
     tickScheduled_ = true;
 
-    post([this] {
-        tickScheduled_ = false;
-        onTick();
-    });
+    if (delay.count() > 0)
+        tickTimer_->start(delay);
+    else
+        post([this] { onTick(); });
 }
 
 void ImageProcessingWorker::onTick()
 {
-    // A tick may still be queued after a pause or a new initialization.
-    if (state_ != WorkerState::Running || !activeContour_)
+    tickScheduled_ = false;
+
+    // A tick may still be pending after a pause or a new initialization.
+    if (shuttingDown_.load(std::memory_order_acquire) || state_ != WorkerState::Running ||
+        !activeContour_)
         return;
 
-    fluvel_ip::ElapsedTimer timeSliceBudget;
-    timeSliceBudget.start();
+    if (mode_ == RunMode::Converge)
+    {
+        // Full speed: no pacing, no intermediate publication.
+        fluvel_ip::ElapsedTimer budget;
+        budget.start();
 
-    while (timeSliceBudget.elapsedLessThan(timeSliceMs_))
+        while (budget.elapsedLessThan(timeSliceMs_))
+        {
+            if (!stepOnceAlgo())
+            {
+                finalizeAndPrepareNextRun();
+                return;
+            }
+        }
+
+        // Yield to the event loop so that pending commands are handled.
+        scheduleTick();
+        return;
+    }
+
+    // Interactive: one frame every kFrameIntervalMs, at most
+    // kIterationsPerFrame iterations per frame.
+    const auto now = Clock::now();
+    const auto sinceLast = now - lastPublish_;
+
+    if (sinceLast < kFrameIntervalMs)
+    {
+        scheduleTick(std::chrono::duration_cast<std::chrono::milliseconds>(kFrameIntervalMs - sinceLast) +
+                     std::chrono::milliseconds{1});
+        return;
+    }
+
+    // Never compute ahead of the consumer.
+    if (frameInFlight_.load(std::memory_order_acquire) && sinceLast < kAckTimeoutMs)
+    {
+        scheduleTick(kAckPollMs);
+        return;
+    }
+
+    fluvel_ip::ElapsedTimer budget;
+    budget.start();
+
+    for (int i = 0; i < kIterationsPerFrame; ++i)
     {
         if (!stepOnceAlgo())
         {
             finalizeAndPrepareNextRun();
             return;
         }
+
+        if (!budget.elapsedLessThan(timeSliceMs_))
+            break;
     }
 
-    if (mode_ == RunMode::Interactive)
-        publish(false);
-
-    // Yield to the event loop so that pending commands are handled.
+    publish();
     scheduleTick();
 }
 
-void ImageProcessingWorker::publish(bool force)
+void ImageProcessingWorker::publish()
 {
     if (!activeContour_)
         return;
 
-    const auto now = Clock::now();
-
-    if (!force)
-    {
-        const auto sinceLast = now - lastPublish_;
-
-        if (sinceLast < kMinPublishIntervalMs)
-            return;
-
-        // The consumer is still busy with the previous frame: keep computing
-        // and publish a more recent one later.
-        if (frameInFlight_.load(std::memory_order_acquire) && sinceLast < kAckTimeoutMs)
-            return;
-    }
-
-    lastPublish_ = now;
+    lastPublish_ = Clock::now();
     frameInFlight_.store(true, std::memory_order_release);
 
     updateDiagnostics();

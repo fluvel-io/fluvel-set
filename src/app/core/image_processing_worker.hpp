@@ -7,6 +7,7 @@
 #include <QMutex>
 #include <QObject>
 #include <QThread>
+#include <QTimer>
 
 #ifndef Q_MOC_RUN
 
@@ -62,16 +63,18 @@ enum class WorkerState
  * Execution is a chain of short ticks processed by the worker event loop, so
  * commands (pause, step, restart, ...) are handled between two ticks.
  *
- * - Interactive mode: the algorithm iterates as fast as it can. A result is
- *   published only when the previous one has been acknowledged by the consumer
- *   (see acknowledgeFrame()) and when a minimum interval has elapsed. Frames
- *   in between are skipped, so the consumer is never flooded and always
- *   receives the most recent contour ("Auto" display policy).
- * - Converge mode: the algorithm runs at full speed, without intermediate
- *   publications, and only the final result is published.
+ * - Interactive mode: the worker is paced by the clock. Every ~16 ms (60 FPS)
+ *   it runs at most kIterationsPerFrame iterations, then publishes the result,
+ *   so the evolution of the contour stays visible even on small images that
+ *   would converge in a few milliseconds. With big images, where one iteration
+ *   takes longer than a frame, it simply runs as fast as it can. It never
+ *   computes a frame ahead of the consumer: if the previous one has not been
+ *   acknowledged (see acknowledgeFrame()), it waits.
+ * - Converge mode: the algorithm runs at full speed, without pacing and
+ *   without intermediate publications. Only the final result is published.
  *
  * Events that matter to the user (initial contour, pause, single step, end of
- * run) are always published, whatever the flow control state.
+ * run) are always published immediately.
  *
  * Responsibilities:
  * - Manage image processing and segmentation lifecycle
@@ -82,9 +85,9 @@ enum class WorkerState
  * @note The preprocessing filters also run in the worker thread. Consecutive
  *       calls to initialize() are coalesced: only the latest request is run.
  *
- * @note A future "publish every iteration" policy would only need to change
- *       the condition in publish(): wait for an acknowledgement coming from
- *       the viewer instead of skipping frames.
+ * @note The display policy lives in onTick(). A future user option (for
+ *       example the number of iterations per frame) would only change
+ *       the iterations-per-frame value.
  */
 class ImageProcessingWorker : public QObject
 {
@@ -190,16 +193,13 @@ private:
     void post(F&& f);
 
     /// Schedule the next tick (at most one is pending).
-    void scheduleTick();
+    void scheduleTick(std::chrono::milliseconds delay = std::chrono::milliseconds{0});
 
     /// One tick of the execution loop.
     void onTick();
 
-    /**
-     * @brief Publish diagnostics and contour.
-     * @param force Bypass the flow control (user visible events).
-     */
-    void publish(bool force);
+    /// Publish diagnostics and contour.
+    void publish();
 
     /// Emit current contour data.
     void emitContour();
@@ -248,9 +248,11 @@ private:
 
     // Shared between threads.
     QThread thread_;
+    QTimer* tickTimer_{nullptr};
     QMutex requestMutex_;
     std::optional<InitRequest> pendingInit_;
     std::atomic<bool> frameInFlight_{false};
+    std::atomic<bool> shuttingDown_{false};
 
     // Used by the worker thread only.
     WorkerState state_{WorkerState::Uninitialized};
@@ -267,11 +269,17 @@ private:
     /// Time slice of one tick for interactive mode.
     static constexpr std::chrono::milliseconds kTimeSliceInteractiveMs{10};
 
-    /// Minimum delay between two published frames (~60 FPS). Bounds the
-    /// conversion work done by the consumer.
-    static constexpr std::chrono::milliseconds kMinPublishIntervalMs{16};
+    /// Delay between two published frames in interactive mode (~60 FPS).
+    static constexpr std::chrono::milliseconds kFrameIntervalMs{16};
 
-    /// Safety net: publish anyway if a frame has not been acknowledged.
+    /// Maximum number of iterations computed between two published frames
+    /// in interactive mode.
+    static constexpr int kIterationsPerFrame{1};
+
+    /// Delay before checking again if the consumer has acknowledged a frame.
+    static constexpr std::chrono::milliseconds kAckPollMs{2};
+
+    /// Safety net: go on if a frame has not been acknowledged after this delay.
     static constexpr std::chrono::milliseconds kAckTimeoutMs{250};
 
     std::chrono::milliseconds timeSliceMs_{kTimeSliceInteractiveMs};
