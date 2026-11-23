@@ -26,26 +26,33 @@ jobs:
 
     steps:
 
+      # The full history and the tags are needed to compare with the last
+      # published build.
       - uses: actions/checkout@v4
-
-      - uses: dorny/paths-filter@v3
-        id: filter
         with:
-          filters: |
+          fetch-depth: 0
 
-            build:
-              - 'src/**'
-              - 'resources/**'
-              - 'packaging/**'
-              - 'cmake/**'
-              - 'CMakeLists.txt'
-              - '.github/workflows/build-desktop.yml'
-              - '.github/workflows/build-linux.yml'
-              - '.github/workflows/latest.yml'
+      # build: something that goes into the applications changed since the
+      # commit of the "latest" tag (moved by the release job, so it is the last
+      # published build), or the "latest" release does not exist.
+      # web: the web pages changed in this push.
+      - name: Detect changes
+        id: filter
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BUILD=$(RELEASE=latest .github/scripts/changed-since.sh refs/tags/latest \
+            src resources packaging cmake CMakeLists.txt \
+            .github/workflows/build-desktop.yml \
+            .github/workflows/build-linux.yml \
+            .github/workflows/latest.yml)
 
-            web:
-              - 'web/**'
-              - 'assets/**'
+          WEB=$(.github/scripts/changed-since.sh "${{ github.event.before }}" \
+            web assets)
+
+          echo "build=$BUILD" >> "$GITHUB_OUTPUT"
+          echo "web=$WEB" >> "$GITHUB_OUTPUT"
+
 
   desktop:
     needs: changes
@@ -70,8 +77,16 @@ jobs:
     secrets: inherit
 
 
+  # The binding tests block the publication of the release.
+  tests:
+    needs: changes
+    if: needs.changes.outputs.build == 'true'
+
+    uses: ./.github/workflows/test-bindings.yml
+
+
   release:
-    needs: [prepare]
+    needs: [prepare, tests]
 
     runs-on: ubuntu-latest
 

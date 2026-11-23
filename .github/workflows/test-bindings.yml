@@ -5,21 +5,16 @@ name: Test bindings
 
 # Fast check of the image processing library through its Python bindings.
 # Built in Debug so that the asserts of the library are enabled.
-# (The wheels workflow runs the same tests on the release branch.)
+#
+# Not run on main (which is only a backup of the work: run
+# scripts/test_bindings.sh locally when needed). It runs before the publication
+# of a release: it is called by the latest and stable workflows, and a failing
+# test blocks the release. It can also be started by hand.
+# (The wheels workflow runs the same tests when it builds the wheels.)
 
 on:
+  workflow_call:
   workflow_dispatch:
-  pull_request:
-    paths: &paths
-      - 'src/image_processing/**'
-      - 'src/bindings/**'
-      - 'cmake/**'
-      - 'CMakeLists.txt'
-      - 'tests/python/**'
-      - '.github/workflows/test-bindings.yml'
-  push:
-    branches: [main]
-    paths: *paths
 
 permissions:
   contents: read

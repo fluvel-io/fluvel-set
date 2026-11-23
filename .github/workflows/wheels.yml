@@ -14,18 +14,38 @@ on:
   workflow_dispatch:
   push:
     branches: [release]
-    paths:
-      - 'src/image_processing/**'
-      - 'src/bindings/**'
-      - 'cmake/**'
-      - 'CMakeLists.txt'
-      - 'pyproject.toml'
-      - 'tests/python/**'
-      - '.github/workflows/wheels.yml'
 
 jobs:
 
+  # Wheels are built only if something that goes into them changed since the
+  # commit of the "latest-python" tag (moved when the wheels are published), or
+  # if the "latest-python" release does not exist.
+  changes:
+    runs-on: ubuntu-latest
+
+    outputs:
+      build: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.build }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changes
+        id: filter
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BUILD=$(RELEASE=latest-python .github/scripts/changed-since.sh refs/tags/latest-python \
+            src/image_processing src/bindings cmake CMakeLists.txt \
+            pyproject.toml tests/python .github/workflows/wheels.yml)
+
+          echo "build=$BUILD" >> "$GITHUB_OUTPUT"
+
   build:
+    needs: changes
+    if: needs.changes.outputs.build == 'true'
+
     name: Wheels (${{ matrix.platform }})
 
     runs-on: ${{ matrix.os }}

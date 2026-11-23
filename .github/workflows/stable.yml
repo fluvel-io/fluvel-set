@@ -96,8 +96,13 @@ jobs:
     uses: ./.github/workflows/prepare-release.yml
     secrets: inherit
 
+  # The binding tests block the publication of the release.
+  tests:
+    needs: validate-release
+    uses: ./.github/workflows/test-bindings.yml
+
   publish:
-    needs: prepare
+    needs: [prepare, tests]
     runs-on: ubuntu-latest
 
     permissions:
