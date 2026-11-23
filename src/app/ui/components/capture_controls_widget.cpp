@@ -4,14 +4,18 @@
 #include "capture_controls_widget.hpp"
 #include "animated_push_button.hpp"
 #include "capture_controller.hpp"
-#include "ffmpeg_codec_utils.hpp"
 #include "icon_loader.hpp"
+
+#include <QHBoxLayout>
+
+#ifdef FLUVEL_USE_FFMPEG
+#include "ffmpeg_codec_utils.hpp"
 #include "morph_button.hpp"
 
 #include <QCheckBox>
-#include <QHBoxLayout>
 #include <QSettings>
 #include <QSignalBlocker>
+#endif
 
 namespace
 {
