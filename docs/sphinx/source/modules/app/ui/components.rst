@@ -33,6 +33,8 @@ Image Viewer
 
 .. doxygenfile:: image_viewer_widget.hpp
 
+.. doxygenfile:: frame_throttle.hpp
+
 .. doxygenfile:: image_viewer_listener.hpp
 
 .. doxygenfile:: image_viewer_interaction.hpp

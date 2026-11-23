@@ -13,7 +13,6 @@
 #include "image_viewer_listener.hpp"
 #include "overlay_text_item.hpp"
 
-#include <QElapsedTimer>
 #include <QGraphicsBlurEffect>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsView>
@@ -39,6 +38,7 @@ constexpr int kUserIdleTimeoutMs = 2000;
 class ImageViewerInteraction;
 class HudOverlayController;
 class MiniMapWidget;
+class FrameThrottle;
 
 /**
  * @brief Image viewer widget with interaction and overlay support.
@@ -391,12 +391,6 @@ private:
     void setupTimers();
 
     // internal image display
-    void submitFrame(const DisplayFrame& frame);
-    bool shouldDisplayImmediately() const;
-    void schedulePendingFrame();
-    void displayPendingFrame();
-
-    void flushPendingFrame();
     void displayFrameNow(const DisplayFrame& f);
     void updatePixmap(const QImage& img);
     void updatePixmapItem(const QImage& img);
@@ -492,13 +486,7 @@ private:
     ImageViewerListener* listener_{nullptr};
 
     // --- Throttling ---
-    DisplayFrame pendingFrame_;
-    bool hasPendingFrame_{false};
-
-    QElapsedTimer displayTimer_;
-    int minDisplayIntervalMs_{0};
-
-    QTimer* throttleTimer_{nullptr};
+    FrameThrottle* throttle_{nullptr};
 
     bool autoFitEnabled_{true};
 

@@ -4,6 +4,7 @@
 #include "image_viewer_widget.hpp"
 #include "drag_drop_behavior.hpp"
 #include "frame_clock.hpp"
+#include "frame_throttle.hpp"
 #include "hud_overlay_controller.hpp"
 #include "image_viewer_interaction.hpp"
 #include "interaction_set.hpp"
@@ -201,12 +202,9 @@ void ImageViewerWidget::applyLayerColors()
 
 void ImageViewerWidget::setupTimers()
 {
-    displayTimer_.start();
+    throttle_ = new FrameThrottle(this);
 
-    throttleTimer_ = new QTimer(this);
-    throttleTimer_->setSingleShot(true);
-
-    connect(throttleTimer_, &QTimer::timeout, this, &ImageViewerWidget::flushPendingFrame);
+    connect(throttle_, &FrameThrottle::frameReady, this, &ImageViewerWidget::displayFrameNow);
 
     inactivityTimer_.setSingleShot(true);
 
@@ -224,13 +222,7 @@ void ImageViewerWidget::setupTimers()
 // ------------------------------------------------------------
 void ImageViewerWidget::setMaxDisplayFps(double fps)
 {
-    if (fps <= 0.0)
-    {
-        minDisplayIntervalMs_ = 0;
-        return;
-    }
-
-    minDisplayIntervalMs_ = static_cast<int>(1000.0 / fps);
+    throttle_->setMaxFps(fps);
 }
 
 void ImageViewerWidget::displayFrameNow(const DisplayFrame& f)
@@ -240,8 +232,6 @@ void ImageViewerWidget::displayFrameNow(const DisplayFrame& f)
     if (!f.keepLayers)
         setLayers(f.layers);
 
-    displayTimer_.restart();
-
     QTimer::singleShot(0, this,
                        [this, f]()
                        {
@@ -250,49 +240,6 @@ void ImageViewerWidget::displayFrameNow(const DisplayFrame& f)
                            emit frameDisplayed(FrameTimestamps{f.receiveTimestampNs,
                                                                f.processTimestampNs, displayTs});
                        });
-}
-
-void ImageViewerWidget::submitFrame(const DisplayFrame& frame)
-{
-    pendingFrame_ = frame;
-    hasPendingFrame_ = true;
-
-    if (shouldDisplayImmediately())
-    {
-        displayPendingFrame();
-        return;
-    }
-
-    schedulePendingFrame();
-}
-
-bool ImageViewerWidget::shouldDisplayImmediately() const
-{
-    if (minDisplayIntervalMs_ == 0)
-        return true;
-
-    return displayTimer_.elapsed() >= minDisplayIntervalMs_;
-}
-
-void ImageViewerWidget::schedulePendingFrame()
-{
-    if (throttleTimer_->isActive())
-        return;
-
-    const qint64 elapsed = displayTimer_.elapsed();
-    const qint64 remaining = minDisplayIntervalMs_ - elapsed;
-
-    if (remaining > 0)
-    {
-        throttleTimer_->start(
-            static_cast<int>(std::min<qint64>(remaining, std::numeric_limits<int>::max())));
-    }
-}
-
-void ImageViewerWidget::displayPendingFrame()
-{
-    displayFrameNow(pendingFrame_);
-    hasPendingFrame_ = false;
 }
 
 void ImageViewerWidget::setImage(const QImage& img)
@@ -305,7 +252,7 @@ void ImageViewerWidget::setImage(const QImage& img)
     f.receiveTimestampNs = now;
     f.processTimestampNs = now;
 
-    submitFrame(f);
+    throttle_->submit(f);
 }
 
 void ImageViewerWidget::setLayers(const QVector<PointLayer>& layers)
@@ -328,7 +275,7 @@ void ImageViewerWidget::setLayers(const QVector<PointLayer>& layers)
 
 void ImageViewerWidget::setDisplayFrame(const DisplayFrame& frame)
 {
-    submitFrame(frame);
+    throttle_->submit(frame);
 }
 
 DisplayFrame ImageViewerWidget::displayFrame() const
@@ -348,15 +295,6 @@ DisplayFrame ImageViewerWidget::displayFrame() const
 // ------------------------------------------------------------
 // Internal rendering
 // ------------------------------------------------------------
-void ImageViewerWidget::flushPendingFrame()
-{
-    if (!hasPendingFrame_)
-        return;
-
-    displayFrameNow(pendingFrame_);
-    hasPendingFrame_ = false;
-}
-
 void ImageViewerWidget::updatePixmap(const QImage& img)
 {
     assert(pixmapItem_);
