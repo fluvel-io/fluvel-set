@@ -87,9 +87,9 @@ void RegionColorSpeedModel::onStepCycle1()
         {
             if (meanRgbOutside_ == meanRgbInside_)
                 status_ = SpeedModelStatus::InitFailed;
-        }
 
-        initialMeansChecked_ = true;
+            initialMeansChecked_ = true;
+        }
     }
 }
 
