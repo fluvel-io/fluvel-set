@@ -184,6 +184,9 @@ set(app_src
     ${CORE_DIR}/image_controller.cpp
     ${CORE_DIR}/image_controller.hpp
 
+    ${CORE_DIR}/image_preview_worker.cpp
+    ${CORE_DIR}/image_preview_worker.hpp
+
     ${CORE_DIR}/image_settings_controller.cpp
     ${CORE_DIR}/image_settings_controller.hpp
 

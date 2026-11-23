@@ -2,10 +2,6 @@
 // Copyright (C) 2010-2026 Fabien Bessy
 
 #include "image_settings_controller.hpp"
-#include "elapsed_timer.hpp"
-#include "image_adapters.hpp"
-#include "image_pipeline.hpp"
-
 #include <QCoreApplication>
 
 #ifdef FLUVEL_DEBUG
@@ -28,6 +24,9 @@ ImageSettingsController::ImageSettingsController(const ImageComputeConfig& confi
 
     connect(phiViewModel_.get(), &PhiViewModel::viewChanged, this,
             &ImageSettingsController::onViewChanged);
+
+    connect(&previewWorker_, &ImagePreviewWorker::previewReady, this,
+            &ImageSettingsController::onPreviewReady);
 }
 
 void ImageSettingsController::updateEditedConfig(
@@ -163,61 +162,6 @@ void ImageSettingsController::revert()
         phiEditor_->revert();
 }
 
-void ImageSettingsController::applyDownscale()
-{
-    downscaled_ = input_;
-
-    if (input_.isNull())
-        return;
-
-    if (input_.format() != QImage::Format_Grayscale8 && input_.format() != QImage::Format_RGB32)
-        return;
-
-    if (editedDownscaleParams_.downscaleEnabled)
-    {
-        const int df = editedDownscaleParams_.downscaleFactor;
-
-        assert(df == 2 || df == 4 || df == 8 || df == 16);
-
-        downscaled_ = input_.scaled(input_.width() / df, input_.height() / df,
-                                    Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-    }
-}
-
-void ImageSettingsController::applyProcessing()
-{
-    processed_ = downscaled_;
-
-    if (downscaled_.isNull())
-        return;
-
-#ifdef FLUVEL_DEBUG
-    qDebug() << __FILE__ << " applyProcessing() " << __LINE__ << __func__;
-#endif
-
-    emit processingStarted();
-
-    // ✅ SAFE : copie indépendante
-    auto input = imageOwnerFromQImage(downscaled_);
-
-    fluvel_ip::ImagePipeline filter;
-    filter.reset(input.view());
-
-    fluvel_ip::ElapsedTimer measurementTimer;
-    measurementTimer.start();
-
-    filter.apply(input.view(), editedProcessingParams_);
-
-    double elapsedSec = measurementTimer.elapsedSec();
-
-    emit filterPipelineProcessed(elapsedSec);
-
-    processed_ = toQImageCopy(filter.outputView());
-
-    if (processed_.isNull())
-        processed_ = downscaled_;
-}
-
 void ImageSettingsController::setInteractiveMode(bool enabled)
 {
     if (!phiViewModel_)
@@ -235,8 +179,32 @@ void ImageSettingsController::setInteractiveMode(bool enabled)
 
 void ImageSettingsController::refreshPreview()
 {
-    applyDownscale();
-    applyProcessing();
+    // Any result of an older request becomes outdated.
+    ++lastRequestId_;
+
+    if (input_.isNull())
+    {
+        downscaled_ = input_;
+        processed_ = input_;
+        return;
+    }
+
+    emit processingStarted();
+
+    previewWorker_.submit(lastRequestId_, input_, editedDownscaleParams_, editedProcessingParams_);
+}
+
+void ImageSettingsController::onPreviewReady(quint64 id, const QImage& downscaled,
+                                             const QImage& processed, double elapsedSec)
+{
+    // A newer request has been made since: its own result will follow.
+    if (id != lastRequestId_)
+        return;
+
+    downscaled_ = downscaled;
+    processed_ = processed;
+
+    emit filterPipelineProcessed(elapsedSec);
 
     if (!processed_.isNull())
         phiViewModel_->setBackground(processed_);

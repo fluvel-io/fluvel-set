@@ -7,6 +7,7 @@
 #include "application_settings_types.hpp"
 #endif
 
+#include "image_preview_worker.hpp"
 #include "phi_editor.hpp"
 #include "phi_view_model.hpp"
 
@@ -47,7 +48,11 @@ struct UiShapeInfo
  * - generating preview images for the user interface
  * - committing or reverting configuration changes
  *
- * @note Intended to run in the Qt main thread.
+ * The preview (downscale and filters) is computed in a separate thread, so the
+ * interface stays responsive while the filters run. Only the latest request is
+ * computed and an outdated result is ignored.
+ *
+ * @note Intended to be used from the Qt main thread.
  */
 class ImageSettingsController : public QObject
 {
@@ -139,14 +144,12 @@ private:
      */
     ShapeInfo computeShapeInfo(const UiShapeInfo& uiShape, const QSize& targetSize);
 
-    /// Apply downscaling to input image.
-    void applyDownscale();
-
-    /// Apply processing pipeline to image.
-    void applyProcessing();
-
-    /// Refresh preview image.
+    /// Ask the preview worker for a new preview.
     void refreshPreview();
+
+    /// Receive a preview computed by the worker.
+    void onPreviewReady(quint64 id, const QImage& downscaled, const QImage& processed,
+                        double elapsedSec);
 
     /// Editor for phi (level-set representation).
     std::unique_ptr<PhiEditor> phiEditor_;
@@ -168,6 +171,12 @@ private:
 
     /// Processed preview image.
     QImage processed_;
+
+    /// Computes the preview in its own thread.
+    ImagePreviewWorker previewWorker_;
+
+    /// Identifier of the latest preview request.
+    quint64 lastRequestId_{0};
 
     /// Whether initialization phase is active.
     bool initializationEnabled_{false};
