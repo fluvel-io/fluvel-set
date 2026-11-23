@@ -968,35 +968,14 @@ Cliquez à nouveau sur Calculer pour appliquer le changement.</translation>
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="299"/>
-        <source>Speed (avg): %1 it/s
+        <location filename="../src/app/core/image_controller.cpp" line="301"/>
+        <source>Speed: %1 it/s
 </source>
-        <translation>Vitesse (moy.) : %1 it/s
+        <translation>Vitesse : %1 it/s
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="300"/>
-        <source>Speed (now): %1 it/s
-</source>
-        <translation>Vitesse (act.) : %1 it/s
-</translation>
-    </message>
-    <message>
-        <location filename="../src/app/core/image_controller.cpp" line="321"/>
-        <source>Frames: %1 /s
-</source>
-        <translation>Images : %1 /s
-</translation>
-    </message>
-    <message>
-        <location filename="../src/app/core/image_controller.cpp" line="322"/>
-        <source>Steps/frame: %1
-</source>
-        <translation>Pas/image : %1
-</translation>
-    </message>
-    <message>
-        <location filename="../src/app/core/image_controller.cpp" line="324"/>
+        <location filename="../src/app/core/image_controller.cpp" line="303"/>
         <source>Contour: %1 pts</source>
         <translation>Contour : %1 pts</translation>
     </message>

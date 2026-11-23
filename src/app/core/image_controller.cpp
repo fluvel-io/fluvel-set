@@ -279,47 +279,26 @@ void ImageController::onDiagnosticsUpdated(const fluvel_ip::ContourDiagnostics& 
     // Time spent computing iterations (waits and pauses excluded).
     s += QString(tr("Compute time: %1 s\n")).arg(diag.elapsedSec, 0, 'f', 2);
 
-    // Speed since the start of the run, and speed since the previous update.
-    const double averageSpeed = diag.elapsedSec > 0.0 ? diag.stepCount / diag.elapsedSec : 0.0;
-
-    // A new run restarts the counters from zero.
+    // Computation speed between this update and the previous one. It is kept
+    // as is when no iteration was done (pause, end of run).
     if (diag.stepCount < lastStepCount_ || diag.elapsedSec < lastComputeSec_)
     {
+        // A new run restarts the counters from zero.
         lastStepCount_ = 0;
         lastComputeSec_ = 0.0;
+        currentSpeed_ = 0.0;
     }
 
-    const int stepsSincePrevious = diag.stepCount - lastStepCount_;
-    const double secSincePrevious = diag.elapsedSec - lastComputeSec_;
-    const double currentSpeed = secSincePrevious > 0.0 ? stepsSincePrevious / secSincePrevious : 0.0;
+    const int newSteps = diag.stepCount - lastStepCount_;
+    const double newSec = diag.elapsedSec - lastComputeSec_;
+
+    if (newSteps > 0 && newSec > 0.0)
+        currentSpeed_ = newSteps / newSec;
 
     lastStepCount_ = diag.stepCount;
     lastComputeSec_ = diag.elapsedSec;
 
-    s += QString(tr("Speed (avg): %1 it/s\n")).arg(averageSpeed, 0, 'f', 0);
-    s += QString(tr("Speed (now): %1 it/s\n")).arg(currentSpeed, 0, 'f', 0);
-
-    if (diagnosticsTimer_.isValid())
-    {
-        const qint64 dtMs = diagnosticsTimer_.restart();
-
-        if (dtMs > 0 && dtMs < 500)
-        {
-            const double instantFps = 1000.0 / static_cast<double>(dtMs);
-            receivedFps_ = receivedFps_ > 0.0 ? 0.9 * receivedFps_ + 0.1 * instantFps : instantFps;
-        }
-        else
-        {
-            receivedFps_ = 0.0;
-        }
-    }
-    else
-    {
-        diagnosticsTimer_.start();
-    }
-
-    s += QString(tr("Frames: %1 /s\n")).arg(receivedFps_, 0, 'f', 0);
-    s += QString(tr("Steps/frame: %1\n")).arg(stepsSincePrevious);
+    s += QString(tr("Speed: %1 it/s\n")).arg(currentSpeed_, 0, 'f', 0);
 
     s += QString(tr("Contour: %1 pts")).arg(diag.contourSize);
 

@@ -10,7 +10,6 @@
 #include "point_layer.hpp"
 #endif
 
-#include <QElapsedTimer>
 #include <QImage>
 #include <QObject>
 #include <QString>
@@ -148,15 +147,12 @@ private:
     DisplayConfig displayConfig_{};
 
     /// Last contours, kept to restyle them when the display configuration changes.
-    /// Time since the previous diagnostics update (display rate measurement).
-    QElapsedTimer diagnosticsTimer_;
-
-    /// Smoothed rate of the updates received from the worker, in frames/s.
-    double receivedFps_{0.0};
-
     /// Step count and compute time of the previous diagnostics update.
     int lastStepCount_{0};
     double lastComputeSec_{0.0};
+
+    /// Last computation speed measured, in iterations per second.
+    double currentSpeed_{0.0};
 
     QVector<QPointF> lastOuterContour_;
     QVector<QPointF> lastInnerContour_;
