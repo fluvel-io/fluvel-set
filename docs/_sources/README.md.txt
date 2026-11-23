@@ -162,6 +162,9 @@ fluvel-set/
 │   ├── resources/                 # Shared datasets and images used by examples
 │   └── utils.py                   # Shared utilities used across examples
 │
+├── tests/                         # Automated tests
+│   └── python/                    # pytest suite of the image processing library (via the bindings)
+│
 ├── resources/                     # Icons and application assets
 ├── translations/                  # Application translations (.ts, .qm)
 │
