@@ -55,7 +55,7 @@ std::vector<float> HausdorffStatistics::sortedMinima(const Shape& fromShape,
 
             minDist = std::min(minDist, math::euclideanDistance(from, to));
 
-            if (minDist == 0.f)
+            if (minDist <= 0.f)
                 break;
         }
 
