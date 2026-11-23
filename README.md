@@ -296,7 +296,7 @@ Image conventions of the Python functions:
 Run the tests (requires `pytest`):
 
 ```bash
-PYTHONPATH=build/python python -m pytest tests/python
+scripts/test_bindings.sh   # build in Debug, then run the tests
 ```
 
 ---
