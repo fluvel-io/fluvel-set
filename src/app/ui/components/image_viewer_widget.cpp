@@ -10,7 +10,6 @@
 #include "mini_map_widget.hpp"
 #include "overlay_text_item.hpp"
 #include "qcolor_utils.hpp"
-#include "qimage_utils.hpp"
 
 #include <QMouseEvent>
 #include <QPainter>
@@ -193,7 +192,7 @@ void ImageViewerWidget::applyLayerColors()
     {
         QColor color = layerVisible_[i] ? layerColors_[i] : QColor(Qt::transparent);
 
-        if (placeholderVisible_)
+        if (layersDimmed_)
             color = qcolor_utils::desaturateAndDarken(color, 0.4, 0.6);
 
         layerItems_[i]->setColor(color);
@@ -1137,28 +1136,20 @@ void ImageViewerWidget::setOverlayMinWidth(qreal minW)
         infoOverlay_->setMinWidth(minW);
 }
 
-void ImageViewerWidget::showPlaceholder(bool showEffect)
+void ImageViewerWidget::setBlurRadius(int radius)
 {
     assert(blur_);
 
-    if (placeholderVisible_ == showEffect)
+    blur_->setBlurRadius(radius);
+}
+
+void ImageViewerWidget::setLayersDimmed(bool dimmed)
+{
+    if (layersDimmed_ == dimmed)
         return;
 
-    if (showEffect)
-    {
-        if (!lastDisplayedImage_.isNull())
-            setImage(qimage_utils::darkenImage(lastDisplayedImage_));
+    layersDimmed_ = dimmed;
 
-        blur_->setBlurRadius(6);
-    }
-    else
-    {
-        blur_->setBlurRadius(0);
-    }
-
-    placeholderVisible_ = showEffect;
-
-    // Layers are drawn desaturated while the placeholder is shown.
     applyLayerColors();
 }
 

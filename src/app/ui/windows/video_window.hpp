@@ -44,6 +44,7 @@ namespace fluvel
 {
 
 struct StreamingInfo;
+struct DisplayFrame;
 class VideoController;
 class VideoSettingsDialog;
 class ConfigurationActionsWidget;
@@ -242,7 +243,11 @@ private:
     bool hasPendingConfiguration() const;
     QCameraFormat getSelectedFormat() const;
 
-    void connectFrameToView();
+    // Shows the source as stopped: darkened and blurred image, dimmed contours.
+    void showPlaceholder(bool show);
+
+    // Forwards the frames of the controller to the viewer while the source is streaming.
+    void onDisplayFrameReady(const DisplayFrame& frame);
 
     void startSource();
     void stopSource();
@@ -417,7 +422,6 @@ private:
 
     ImageViewerWidget* imageViewer_{nullptr};
     VideoController* videoController_{nullptr};
-    QMetaObject::Connection frameToViewConnection_;
     QMetaObject::Connection frameToCaptureConnection_;
 
     QHash<QByteArray, DeviceStreamingStatus> deviceStreamingStatus_;
@@ -430,6 +434,12 @@ private:
     QIcon formatAvailableIcon_;
 
     bool restartPending_{false};
+
+    // True between the start and the stop of the source: the viewer shows the frames.
+    bool framesToView_{false};
+
+    // True while the placeholder is shown (see showPlaceholder()).
+    bool placeholderVisible_{false};
 
     QHash<QByteArray, QCameraFormat> preferredFormats_;
 

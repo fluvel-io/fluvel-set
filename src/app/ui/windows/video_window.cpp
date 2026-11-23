@@ -21,6 +21,7 @@
 #include "pixel_info_behavior.hpp"
 #include "preferences_dialog.hpp"
 #include "qcolor_utils.hpp"
+#include "qimage_utils.hpp"
 #include "qt_utils.hpp"
 #include "time_utils.hpp"
 #include "timeline_slider.hpp"
@@ -692,6 +693,9 @@ void VideoWindow::setupConnections()
     connect(videoController_, &VideoController::textStatsUpdated, imageViewer_,
             &ImageViewerWidget::setText);
 
+    connect(videoController_, &VideoController::displayFrameReady, this,
+            &VideoWindow::onDisplayFrameReady);
+
     // ---  View → Controller for display stats ---
 
     connect(imageViewer_, &ImageViewerWidget::frameDisplayed, videoController_,
@@ -1312,11 +1316,36 @@ void VideoWindow::ensureCameraPermission()
 }
 #endif
 
-void VideoWindow::connectFrameToView()
+void VideoWindow::showPlaceholder(bool show)
 {
-    disconnect(frameToViewConnection_);
-    frameToViewConnection_ = connect(videoController_, &VideoController::displayFrameReady,
-                                     imageViewer_, &ImageViewerWidget::setDisplayFrame);
+    assert(imageViewer_);
+
+    constexpr int kPlaceholderBlurRadius = 6;
+
+    // Idempotent: the image must be darkened only once.
+    if (placeholderVisible_ == show)
+        return;
+
+    placeholderVisible_ = show;
+
+    if (show)
+    {
+        const QImage& image = imageViewer_->image();
+
+        if (!image.isNull())
+            imageViewer_->setImage(qimage_utils::darkenImage(image));
+    }
+
+    imageViewer_->setBlurRadius(show ? kPlaceholderBlurRadius : 0);
+    imageViewer_->setLayersDimmed(show);
+}
+
+void VideoWindow::onDisplayFrameReady(const DisplayFrame& frame)
+{
+    // The viewer shows a placeholder when the source is stopped, lost or in error:
+    // the frames that could still arrive must not replace it.
+    if (framesToView_)
+        imageViewer_->setDisplayFrame(frame);
 }
 
 QCameraFormat VideoWindow::getSelectedFormat() const
@@ -1377,8 +1406,8 @@ void VideoWindow::onStreamingStarted(const StreamingInfo& info)
 
     if (!restartPending_)
     {
-        imageViewer_->showPlaceholder(false);
-        connectFrameToView();
+        showPlaceholder(false);
+        framesToView_ = true;
     }
 
     refreshUi();
@@ -1501,8 +1530,8 @@ void VideoWindow::onStreamingStopped()
     }
     else
     {
-        disconnect(frameToViewConnection_);
-        imageViewer_->showPlaceholder(true);
+        framesToView_ = false;
+        showPlaceholder(true);
 
         refreshUi();
         updateWindowTitle();
@@ -1517,8 +1546,8 @@ void VideoWindow::onCameraError(const CameraErrorInfo& errorInfo)
 
     restartPending_ = false;
 
-    disconnect(frameToViewConnection_);
-    imageViewer_->showPlaceholder(true);
+    framesToView_ = false;
+    showPlaceholder(true);
 
     QString message =
         tr("Source: %1\n\n%2").arg(errorInfo.sourceInfo.camera.description, errorInfo.errorString);
@@ -1539,8 +1568,8 @@ void VideoWindow::onMediaPlayerError(const MediaPlayerErrorInfo& errorInfo)
 
     restartPending_ = false;
 
-    disconnect(frameToViewConnection_);
-    imageViewer_->showPlaceholder(true);
+    framesToView_ = false;
+    showPlaceholder(true);
 
     QString message =
         tr("Source: %1\n\n%2").arg(errorInfo.sourceInfo.media.description, errorInfo.errorString);
@@ -1594,8 +1623,8 @@ void VideoWindow::onStreamingLost(const StreamingInfo& streamingInfo, double fra
 {
     assert(imageViewer_);
 
-    disconnect(frameToViewConnection_);
-    imageViewer_->showPlaceholder(true);
+    framesToView_ = false;
+    showPlaceholder(true);
 
     QMessageBox::warning(this, tr("Source stream lost"),
                          tr("No valid frame was received for %1 seconds.\n"

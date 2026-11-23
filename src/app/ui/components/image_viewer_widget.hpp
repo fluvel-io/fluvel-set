@@ -181,9 +181,18 @@ public:
     void setOverlayMinWidth(qreal minW);
 
     /**
-     * @brief Shows or hides a placeholder effect.
+     * @brief Blurs the displayed image.
+     *
+     * @param radius Blur radius in pixels (0 disables the blur).
      */
-    void showPlaceholder(bool showEffect);
+    void setBlurRadius(int radius);
+
+    /**
+     * @brief Draws the layers desaturated and darkened.
+     *
+     * @param dimmed True to dim the layers, false to draw them with their own colors.
+     */
+    void setLayersDimmed(bool dimmed);
 
     /**
      * @brief Returns the current image.
@@ -498,7 +507,7 @@ private:
     const double maxZoom_{100.0};
 
     QGraphicsBlurEffect* blur_{nullptr};
-    bool placeholderVisible_{false};
+    bool layersDimmed_{false};
 
     bool dragHighlight_{false};
 
