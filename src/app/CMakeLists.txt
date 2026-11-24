@@ -181,6 +181,9 @@ set(app_src
     ${UI_COMP_DIR}/morph_button.cpp
     ${UI_COMP_DIR}/morph_button.hpp
 
+    ${CORE_DIR}/analysis_worker.cpp
+    ${CORE_DIR}/analysis_worker.hpp
+
     ${CORE_DIR}/image_controller.cpp
     ${CORE_DIR}/image_controller.hpp
 

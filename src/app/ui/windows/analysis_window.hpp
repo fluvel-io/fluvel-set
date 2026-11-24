@@ -4,9 +4,7 @@
 #pragma once
 
 #include "analysis_widget.hpp"
-#include "hausdorff_distance.hpp"
-#include "hausdorff_statistics.hpp"
-#include "point_containers.hpp"
+#include "analysis_worker.hpp"
 
 #include <QMainWindow>
 
@@ -34,6 +32,10 @@ class AnimatedPushButton;
  * - shape intersection
  *
  * Results are displayed in a dedicated popup.
+ *
+ * The measures are computed in a separate thread (see AnalysisWorker), so the
+ * window stays responsive with large shapes. While a computation is running,
+ * the button is disabled and shows that the result is awaited.
  */
 class AnalysisWindow : public QMainWindow
 {
@@ -52,17 +54,18 @@ protected:
     void closeEvent(QCloseEvent* event) override;
 
 private:
+    /// Ask the worker for the measures of the two selected shapes.
     void computeHd();
-    void refreshQuantile(int hundredth);
 
-    void calculateShapesIntersection();
+    /// Display the measures computed by the worker.
+    void onAnalysisReady(const AnalysisResult& result);
+
+    void refreshQuantile(int hundredth);
 
     AnalysisWidget* widget1_{nullptr};
     AnalysisWidget* widget2_{nullptr};
     AnimatedPushButton* computeButton_{nullptr};
     QCheckBox* alignCentroidsCheck_{nullptr};
-
-    fluvel_ip::PointSet intersection_;
 
     QDialog* resultsPopup_{nullptr};
     QLabel* hausdorffLabel_{nullptr};
@@ -74,8 +77,17 @@ private:
     QLabel* normalizedCentroidsDistLabel_{nullptr};
     QLabel* timeLabel_{nullptr};
 
-    std::unique_ptr<fluvel_ip::HausdorffDistance> hd_;
-    std::unique_ptr<fluvel_ip::HausdorffStatistics> stats_;
+    /// Computes the measures in its own thread.
+    AnalysisWorker worker_;
+
+    /// Identifier of the latest request, to ignore an outdated result.
+    quint64 lastRequestId_{0};
+
+    /// Whether a computation is running.
+    bool computing_{false};
+
+    /// Statistics of the last result, to compute other quantiles.
+    std::shared_ptr<const AnalysisResult::Data> data_;
     float factor_{0.f};
 };
 

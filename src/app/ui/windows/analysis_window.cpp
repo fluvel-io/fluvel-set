@@ -5,10 +5,6 @@
 
 #include "analysis_widget.hpp"
 #include "animated_push_button.hpp"
-#include "color_adapters.hpp"
-#include "elapsed_timer.hpp"
-#include "hausdorff_distance.hpp"
-#include "hausdorff_statistics.hpp"
 #include "icon_loader.hpp"
 
 #include <QCheckBox>
@@ -20,6 +16,8 @@
 #include <QSettings>
 #include <QSpinBox>
 
+#include <utility>
+
 namespace fluvel
 {
 
@@ -27,8 +25,6 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
     : QMainWindow(parent)
 
 {
-    intersection_.reserve(10000);
-
     QSettings settings;
 
     setWindowTitle(tr("Analysis: Input"));
@@ -75,6 +71,8 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
     inputLayout->addWidget(computeButton_);
 
     connect(computeButton_, &QPushButton::clicked, this, &AnalysisWindow::computeHd);
+
+    connect(&worker_, &AnalysisWorker::analysisReady, this, &AnalysisWindow::onAnalysisReady);
 
     ///////////////////////////////////////
     ///////////////////////////////////////
@@ -187,27 +185,48 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
 
 void AnalysisWindow::computeHd()
 {
-    fluvel_ip::ElapsedTimer timer;
-    timer.start();
+    if (!widget1_->shape().isValid() || !widget2_->shape().isValid())
+        return;
 
-    const fluvel_ip::HausdorffOptions options{.alignCentroids = alignCentroidsCheck_->isChecked()};
+    AnalysisRequest request;
+    request.id = ++lastRequestId_;
+    request.shape1 = widget1_->shape();
+    request.shape2 = widget2_->shape();
+    request.image1 = widget1_->image();
+    request.image2 = widget2_->image();
+    request.rgb1 = widget1_->rgb();
+    request.rgb2 = widget2_->rgb();
+    request.size1 = QSize(widget1_->imageWidth(), widget1_->imageHeight());
+    request.size2 = QSize(widget2_->imageWidth(), widget2_->imageHeight());
+    request.options = {.alignCentroids = alignCentroidsCheck_->isChecked()};
 
-    hd_ = std::make_unique<fluvel_ip::HausdorffDistance>(widget1_->shape(), widget2_->shape(),
-                                                         &intersection_, options);
+    computing_ = true;
+    computeButton_->setEnabled(false);
+    computeButton_->setText(tr("Computing..."));
 
-    stats_ = std::make_unique<fluvel_ip::HausdorffStatistics>(widget1_->shape(),
-                                                              widget2_->shape(), &intersection_,
-                                                              options);
+    worker_.submit(std::move(request));
+}
 
-    const double elapsed = timer.elapsedSec();
+void AnalysisWindow::onAnalysisReady(const AnalysisResult& result)
+{
+    computing_ = false;
+    computeButton_->setText(tr("Compute Hausdorff Distance"));
 
-    const float hausdorffDist = hd_->distance();
-    const float hausdorffQuantile = stats_->quantileDistance(percentileSp_->value());
-    const float centroidsGap = hd_->centroidsDistance();
+    // The selection changed while the computation was running.
+    if (result.id != lastRequestId_)
+    {
+        checkLists();
+        return;
+    }
 
-    factor_ = 100.f / fluvel_ip::Shape::gridDiagonal(
-                          std::max(widget1_->imageWidth(), widget2_->imageWidth()),
-                          std::max(widget1_->imageHeight(), widget2_->imageHeight()));
+    checkLists();
+
+    data_ = result.data;
+    factor_ = result.normalizationFactor;
+
+    const float hausdorffDist = result.hausdorffDistance;
+    const float hausdorffQuantile = data_->statistics->quantileDistance(percentileSp_->value());
+    const float centroidsGap = result.centroidsDistance;
 
     const float hdRatio = factor_ * hausdorffDist;
     const float quantileRatio = factor_ * hausdorffQuantile;
@@ -247,16 +266,17 @@ void AnalysisWindow::computeHd()
     // Time
     // =========================
 
-    timeLabel_->setText(tr("Computation time: %1 s").arg(QString::number(elapsed, 'f', 2)));
+    timeLabel_->setText(
+        tr("Computation time: %1 s").arg(QString::number(result.elapsedSec, 'f', 2)));
 
     resultsPopup_->show();
 }
 
 void AnalysisWindow::refreshQuantile(int hundredth)
 {
-    if (stats_ != nullptr)
+    if (data_ != nullptr)
     {
-        const float hausdorffQuantile = stats_->quantileDistance(hundredth);
+        const float hausdorffQuantile = data_->statistics->quantileDistance(hundredth);
         const float quantileRatio = factor_ * hausdorffQuantile;
 
         quantileLabel_->setText(
@@ -269,44 +289,13 @@ void AnalysisWindow::refreshQuantile(int hundredth)
 
 void AnalysisWindow::checkLists()
 {
-    if (widget1_->shape().isValid() && widget2_->shape().isValid())
-    {
-        calculateShapesIntersection();
-        computeButton_->setEnabled(true);
-    }
-    else
-    {
-        computeButton_->setEnabled(false);
-    }
-}
+    const bool valid = widget1_->shape().isValid() && widget2_->shape().isValid();
 
-void AnalysisWindow::calculateShapesIntersection()
-{
-    std::size_t size1 = widget1_->shape().points().size();
-    std::size_t size2 = widget2_->shape().points().size();
+    // A result still to come would concern the previous selection.
+    if (computing_)
+        ++lastRequestId_;
 
-    const fluvel_ip::Shape& smallerShape = (size1 < size2) ? widget1_->shape() : widget2_->shape();
-
-    const QImage& largerShapeImg = (size1 < size2) ? widget2_->image() : widget1_->image();
-
-    const fluvel_ip::Rgb_uc& chosenRgb = (size1 < size2) ? widget2_->rgb() : widget1_->rgb();
-
-    QRgb rgbPixels;
-
-    intersection_.clear();
-
-    for (const auto& p : smallerShape.points())
-    {
-        if (p.x >= 0 && p.x < largerShapeImg.width() && p.y >= 0 && p.y < largerShapeImg.height())
-        {
-            rgbPixels = largerShapeImg.pixel(p.x, p.y);
-
-            if (toRgb_uc(rgbPixels) == chosenRgb)
-            {
-                intersection_.insert(p);
-            }
-        }
-    }
+    computeButton_->setEnabled(valid && !computing_);
 }
 
 void AnalysisWindow::closeEvent(QCloseEvent* event)
