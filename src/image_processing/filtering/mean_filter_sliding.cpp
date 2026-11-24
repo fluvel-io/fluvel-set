@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstdint>
+#include <vector>
 
 namespace fluvel_ip::filter
 {
@@ -50,12 +51,10 @@ void MeanSliding::apply(const ImageView& input, int radius)
     // is valid, even larger than the image.
     const int64_t kernelSize = 2 * static_cast<int64_t>(radius) + 1;
 
-    // Ranges of the three loops of a pass: border, fast path, border.
+    // Ranges of the three loops of the horizontal pass: border, fast path, border.
     // They never overlap, even when the kernel is larger than the image.
     const int leftEndX = std::min(radius, width_);
     const int centerEndX = std::max(leftEndX, width_ - radius - 1);
-    const int topEndY = std::min(radius, height_);
-    const int centerEndY = std::max(topEndY, height_ - radius - 1);
 
     // =========================
     // PASS 1 — Horizontal (sliding + fast path)
@@ -118,77 +117,44 @@ void MeanSliding::apply(const ImageView& input, int radius)
     }
 
     // =========================
-    // PASS 2 — Vertical (sliding + fast path)
+    // PASS 2 — Vertical (sliding, row by row)
     // =========================
-    for (int x = 0; x < width_; ++x)
+    // One running sum per column, so that the memory is read row by row (a column-by-column
+    // walk touches one cache line per row, which is slow on large images).
+    // The rows outside the image are replaced by the nearest border row.
+    const int rowBytes = width_ * channels;
+    std::vector<int64_t> sums(rowBytes, 0);
+
+    // init window
+    for (int k = -radius; k <= radius; ++k)
     {
-        for (int c = 0; c < activeChannels; ++c)
-        {
-            int64_t sum = 0;
+        const uint8_t* row = buffer1_.rowPtr(std::clamp(k, 0, height_ - 1));
 
-            // init window
-            for (int k = -radius; k <= radius; ++k)
+        for (int x = 0; x < width_; ++x)
+            for (int c = 0; c < activeChannels; ++c)
+                sums[x * channels + c] += row[x * channels + c];
+    }
+
+    for (int y = 0; y < height_; ++y)
+    {
+        uint8_t* dst = buffer2_.rowPtr(y);
+
+        for (int x = 0; x < width_; ++x)
+            for (int c = 0; c < activeChannels; ++c)
             {
-                const int yy = std::clamp(k, 0, height_ - 1);
-                const uint8_t* row = buffer1_.rowPtr(yy);
-
-                sum += row[x * channels + c];
-            }
-
-            // -------- TOP BORDER --------
-            for (int y = 0; y < topEndY; ++y)
-            {
-                uint8_t* dst = buffer2_.rowPtr(y);
-
                 const int idx = x * channels + c;
-                dst[idx] = static_cast<uint8_t>((sum + kernelSize / 2) / kernelSize);
-
-                const int y_out = std::clamp(y - radius, 0, height_ - 1);
-                const int y_in = std::clamp(y + radius + 1, 0, height_ - 1);
-
-                const uint8_t* row_out = buffer1_.rowPtr(y_out);
-                const uint8_t* row_in = buffer1_.rowPtr(y_in);
-
-                sum -= row_out[x * channels + c];
-                sum += row_in[x * channels + c];
+                dst[idx] = static_cast<uint8_t>((sums[idx] + kernelSize / 2) / kernelSize);
             }
 
-            // -------- CENTER (FAST PATH) --------
-            for (int y = topEndY; y < centerEndY; ++y)
+        const uint8_t* row_out = buffer1_.rowPtr(std::clamp(y - radius, 0, height_ - 1));
+        const uint8_t* row_in = buffer1_.rowPtr(std::clamp(y + radius + 1, 0, height_ - 1));
+
+        for (int x = 0; x < width_; ++x)
+            for (int c = 0; c < activeChannels; ++c)
             {
-                uint8_t* dst = buffer2_.rowPtr(y);
-
                 const int idx = x * channels + c;
-                dst[idx] = static_cast<uint8_t>((sum + kernelSize / 2) / kernelSize);
-
-                const int y_out = y - radius;
-                const int y_in = y + radius + 1;
-
-                const uint8_t* row_out = buffer1_.rowPtr(y_out);
-                const uint8_t* row_in = buffer1_.rowPtr(y_in);
-
-                sum -= row_out[x * channels + c];
-                sum += row_in[x * channels + c];
+                sums[idx] += row_in[idx] - row_out[idx];
             }
-
-            // -------- BOTTOM BORDER --------
-            for (int y = centerEndY; y < height_; ++y)
-            {
-                uint8_t* dst = buffer2_.rowPtr(y);
-
-                const int idx = x * channels + c;
-                dst[idx] = static_cast<uint8_t>((sum + kernelSize / 2) / kernelSize);
-
-                const int y_out = std::clamp(y - radius, 0, height_ - 1);
-                const int y_in = std::clamp(y + radius + 1, 0, height_ - 1);
-
-                const uint8_t* row_out = buffer1_.rowPtr(y_out);
-                const uint8_t* row_in = buffer1_.rowPtr(y_in);
-
-                sum -= row_out[x * channels + c];
-                sum += row_in[x * channels + c];
-            }
-        }
     }
 
     std::swap(buffer1_, buffer2_);
@@ -211,4 +177,4 @@ ImageOwner& MeanSliding::outputRef() noexcept
     return buffer1_;
 }
 
-} // namespace fluvel_ip
+} // namespace fluvel_ip::filter
