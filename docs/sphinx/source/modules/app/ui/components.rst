@@ -19,7 +19,7 @@ Configuration
 
 .. doxygenfile:: display_settings_widget.hpp
 
-.. doxygenfile:: analysis_widget.hpp
+.. doxygenfile:: hausdorff_widget.hpp
 
 .. doxygenfile:: color_selector_widget.hpp
 

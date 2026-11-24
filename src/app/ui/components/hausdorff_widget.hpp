@@ -29,11 +29,11 @@ class ImageViewerWidget;
 class AnimatedPushButton;
 
 /**
- * @brief Widget for image analysis and shape extraction.
+ * @brief Widget for shape extraction (one side of the Hausdorff comparison).
  *
  * This widget provides tools to:
  * - load and display images
- * - select colors for analysis
+ * - select the shape color
  * - generate and update shapes based on the selected color
  * - optionally apply noise for testing
  *
@@ -42,16 +42,16 @@ class AnimatedPushButton;
  *
  * The widget maintains the current image, selected color, and resulting shape.
  */
-class AnalysisWidget : public QWidget, public ImageViewerListener
+class HausdorffWidget : public QWidget, public ImageViewerListener
 {
     Q_OBJECT
 
 public:
-    AnalysisWidget(QWidget* parent = nullptr);
+    HausdorffWidget(QWidget* parent = nullptr);
 
     /**
      * @name Accessors
-     * @brief Read-only access to current analysis data.
+     * @brief Read-only access to current shape data.
      * @{
      */
 
@@ -97,7 +97,7 @@ private:
     /**
      * @brief Handles color picking events from the image viewer.
      *
-     * Updates the selected color and refreshes the analysis.
+     * Updates the selected color and refreshes the shape.
      */
     void onColorPicked(const QColor& color, const QPoint& imagePos) override;
 

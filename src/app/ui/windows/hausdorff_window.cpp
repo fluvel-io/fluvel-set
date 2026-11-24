@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: CeCILL-2.1
 // Copyright (C) 2010-2026 Fabien Bessy
 
-#include "analysis_window.hpp"
+#include "hausdorff_window.hpp"
 
-#include "analysis_widget.hpp"
+#include "hausdorff_widget.hpp"
 #include "animated_push_button.hpp"
 #include "icon_loader.hpp"
 
@@ -21,7 +21,7 @@
 namespace fluvel
 {
 
-AnalysisWindow::AnalysisWindow(QWidget* parent)
+HausdorffWindow::HausdorffWindow(QWidget* parent)
     : QMainWindow(parent)
 
 {
@@ -29,9 +29,9 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
 
     setWindowTitle(tr("Hausdorff distance"));
 
-    if (settings.contains("ui_geometry/analysis_window"))
+    if (settings.contains("ui_geometry/hausdorff_window"))
     {
-        restoreGeometry(settings.value("ui_geometry/analysis_window").toByteArray());
+        restoreGeometry(settings.value("ui_geometry/hausdorff_window").toByteArray());
     }
     else
     {
@@ -39,11 +39,11 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
     }
 
     ///////////////////////////////////////////////////////////////
-    ///          Input analysis QMainWindow (this)              ///
+    ///          Input Hausdorff QMainWindow (this)              ///
     ///////////////////////////////////////////////////////////////
 
-    widget1_ = new AnalysisWidget(this);
-    widget2_ = new AnalysisWidget(this);
+    widget1_ = new HausdorffWidget(this);
+    widget2_ = new HausdorffWidget(this);
 
     QHBoxLayout* listsSelectLayout = new QHBoxLayout;
     listsSelectLayout->addWidget(widget1_);
@@ -57,7 +57,7 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
 
     alignCentroidsCheck_ = new QCheckBox(tr("Align centroids"));
     alignCentroidsCheck_->setChecked(
-        settings.value("analysis_window/align_centroids", false).toBool());
+        settings.value("hausdorff_window/align_centroids", false).toBool());
     alignCentroidsCheck_->setToolTip(
         tr("Unchecked: distances are measured between the shapes as they are positioned in the "
            "images, so a shift between them increases the distance.\n"
@@ -70,11 +70,11 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
     inputLayout->addWidget(alignCentroidsCheck_);
     inputLayout->addWidget(computeButton_);
 
-    connect(computeButton_, &QPushButton::clicked, this, &AnalysisWindow::computeHd);
+    connect(computeButton_, &QPushButton::clicked, this, &HausdorffWindow::computeHd);
     // The displayed results no longer match the options once they change.
-    connect(alignCentroidsCheck_, &QCheckBox::toggled, this, &AnalysisWindow::checkLists);
+    connect(alignCentroidsCheck_, &QCheckBox::toggled, this, &HausdorffWindow::checkLists);
 
-    connect(&worker_, &AnalysisWorker::analysisReady, this, &AnalysisWindow::onAnalysisReady);
+    connect(&worker_, &HausdorffWorker::hausdorffReady, this, &HausdorffWindow::onHausdorffReady);
 
     ///////////////////////////////////////
     ///////////////////////////////////////
@@ -111,7 +111,7 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
     percentileLayout->addRow(tr("Percentile: "), percentileSp_);
 
     connect(percentileSp_, QOverload<int>::of(&QSpinBox::valueChanged), this,
-            &AnalysisWindow::refreshQuantile);
+            &HausdorffWindow::refreshQuantile);
 
     quantileLabel_ = new QLabel(this);
     quantileLabel_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
@@ -178,12 +178,12 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
     resultsPopup_->setLayout(resultsLayout);
 }
 
-void AnalysisWindow::computeHd()
+void HausdorffWindow::computeHd()
 {
     if (!widget1_->shape().isValid() || !widget2_->shape().isValid())
         return;
 
-    AnalysisRequest request;
+    HausdorffRequest request;
     request.id = ++lastRequestId_;
     request.shape1 = widget1_->shape();
     request.shape2 = widget2_->shape();
@@ -203,7 +203,7 @@ void AnalysisWindow::computeHd()
     worker_.submit(std::move(request));
 }
 
-void AnalysisWindow::onAnalysisReady(const AnalysisResult& result)
+void HausdorffWindow::onHausdorffReady(const HausdorffResult& result)
 {
     computing_ = false;
     computeButton_->setText(tr("Compute Hausdorff Distance"));
@@ -268,7 +268,7 @@ void AnalysisWindow::onAnalysisReady(const AnalysisResult& result)
     resultsPopup_->show();
 }
 
-void AnalysisWindow::refreshQuantile(int hundredth)
+void HausdorffWindow::refreshQuantile(int hundredth)
 {
     if (data_ != nullptr)
     {
@@ -283,7 +283,7 @@ void AnalysisWindow::refreshQuantile(int hundredth)
     }
 }
 
-void AnalysisWindow::showPlaceholders(const QString& mark)
+void HausdorffWindow::showPlaceholders(const QString& mark)
 {
     data_.reset();
 
@@ -297,7 +297,7 @@ void AnalysisWindow::showPlaceholders(const QString& mark)
     timeLabel_->setText(tr("Computation time: %1 s").arg(mark));
 }
 
-void AnalysisWindow::checkLists()
+void HausdorffWindow::checkLists()
 {
     // Whatever is displayed was computed for another selection or other options.
     showPlaceholders(QStringLiteral("--"));
@@ -311,12 +311,12 @@ void AnalysisWindow::checkLists()
     computeButton_->setEnabled(valid && !computing_);
 }
 
-void AnalysisWindow::closeEvent(QCloseEvent* event)
+void HausdorffWindow::closeEvent(QCloseEvent* event)
 {
     QSettings settings;
 
-    settings.setValue("ui_geometry/analysis_window", saveGeometry());
-    settings.setValue("analysis_window/align_centroids", alignCentroidsCheck_->isChecked());
+    settings.setValue("ui_geometry/hausdorff_window", saveGeometry());
+    settings.setValue("hausdorff_window/align_centroids", alignCentroidsCheck_->isChecked());
 
     widget1_->saveSettings();
     widget2_->saveSettings();

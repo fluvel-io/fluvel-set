@@ -78,7 +78,7 @@ align_centroids
     If True, the centroids of both contours are aligned first, so
     only the difference of shape is measured; the translation is
     then given by ``centroids_distance``. This is what the Fluvel Set
-    application can do in its analysis window.
+    application can do in its Hausdorff window.
 
 Returns
 -------

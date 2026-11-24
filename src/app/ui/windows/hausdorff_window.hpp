@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "analysis_widget.hpp"
-#include "analysis_worker.hpp"
+#include "hausdorff_widget.hpp"
+#include "hausdorff_worker.hpp"
 
 #include <QMainWindow>
 
@@ -18,14 +18,14 @@ class QDialog;
 namespace fluvel
 {
 
-class AnalysisWidget;
+class HausdorffWidget;
 class AnimatedPushButton;
 
 /**
- * @brief Main window for comparing analysis results between two images.
+ * @brief Main window for comparing two shapes with the Hausdorff distance.
  *
  * This window allows the user to compare shapes extracted from two
- * AnalysisWidget instances. It computes various metrics such as:
+ * HausdorffWidget instances. It computes various metrics such as:
  * - Hausdorff distance
  * - quantile distance
  * - centroid distance
@@ -33,21 +33,21 @@ class AnimatedPushButton;
  *
  * Results are displayed in a dedicated popup.
  *
- * The measures are computed in a separate thread (see AnalysisWorker), so the
+ * The measures are computed in a separate thread (see HausdorffWorker), so the
  * window stays responsive with large shapes. While a computation is running,
  * the button is disabled and shows that the result is awaited.
  */
-class AnalysisWindow : public QMainWindow
+class HausdorffWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
     /**
-     * @brief Constructs the analysis window.
+     * @brief Constructs the Hausdorff window.
      *
      * @param parent Optional parent widget.
      */
-    AnalysisWindow(QWidget* parent = nullptr);
+    HausdorffWindow(QWidget* parent = nullptr);
     void checkLists();
 
 protected:
@@ -58,15 +58,15 @@ private:
     void computeHd();
 
     /// Display the measures computed by the worker.
-    void onAnalysisReady(const AnalysisResult& result);
+    void onHausdorffReady(const HausdorffResult& result);
 
     void refreshQuantile(int hundredth);
 
     /// Replace every displayed result by a mark ("--": none, "...": being computed).
     void showPlaceholders(const QString& mark);
 
-    AnalysisWidget* widget1_{nullptr};
-    AnalysisWidget* widget2_{nullptr};
+    HausdorffWidget* widget1_{nullptr};
+    HausdorffWidget* widget2_{nullptr};
     AnimatedPushButton* computeButton_{nullptr};
     QCheckBox* alignCentroidsCheck_{nullptr};
 
@@ -81,7 +81,7 @@ private:
     QLabel* timeLabel_{nullptr};
 
     /// Computes the measures in its own thread.
-    AnalysisWorker worker_;
+    HausdorffWorker worker_;
 
     /// Identifier of the latest request, to ignore an outdated result.
     quint64 lastRequestId_{0};
@@ -90,7 +90,7 @@ private:
     bool computing_{false};
 
     /// Statistics of the last result, to compute other quantiles.
-    std::shared_ptr<const AnalysisResult::Data> data_;
+    std::shared_ptr<const HausdorffResult::Data> data_;
     float factor_{0.f};
 };
 

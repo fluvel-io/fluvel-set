@@ -26,9 +26,9 @@ namespace fluvel
 {
 
 /**
- * @brief Input of an analysis: the two shapes to compare and how to measure them.
+ * @brief Input of a Hausdorff computation: the two shapes to compare and how to measure them.
  */
-struct AnalysisRequest
+struct HausdorffRequest
 {
     quint64 id{0}; ///< Identifier returned with the result.
 
@@ -49,12 +49,12 @@ struct AnalysisRequest
 };
 
 /**
- * @brief Measures computed by an analysis.
+ * @brief Measures computed by the worker.
  *
  * The statistics object is shared and read-only, so the receiver can compute
  * other quantiles without asking the worker again.
  */
-struct AnalysisResult
+struct HausdorffResult
 {
     quint64 id{0};
 
@@ -80,7 +80,7 @@ struct AnalysisResult
 };
 
 /**
- * @brief Computes the shape analysis (intersection, Hausdorff distance,
+ * @brief Computes the shape comparison (intersection, Hausdorff distance,
  *        statistics, centroids) in its own thread.
  *
  * submit() returns immediately. If several requests arrive while a
@@ -90,34 +90,34 @@ struct AnalysisResult
  * @note submit() can be called from any thread. The result signal is queued to
  *       the receivers. The destructor waits for the computation in progress.
  */
-class AnalysisWorker : public QObject
+class HausdorffWorker : public QObject
 {
     Q_OBJECT
 
 public:
-    AnalysisWorker();
-    ~AnalysisWorker() override;
+    HausdorffWorker();
+    ~HausdorffWorker() override;
 
-    AnalysisWorker(const AnalysisWorker&) = delete;
-    AnalysisWorker& operator=(const AnalysisWorker&) = delete;
+    HausdorffWorker(const HausdorffWorker&) = delete;
+    HausdorffWorker& operator=(const HausdorffWorker&) = delete;
 
-    /// Ask for a new analysis.
-    void submit(AnalysisRequest request);
+    /// Ask for a new computation.
+    void submit(HausdorffRequest request);
 
 signals:
-    /// Emitted when an analysis is done.
-    void analysisReady(fluvel::AnalysisResult result);
+    /// Emitted when a computation is done.
+    void hausdorffReady(fluvel::HausdorffResult result);
 
 private:
     /// Run the latest pending request (worker thread).
     void run();
 
     /// Points of the smaller shape that have the color of the shape in the other image.
-    static fluvel_ip::PointSet computeIntersection(const AnalysisRequest& request);
+    static fluvel_ip::PointSet computeIntersection(const HausdorffRequest& request);
 
     QThread thread_;
     QMutex mutex_;
-    std::optional<AnalysisRequest> pending_;
+    std::optional<HausdorffRequest> pending_;
 };
 
 } // namespace fluvel

@@ -20,8 +20,8 @@ set(app_src
     ${UI_WIN_DIR}/image_window.cpp
     ${UI_WIN_DIR}/image_window.hpp
 
-    ${UI_WIN_DIR}/analysis_window.cpp
-    ${UI_WIN_DIR}/analysis_window.hpp
+    ${UI_WIN_DIR}/hausdorff_window.cpp
+    ${UI_WIN_DIR}/hausdorff_window.hpp
 
     ${UI_WIN_DIR}/histogram_window.cpp
     ${UI_WIN_DIR}/histogram_window.hpp
@@ -44,8 +44,8 @@ set(app_src
     ${UI_COMP_DIR}/display_settings_widget.cpp
     ${UI_COMP_DIR}/display_settings_widget.hpp
 
-    ${UI_COMP_DIR}/analysis_widget.cpp
-    ${UI_COMP_DIR}/analysis_widget.hpp
+    ${UI_COMP_DIR}/hausdorff_widget.cpp
+    ${UI_COMP_DIR}/hausdorff_widget.hpp
 
     ${UI_COMP_DIR}/histogram_widget.cpp
     ${UI_COMP_DIR}/histogram_widget.hpp
@@ -187,8 +187,8 @@ set(app_src
     ${UI_COMP_DIR}/morph_button.cpp
     ${UI_COMP_DIR}/morph_button.hpp
 
-    ${CORE_DIR}/analysis_worker.cpp
-    ${CORE_DIR}/analysis_worker.hpp
+    ${CORE_DIR}/hausdorff_worker.cpp
+    ${CORE_DIR}/hausdorff_worker.hpp
 
     ${CORE_DIR}/image_controller.cpp
     ${CORE_DIR}/image_controller.hpp

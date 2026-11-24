@@ -8,10 +8,10 @@ sequenceDiagram
     autonumber
 
     box rgb(238,248,242) GUI thread
-        participant W as AnalysisWindow
+        participant W as HausdorffWindow
     end
-    box rgb(244,245,255) Analysis thread
-        participant K as AnalysisWorker
+    box rgb(244,245,255) Hausdorff thread
+        participant K as HausdorffWorker
         participant H as HausdorffDistance<br/>and HausdorffStatistics
     end
 
@@ -25,7 +25,7 @@ sequenceDiagram
     K->>K: intersection of the two shapes
     K->>H: build with the shapes and the intersection
     H-->>K: distance, centroids, sorted minima
-    K-->>W: analysisReady(result)
+    K-->>W: hausdorffReady(result)
 
     alt the selection did not change
         W->>W: show the distances and the popup

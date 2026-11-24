@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: CeCILL-2.1
 // Copyright (C) 2010-2026 Fabien Bessy
 
-#include "analysis_widget.hpp"
+#include "hausdorff_widget.hpp"
 
-#include "analysis_window.hpp"
+#include "hausdorff_window.hpp"
 #include "animated_push_button.hpp"
 #include "color_adapters.hpp"
 #include "color_picker_behavior.hpp"
@@ -36,8 +36,8 @@ namespace
 /// Side of the mini-maps: smaller than the default, since two views share the window.
 constexpr int kMiniMapSize{100};
 
-/// Presentation of the viewers of the analysis window.
-ViewConfig analysisViewConfig()
+/// Presentation of the viewers of the Hausdorff window.
+ViewConfig hausdorffViewConfig()
 {
     ViewConfig view;
     view.algorithmOverlayEnabled = false;
@@ -47,14 +47,14 @@ ViewConfig analysisViewConfig()
 }
 } // namespace
 
-int AnalysisWidget::countThis = 0;
+int HausdorffWidget::countThis = 0;
 
-AnalysisWidget::AnalysisWidget(QWidget* parent)
+HausdorffWidget::HausdorffWidget(QWidget* parent)
     : QWidget(parent)
 {
     ++countThis;         // static variable to count the instances
     idThis_ = countThis; // in order to know if *this is the first or the second widget of
-                         // analysis_window
+                         // hausdorff_window
 
     QSettings settings;
 
@@ -66,7 +66,7 @@ AnalysisWidget::AnalysisWidget(QWidget* parent)
 
     ///////////////////////////////////////
 
-    imageViewer_ = new ImageViewerWidget(analysisViewConfig(), this);
+    imageViewer_ = new ImageViewerWidget(hausdorffViewConfig(), this);
     auto interaction = std::make_unique<InteractionSet>();
     // interaction->addBehavior(std::make_unique<AutoFitBehavior>());
     // interaction->addBehavior(std::make_unique<FullscreenBehavior>());
@@ -95,11 +95,11 @@ AnalysisWidget::AnalysisWidget(QWidget* parent)
     //////////////////////////////////////////////////////////////////////////////////
 
     selectedColor_.red = static_cast<unsigned char>(
-        settings.value("Analysis/R" + QString::number(idThis_), 128).toInt());
+        settings.value("Hausdorff/R" + QString::number(idThis_), 128).toInt());
     selectedColor_.green = static_cast<unsigned char>(
-        settings.value("Analysis/G" + QString::number(idThis_), 0).toInt());
+        settings.value("Hausdorff/G" + QString::number(idThis_), 0).toInt());
     selectedColor_.blue = static_cast<unsigned char>(
-        settings.value("Analysis/B" + QString::number(idThis_), 255).toInt());
+        settings.value("Hausdorff/B" + QString::number(idThis_), 255).toInt());
 
     QColor initialColor = toQColor(selectedColor_);
     colorSelector_ = new ColorSelectorWidget(this, initialColor);
@@ -151,19 +151,19 @@ AnalysisWidget::AnalysisWidget(QWidget* parent)
 
     lastDirectoryUsed_ = settings.value("history/last_directory", QDir().homePath()).toString();
 
-    connect(openButton_, &QPushButton::clicked, this, &AnalysisWidget::openFilename);
+    connect(openButton_, &QPushButton::clicked, this, &HausdorffWidget::openFilename);
 
-    // When the user drags and drops an image into the analysis viewer.
+    // When the user drags and drops an image into the viewer.
     connect(imageViewer_, &ImageViewerWidget::imageDropped, this,
-            &AnalysisWidget::openDroppedImage);
+            &HausdorffWidget::openDroppedImage);
 
     connect(colorSelector_, &ColorSelectorWidget::colorSelected, this,
-            &AnalysisWidget::onColorSelected);
+            &HausdorffWidget::onColorSelected);
 
-    auto* analysisWindow = qobject_cast<AnalysisWindow*>(parentWidget());
-    Q_ASSERT(analysisWindow);
+    auto* hausdorffWindow = qobject_cast<HausdorffWindow*>(parentWidget());
+    Q_ASSERT(hausdorffWindow);
 
-    connect(this, &AnalysisWidget::listChanged, analysisWindow, &AnalysisWindow::checkLists);
+    connect(this, &HausdorffWidget::listChanged, hausdorffWindow, &HausdorffWindow::checkLists);
 
     connect(noiseGroup_, &QGroupBox::toggled, this,
             [this](bool)
@@ -172,18 +172,18 @@ AnalysisWidget::AnalysisWidget(QWidget* parent)
             });
 
     connect(noiseSp_, QOverload<int>::of(&QSpinBox::valueChanged), this,
-            &AnalysisWidget::refreshWithNoise);
+            &HausdorffWidget::refreshWithNoise);
 
     refresh();
 }
 
-void AnalysisWidget::onColorSelected(const QColor& c)
+void HausdorffWidget::onColorSelected(const QColor& c)
 {
     selectedColor_ = toRgb_uc(c);
     refresh();
 }
 
-void AnalysisWidget::openFilename()
+void HausdorffWidget::openFilename()
 {
     const QString fileName =
         QFileDialog::getOpenFileName(this, tr("Open Image") + " " + QString::number(idThis_),
@@ -197,7 +197,7 @@ void AnalysisWidget::openFilename()
     openImage();
 }
 
-void AnalysisWidget::openDroppedImage(const QString& fileName)
+void HausdorffWidget::openDroppedImage(const QString& fileName)
 {
     if (fileName.isEmpty())
         return;
@@ -207,7 +207,7 @@ void AnalysisWidget::openDroppedImage(const QString& fileName)
     openImage();
 }
 
-void AnalysisWidget::openImage()
+void HausdorffWidget::openImage()
 {
     assert(!absoluteName_.isEmpty());
 
@@ -233,12 +233,12 @@ void AnalysisWidget::openImage()
     nameLabel_->setText(name + " - " + string_lists_text);
 }
 
-void AnalysisWidget::refresh()
+void HausdorffWidget::refresh()
 {
     refreshWithNoise(noiseSp_->value());
 }
 
-void AnalysisWidget::createList()
+void HausdorffWidget::createList()
 {
     shape_.clear();
 
@@ -277,7 +277,7 @@ void AnalysisWidget::createList()
     emit listChanged();
 }
 
-void AnalysisWidget::refreshWithNoise(int noisePercent)
+void HausdorffWidget::refreshWithNoise(int noisePercent)
 {
     if (image_.isNull())
         return;
@@ -310,7 +310,7 @@ void AnalysisWidget::refreshWithNoise(int noisePercent)
     createList();
 }
 
-void AnalysisWidget::onColorPicked(const QColor& color, const QPoint&)
+void HausdorffWidget::onColorPicked(const QColor& color, const QPoint&)
 {
     if (image_.isNull())
         return;
@@ -318,17 +318,17 @@ void AnalysisWidget::onColorPicked(const QColor& color, const QPoint&)
     colorSelector_->setSelectedColor(color);
 }
 
-void AnalysisWidget::saveSettings() const
+void HausdorffWidget::saveSettings() const
 {
     QSettings settings;
 
     settings.setValue("history/last_directory", lastDirectoryUsed_);
 
-    // settings.setValue("Analysis/combo" + QString::number(idThis_), colorList_->currentIndex());
+    // settings.setValue("Hausdorff/combo" + QString::number(idThis_), colorList_->currentIndex());
 
-    settings.setValue("Analysis/R" + QString::number(idThis_), int(selectedColor_.red));
-    settings.setValue("Analysis/G" + QString::number(idThis_), int(selectedColor_.green));
-    settings.setValue("Analysis/B" + QString::number(idThis_), int(selectedColor_.blue));
+    settings.setValue("Hausdorff/R" + QString::number(idThis_), int(selectedColor_.red));
+    settings.setValue("Hausdorff/G" + QString::number(idThis_), int(selectedColor_.green));
+    settings.setValue("Hausdorff/B" + QString::number(idThis_), int(selectedColor_.blue));
 }
 
 } // namespace fluvel

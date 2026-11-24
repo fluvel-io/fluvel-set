@@ -16,7 +16,7 @@ Main Windows
 
 .. doxygenfile:: video_window.hpp
 
-.. doxygenfile:: analysis_window.hpp
+.. doxygenfile:: hausdorff_window.hpp
 
 .. doxygenfile:: histogram_window.hpp
 

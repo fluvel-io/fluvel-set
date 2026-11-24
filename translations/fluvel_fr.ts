@@ -452,212 +452,6 @@ R : %3  G : %4  B : %5</translation>
     </message>
 </context>
 <context>
-    <name>fluvel::AnalysisWidget</name>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="64"/>
-        <source>Title - Size</source>
-        <translation>Titre - Taille</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="92"/>
-        <source>Image</source>
-        <translation>Image</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="110"/>
-        <source>Color</source>
-        <translation>Couleur</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="108"/>
-        <source>Color: </source>
-        <translation>Couleur : </translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="76"/>
-        <source>Drop an image here
-
-or click Open...</source>
-        <translation>Glissez-déposez une image ici
-
-ou cliquez sur Ouvrir...</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="85"/>
-        <source>Open...</source>
-        <translation>Ouvrir...</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="122"/>
-        <source>Noise</source>
-        <translation>Bruit</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="127"/>
-        <source>Amount:</source>
-        <translation>Intensité :</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="136"/>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="270"/>
-        <source>Shape 1 size: %1 pts</source>
-        <translation>Taille de la forme 1 : %1 pts</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="141"/>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="274"/>
-        <source>Shape 2 size: %1 pts</source>
-        <translation>Taille de la forme 2 : %1 pts</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="189"/>
-        <source>Open Image</source>
-        <translation>Ouvrir une image</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="220"/>
-        <source>Cannot Open Image</source>
-        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/components/analysis_widget.cpp" line="221"/>
-        <source>Failed to load image: %1</source>
-        <translation>Impossible de charger l’image : %1</translation>
-    </message>
-</context>
-<context>
-    <name>fluvel::AnalysisWindow</name>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="101"/>
-        <source>Hausdorff measure</source>
-        <translation>Métriques de Hausdorff</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="111"/>
-        <source>Percentile: </source>
-        <translation>Percentile : </translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="132"/>
-        <source>Hausdorff quantile measure</source>
-        <translation>Mesure du quantile de la distance de Hausdorff</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="156"/>
-        <source>Time</source>
-        <translation>Temps</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="177"/>
-        <source>Results</source>
-        <translation>Résultats</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="266"/>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="297"/>
-        <source>Computation time: %1 s</source>
-        <translation>Temps de calcul : %1 s</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="236"/>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="290"/>
-        <source>Hausdorff distance: %1 px</source>
-        <translation>Distance de Hausdorff : %1 px</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="54"/>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="209"/>
-        <source>Compute Hausdorff Distance</source>
-        <translation>Calculer la distance de Hausdorff</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="201"/>
-        <source>Computing...</source>
-        <translation>Calcul en cours...</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="58"/>
-        <source>Align centroids</source>
-        <translation>Aligner les centroïdes</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="30"/>
-        <source>Hausdorff distance</source>
-        <translation>Distance de Hausdorff</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="62"/>
-        <source>Unchecked: distances are measured between the shapes as they are positioned in the images, so a shift between them increases the distance.
-Checked: the centroids of both shapes are superimposed first, so only the difference of shape is measured (the shift is given by the distance between centroids).
-Click on Compute again to apply the change.</source>
-        <translation>Décoché : les distances sont mesurées entre les formes telles qu’elles sont positionnées dans les images, donc un décalage entre elles augmente la distance.
-Coché : les centroïdes des deux formes sont d’abord superposés, de sorte que seule la différence de forme est mesurée (le décalage est donné par la distance entre centroïdes).
-Cliquez à nouveau sur Calculer pour appliquer le changement.</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="90"/>
-        <source>Maximum of the minimum distances between the two shapes.</source>
-        <translation>Maximum des distances minimales entre les deux formes.</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="96"/>
-        <source>Hausdorff distance normalized by the largest image diagonal.</source>
-        <translation>Distance de Hausdorff normalisée par la plus grande diagonale de l’image.</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="120"/>
-        <source>Uses a percentile of the minimum distances instead of the maximum minimum distance.</source>
-        <translation>Utilise un percentile des distances minimales au lieu de la distance minimale maximale.</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="141"/>
-        <source>Distance between centroids normalized by the largest image diagonal.</source>
-        <translation>Distance entre les centroïdes normalisée par la plus grande diagonale de l’image.</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="148"/>
-        <source>Shape distances</source>
-        <translation>Distances entre formes</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="239"/>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="291"/>
-        <source>Normalized Hausdorff distance: %1 %</source>
-        <translation>Distance de Hausdorff normalisée : %1 %</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="249"/>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="282"/>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="293"/>
-        <source>Normalized Hausdorff quantile: %1 %</source>
-        <translation>Quantile de Hausdorff normalisé : %1 %</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="256"/>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="294"/>
-        <source>Distance between centroids: %1 px</source>
-        <translation>Distance entre les centroïdes : %1 px</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="259"/>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="296"/>
-        <source>Normalized distance between centroids: %1 %</source>
-        <translation>Distance normalisée entre les centroïdes : %1 %</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="126"/>
-        <source>Quantile-based Hausdorff distance normalized by the largest image diagonal.</source>
-        <translation>Distance de Hausdorff basée sur un quantile et normalisée par la plus grande diagonale de l’image.</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="246"/>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="279"/>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="292"/>
-        <source>Hausdorff quantile: %1 px</source>
-        <translation>Quantile de Hausdorff : %1 px</translation>
-    </message>
-</context>
-<context>
     <name>fluvel::CaptureController</name>
     <message>
         <location filename="../src/app/core/capture_controller.cpp" line="226"/>
@@ -865,6 +659,212 @@ Cliquez à nouveau sur Calculer pour appliquer le changement.</translation>
         <location filename="../src/app/ui/components/display_settings_widget.cpp" line="85"/>
         <source>View</source>
         <translation>Vue</translation>
+    </message>
+</context>
+<context>
+    <name>fluvel::HausdorffWidget</name>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="64"/>
+        <source>Title - Size</source>
+        <translation>Titre - Taille</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="92"/>
+        <source>Image</source>
+        <translation>Image</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="110"/>
+        <source>Color</source>
+        <translation>Couleur</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="108"/>
+        <source>Color: </source>
+        <translation>Couleur : </translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="76"/>
+        <source>Drop an image here
+
+or click Open...</source>
+        <translation>Glissez-déposez une image ici
+
+ou cliquez sur Ouvrir...</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="85"/>
+        <source>Open...</source>
+        <translation>Ouvrir...</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="122"/>
+        <source>Noise</source>
+        <translation>Bruit</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="127"/>
+        <source>Amount:</source>
+        <translation>Intensité :</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="136"/>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="270"/>
+        <source>Shape 1 size: %1 pts</source>
+        <translation>Taille de la forme 1 : %1 pts</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="141"/>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="274"/>
+        <source>Shape 2 size: %1 pts</source>
+        <translation>Taille de la forme 2 : %1 pts</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="189"/>
+        <source>Open Image</source>
+        <translation>Ouvrir une image</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="220"/>
+        <source>Cannot Open Image</source>
+        <translation>Impossible d&apos;ouvrir l&apos;image</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="221"/>
+        <source>Failed to load image: %1</source>
+        <translation>Impossible de charger l’image : %1</translation>
+    </message>
+</context>
+<context>
+    <name>fluvel::HausdorffWindow</name>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="101"/>
+        <source>Hausdorff measure</source>
+        <translation>Métriques de Hausdorff</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="111"/>
+        <source>Percentile: </source>
+        <translation>Percentile : </translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="132"/>
+        <source>Hausdorff quantile measure</source>
+        <translation>Mesure du quantile de la distance de Hausdorff</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="156"/>
+        <source>Time</source>
+        <translation>Temps</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="177"/>
+        <source>Results</source>
+        <translation>Résultats</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="266"/>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="297"/>
+        <source>Computation time: %1 s</source>
+        <translation>Temps de calcul : %1 s</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="236"/>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="290"/>
+        <source>Hausdorff distance: %1 px</source>
+        <translation>Distance de Hausdorff : %1 px</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="54"/>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="209"/>
+        <source>Compute Hausdorff Distance</source>
+        <translation>Calculer la distance de Hausdorff</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="201"/>
+        <source>Computing...</source>
+        <translation>Calcul en cours...</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="58"/>
+        <source>Align centroids</source>
+        <translation>Aligner les centroïdes</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="30"/>
+        <source>Hausdorff distance</source>
+        <translation>Distance de Hausdorff</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="62"/>
+        <source>Unchecked: distances are measured between the shapes as they are positioned in the images, so a shift between them increases the distance.
+Checked: the centroids of both shapes are superimposed first, so only the difference of shape is measured (the shift is given by the distance between centroids).
+Click on Compute again to apply the change.</source>
+        <translation>Décoché : les distances sont mesurées entre les formes telles qu’elles sont positionnées dans les images, donc un décalage entre elles augmente la distance.
+Coché : les centroïdes des deux formes sont d’abord superposés, de sorte que seule la différence de forme est mesurée (le décalage est donné par la distance entre centroïdes).
+Cliquez à nouveau sur Calculer pour appliquer le changement.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="90"/>
+        <source>Maximum of the minimum distances between the two shapes.</source>
+        <translation>Maximum des distances minimales entre les deux formes.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="96"/>
+        <source>Hausdorff distance normalized by the largest image diagonal.</source>
+        <translation>Distance de Hausdorff normalisée par la plus grande diagonale de l’image.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="120"/>
+        <source>Uses a percentile of the minimum distances instead of the maximum minimum distance.</source>
+        <translation>Utilise un percentile des distances minimales au lieu de la distance minimale maximale.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="141"/>
+        <source>Distance between centroids normalized by the largest image diagonal.</source>
+        <translation>Distance entre les centroïdes normalisée par la plus grande diagonale de l’image.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="148"/>
+        <source>Shape distances</source>
+        <translation>Distances entre formes</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="239"/>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="291"/>
+        <source>Normalized Hausdorff distance: %1 %</source>
+        <translation>Distance de Hausdorff normalisée : %1 %</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="249"/>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="282"/>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="293"/>
+        <source>Normalized Hausdorff quantile: %1 %</source>
+        <translation>Quantile de Hausdorff normalisé : %1 %</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="256"/>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="294"/>
+        <source>Distance between centroids: %1 px</source>
+        <translation>Distance entre les centroïdes : %1 px</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="259"/>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="296"/>
+        <source>Normalized distance between centroids: %1 %</source>
+        <translation>Distance normalisée entre les centroïdes : %1 %</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="126"/>
+        <source>Quantile-based Hausdorff distance normalized by the largest image diagonal.</source>
+        <translation>Distance de Hausdorff basée sur un quantile et normalisée par la plus grande diagonale de l’image.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="246"/>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="279"/>
+        <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="292"/>
+        <source>Hausdorff quantile: %1 px</source>
+        <translation>Quantile de Hausdorff : %1 px</translation>
     </message>
 </context>
 <context>

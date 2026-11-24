@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: CeCILL-2.1
 // Copyright (C) 2010-2026 Fabien Bessy
 
-#include "analysis_worker.hpp"
+#include "hausdorff_worker.hpp"
 
 #include "color_adapters.hpp"
 #include "elapsed_timer.hpp"
@@ -15,23 +15,23 @@
 namespace fluvel
 {
 
-AnalysisWorker::AnalysisWorker()
+HausdorffWorker::HausdorffWorker()
     : QObject(nullptr)
 {
     // Needed to queue the result across threads.
-    qRegisterMetaType<fluvel::AnalysisResult>("fluvel::AnalysisResult");
+    qRegisterMetaType<fluvel::HausdorffResult>("fluvel::HausdorffResult");
 
     moveToThread(&thread_);
     thread_.start();
 }
 
-AnalysisWorker::~AnalysisWorker()
+HausdorffWorker::~HausdorffWorker()
 {
     thread_.quit();
     thread_.wait();
 }
 
-void AnalysisWorker::submit(AnalysisRequest request)
+void HausdorffWorker::submit(HausdorffRequest request)
 {
     {
         const QMutexLocker lock(&mutex_);
@@ -41,7 +41,7 @@ void AnalysisWorker::submit(AnalysisRequest request)
     QMetaObject::invokeMethod(this, [this] { run(); }, Qt::QueuedConnection);
 }
 
-fluvel_ip::PointSet AnalysisWorker::computeIntersection(const AnalysisRequest& request)
+fluvel_ip::PointSet HausdorffWorker::computeIntersection(const HausdorffRequest& request)
 {
     const std::size_t size1 = request.shape1.points().size();
     const std::size_t size2 = request.shape2.points().size();
@@ -68,9 +68,9 @@ fluvel_ip::PointSet AnalysisWorker::computeIntersection(const AnalysisRequest& r
     return intersection;
 }
 
-void AnalysisWorker::run()
+void HausdorffWorker::run()
 {
-    std::optional<AnalysisRequest> request;
+    std::optional<HausdorffRequest> request;
 
     {
         const QMutexLocker lock(&mutex_);
@@ -84,7 +84,7 @@ void AnalysisWorker::run()
     fluvel_ip::ElapsedTimer timer;
     timer.start();
 
-    auto data = std::make_shared<AnalysisResult::Data>();
+    auto data = std::make_shared<HausdorffResult::Data>();
 
     data->intersection = computeIntersection(*request);
 
@@ -94,7 +94,7 @@ void AnalysisWorker::run()
     data->statistics = std::make_unique<fluvel_ip::HausdorffStatistics>(
         request->shape1, request->shape2, &data->intersection, request->options);
 
-    AnalysisResult result;
+    HausdorffResult result;
     result.id = request->id;
     result.elapsedSec = timer.elapsedSec();
     result.hausdorffDistance = data->distance->distance();
@@ -105,7 +105,7 @@ void AnalysisWorker::run()
                     std::max(request->size1.height(), request->size2.height()));
     result.data = std::move(data);
 
-    emit analysisReady(std::move(result));
+    emit hausdorffReady(std::move(result));
 }
 
 } // namespace fluvel

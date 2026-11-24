@@ -4,7 +4,7 @@
 #pragma once
 
 #include "image_processing_worker.hpp"
-#include "analysis_window.hpp"
+#include "hausdorff_window.hpp"
 #include "histogram_window.hpp"
 #include "video_window.hpp"
 
@@ -185,7 +185,7 @@ private:
 #if defined(FLUVEL_ENABLE_CAMERA_SOURCE) && defined(FLUVEL_ENABLE_MEDIA_SOURCE)
     std::unique_ptr<VideoWindow> videoWindow_;
 #endif
-    std::unique_ptr<AnalysisWindow> analysisWindow_;
+    std::unique_ptr<HausdorffWindow> hausdorffWindow_;
     std::unique_ptr<HistogramWindow> histogramWindow_;
     SettingsDialog* settingsDialog_{nullptr};
     AboutDialog* AboutDialog_{nullptr};
@@ -228,7 +228,7 @@ private:
 
     QAction* imageSessionAct_{nullptr};
     QAction* videoSessionAct_{nullptr};
-    QAction* analysisAct_{nullptr};
+    QAction* hausdorffAct_{nullptr};
     QAction* histogramAct_{nullptr};
 
     QAction* aboutAct_{nullptr};

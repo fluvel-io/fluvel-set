@@ -316,12 +316,12 @@ void ImageWindow::setupActions()
         act->setIcon(recentIcon);
     }
 
-    analysisAct_ = new QAction(tr("Ha&usdorff distance..."), this);
-    analysisAct_->setStatusTip(tr("Compute the Hausdorff distance."));
-    analysisAct_->setShortcut(tr("Ctrl+A"));
+    hausdorffAct_ = new QAction(tr("Ha&usdorff distance..."), this);
+    hausdorffAct_->setStatusTip(tr("Compute the Hausdorff distance."));
+    hausdorffAct_->setShortcut(tr("Ctrl+A"));
 
     QIcon measureIcon = il::loadIcon(":/icons/actions/measure-symbolic.svg");
-    analysisAct_->setIcon(measureIcon);
+    hausdorffAct_->setIcon(measureIcon);
 
     histogramAct_ = new QAction(tr("&Histogram"), this);
     histogramAct_->setStatusTip(tr("Show the histogram of the displayed image."));
@@ -359,7 +359,7 @@ void ImageWindow::setupMenus()
     fileMenu_->addAction(clearAct_);
 
     analysisMenu_ = new QMenu(tr("&Analysis"), this);
-    analysisMenu_->addAction(analysisAct_);
+    analysisMenu_->addAction(hausdorffAct_);
     analysisMenu_->addAction(histogramAct_);
 
     helpMenu_ = new QMenu(tr("&Help"), this);
@@ -418,7 +418,7 @@ void ImageWindow::setupChildWindows()
 #if defined(FLUVEL_ENABLE_CAMERA_SOURCE) && defined(FLUVEL_ENABLE_MEDIA_SOURCE)
     videoWindow_ = std::make_unique<VideoWindow>();
 #endif
-    analysisWindow_ = std::make_unique<AnalysisWindow>();
+    hausdorffWindow_ = std::make_unique<HausdorffWindow>();
     histogramWindow_ = std::make_unique<HistogramWindow>();
 
     settingsDialog_ = new SettingsDialog(config.compute, this);
@@ -716,10 +716,10 @@ void ImageWindow::setupUserActionsConnections()
         window->activateWindow();
     };
 
-    connect(analysisAct_, &QAction::triggered, analysisWindow_.get(),
+    connect(hausdorffAct_, &QAction::triggered, hausdorffWindow_.get(),
             [this, showAndRaise]()
             {
-                showAndRaise(analysisWindow_.get());
+                showAndRaise(hausdorffWindow_.get());
             });
 
     connect(histogramAct_, &QAction::triggered, histogramWindow_.get(),

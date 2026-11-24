@@ -31,7 +31,7 @@ Execution
 
 .. doxygenfile:: image_preview_worker.hpp
 
-.. doxygenfile:: analysis_worker.hpp
+.. doxygenfile:: hausdorff_worker.hpp
 
 .. doxygenfile:: video_processing_thread.hpp
 
