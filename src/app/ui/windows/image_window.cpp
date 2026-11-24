@@ -708,14 +708,24 @@ void ImageWindow::setupUserActionsConnections()
 
     // ---   3rd menu   ---
 
-    connect(analysisAct_, &QAction::triggered, analysisWindow_.get(), &AnalysisWindow::show);
+    // Calling show() alone does not bring an already visible window to the front.
+    const auto showAndRaise = [](QWidget* window)
+    {
+        window->show();
+        window->raise();
+        window->activateWindow();
+    };
+
+    connect(analysisAct_, &QAction::triggered, analysisWindow_.get(),
+            [this, showAndRaise]()
+            {
+                showAndRaise(analysisWindow_.get());
+            });
 
     connect(histogramAct_, &QAction::triggered, histogramWindow_.get(),
-            [this]()
+            [this, showAndRaise]()
             {
-                histogramWindow_->show();
-                histogramWindow_->raise();
-                histogramWindow_->activateWindow();
+                showAndRaise(histogramWindow_.get());
             });
 
     // ---   4th menu   ---

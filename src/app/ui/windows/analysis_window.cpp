@@ -27,7 +27,7 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
 {
     QSettings settings;
 
-    setWindowTitle(tr("Analysis: Input"));
+    setWindowTitle(tr("Hausdorff distance"));
 
     if (settings.contains("ui_geometry/analysis_window"))
     {
@@ -174,7 +174,7 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
     setCentralWidget(centralWidget);
 
     resultsPopup_ = new QDialog(this);
-    resultsPopup_->setWindowTitle(tr("Analysis: Results"));
+    resultsPopup_->setWindowTitle(tr("Results"));
     resultsPopup_->setLayout(resultsLayout);
 }
 

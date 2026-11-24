@@ -548,6 +548,11 @@ ou cliquez sur Ouvrir...</translation>
         <translation>Temps</translation>
     </message>
     <message>
+        <location filename="../src/app/ui/windows/analysis_window.cpp" line="177"/>
+        <source>Results</source>
+        <translation>Résultats</translation>
+    </message>
+    <message>
         <location filename="../src/app/ui/windows/analysis_window.cpp" line="266"/>
         <location filename="../src/app/ui/windows/analysis_window.cpp" line="297"/>
         <source>Computation time: %1 s</source>
@@ -558,11 +563,6 @@ ou cliquez sur Ouvrir...</translation>
         <location filename="../src/app/ui/windows/analysis_window.cpp" line="290"/>
         <source>Hausdorff distance: %1 px</source>
         <translation>Distance de Hausdorff : %1 px</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="30"/>
-        <source>Analysis: Input</source>
-        <translation>Analyse : entrée</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/analysis_window.cpp" line="54"/>
@@ -579,6 +579,11 @@ ou cliquez sur Ouvrir...</translation>
         <location filename="../src/app/ui/windows/analysis_window.cpp" line="58"/>
         <source>Align centroids</source>
         <translation>Aligner les centroïdes</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/analysis_window.cpp" line="30"/>
+        <source>Hausdorff distance</source>
+        <translation>Distance de Hausdorff</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/analysis_window.cpp" line="62"/>
@@ -613,11 +618,6 @@ Cliquez à nouveau sur Calculer pour appliquer le changement.</translation>
         <location filename="../src/app/ui/windows/analysis_window.cpp" line="148"/>
         <source>Shape distances</source>
         <translation>Distances entre formes</translation>
-    </message>
-    <message>
-        <location filename="../src/app/ui/windows/analysis_window.cpp" line="177"/>
-        <source>Analysis: Results</source>
-        <translation>Analyse : résultats</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/analysis_window.cpp" line="239"/>
@@ -1045,52 +1045,52 @@ Cliquez à nouveau sur Calculer pour appliquer le changement.</translation>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="105"/>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1087"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1097"/>
         <source>Start</source>
         <translation>Démarrer</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="106"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1089"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1099"/>
         <source>Run the active contour.</source>
         <translation>Lancer le contour actif.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="109"/>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1104"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1114"/>
         <source>Resume</source>
         <translation>Reprendre</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="113"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1106"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1116"/>
         <source>Resume the active contour execution.</source>
         <translation>Reprendre l’exécution du contour actif.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="116"/>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1113"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1123"/>
         <source>Step</source>
         <translation>Étape</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="117"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1115"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1125"/>
         <source>Advance the active contour by one iteration.</source>
         <translation>Avancer le contour actif d’une itération.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="128"/>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1121"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1131"/>
         <source>Converge</source>
         <translation>Convergence</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="129"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1124"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1134"/>
         <source>Run until completion without displaying intermediate steps.</source>
         <translation>Aller jusqu’à la fin sans afficher les étapes intermédiaires.</translation>
     </message>
@@ -1174,7 +1174,7 @@ ou choisissez Fichier → Ouvrir</translation>
         <translation>Démarrer l’enregistrement automatiquement au début du traitement.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="891"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="901"/>
         <source>Image</source>
         <translation>Image</translation>
     </message>
@@ -1229,49 +1229,49 @@ ou choisissez Fichier → Ouvrir</translation>
         <translation>Ouvrir une image</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="797"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="807"/>
         <source>&amp;%1</source>
         <translation>&amp;%1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="956"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="966"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="870"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="880"/>
         <source>Opened image: %1</source>
         <translation>Image ouverte : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="915"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="925"/>
         <source>Gray</source>
         <translation>Niveaux de gris</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1081"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1091"/>
         <source>Restart</source>
         <translation>Redémarrer</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1083"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1093"/>
         <source>Restart the active contour from its initial state.</source>
         <translation>Redémarrer le contour actif depuis son état initial.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1098"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1108"/>
         <source>Pause</source>
         <translation>Pause</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1100"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1110"/>
         <source>Suspend execution and display the current state.</source>
         <translation>Mettre en pause et afficher l’état actuel.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="949"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="959"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
