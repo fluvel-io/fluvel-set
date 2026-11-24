@@ -30,6 +30,21 @@ const QColor kShapeMainColor{0, 230, 118};
 const QColor kShapeOutlineColor{64, 0, 255};
 constexpr qreal kShapeMainWidth{2.0};
 constexpr qreal kShapeOutlineWidth{4.0};
+
+/// Path item drawn with anti-aliasing (the view itself does not enable it,
+/// which is right for the pixels of the image and of the contour points).
+class SmoothPathItem : public QGraphicsPathItem
+{
+public:
+    using QGraphicsPathItem::QGraphicsPathItem;
+
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
+               QWidget* widget) override
+    {
+        painter->setRenderHint(QPainter::Antialiasing, true);
+        QGraphicsPathItem::paint(painter, option, widget);
+    }
+};
 } // namespace
 
 namespace fluvel
@@ -124,7 +139,7 @@ void ImageViewerWidget::setupItems()
 
     auto makeShapeItem = [this](const QColor& color, qreal width)
     {
-        auto* item = new QGraphicsPathItem(shapeClipItem_);
+        auto* item = new SmoothPathItem(shapeClipItem_);
 
         // Cosmetic pen: constant width on the screen, whatever the zoom.
         QPen pen(color, width);
