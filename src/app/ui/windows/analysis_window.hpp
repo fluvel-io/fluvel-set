@@ -62,6 +62,9 @@ private:
 
     void refreshQuantile(int hundredth);
 
+    /// Replace every displayed result by a mark ("--": none, "...": being computed).
+    void showPlaceholders(const QString& mark);
+
     AnalysisWidget* widget1_{nullptr};
     AnalysisWidget* widget2_{nullptr};
     AnimatedPushButton* computeButton_{nullptr};

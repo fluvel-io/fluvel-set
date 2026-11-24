@@ -71,6 +71,8 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
     inputLayout->addWidget(computeButton_);
 
     connect(computeButton_, &QPushButton::clicked, this, &AnalysisWindow::computeHd);
+    // The displayed results no longer match the options once they change.
+    connect(alignCentroidsCheck_, &QCheckBox::toggled, this, &AnalysisWindow::checkLists);
 
     connect(&worker_, &AnalysisWorker::analysisReady, this, &AnalysisWindow::onAnalysisReady);
 
@@ -83,13 +85,11 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
     ///////////////////////////////////////
 
     hausdorffLabel_ = new QLabel(this);
-    hausdorffLabel_->setText(tr("Hausdorff distance: "));
     hausdorffLabel_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     hausdorffLabel_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     hausdorffLabel_->setToolTip(tr("Maximum of the minimum distances between the two shapes."));
 
     normalizedHausdorffLabel_ = new QLabel(this);
-    normalizedHausdorffLabel_->setText(tr("Normalized Hausdorff distance: "));
     normalizedHausdorffLabel_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     normalizedHausdorffLabel_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     normalizedHausdorffLabel_->setToolTip(
@@ -114,14 +114,12 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
             &AnalysisWindow::refreshQuantile);
 
     quantileLabel_ = new QLabel(this);
-    quantileLabel_->setText(tr("Hausdorff quantile: "));
     quantileLabel_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     quantileLabel_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     quantileLabel_->setToolTip(
         tr("Uses a percentile of the minimum distances instead of the maximum minimum distance."));
 
     normalizedQuantileLabel_ = new QLabel(this);
-    normalizedQuantileLabel_->setText(tr("Normalized Hausdorff quantile: "));
     normalizedQuantileLabel_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     normalizedQuantileLabel_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     normalizedQuantileLabel_->setToolTip(
@@ -135,12 +133,10 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
     quantileGroup->setLayout(quantileLayout);
 
     centroidsDistLabel_ = new QLabel(this);
-    centroidsDistLabel_->setText(tr("Distance between centroids: "));
     centroidsDistLabel_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     centroidsDistLabel_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     normalizedCentroidsDistLabel_ = new QLabel(this);
-    normalizedCentroidsDistLabel_->setText(tr("Normalized distance between centroids: "));
     normalizedCentroidsDistLabel_->setToolTip(
         tr("Distance between centroids normalized by the largest image diagonal."));
     normalizedCentroidsDistLabel_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
@@ -153,7 +149,6 @@ AnalysisWindow::AnalysisWindow(QWidget* parent)
     centroidsGroup->setLayout(centroidsLayout);
 
     timeLabel_ = new QLabel(this);
-    timeLabel_->setText(tr("Computation time: -- s"));
     timeLabel_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     timeLabel_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     QVBoxLayout* timeLayout = new QVBoxLayout;
@@ -201,6 +196,7 @@ void AnalysisWindow::computeHd()
     request.options = {.alignCentroids = alignCentroidsCheck_->isChecked()};
 
     computing_ = true;
+    showPlaceholders(tr("..."));
     computeButton_->setEnabled(false);
     computeButton_->setText(tr("Computing..."));
 
@@ -287,8 +283,25 @@ void AnalysisWindow::refreshQuantile(int hundredth)
     }
 }
 
+void AnalysisWindow::showPlaceholders(const QString& mark)
+{
+    data_.reset();
+
+    hausdorffLabel_->setText(tr("Hausdorff distance: %1 px").arg(mark));
+    normalizedHausdorffLabel_->setText(tr("Normalized Hausdorff distance: %1 %").arg(mark));
+    quantileLabel_->setText(tr("Hausdorff quantile: %1 px").arg(mark));
+    normalizedQuantileLabel_->setText(tr("Normalized Hausdorff quantile: %1 %").arg(mark));
+    centroidsDistLabel_->setText(tr("Distance between centroids: %1 px").arg(mark));
+    normalizedCentroidsDistLabel_->setText(
+        tr("Normalized distance between centroids: %1 %").arg(mark));
+    timeLabel_->setText(tr("Computation time: %1 s").arg(mark));
+}
+
 void AnalysisWindow::checkLists()
 {
+    // Whatever is displayed was computed for another selection or other options.
+    showPlaceholders(QStringLiteral("--"));
+
     const bool valid = widget1_->shape().isValid() && widget2_->shape().isValid();
 
     // A result still to come would concern the previous selection.
