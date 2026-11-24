@@ -323,6 +323,10 @@ void ImageWindow::setupActions()
     QIcon measureIcon = il::loadIcon(":/icons/actions/measure-symbolic.svg");
     analysisAct_->setIcon(measureIcon);
 
+    histogramAct_ = new QAction(tr("&Histogram"), this);
+    histogramAct_->setStatusTip(tr("Show the histogram of the displayed image."));
+    histogramAct_->setShortcut(tr("Ctrl+H"));
+
     aboutAct_ = new QAction(tr("&About"), this);
     aboutAct_->setStatusTip(tr("Application information, license and home page."));
 
@@ -353,6 +357,7 @@ void ImageWindow::setupMenus()
 
     segmentationMenu_ = new QMenu(tr("&Segmentation"), this);
     segmentationMenu_->addAction(analysisAct_);
+    segmentationMenu_->addAction(histogramAct_);
 
     helpMenu_ = new QMenu(tr("&Help"), this);
     helpMenu_->addAction(aboutAct_);
@@ -411,6 +416,7 @@ void ImageWindow::setupChildWindows()
     videoWindow_ = std::make_unique<VideoWindow>();
 #endif
     analysisWindow_ = std::make_unique<AnalysisWindow>();
+    histogramWindow_ = std::make_unique<HistogramWindow>();
 
     settingsDialog_ = new SettingsDialog(config.compute, this);
     AboutDialog_ = new AboutDialog(this);
@@ -454,6 +460,10 @@ void ImageWindow::setupConnections()
     // to refresh the view with a new image
     connect(imageController_, &ImageController::displayedImageReady, imageViewer_,
             &ImageViewerWidget::setImage);
+
+    // The histogram follows the image sent to the viewer.
+    connect(imageController_, &ImageController::displayedImageReady, histogramWindow_.get(),
+            &HistogramWindow::setImage);
 
     connect(imageController_, &ImageController::displayedImageReady, this,
             [this](const QImage& image)
@@ -696,6 +706,14 @@ void ImageWindow::setupUserActionsConnections()
     // ---   3rd menu   ---
 
     connect(analysisAct_, &QAction::triggered, analysisWindow_.get(), &AnalysisWindow::show);
+
+    connect(histogramAct_, &QAction::triggered, histogramWindow_.get(),
+            [this]()
+            {
+                histogramWindow_->show();
+                histogramWindow_->raise();
+                histogramWindow_->activateWindow();
+            });
 
     // ---   4th menu   ---
 

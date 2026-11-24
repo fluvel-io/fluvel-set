@@ -196,7 +196,7 @@ void AnalysisWindow::computeHd()
     request.options = {.alignCentroids = alignCentroidsCheck_->isChecked()};
 
     computing_ = true;
-    showPlaceholders(tr("..."));
+    showPlaceholders(QStringLiteral("..."));
     computeButton_->setEnabled(false);
     computeButton_->setText(tr("Computing..."));
 

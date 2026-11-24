@@ -5,6 +5,7 @@
 
 #include "image_processing_worker.hpp"
 #include "analysis_window.hpp"
+#include "histogram_window.hpp"
 #include "video_window.hpp"
 
 #include <QIcon>
@@ -185,6 +186,7 @@ private:
     std::unique_ptr<VideoWindow> videoWindow_;
 #endif
     std::unique_ptr<AnalysisWindow> analysisWindow_;
+    std::unique_ptr<HistogramWindow> histogramWindow_;
     SettingsDialog* settingsDialog_{nullptr};
     AboutDialog* AboutDialog_{nullptr};
 
@@ -227,6 +229,7 @@ private:
     QAction* imageSessionAct_{nullptr};
     QAction* videoSessionAct_{nullptr};
     QAction* analysisAct_{nullptr};
+    QAction* histogramAct_{nullptr};
 
     QAction* aboutAct_{nullptr};
 

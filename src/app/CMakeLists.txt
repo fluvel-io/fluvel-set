@@ -23,6 +23,9 @@ set(app_src
     ${UI_WIN_DIR}/analysis_window.cpp
     ${UI_WIN_DIR}/analysis_window.hpp
 
+    ${UI_WIN_DIR}/histogram_window.cpp
+    ${UI_WIN_DIR}/histogram_window.hpp
+
     ${UI_WIN_DIR}/settings_dialog.cpp
     ${UI_WIN_DIR}/settings_dialog.hpp
 
@@ -43,6 +46,9 @@ set(app_src
 
     ${UI_COMP_DIR}/analysis_widget.cpp
     ${UI_COMP_DIR}/analysis_widget.hpp
+
+    ${UI_COMP_DIR}/histogram_widget.cpp
+    ${UI_COMP_DIR}/histogram_widget.hpp
 
     ${UI_COMP_DIR}/color_selector_widget.cpp
     ${UI_COMP_DIR}/color_selector_widget.hpp

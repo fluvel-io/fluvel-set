@@ -85,6 +85,9 @@ set(ip_src
     ${ANALYSIS_DIR}/hausdorff_statistics.cpp
     ${ANALYSIS_DIR}/hausdorff_statistics.hpp
 
+    ${ANALYSIS_DIR}/histogram.cpp
+    ${ANALYSIS_DIR}/histogram.hpp
+
 
     ${CORE_DIR}/grid2d.hpp
     ${CORE_DIR}/image_format.hpp
