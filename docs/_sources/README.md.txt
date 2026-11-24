@@ -71,7 +71,7 @@ On Linux, two packages are provided:
 
 ### Python package
 
-Pre-built wheels (Linux x86_64, Windows x64, macOS 13+) are attached to the
+Pre-built wheels (Linux x86_64 with glibc 2.34 or newer, Windows x64, macOS 13+) are attached to the
 [latest-python release](https://github.com/fluvel-io/fluvel-set/releases/tag/latest-python):
 
 ```bash
@@ -227,9 +227,9 @@ Optional:
 
 Additional dependencies:
 
-- Python ≥ 3.10
+- Python ≥ 3.11
 - pybind11
-- NumPy
+- NumPy ≥ 1.23
 
 Optional (examples only):
 

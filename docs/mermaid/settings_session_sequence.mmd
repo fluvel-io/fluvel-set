@@ -1,0 +1,40 @@
+%%{init: {"theme": "base", "themeVariables": {
+  "primaryColor": "#f4f5ff", "primaryBorderColor": "#6b6fcf", "primaryTextColor": "#1d1d1f",
+  "lineColor": "#6b6fcf", "actorBkg": "#ffffff", "actorBorder": "#6b6fcf", "actorTextColor": "#1d1d1f",
+  "noteBkgColor": "#ffffff", "noteBorderColor": "#4fc98a", "noteTextColor": "#1d1d1f",
+  "signalColor": "#444444", "signalTextColor": "#1d1d1f", "labelBoxBkgColor": "#ffffff",
+  "labelBoxBorderColor": "#c8c8c8", "loopTextColor": "#444444", "sequenceNumberColor": "#ffffff"}}}%%
+sequenceDiagram
+    autonumber
+
+    box rgb(238,248,242) GUI thread
+        participant D as SettingsDialog
+        participant S as ImageSettingsController
+        participant V as PhiViewModel<br/>(preview and shape overlay)
+    end
+    box rgb(244,245,255) Preview thread
+        participant P as ImagePreviewWorker
+    end
+
+    Note over D,S: Changing a filter or the downscale
+
+    D->>S: updateEditedConfig(downscale, filters)
+    S->>S: new request identifier
+    S-->>D: processingStarted
+    Note over D: the time shows "..."
+    S-)P: submit(id, image, parameters)
+    Note over S,P: queued command: only the latest request is kept,<br/>the older ones are dropped
+
+    P->>P: downscale, then filters
+    P-->>S: previewReady(id, images, filter time)
+
+    alt id is the latest request
+        S->>V: setBackground(filtered image)
+        S-->>D: filterPipelineProcessed(time)
+    else outdated result
+        S->>S: ignore it, a newer one follows
+    end
+
+    Note over D,V: Editing the initial shape stays in the GUI thread
+    D->>S: addShape or subtractShape
+    S->>V: update the phi mask and its overlay

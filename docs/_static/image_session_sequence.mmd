@@ -7,33 +7,37 @@
 sequenceDiagram
     autonumber
 
-    box rgb(238,248,242) GUI thread only, the worker is driven by a timer
+    box rgb(238,248,242) GUI thread
         participant V as ImageViewerWidget<br/>(passive view)
         participant W as ImageWindow<br/>(wiring)
         participant C as ImageController
-        participant P as ImageProcessingWorker<br/>(timer driven)
+    end
+    box rgb(244,245,255) Worker thread
+        participant P as ImageProcessingWorker
         participant A as ActiveContour
     end
 
     Note over W,P: Commands: from the window to the algorithm
 
     W->>C: open an image, apply settings
-    C->>P: initialize(image, config)
-    Note over C,P: preprocessing (filters) runs here, synchronously:<br/>the interface waits until it is done
+    C-)P: initialize(image, config)
+    Note over C,P: queued command: only the latest one is run.<br/>The filters run in the worker thread
+    P-->>C: processedImageReady(image)
     W->>C: start (or step, pause, converge)
-    C->>P: restart()
+    C-)P: restart()
 
-    Note over P,V: Each timer tick runs a short time slice
+    Note over P,V: Interactive mode: one frame every 16 ms
 
     loop until the contour is stable
-        P->>A: runCycles(...) within the time slice
+        P->>A: step(), 10 iterations per frame
         P-->>C: contourUpdated(contours)
-        P-->>C: processedImageReady(image)
+        P-->>C: diagnosticsUpdated(diagnostics)
         C->>C: build the point layers (presentation)
         C-->>V: contourUpdated(layers)
         Note over C,V: connected by ImageWindow
-        P-->>C: diagnosticsUpdated(diagnostics)
+        C-)P: acknowledgeFrame()
+        Note over P: the next frame waits for<br/>the acknowledgement
     end
 
-    P-->>C: stateChanged(converged)
+    P-->>C: stateChanged(finished)
     C-->>W: state shown in the interface

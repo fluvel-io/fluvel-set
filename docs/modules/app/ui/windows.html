@@ -1991,7 +1991,8 @@ into complete user-facing interfaces.</p>
 <li><p>shape intersection</p></li>
 </ul>
 </p>
-<p>Results are displayed in a dedicated popup. </p>
+<p>Results are displayed in a dedicated popup.</p>
+<p>The measures are computed in a separate thread (see <a class="reference internal" href="../app_core.html#classfluvel_1_1AnalysisWorker"><span class="std std-ref">AnalysisWorker</span></a>), so the window stays responsive with large shapes. While a computation is running, the button is disabled and shows that the result is awaited. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -2024,16 +2025,18 @@ into complete user-facing interfaces.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow9computeHdEv">
 <span id="_CPPv3N6fluvel14AnalysisWindow9computeHdEv"></span><span id="_CPPv2N6fluvel14AnalysisWindow9computeHdEv"></span><span id="fluvel::AnalysisWindow::computeHd"></span><span class="target" id="classfluvel_1_1AnalysisWindow_1a56c0901ebda1b81d026f69a31bf4debd"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">computeHd</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel14AnalysisWindow9computeHdEv" title="Link to this definition">#</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Ask the worker for the measures of the two selected shapes. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow15onAnalysisReadyERK14AnalysisResult">
+<span id="_CPPv3N6fluvel14AnalysisWindow15onAnalysisReadyERK14AnalysisResult"></span><span id="_CPPv2N6fluvel14AnalysisWindow15onAnalysisReadyERK14AnalysisResult"></span><span id="fluvel::AnalysisWindow::onAnalysisReady__AnalysisResultCR"></span><span class="target" id="classfluvel_1_1AnalysisWindow_1a1799578fcd5732f0ae0e5ba9e8a42195"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onAnalysisReady</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel14AnalysisResultE" title="fluvel::AnalysisResult"><span class="n"><span class="pre">AnalysisResult</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">result</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel14AnalysisWindow15onAnalysisReadyERK14AnalysisResult" title="Link to this definition">#</a><br /></dt>
+<dd><p>Display the measures computed by the worker. </p>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow15refreshQuantileEi">
 <span id="_CPPv3N6fluvel14AnalysisWindow15refreshQuantileEi"></span><span id="_CPPv2N6fluvel14AnalysisWindow15refreshQuantileEi"></span><span id="fluvel::AnalysisWindow::refreshQuantile__i"></span><span class="target" id="classfluvel_1_1AnalysisWindow_1a83373901f9fd67d31369fc30afc92190"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">refreshQuantile</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hundredth</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel14AnalysisWindow15refreshQuantileEi" title="Link to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow27calculateShapesIntersectionEv">
-<span id="_CPPv3N6fluvel14AnalysisWindow27calculateShapesIntersectionEv"></span><span id="_CPPv2N6fluvel14AnalysisWindow27calculateShapesIntersectionEv"></span><span id="fluvel::AnalysisWindow::calculateShapesIntersection"></span><span class="target" id="classfluvel_1_1AnalysisWindow_1ae67b279d9513244688b4748fd3ec9102"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">calculateShapesIntersection</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel14AnalysisWindow27calculateShapesIntersectionEv" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -2057,11 +2060,6 @@ into complete user-facing interfaces.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow20alignCentroidsCheck_E">
 <span id="_CPPv3N6fluvel14AnalysisWindow20alignCentroidsCheck_E"></span><span id="_CPPv2N6fluvel14AnalysisWindow20alignCentroidsCheck_E"></span><span id="fluvel::AnalysisWindow::alignCentroidsCheck___QCheckBoxP"></span><span class="target" id="classfluvel_1_1AnalysisWindow_1a67d578706bc7f04a65283727b910b160"></span><span class="n"><span class="pre">QCheckBox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">alignCentroidsCheck_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">nullptr</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel14AnalysisWindow20alignCentroidsCheck_E" title="Link to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow13intersection_E">
-<span id="_CPPv3N6fluvel14AnalysisWindow13intersection_E"></span><span id="_CPPv2N6fluvel14AnalysisWindow13intersection_E"></span><span id="fluvel::AnalysisWindow::intersection___fluvel_ip::PointSet"></span><span class="target" id="classfluvel_1_1AnalysisWindow_1a2c9b2a224d7be41b2130b8defe454636"></span><a class="reference internal" href="../../ip/analysis.html#_CPPv49fluvel_ip" title="fluvel_ip"><span class="n"><span class="pre">fluvel_ip</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../../ip/ip_core.html#_CPPv4N9fluvel_ip8PointSetE" title="fluvel_ip::PointSet"><span class="n"><span class="pre">PointSet</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">intersection_</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel14AnalysisWindow13intersection_E" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -2110,14 +2108,28 @@ into complete user-facing interfaces.</p>
 <dd></dd></dl>
 
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow3hd_E">
-<span id="_CPPv3N6fluvel14AnalysisWindow3hd_E"></span><span id="_CPPv2N6fluvel14AnalysisWindow3hd_E"></span><span id="fluvel::AnalysisWindow::hd___std::unique_ptr:fluvel_ip::HausdorffDistance:"></span><span class="target" id="classfluvel_1_1AnalysisWindow_1a32cb869dbff36d9cbcd00c54b134cd5e"></span><a class="reference internal" href="../../ip/ip_core.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../ip/analysis.html#_CPPv49fluvel_ip" title="fluvel_ip"><span class="n"><span class="pre">fluvel_ip</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../../ip/analysis.html#_CPPv4N9fluvel_ip17HausdorffDistanceE" title="fluvel_ip::HausdorffDistance"><span class="n"><span class="pre">HausdorffDistance</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hd_</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel14AnalysisWindow3hd_E" title="Link to this definition">#</a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow7worker_E">
+<span id="_CPPv3N6fluvel14AnalysisWindow7worker_E"></span><span id="_CPPv2N6fluvel14AnalysisWindow7worker_E"></span><span id="fluvel::AnalysisWindow::worker___AnalysisWorker"></span><span class="target" id="classfluvel_1_1AnalysisWindow_1a725296b8033b1e136b6d6301c5179be1"></span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel14AnalysisWorkerE" title="fluvel::AnalysisWorker"><span class="n"><span class="pre">AnalysisWorker</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">worker_</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel14AnalysisWindow7worker_E" title="Link to this definition">#</a><br /></dt>
+<dd><p>Computes the measures in its own thread. </p>
+</dd></dl>
 
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow6stats_E">
-<span id="_CPPv3N6fluvel14AnalysisWindow6stats_E"></span><span id="_CPPv2N6fluvel14AnalysisWindow6stats_E"></span><span id="fluvel::AnalysisWindow::stats___std::unique_ptr:fluvel_ip::HausdorffStatistics:"></span><span class="target" id="classfluvel_1_1AnalysisWindow_1ad7acc4708ede410aab5b6537448c1544"></span><a class="reference internal" href="../../ip/ip_core.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../ip/analysis.html#_CPPv49fluvel_ip" title="fluvel_ip"><span class="n"><span class="pre">fluvel_ip</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../../ip/analysis.html#_CPPv4N9fluvel_ip19HausdorffStatisticsE" title="fluvel_ip::HausdorffStatistics"><span class="n"><span class="pre">HausdorffStatistics</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stats_</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel14AnalysisWindow6stats_E" title="Link to this definition">#</a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow14lastRequestId_E">
+<span id="_CPPv3N6fluvel14AnalysisWindow14lastRequestId_E"></span><span id="_CPPv2N6fluvel14AnalysisWindow14lastRequestId_E"></span><span id="fluvel::AnalysisWindow::lastRequestId___quint64"></span><span class="target" id="classfluvel_1_1AnalysisWindow_1a6e46f5db56744679e580a27e70ddc031"></span><span class="n"><span class="pre">quint64</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lastRequestId_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel14AnalysisWindow14lastRequestId_E" title="Link to this definition">#</a><br /></dt>
+<dd><p>Identifier of the latest request, to ignore an outdated result. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow10computing_E">
+<span id="_CPPv3N6fluvel14AnalysisWindow10computing_E"></span><span id="_CPPv2N6fluvel14AnalysisWindow10computing_E"></span><span id="fluvel::AnalysisWindow::computing___b"></span><span class="target" id="classfluvel_1_1AnalysisWindow_1a3818a08d839ed078c98b08fba1346ee1"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">computing_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">false</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel14AnalysisWindow10computing_E" title="Link to this definition">#</a><br /></dt>
+<dd><p>Whether a computation is running. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow5data_E">
+<span id="_CPPv3N6fluvel14AnalysisWindow5data_E"></span><span id="_CPPv2N6fluvel14AnalysisWindow5data_E"></span><span id="fluvel::AnalysisWindow::data___std::shared_ptr:AnalysisResult::DataC:"></span><span class="target" id="classfluvel_1_1AnalysisWindow_1af8e2a2517984c584d64f07d88ffcdc19"></span><a class="reference internal" href="../../ip/ip_core.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel14AnalysisResultE" title="fluvel::AnalysisResult"><span class="n"><span class="pre">AnalysisResult</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel14AnalysisResult4DataE" title="fluvel::AnalysisResult::Data"><span class="n"><span class="pre">Data</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel14AnalysisWindow5data_E" title="Link to this definition">#</a><br /></dt>
+<dd><p>Statistics of the last result, to compute other quantiles. </p>
+</dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel14AnalysisWindow7factor_E">
@@ -3475,13 +3487,12 @@ Unlike the session dialogs, this dialog reads and writes the singleton itself, b
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow10checkListsEv"><code class="docutils literal notranslate"><span class="pre">checkLists()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow10closeEventEP11QCloseEvent"><code class="docutils literal notranslate"><span class="pre">closeEvent()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow9computeHdEv"><code class="docutils literal notranslate"><span class="pre">computeHd()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow15onAnalysisReadyERK14AnalysisResult"><code class="docutils literal notranslate"><span class="pre">onAnalysisReady()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow15refreshQuantileEi"><code class="docutils literal notranslate"><span class="pre">refreshQuantile()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow27calculateShapesIntersectionEv"><code class="docutils literal notranslate"><span class="pre">calculateShapesIntersection()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow8widget1_E"><code class="docutils literal notranslate"><span class="pre">widget1_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow8widget2_E"><code class="docutils literal notranslate"><span class="pre">widget2_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow14computeButton_E"><code class="docutils literal notranslate"><span class="pre">computeButton_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow20alignCentroidsCheck_E"><code class="docutils literal notranslate"><span class="pre">alignCentroidsCheck_</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow13intersection_E"><code class="docutils literal notranslate"><span class="pre">intersection_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow13resultsPopup_E"><code class="docutils literal notranslate"><span class="pre">resultsPopup_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow15hausdorffLabel_E"><code class="docutils literal notranslate"><span class="pre">hausdorffLabel_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow13percentileSp_E"><code class="docutils literal notranslate"><span class="pre">percentileSp_</span></code></a></li>
@@ -3491,8 +3502,10 @@ Unlike the session dialogs, this dialog reads and writes the singleton itself, b
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow19centroidsDistLabel_E"><code class="docutils literal notranslate"><span class="pre">centroidsDistLabel_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow29normalizedCentroidsDistLabel_E"><code class="docutils literal notranslate"><span class="pre">normalizedCentroidsDistLabel_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow10timeLabel_E"><code class="docutils literal notranslate"><span class="pre">timeLabel_</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow3hd_E"><code class="docutils literal notranslate"><span class="pre">hd_</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow6stats_E"><code class="docutils literal notranslate"><span class="pre">stats_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow7worker_E"><code class="docutils literal notranslate"><span class="pre">worker_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow14lastRequestId_E"><code class="docutils literal notranslate"><span class="pre">lastRequestId_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow10computing_E"><code class="docutils literal notranslate"><span class="pre">computing_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow5data_E"><code class="docutils literal notranslate"><span class="pre">data_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel14AnalysisWindow7factor_E"><code class="docutils literal notranslate"><span class="pre">factor_</span></code></a></li>
 </ul>
 </li>

@@ -409,7 +409,7 @@ systems, use the Flatpak.</p></li>
 </section>
 <section id="python-package">
 <h3>Python package<a class="headerlink" href="#python-package" title="Link to this heading">#</a></h3>
-<p>Pre-built wheels (Linux x86_64, Windows x64, macOS 13+) are attached to the
+<p>Pre-built wheels (Linux x86_64 with glibc 2.34 or newer, Windows x64, macOS 13+) are attached to the
 <a class="reference external" href="https://github.com/fluvel-io/fluvel-set/releases/tag/latest-python">latest-python release</a>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w">   </span><span class="c1"># Windows: .venv\Scripts\activate</span>
 pip<span class="w"> </span>install<span class="w"> </span>fluvel-set<span class="w"> </span>--find-links<span class="w"> </span>https://github.com/fluvel-io/fluvel-set/releases/expanded_assets/latest-python
@@ -558,9 +558,9 @@ on Windows.</p></li>
 <h4>Python bindings<a class="headerlink" href="#python-bindings" title="Link to this heading">#</a></h4>
 <p>Additional dependencies:</p>
 <ul class="simple">
-<li><p>Python ≥ 3.10</p></li>
+<li><p>Python ≥ 3.11</p></li>
 <li><p>pybind11</p></li>
-<li><p>NumPy</p></li>
+<li><p>NumPy ≥ 1.23</p></li>
 </ul>
 <p>Optional (examples only):</p>
 <ul class="simple">

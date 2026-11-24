@@ -29,6 +29,10 @@ Execution
 
 .. doxygenfile:: image_processing_worker.hpp
 
+.. doxygenfile:: image_preview_worker.hpp
+
+.. doxygenfile:: analysis_worker.hpp
+
 .. doxygenfile:: video_processing_thread.hpp
 
 .. doxygenfile:: video_recorder_worker.hpp
