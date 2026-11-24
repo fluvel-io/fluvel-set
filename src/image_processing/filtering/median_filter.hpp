@@ -190,7 +190,7 @@ private:
 
     ImageOwner output_; ///< Output buffer.
 
-    std::vector<int> columnsHisto_;                 ///< Column histograms (size = width * 256).
+    std::vector<uint16_t> columnsHisto_;                ///< Column histograms (size = width * 256).
     std::array<int, kHistogramSize> kernelHisto_{}; ///< Kernel histogram.
 
     int currentMedian_{kHistogramSize / 2}; ///< Current median index.
