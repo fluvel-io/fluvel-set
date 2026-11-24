@@ -872,17 +872,17 @@ Cliquez à nouveau sur Calculer pour appliquer le changement.</translation>
     <message>
         <location filename="../src/app/ui/components/histogram_widget.cpp" line="237"/>
         <source>No image</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune image</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/histogram_widget.cpp" line="304"/>
         <source>Level %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Niveau %1</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/histogram_widget.cpp" line="311"/>
         <source>Gray</source>
-        <translation type="unfinished">Niveaux de gris</translation>
+        <translation>Gris</translation>
     </message>
 </context>
 <context>
@@ -890,32 +890,32 @@ Cliquez à nouveau sur Calculer pour appliquer le changement.</translation>
     <message>
         <location filename="../src/app/ui/windows/histogram_window.cpp" line="49"/>
         <source>Histogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Histogramme</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/histogram_window.cpp" line="63"/>
         <source>Logarithmic scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Échelle logarithmique</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/histogram_window.cpp" line="64"/>
         <source>Makes the small values visible when a few levels dominate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rend visibles les petites valeurs lorsque quelques niveaux dominent.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/histogram_window.cpp" line="129"/>
         <source>%1 × %2 px, %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 × %2 px, %3</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/histogram_window.cpp" line="132"/>
         <source>color</source>
-        <translation type="unfinished"></translation>
+        <translation>couleur</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/histogram_window.cpp" line="132"/>
         <source>grayscale</source>
-        <translation type="unfinished"></translation>
+        <translation>niveaux de gris</translation>
     </message>
 </context>
 <context>
@@ -1146,17 +1146,17 @@ ou choisissez Fichier → Ouvrir</translation>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="326"/>
         <source>&amp;Histogram</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Histogramme</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="327"/>
         <source>Show the histogram of the displayed image.</source>
-        <translation type="unfinished"></translation>
+        <translation>Affiche l’histogramme de l’image affichée.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="328"/>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="330"/>
