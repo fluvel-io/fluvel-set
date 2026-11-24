@@ -9,6 +9,7 @@
 
 #include <QImage>
 #include <QObject>
+#include <QPainterPath>
 
 #include <vector>
 
@@ -123,9 +124,22 @@ signals:
     /**
      * @brief Emitted when the displayed view changes.
      *
+     * The image holds the background and phi only, the overlay shape is
+     * sent separately (see overlayChanged()).
+     *
      * @param image Updated image ready for display.
      */
     void viewChanged(const QImage& image);
+
+    /**
+     * @brief Emitted when the overlay shape changes.
+     *
+     * @param path Outline of the shape, in image coordinates.
+     */
+    void overlayChanged(const QPainterPath& path);
+
+    /// Emitted when the overlay shape must no longer be displayed.
+    void overlayCleared();
 
 private:
     /**
@@ -138,10 +152,13 @@ private:
      */
     void updatePhiFromLists();
 
+    /// Sends the overlay shape to the view, or clears it.
+    void emitOverlay();
+
     /**
      * @brief Composes the final displayed image.
      *
-     * Combines background, phi, and optional overlay.
+     * Combines background and phi.
      */
     void composeView();
 

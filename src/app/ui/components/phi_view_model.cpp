@@ -4,7 +4,6 @@
 #include "phi_view_model.hpp"
 #include "phi_editor.hpp"
 
-#include <QPainter>
 
 #ifdef FLUVEL_DEBUG
 #include <QDebug>
@@ -20,13 +19,6 @@ const QColor kInColor{0, 230, 118};
 // phi (Lout and Lin colors) in interactive mode
 const QColor kInteractiveOuterColor{32, 0, 128};
 const QColor kInteractiveInnerColor{0, 115, 59};
-
-// overlay colors (user interaction)
-const QColor kOverlayMainColor{kInColor};
-const QColor kOverlayOutlineColor{kOutColor};
-
-constexpr int kOverlayMainWidth{2};
-constexpr int kOverlayOutlineWidth{4};
 
 PhiViewModel::PhiViewModel(PhiEditor* editor, fluvel_ip::Connectivity connectivity, QObject* parent)
     : QObject(parent)
@@ -57,6 +49,7 @@ void PhiViewModel::setConnectivity(fluvel_ip::Connectivity c)
     updatePhiFromLists();
 
     overlayVisible_ = false;
+    emit overlayCleared();
     composeView();
 }
 
@@ -68,6 +61,7 @@ void PhiViewModel::setBackground(const QImage& image)
     updatePhiFromLists();
 
     overlayVisible_ = false;
+    emit overlayCleared();
     composeView();
 }
 
@@ -81,6 +75,7 @@ void PhiViewModel::updateFromEditor()
     updatePhiFromLists();
 
     overlayVisible_ = false;
+    emit overlayCleared();
     composeView();
 }
 
@@ -91,6 +86,7 @@ void PhiViewModel::onClearFromEditor()
     displayedPhi_ = background_;
 
     overlayVisible_ = false;
+    emit overlayCleared();
     composeView();
 }
 
@@ -201,57 +197,48 @@ void PhiViewModel::composeView()
     qDebug() << __FILE__ << " composeView() " << __LINE__ << __func__;
 #endif
 
-    QImage outputImg = displayedPhi_;
-
-    if (overlayVisible_)
-    {
-        QPainter p(&outputImg);
-        p.setRenderHint(QPainter::Antialiasing, false);
-        p.setBrush(Qt::NoBrush);
-
-        auto drawShape = [&](QPainter& painter)
-        {
-            if (overlayShape_.type == ShapeType::Rectangle)
-                painter.drawRect(overlayShape_.boundingBox);
-            else
-                painter.drawEllipse(overlayShape_.boundingBox);
-        };
-
-        // --- outline (dessous) ---
-        {
-            QPen pen(kOverlayOutlineColor, kOverlayOutlineWidth);
-            p.setPen(pen);
-            drawShape(p);
-        }
-
-        // --- main (dessus) ---
-        {
-            QPen pen(kOverlayMainColor, kOverlayMainWidth);
-            p.setPen(pen);
-            drawShape(p);
-        }
-    }
-
-    emit viewChanged(outputImg);
+    emit viewChanged(displayedPhi_);
 }
 
 void PhiViewModel::setOverlay(const ShapeInfo& overlayShape)
 {
     overlayShape_ = overlayShape;
     overlayVisible_ = true;
-    composeView();
+    emitOverlay();
 }
 
 void PhiViewModel::showOverlay()
 {
     overlayVisible_ = true;
-    composeView();
+    emitOverlay();
 }
 
 void PhiViewModel::hideOverlay()
 {
     overlayVisible_ = false;
-    composeView();
+    emit overlayCleared();
+}
+
+void PhiViewModel::emitOverlay()
+{
+    if (!overlayVisible_ || !overlayShape_.boundingBox.isValid())
+    {
+        emit overlayCleared();
+        return;
+    }
+
+    // The shape is a vector item of the viewer: it stays sharp at any zoom and
+    // moving it never touches the image.
+    const QRectF box(overlayShape_.boundingBox.normalized());
+
+    QPainterPath path;
+
+    if (overlayShape_.type == ShapeType::Rectangle)
+        path.addRect(box);
+    else
+        path.addEllipse(box);
+
+    emit overlayChanged(path);
 }
 
 void PhiViewModel::setInteractiveMode(bool enabled)

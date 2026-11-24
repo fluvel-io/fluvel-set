@@ -14,6 +14,8 @@
 #include "overlay_text_item.hpp"
 
 #include <QGraphicsBlurEffect>
+#include <QGraphicsPathItem>
+#include <QGraphicsRectItem>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsView>
 #include <QImage>
@@ -131,6 +133,20 @@ public:
      * are emptied.
      */
     void setLayers(const QVector<PointLayer>& layers);
+
+    /**
+     * @brief Shows an outline over the image (for example the shape being placed).
+     *
+     * The outline is a vector item of the scene, in image coordinates: it is
+     * drawn at the resolution of the screen, with a constant width and
+     * anti-aliasing, and moving it does not touch the image.
+     *
+     * @param path Outline in image coordinates.
+     */
+    void setShapeOverlay(const QPainterPath& path);
+
+    /// Hides the outline set by setShapeOverlay().
+    void clearShapeOverlay();
 
     /**
      * @brief Sets the current display frame.
@@ -461,6 +477,11 @@ private:
     QImage lastDisplayedImage_;
 
     ViewConfig viewConfig_{};
+
+    /// Outline drawn under (wide) and over (narrow) to be visible on any background.
+    QGraphicsRectItem* shapeClipItem_{nullptr};
+    QGraphicsPathItem* shapeOutlineItem_{nullptr};
+    QGraphicsPathItem* shapeItem_{nullptr};
 
     /// One graphics item per layer (created on demand, never destroyed).
     QVector<ContourPointsItem*> layerItems_;

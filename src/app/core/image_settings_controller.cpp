@@ -25,6 +25,11 @@ ImageSettingsController::ImageSettingsController(const ImageComputeConfig& confi
     connect(phiViewModel_.get(), &PhiViewModel::viewChanged, this,
             &ImageSettingsController::onViewChanged);
 
+    connect(phiViewModel_.get(), &PhiViewModel::overlayChanged, this,
+            &ImageSettingsController::overlayChanged);
+    connect(phiViewModel_.get(), &PhiViewModel::overlayCleared, this,
+            &ImageSettingsController::overlayCleared);
+
     connect(&previewWorker_, &ImagePreviewWorker::previewReady, this,
             &ImageSettingsController::onPreviewReady);
 }

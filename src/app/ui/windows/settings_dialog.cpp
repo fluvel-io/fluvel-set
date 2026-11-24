@@ -819,6 +819,11 @@ void SettingsDialog::setupConnections()
     connect(imageSettingsController_, &ImageSettingsController::viewChanged, imageViewer_,
             &ImageViewerWidget::setImage);
 
+    connect(imageSettingsController_, &ImageSettingsController::overlayChanged, imageViewer_,
+            &ImageViewerWidget::setShapeOverlay);
+    connect(imageSettingsController_, &ImageSettingsController::overlayCleared, imageViewer_,
+            &ImageViewerWidget::clearShapeOverlay);
+
     connect(algoWidget_, &AlgoSettingsWidget::connectivityChanged, imageSettingsController_,
             &ImageSettingsController::onConnectivityChanged);
 

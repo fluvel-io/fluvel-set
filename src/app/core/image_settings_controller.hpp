@@ -12,6 +12,7 @@
 #include "phi_view_model.hpp"
 
 #include <QObject>
+#include <QPainterPath>
 
 namespace fluvel
 {
@@ -124,6 +125,12 @@ public:
 signals:
     /// Emitted when the preview image changes.
     void viewChanged(const QImage& imageSettings);
+
+    /// Emitted when the outline of the shape being placed changes (image coordinates).
+    void overlayChanged(const QPainterPath& path);
+
+    /// Emitted when the outline of the shape must be hidden.
+    void overlayCleared();
 
     /// Emitted when processing starts.
     void processingStarted();

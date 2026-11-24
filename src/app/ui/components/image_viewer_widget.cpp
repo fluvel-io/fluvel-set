@@ -24,7 +24,13 @@
 namespace
 {
 constexpr QPoint kCursorOverlayOffset{8, -8};
-}
+
+// Outline of the shape being placed (same colors as the phi boundaries).
+const QColor kShapeMainColor{0, 230, 118};
+const QColor kShapeOutlineColor{64, 0, 255};
+constexpr qreal kShapeMainWidth{2.0};
+constexpr qreal kShapeOutlineWidth{4.0};
+} // namespace
 
 namespace fluvel
 {
@@ -108,6 +114,33 @@ void ImageViewerWidget::setupItems()
     pixmapItem_ = new QGraphicsPixmapItem(contentRoot_);
     pixmapItem_->setZValue(0);
 
+    // The outline is clipped to the image, as it was when it was drawn into it.
+    shapeClipItem_ = new QGraphicsRectItem(contentRoot_);
+    shapeClipItem_->setPen(Qt::NoPen);
+    shapeClipItem_->setBrush(Qt::NoBrush);
+    shapeClipItem_->setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
+    shapeClipItem_->setAcceptedMouseButtons(Qt::NoButton);
+    shapeClipItem_->setZValue(110.0);
+
+    auto makeShapeItem = [this](const QColor& color, qreal width)
+    {
+        auto* item = new QGraphicsPathItem(shapeClipItem_);
+
+        // Cosmetic pen: constant width on the screen, whatever the zoom.
+        QPen pen(color, width);
+        pen.setCosmetic(true);
+
+        item->setPen(pen);
+        item->setBrush(Qt::NoBrush);
+        item->setAcceptedMouseButtons(Qt::NoButton);
+        item->hide();
+
+        return item;
+    };
+
+    shapeOutlineItem_ = makeShapeItem(kShapeOutlineColor, kShapeOutlineWidth);
+    shapeItem_ = makeShapeItem(kShapeMainColor, kShapeMainWidth);
+
     blur_ = new QGraphicsBlurEffect;
     pixmapItem_->setGraphicsEffect(blur_);
     blur_->setBlurRadius(0);
@@ -168,6 +201,23 @@ void ImageViewerWidget::setupInfoOverlay()
     infoOverlay_->setZValue(100.0);
     infoOverlay_->hide();
     infoOverlay_->setCursor(Qt::ArrowCursor);
+}
+
+void ImageViewerWidget::setShapeOverlay(const QPainterPath& path)
+{
+    shapeClipItem_->setRect(scene_->sceneRect());
+
+    shapeOutlineItem_->setPath(path);
+    shapeItem_->setPath(path);
+
+    shapeOutlineItem_->show();
+    shapeItem_->show();
+}
+
+void ImageViewerWidget::clearShapeOverlay()
+{
+    shapeOutlineItem_->hide();
+    shapeItem_->hide();
 }
 
 ContourPointsItem* ImageViewerWidget::layerItem(int index)
