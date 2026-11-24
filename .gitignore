@@ -70,13 +70,51 @@ perf.data*
 callgrind.out.*
 
 # =========================
-# OS / editor junk
+# OS junk
 # =========================
 .DS_Store
 Thumbs.db
 *~
 *.swp
 *.swo
+
+# =========================
+# Editors / IDEs
+# =========================
+# JetBrains (CLion, ...)
+.idea/
+# VS Code
+.vscode/
+# Visual Studio
+.vs/
+# Sublime Text
+*.sublime-workspace
+# clangd index
+.cache/
+# Qt Creator
+.qtcreator/
+.qt/
+# Xcode
+xcuserdata/
+# Vim
+*.un~
+Session.vim
+# Emacs
+\#*\#
+.\#*
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+# Output of the workflow example (adjust the path to match yours)
+# examples/workflow/output/
 
 # AddressSanitizer log files
 scripts/asan_log.*
@@ -100,3 +138,6 @@ web/assets/
 # Local packaging/build artifacts
 tools/
 dist/
+
+# Output of the workflow example
+examples/workflow/output/
