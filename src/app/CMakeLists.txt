@@ -394,6 +394,7 @@ set(APP_RESOURCES
     ${FLUVEL_RESOURCES_DIR}/icons/actions/edit-clear-history.svg
 
     ${FLUVEL_RESOURCES_DIR}/icons/actions/measure-symbolic.svg
+    ${FLUVEL_RESOURCES_DIR}/icons/actions/histogram-symbolic.svg
     ${FLUVEL_RESOURCES_DIR}/icons/actions/settings-symbolic.svg
     ${FLUVEL_RESOURCES_DIR}/icons/actions/language-symbolic.svg
     ${FLUVEL_RESOURCES_DIR}/icons/actions/help-about-symbolic.svg

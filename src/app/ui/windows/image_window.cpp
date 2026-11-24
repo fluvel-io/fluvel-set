@@ -327,6 +327,9 @@ void ImageWindow::setupActions()
     histogramAct_->setStatusTip(tr("Show the histogram of the displayed image."));
     histogramAct_->setShortcut(tr("Ctrl+H"));
 
+    QIcon histogramIcon = il::loadIcon(":/icons/actions/histogram-symbolic.svg");
+    histogramAct_->setIcon(histogramIcon);
+
     aboutAct_ = new QAction(tr("&About"), this);
     aboutAct_->setStatusTip(tr("Application information, license and home page."));
 
