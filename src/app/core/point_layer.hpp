@@ -30,6 +30,11 @@ struct PointLayer
     /// Scale from the layer coordinates to the displayed image coordinates.
     /// Set by the controller (e.g. downscale factor when the source image is shown).
     qreal scale{1.0};
+
+    /// Draw the points as a smooth line at least a couple of screen pixels
+    /// wide, so that a dense boundary stays continuous when the image is
+    /// zoomed out (used for phi, which has one point per boundary pixel).
+    bool smooth{false};
 };
 
 } // namespace fluvel

@@ -6,6 +6,7 @@
 #include "contour_types.hpp"
 #include "phi_editor.hpp"
 #include "point.hpp"
+#include "point_layer.hpp"
 
 #include <QImage>
 #include <QObject>
@@ -124,12 +125,22 @@ signals:
     /**
      * @brief Emitted when the displayed view changes.
      *
-     * The image holds the background and phi only, the overlay shape is
-     * sent separately (see overlayChanged()).
+     * The image is the background only: phi (see layersChanged()) and the
+     * overlay shape (see overlayChanged()) are sent separately.
      *
      * @param image Updated image ready for display.
      */
     void viewChanged(const QImage& image);
+
+    /**
+     * @brief Emitted when the boundaries of phi change.
+     *
+     * The outer and inner boundaries are sent as two layers of points (in
+     * the order outer, inner) to be drawn over the image by the viewer.
+     *
+     * @param layers Layers of points, in image coordinates.
+     */
+    void layersChanged(const QVector<PointLayer>& layers);
 
     /**
      * @brief Emitted when the overlay shape changes.
@@ -147,20 +158,11 @@ private:
      */
     void updateLists();
 
-    /**
-     * @brief Rebuilds the phi image from boundary lists.
-     */
-    void updatePhiFromLists();
+    /// Sends the boundaries of phi to the view.
+    void emitLayers();
 
     /// Sends the overlay shape to the view, or clears it.
     void emitOverlay();
-
-    /**
-     * @brief Composes the final displayed image.
-     *
-     * Combines background and phi.
-     */
-    void composeView();
 
     /// Associated editor (not owned).
     PhiEditor* editor_;
@@ -170,9 +172,6 @@ private:
 
     /// Internal phi representation.
     QImage phi_;
-
-    /// Final composed image displayed to the user.
-    QImage displayedPhi_;
 
     /// Outer contour boundary.
     std::vector<fluvel_ip::Point2D_i> outerBoundary_;

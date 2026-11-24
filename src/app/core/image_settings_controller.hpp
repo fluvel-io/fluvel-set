@@ -126,6 +126,9 @@ signals:
     /// Emitted when the preview image changes.
     void viewChanged(const QImage& imageSettings);
 
+    /// Emitted when the boundaries of phi change (layers of points, outer then inner).
+    void layersChanged(const QVector<PointLayer>& layers);
+
     /// Emitted when the outline of the shape being placed changes (image coordinates).
     void overlayChanged(const QPainterPath& path);
 

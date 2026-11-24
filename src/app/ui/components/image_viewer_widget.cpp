@@ -220,8 +220,6 @@ void ImageViewerWidget::setupInfoOverlay()
 
 void ImageViewerWidget::setShapeOverlay(const QPainterPath& path)
 {
-    shapeClipItem_->setRect(scene_->sceneRect());
-
     shapeOutlineItem_->setPath(path);
     shapeItem_->setPath(path);
 
@@ -327,6 +325,7 @@ void ImageViewerWidget::setLayers(const QVector<PointLayer>& layers)
         ContourPointsItem* item = layerItem(i);
         item->setPoints(layers[i].points);
         item->setScale(layers[i].scale);
+        item->setSmooth(layers[i].smooth);
         layerColors_[i] = layers[i].color;
         layerVisible_[i] = layers[i].visible;
     }
@@ -402,6 +401,9 @@ void ImageViewerWidget::updateSceneRect(const QImage& img)
 
     scene_->setSceneRect(0.0, 0.0, static_cast<qreal>(img.width()),
                          static_cast<qreal>(img.height()));
+
+    // The outline of the shape is clipped to the image.
+    shapeClipItem_->setRect(scene_->sceneRect());
 }
 
 void ImageViewerWidget::handleImageSizeChanged()

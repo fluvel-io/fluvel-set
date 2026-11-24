@@ -53,6 +53,15 @@ public:
     /** @} */
 
     /**
+     * @brief Draws the points as a smooth line of at least a few screen pixels.
+     *
+     * The width on the screen then does not shrink with the zoom, and the
+     * line is anti-aliased. By default the points are drawn as they are, one
+     * pen width wide in image pixels.
+     */
+    void setSmooth(bool smooth);
+
+    /**
      * @brief Sets the drawing color.
      *
      * @param color Contour color.
@@ -87,6 +96,7 @@ private:
     QVector<QPointF> points_;
     QRectF boundingRect_{0.0, 0.0, 1.0, 1.0};
     QColor color_{Qt::red};
+    bool smooth_{false};
 };
 
 } // namespace fluvel

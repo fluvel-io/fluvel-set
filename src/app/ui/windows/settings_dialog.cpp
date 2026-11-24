@@ -819,6 +819,9 @@ void SettingsDialog::setupConnections()
     connect(imageSettingsController_, &ImageSettingsController::viewChanged, imageViewer_,
             &ImageViewerWidget::setImage);
 
+    connect(imageSettingsController_, &ImageSettingsController::layersChanged, imageViewer_,
+            &ImageViewerWidget::setLayers);
+
     connect(imageSettingsController_, &ImageSettingsController::overlayChanged, imageViewer_,
             &ImageViewerWidget::setShapeOverlay);
     connect(imageSettingsController_, &ImageSettingsController::overlayCleared, imageViewer_,

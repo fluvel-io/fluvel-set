@@ -5,11 +5,21 @@
 
 #include <QPainter>
 
+#include <algorithm>
+#include <cmath>
+
 namespace
 {
 // Width of the pen used to draw the contour points, in image pixels
 // (the pen is not cosmetic, so it is scaled with the zoom).
 constexpr qreal kPenWidth = 1.1;
+
+// Smallest width on the screen of a smooth line, in screen pixels.
+constexpr qreal kSmoothMinScreenWidth = 2.0;
+
+// Zoom out factor up to which the bounding rectangle contains the whole
+// stroke of a smooth line (its width in image pixels grows when zooming out).
+constexpr qreal kSmoothMaxZoomOut = 16.0;
 } // namespace
 
 namespace fluvel
@@ -31,6 +41,17 @@ void ContourPointsItem::setPoints(const QVector<QPointF>& points)
     prepareGeometryChange();
     points_ = points;
     boundingRect_ = computeBoundingRect();
+}
+
+void ContourPointsItem::setSmooth(bool smooth)
+{
+    if (smooth_ == smooth)
+        return;
+
+    prepareGeometryChange();
+    smooth_ = smooth;
+    boundingRect_ = computeBoundingRect();
+    update();
 }
 
 void ContourPointsItem::clearPoints()
@@ -73,7 +94,9 @@ QRectF ContourPointsItem::computeBoundingRect() const
     // The bounding rectangle must also contain the whole stroke of the
     // outermost points: half of the pen width goes beyond the pixel.
 
-    constexpr qreal margin = 0.5 + kPenWidth;
+    const qreal strokeWidth =
+        smooth_ ? std::max(kPenWidth, kSmoothMinScreenWidth * kSmoothMaxZoomOut) : kPenWidth;
+    const qreal margin = 0.5 + strokeWidth;
     rf.adjust(-margin, -margin, margin, margin);
 
     return rf;
@@ -81,13 +104,28 @@ QRectF ContourPointsItem::computeBoundingRect() const
 
 void ContourPointsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*)
 {
-    painter->setRenderHint(QPainter::Antialiasing, false);
+    painter->setRenderHint(QPainter::Antialiasing, smooth_);
     painter->setRenderHint(QPainter::SmoothPixmapTransform, false);
     painter->setRenderHint(QPainter::TextAntialiasing, false);
 
+    qreal width = kPenWidth;
+
+    if (smooth_)
+    {
+        // Scale from image pixels to screen pixels (zoom and layer scale).
+        const QTransform& t = painter->worldTransform();
+        const qreal zoom = std::hypot(t.m11(), t.m12());
+
+        if (zoom > 0.0)
+            width = std::max(kPenWidth, kSmoothMinScreenWidth / zoom);
+    }
+
     QPen pen(color_);
-    pen.setWidthF(kPenWidth);
+    pen.setWidthF(width);
     pen.setCosmetic(false);
+
+    if (smooth_)
+        pen.setCapStyle(Qt::RoundCap);
 
     painter->setPen(pen);
     painter->setBrush(Qt::NoBrush);

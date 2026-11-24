@@ -2,6 +2,7 @@
 // Copyright (C) 2010-2026 Fabien Bessy
 
 #include "phi_view_model.hpp"
+#include "contour_adapters.hpp"
 #include "phi_editor.hpp"
 
 
@@ -34,7 +35,6 @@ PhiViewModel::PhiViewModel(PhiEditor* editor, fluvel_ip::Connectivity connectivi
     phi_ = editor_->phi();
 
     updateLists();
-    updatePhiFromLists();
 
     connect(editor_, &PhiEditor::editedPhiChanged, this, &PhiViewModel::updateFromEditor);
 
@@ -46,11 +46,10 @@ void PhiViewModel::setConnectivity(fluvel_ip::Connectivity c)
     connectivity_ = c;
 
     updateLists();
-    updatePhiFromLists();
+    emitLayers();
 
     overlayVisible_ = false;
     emit overlayCleared();
-    composeView();
 }
 
 void PhiViewModel::setBackground(const QImage& image)
@@ -58,11 +57,13 @@ void PhiViewModel::setBackground(const QImage& image)
     background_ = image.convertToFormat(QImage::Format_RGB32);
 
     updateLists();
-    updatePhiFromLists();
+
+    // The image first: it sets the size of the scene the layers refer to.
+    emit viewChanged(background_);
+    emitLayers();
 
     overlayVisible_ = false;
     emit overlayCleared();
-    composeView();
 }
 
 void PhiViewModel::updateFromEditor()
@@ -72,22 +73,20 @@ void PhiViewModel::updateFromEditor()
 #endif
 
     updateLists();
-    updatePhiFromLists();
+    emitLayers();
 
     overlayVisible_ = false;
     emit overlayCleared();
-    composeView();
 }
 
 void PhiViewModel::onClearFromEditor()
 {
     outerBoundary_.clear();
     innerBoundary_.clear();
-    displayedPhi_ = background_;
+    emitLayers();
 
     overlayVisible_ = false;
     emit overlayCleared();
-    composeView();
 }
 
 void PhiViewModel::updateLists()
@@ -153,51 +152,22 @@ void PhiViewModel::updateLists()
     }
 }
 
-void PhiViewModel::updatePhiFromLists()
+void PhiViewModel::emitLayers()
 {
-#ifdef FLUVEL_DEBUG
-    qDebug() << __FILE__ << " updatePhiFromLists() " << __LINE__ << __func__;
-#endif
+    const QColor& outColor = interactiveMode_ ? kInteractiveOuterColor : kOutColor;
+    const QColor& inColor = interactiveMode_ ? kInteractiveInnerColor : kInColor;
 
-    displayedPhi_ = background_;
+    QVector<PointLayer> layers(2);
 
-    if (displayedPhi_.size() != listsGridSize_)
-        return;
+    layers[0].points = convertToQVector(outerBoundary_);
+    layers[0].color = outColor;
+    layers[0].smooth = true;
 
-    Q_ASSERT(displayedPhi_.format() == QImage::Format_RGB32);
+    layers[1].points = convertToQVector(innerBoundary_);
+    layers[1].color = inColor;
+    layers[1].smooth = true;
 
-    const QRgb outColor = (interactiveMode_ ? kInteractiveOuterColor : kOutColor).rgb();
-    const QRgb inColor = (interactiveMode_ ? kInteractiveInnerColor : kInColor).rgb();
-
-    const int width = displayedPhi_.width();
-    const int height = displayedPhi_.height();
-
-    for (const auto& p : outerBoundary_)
-    {
-        if (p.y < 0 || p.y >= height || p.x < 0 || p.x >= width)
-            continue;
-
-        QRgb* line = reinterpret_cast<QRgb*>(displayedPhi_.scanLine(p.y));
-        line[p.x] = outColor;
-    }
-
-    for (const auto& p : innerBoundary_)
-    {
-        if (p.y < 0 || p.y >= height || p.x < 0 || p.x >= width)
-            continue;
-
-        QRgb* line = reinterpret_cast<QRgb*>(displayedPhi_.scanLine(p.y));
-        line[p.x] = inColor;
-    }
-}
-
-void PhiViewModel::composeView()
-{
-#ifdef FLUVEL_DEBUG
-    qDebug() << __FILE__ << " composeView() " << __LINE__ << __func__;
-#endif
-
-    emit viewChanged(displayedPhi_);
+    emit layersChanged(layers);
 }
 
 void PhiViewModel::setOverlay(const ShapeInfo& overlayShape)
@@ -245,8 +215,7 @@ void PhiViewModel::setInteractiveMode(bool enabled)
 {
     interactiveMode_ = enabled;
 
-    updatePhiFromLists(); // recalcul des couleurs atténuées
-    composeView();
+    emitLayers(); // colors are dimmed in interactive mode
 }
 
 } // namespace fluvel
