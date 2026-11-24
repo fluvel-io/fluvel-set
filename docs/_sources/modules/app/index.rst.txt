@@ -60,7 +60,7 @@ data can be stored.
      - worker -> display
      - **Wait**: the worker does not compute a new frame until the controller
        has acknowledged the previous one (back-pressure).
-   * - Settings preview and analysis
+   * - Settings preview and Hausdorff
      - window -> worker
      - **Latest wins**: only the latest request is computed. Each request has
        a number, and an answer that no longer matches the last request is
@@ -150,12 +150,12 @@ its first preview is ready, instead of the previous image.
      </a>
    </div>
 
-Analysis
---------
+Hausdorff comparison
+---------------------
 
-The analysis window compares two shapes (intersection, Hausdorff distance,
+The Hausdorff window compares two shapes (intersection, Hausdorff distance,
 quantile and distance between centroids). The measures can take a long time
-on large shapes, so they are computed by an analysis worker in its own thread:
+on large shapes, so they are computed by a Hausdorff worker in its own thread:
 the window copies the shapes, the images and the options into a request, and the
 button stays disabled until the answer arrives. As for the preview, only the
 latest request is computed and a result that no longer matches the selection
@@ -166,8 +166,8 @@ computation.
 .. raw:: html
 
    <div style="text-align:center;">
-     <a href="../../_static/analysis_sequence.svg" target="_blank">
-       <img src="../../_static/analysis_sequence.svg"
+     <a href="../../_static/hausdorff_sequence.svg" target="_blank">
+       <img src="../../_static/hausdorff_sequence.svg"
             style="max-width:760px; width:100%; height:auto;">
      </a>
    </div>

@@ -792,6 +792,59 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence,
 
 </dd></dl>
 
+<dl class="cpp type">
+<dt class="sig sig-object cpp">
+<span class="target" id="namespacefluvel__ip"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fluvel_ip</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-variables">Variables</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9fluvel_ip16kHistogramLevelsE">
+<span id="_CPPv3N9fluvel_ip16kHistogramLevelsE"></span><span id="_CPPv2N9fluvel_ip16kHistogramLevelsE"></span><span id="fluvel_ip::kHistogramLevels__i"></span><span class="target" id="namespacefluvel__ip_1ad19eae26b1a23fe01b6d623e47616e9c"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">kHistogramLevels</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">256</span></span><a class="headerlink" href="#_CPPv4N9fluvel_ip16kHistogramLevelsE" title="Link to this definition">#</a><br /></dt>
+<dd><p>Number of levels of an 8-bit channel. </p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N9fluvel_ip9HistogramE">
+<span id="_CPPv3N9fluvel_ip9HistogramE"></span><span id="_CPPv2N9fluvel_ip9HistogramE"></span><span id="fluvel_ip::Histogram"></span><span class="target" id="structfluvel__ip_1_1Histogram"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Histogram</span></span></span><a class="headerlink" href="#_CPPv4N9fluvel_ip9HistogramE" title="Link to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;histogram.hpp&gt;</em></div>
+<p>Intensity histogram of an 8-bit image. </p>
+<p>For a grayscale image only <code class="docutils literal notranslate"><span class="pre">bins[0]</span></code> is filled (gray level). For a color image the channels are always stored in the order red, green, blue, whatever the memory layout of the image (RGB, BGR, …). The alpha channel is ignored. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK9fluvel_ip9Histogram12channelCountEv">
+<span id="_CPPv3NK9fluvel_ip9Histogram12channelCountEv"></span><span id="_CPPv2NK9fluvel_ip9Histogram12channelCountEv"></span><span id="fluvel_ip::Histogram::channelCountC"></span><span class="target" id="structfluvel__ip_1_1Histogram_1a82624534053796ef24395f57deef8f78"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">channelCount</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK9fluvel_ip9Histogram12channelCountEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Number of channels filled (1 or 3). </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9fluvel_ip9Histogram5colorE">
+<span id="_CPPv3N9fluvel_ip9Histogram5colorE"></span><span id="_CPPv2N9fluvel_ip9Histogram5colorE"></span><span id="fluvel_ip::Histogram::color__b"></span><span class="target" id="structfluvel__ip_1_1Histogram_1adeba4cf126198b3d0726d1f54b9c322d"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">color</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">false</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N9fluvel_ip9Histogram5colorE" title="Link to this definition">#</a><br /></dt>
+<dd><p>True for a color image (3 channels filled), false for grayscale (1 channel). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9fluvel_ip9Histogram7samplesE">
+<span id="_CPPv3N9fluvel_ip9Histogram7samplesE"></span><span id="_CPPv2N9fluvel_ip9Histogram7samplesE"></span><span id="fluvel_ip::Histogram::samples__uint64_t"></span><span class="target" id="structfluvel__ip_1_1Histogram_1a8994da6ae4b327d678249103a7256c61"></span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">samples</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N9fluvel_ip9Histogram7samplesE" title="Link to this definition">#</a><br /></dt>
+<dd><p>Number of counted pixels (all the pixels, or the sampled ones, see computeHistogram()). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9fluvel_ip9Histogram4binsE">
+<span id="_CPPv3N9fluvel_ip9Histogram4binsE"></span><span id="_CPPv2N9fluvel_ip9Histogram4binsE"></span><span id="fluvel_ip::Histogram::bins__std::array:std::array:uint64_t.kHistogramLevels:.3:"></span><span class="target" id="structfluvel__ip_1_1Histogram_1a8a3b1829f09834c0be7bcb00533b672b"></span><a class="reference internal" href="ip_core.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="ip_core.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N9fluvel_ip16kHistogramLevelsE" title="fluvel_ip::kHistogramLevels"><span class="n"><span class="pre">kHistogramLevels</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bins</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N9fluvel_ip9Histogram4binsE" title="Link to this definition">#</a><br /></dt>
+<dd><p>bins[channel][level]: number of pixels of the channel having this level. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 
@@ -891,6 +944,14 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence,
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip19HausdorffStatistics11minimaBToA_E"><code class="docutils literal notranslate"><span class="pre">minimaBToA_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip19HausdorffStatistics4meanERKNSt6vectorIfEE"><code class="docutils literal notranslate"><span class="pre">mean()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip19HausdorffStatistics8quantileERKNSt6vectorIfEEi"><code class="docutils literal notranslate"><span class="pre">quantile()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip16kHistogramLevelsE"><code class="docutils literal notranslate"><span class="pre">kHistogramLevels</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip9HistogramE"><code class="docutils literal notranslate"><span class="pre">fluvel_ip::Histogram</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK9fluvel_ip9Histogram12channelCountEv"><code class="docutils literal notranslate"><span class="pre">channelCount()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip9Histogram5colorE"><code class="docutils literal notranslate"><span class="pre">color</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip9Histogram7samplesE"><code class="docutils literal notranslate"><span class="pre">samples</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip9Histogram4binsE"><code class="docutils literal notranslate"><span class="pre">bins</span></code></a></li>
 </ul>
 </li>
 </ul>

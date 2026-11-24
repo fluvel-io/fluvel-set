@@ -293,7 +293,7 @@ Image conventions of the Python functions:
 - `hausdorff_metrics` returns exact distances (Hausdorff, modified, quantile) in absolute
   pixel coordinates, like MONAI or MedPy. Use `align_centroids=True` to ignore the
   translation between the contours and measure the difference of shape only, as the
-  analysis window of the application can do. The quantile is taken in each direction
+  Hausdorff window of the application can do. The quantile is taken in each direction
   (nearest rank) and the larger value is kept.
 
 Run the tests (requires `pytest`):

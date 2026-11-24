@@ -428,7 +428,7 @@ the latency stays bounded.</p></td>
 <td><p><strong>Wait</strong>: the worker does not compute a new frame until the controller
 has acknowledged the previous one (back-pressure).</p></td>
 </tr>
-<tr class="row-even"><td><p>Settings preview and analysis</p></td>
+<tr class="row-even"><td><p>Settings preview and Hausdorff</p></td>
 <td><p>window -&gt; worker</p></td>
 <td><p><strong>Latest wins</strong>: only the latest request is computed. Each request has
 a number, and an answer that no longer matches the last request is
@@ -507,11 +507,11 @@ its first preview is ready, instead of the previous image.</p>
          style="max-width:760px; width:100%; height:auto;">
   </a>
 </div></section>
-<section id="analysis">
-<h2>Analysis<a class="headerlink" href="#analysis" title="Link to this heading">#</a></h2>
-<p>The analysis window compares two shapes (intersection, Hausdorff distance,
+<section id="hausdorff-comparison">
+<h2>Hausdorff comparison<a class="headerlink" href="#hausdorff-comparison" title="Link to this heading">#</a></h2>
+<p>The Hausdorff window compares two shapes (intersection, Hausdorff distance,
 quantile and distance between centroids). The measures can take a long time
-on large shapes, so they are computed by an analysis worker in its own thread:
+on large shapes, so they are computed by a Hausdorff worker in its own thread:
 the window copies the shapes, the images and the options into a request, and the
 button stays disabled until the answer arrives. As for the preview, only the
 latest request is computed and a result that no longer matches the selection
@@ -519,8 +519,8 @@ is ignored. The worker returns the statistics as a shared read-only object, so
 changing the percentile only reads the quantile from it, without any new
 computation.</p>
 <div style="text-align:center;">
-  <a href="../../_static/analysis_sequence.svg" target="_blank">
-    <img src="../../_static/analysis_sequence.svg"
+  <a href="../../_static/hausdorff_sequence.svg" target="_blank">
+    <img src="../../_static/hausdorff_sequence.svg"
          style="max-width:760px; width:100%; height:auto;">
   </a>
 </div></section>
@@ -715,7 +715,7 @@ apply to this dialog.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-session">Video session</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-session">Image session</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#settings-preview">Settings preview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hausdorff-comparison">Hausdorff comparison</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recording">Recording</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot">Snapshot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">

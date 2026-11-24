@@ -617,7 +617,7 @@ is not RGB: with the default settings, the result is the same either way.</p></l
 <li><p><code class="docutils literal notranslate"><span class="pre">hausdorff_metrics</span></code> returns exact distances (Hausdorff, modified, quantile) in absolute
 pixel coordinates, like MONAI or MedPy. Use <code class="docutils literal notranslate"><span class="pre">align_centroids=True</span></code> to ignore the
 translation between the contours and measure the difference of shape only, as the
-analysis window of the application can do. The quantile is taken in each direction
+Hausdorff window of the application can do. The quantile is taken in each direction
 (nearest rank) and the larger value is kept.</p></li>
 </ul>
 <p>Run the tests (requires <code class="docutils literal notranslate"><span class="pre">pytest</span></code>):</p>
