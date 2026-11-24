@@ -31,6 +31,22 @@
 namespace fluvel
 {
 
+namespace
+{
+/// Side of the mini-maps: smaller than the default, since two views share the window.
+constexpr int kMiniMapSize{100};
+
+/// Presentation of the viewers of the analysis window.
+ViewConfig analysisViewConfig()
+{
+    ViewConfig view;
+    view.algorithmOverlayEnabled = false;
+    view.miniMapEnabled = true;
+    view.miniMapSize = kMiniMapSize;
+    return view;
+}
+} // namespace
+
 int AnalysisWidget::countThis = 0;
 
 AnalysisWidget::AnalysisWidget(QWidget* parent)
@@ -50,7 +66,7 @@ AnalysisWidget::AnalysisWidget(QWidget* parent)
 
     ///////////////////////////////////////
 
-    imageViewer_ = new ImageViewerWidget(this);
+    imageViewer_ = new ImageViewerWidget(analysisViewConfig(), this);
     auto interaction = std::make_unique<InteractionSet>();
     // interaction->addBehavior(std::make_unique<AutoFitBehavior>());
     // interaction->addBehavior(std::make_unique<FullscreenBehavior>());

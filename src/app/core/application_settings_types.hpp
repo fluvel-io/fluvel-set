@@ -182,12 +182,17 @@ struct ViewConfig
 {
     static constexpr bool kDefaultOptionDisabled{false};
     static constexpr bool kDefaultOverlayEnabled{true};
+    static constexpr int kDefaultMiniMapSize{160};
 
     bool mirrorMode{kDefaultOptionDisabled};
     bool smoothDisplay{kDefaultOptionDisabled};
 
     bool algorithmOverlayEnabled{kDefaultOverlayEnabled};
     bool miniMapEnabled{kDefaultOverlayEnabled};
+
+    /// Side of the (square) mini-map in pixels. Not saved in the user settings:
+    /// a window that needs another size sets it when it builds its viewer.
+    int miniMapSize{kDefaultMiniMapSize};
 };
 
 /**

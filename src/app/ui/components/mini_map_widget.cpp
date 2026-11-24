@@ -14,7 +14,13 @@ namespace fluvel
 MiniMapWidget::MiniMapWidget(QWidget* parent)
     : QWidget(parent)
 {
-    setMinimumSize(120, 120);
+    setSide(side_);
+}
+
+void MiniMapWidget::setSide(int side)
+{
+    side_ = side;
+    setFixedSize(side_, side_);
 }
 
 void MiniMapWidget::setImage(const QImage& image)
@@ -26,8 +32,8 @@ void MiniMapWidget::setImage(const QImage& image)
         return;
     }
 
-    thumbnail_ =
-        QPixmap::fromImage(image).scaled(160, 160, Qt::KeepAspectRatio, Qt::FastTransformation);
+    thumbnail_ = QPixmap::fromImage(image).scaled(side_, side_, Qt::KeepAspectRatio,
+                                                  Qt::FastTransformation);
 
     update();
 }

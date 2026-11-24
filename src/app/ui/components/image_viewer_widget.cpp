@@ -145,7 +145,7 @@ void ImageViewerWidget::setupMiniMap()
 {
     miniMap_ = new MiniMapWidget(this);
 
-    miniMap_->resize(160, 160);
+    miniMap_->setSide(viewConfig_.miniMapSize);
 
     // The mini-map visibility follows the view configuration once an image is shown.
     miniMap_->hide();
@@ -980,8 +980,16 @@ void ImageViewerWidget::applyViewConfig(const ViewConfig& view)
 {
     const bool previousMirrorMode = viewConfig_.mirrorMode;
     const bool previousSmoothDisplay = viewConfig_.smoothDisplay;
+    const int previousMiniMapSize = viewConfig_.miniMapSize;
 
     viewConfig_ = view;
+
+    if (previousMiniMapSize != viewConfig_.miniMapSize)
+    {
+        miniMap_->setSide(viewConfig_.miniMapSize);
+        positionMiniMap();
+        updateMiniMapThumbnail();
+    }
 
     updateViewOptions();
 

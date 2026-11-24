@@ -43,6 +43,15 @@ public:
     void setImage(const QImage& image);
 
     /**
+     * @brief Sets the side of the (square) mini-map.
+     *
+     * The thumbnail is rebuilt at the new size by the next call to setImage().
+     *
+     * @param side Side in pixels.
+     */
+    void setSide(int side);
+
+    /**
      * @brief Sets the bounds of the scene represented by the mini-map.
      *
      * @param sceneRect Scene rectangle in scene coordinates.
@@ -94,6 +103,9 @@ private:
     QPointF scenePositionFromMiniMap(const QPointF& position) const;
 
     QPixmap thumbnail_;
+
+    /// Side of the mini-map, also the largest side of the thumbnail.
+    int side_{160};
 
     QRectF sceneRect_;
     QRectF visibleRect_;
