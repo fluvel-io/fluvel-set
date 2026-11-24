@@ -113,68 +113,48 @@ void PhiViewModel::updateLists()
     outerBoundary_.clear();
     innerBoundary_.clear();
 
+    const bool eight = connectivity_ != fluvel_ip::Connectivity::Four;
+
+    // A pixel belongs to a boundary list when one of its neighbors has another
+    // value. Pixels outside the image are neutral. The rows above and below are
+    // read through pointers, which is much faster than a bounds-checked access
+    // per neighbor on large images.
     for (int y = 0; y < h; ++y)
     {
-        const uchar* line = phi_.constScanLine(y);
+        const uchar* cur = phi_.constScanLine(y);
+        const uchar* up = (y > 0) ? phi_.constScanLine(y - 1) : nullptr;
+        const uchar* down = (y + 1 < h) ? phi_.constScanLine(y + 1) : nullptr;
 
         for (int x = 0; x < w; ++x)
         {
-            uchar I = line[x];
+            const uchar value = cur[x];
 
-            if (!pointIsRedundant(x, y))
-            {
-                if (I == 0)
-                {
-                    outerBoundary_.emplace_back(x, y);
-                }
-                else if (I == 255)
-                {
-                    innerBoundary_.emplace_back(x, y);
-                }
-            }
-        }
-    }
-}
-
-bool PhiViewModel::pointIsRedundant(int x, int y)
-{
-    assert(!phi_.isNull());
-
-    const int w = phi_.width();
-    const int h = phi_.height();
-
-    const uchar center = phi_.constScanLine(y)[x];
-
-    auto same_value = [&](int nx, int ny) -> bool
-    {
-        if (nx < 0 || nx >= w || ny < 0 || ny >= h)
-            return true; // hors image = neutre
-
-        return phi_.constScanLine(ny)[nx] == center;
-    };
-
-    // 4-connectivity
-    // connectivity_ == Connectivity::Four
-    if (connectivity_ == fluvel_ip::Connectivity::Four)
-    {
-        return same_value(x - 1, y) && same_value(x + 1, y) && same_value(x, y - 1) &&
-               same_value(x, y + 1);
-    }
-
-    // 8-connectivity
-    for (int dy = -1; dy <= 1; ++dy)
-    {
-        for (int dx = -1; dx <= 1; ++dx)
-        {
-            if (dx == 0 && dy == 0)
+            if (value != 0 && value != 255)
                 continue;
 
-            if (!same_value(x + dx, y + dy))
-                return false;
+            const bool hasLeft = x > 0;
+            const bool hasRight = x + 1 < w;
+
+            bool redundant = (!hasLeft || cur[x - 1] == value) && (!hasRight || cur[x + 1] == value) &&
+                             (!up || up[x] == value) && (!down || down[x] == value);
+
+            if (redundant && eight)
+            {
+                redundant = (!up || ((!hasLeft || up[x - 1] == value) &&
+                                     (!hasRight || up[x + 1] == value))) &&
+                            (!down || ((!hasLeft || down[x - 1] == value) &&
+                                       (!hasRight || down[x + 1] == value)));
+            }
+
+            if (redundant)
+                continue;
+
+            if (value == 0)
+                outerBoundary_.emplace_back(x, y);
+            else
+                innerBoundary_.emplace_back(x, y);
         }
     }
-
-    return true;
 }
 
 void PhiViewModel::updatePhiFromLists()

@@ -145,15 +145,6 @@ private:
      */
     void composeView();
 
-    /**
-     * @brief Checks whether a point is redundant in the contour.
-     *
-     * @param x X coordinate.
-     * @param y Y coordinate.
-     * @return True if the point is redundant.
-     */
-    bool pointIsRedundant(int x, int y);
-
     /// Associated editor (not owned).
     PhiEditor* editor_;
 

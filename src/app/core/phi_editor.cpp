@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <cmath>
 #include <cstddef>
+#include <cstring>
 
 namespace fluvel
 {
@@ -81,23 +82,15 @@ static void drawEllipseMask(QImage& img, const QRect& rect, uchar value)
 
 static void drawRectMask(QImage& img, const QRect& rect, uchar value)
 {
-    QRect r = rect.normalized();
+    const QRect r = rect.normalized().intersected(img.rect());
+
+    if (r.isEmpty())
+        return;
+
+    const size_t count = static_cast<size_t>(r.width());
 
     for (int y = r.top(); y <= r.bottom(); ++y)
-    {
-        if (y < 0 || y >= img.height())
-            continue;
-
-        uchar* line = img.scanLine(y);
-
-        for (int x = r.left(); x <= r.right(); ++x)
-        {
-            if (x < 0 || x >= img.width())
-                continue;
-
-            line[x] = value;
-        }
-    }
+        std::memset(img.scanLine(y) + r.left(), value, count);
 }
 
 void PhiEditor::changeShape(const ShapeInfo& shapeInfo, const QColor& color)
