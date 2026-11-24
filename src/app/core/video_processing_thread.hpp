@@ -43,6 +43,10 @@ namespace fluvel
  *
  * ReceivedFrame → preprocessing → active contour → ProcessedFrame
  *
+ * The thread is the consumer of the video source: when it is slower than the
+ * source, only the latest received frame is kept and the older ones are
+ * dropped, so the latency stays bounded.
+ *
  * Thread-safety is ensured through mutexes, condition variables,
  * and atomic synchronization primitives.
  *

@@ -34,6 +34,49 @@ together. The algorithm itself, in Fluvel IP, does not depend on Qt.
      </a>
    </div>
 
+Threads and data flow
+---------------------
+
+Every long computation of the application runs outside the GUI thread, and
+every thread follows the same producer/consumer scheme: a producer hands data
+to a consumer that lives in another thread, and the two never wait for each
+other, except where this is wanted. What changes from one case to another is
+the answer to a single question: **what happens when the consumer is slower
+than the producer?** The data can be dropped, the producer can wait, or the
+data can be stored.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 18 24 58
+
+   * - Case
+     - Producer -> consumer
+     - If the consumer is slower
+   * - Video session
+     - video source -> processing thread
+     - **Drop**: only the latest frame is kept, the older ones are lost, so
+       the latency stays bounded.
+   * - Image session
+     - worker -> display
+     - **Wait**: the worker does not compute a new frame until the controller
+       has acknowledged the previous one (back-pressure).
+   * - Settings preview and analysis
+     - window -> worker
+     - **Latest wins**: only the latest request is computed. Each request has
+       a number, and an answer that no longer matches the last request is
+       ignored.
+   * - Recording
+     - GUI thread -> encoder thread
+     - **Store**: the buffer keeps the frames in memory and spills them to
+       disk when its limit is reached, so no frame is lost.
+   * - Snapshot
+     - GUI thread -> writer thread
+     - **Bounded queue**: the files are written one at a time, in order.
+
+The sections below detail each case. In all of them, the data crosses the
+thread boundary either by a queued signal (the value is copied or shared as
+read-only), or by a small structure protected by a mutex.
+
 Video session
 -------------
 

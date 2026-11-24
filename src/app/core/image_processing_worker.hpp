@@ -74,6 +74,10 @@ enum class WorkerState
  * - Converge mode: the algorithm runs at full speed, without pacing and
  *   without intermediate publications. Only the final result is published.
  *
+ * This is a producer/consumer scheme where the worker is the producer: when the
+ * consumer is slower, the producer waits (back-pressure) instead of dropping
+ * or storing frames.
+ *
  * Events that matter to the user (initial contour, pause, single step, end of
  * run) are always published immediately.
  *
