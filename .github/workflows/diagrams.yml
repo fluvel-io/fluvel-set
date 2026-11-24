@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: CeCILL-2.1
+# Copyright (C) 2010-2026 Fabien Bessy
+
+# Renders docs/mermaid/*.mmd to SVG and uploads them as an artifact.
+# Run it by hand (Actions > Fluvel Set Diagrams > Run workflow), download the
+# "mermaid-diagrams" artifact, then commit the SVG files to docs/mermaid/.
+# Nothing is published and nothing is pushed.
+
+name: Fluvel Set Diagrams
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+
+  diagrams:
+    runs-on: ubuntu-24.04
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Install fonts
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y fonts-liberation
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate Mermaid diagrams
+        env:
+          # Use the Chrome of the runner instead of downloading one.
+          PUPPETEER_SKIP_DOWNLOAD: "true"
+        run: |
+          npm install -g @mermaid-js/mermaid-cli
+          echo '{"executablePath":"/usr/bin/google-chrome","args":["--no-sandbox"]}' > "$RUNNER_TEMP/puppeteer.json"
+          MMDC_PUPPETEER_CONFIG="$RUNNER_TEMP/puppeteer.json" scripts/generate_diagrams.sh
+
+      - name: Upload generated diagrams
+        uses: actions/upload-artifact@v4
+        with:
+          name: mermaid-diagrams
+          path: docs/mermaid/*.svg
+          if-no-files-found: error
