@@ -18,6 +18,8 @@ Main Windows
 
 .. doxygenfile:: analysis_window.hpp
 
+.. doxygenfile:: histogram_window.hpp
+
 
 Dialogs
 -------

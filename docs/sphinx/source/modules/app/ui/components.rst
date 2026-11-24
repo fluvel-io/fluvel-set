@@ -147,6 +147,8 @@ Miscellaneous Widgets
 
 .. doxygenfile:: clickable_label.hpp
 
+.. doxygenfile:: histogram_widget.hpp
+
 
 UI Infrastructure
 -----------------

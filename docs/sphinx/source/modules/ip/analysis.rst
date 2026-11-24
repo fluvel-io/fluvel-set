@@ -26,3 +26,5 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence,
 .. doxygenfile:: hausdorff_distance.hpp
 
 .. doxygenfile:: hausdorff_statistics.hpp
+
+.. doxygenfile:: histogram.hpp
