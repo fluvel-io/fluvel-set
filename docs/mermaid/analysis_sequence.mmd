@@ -1,0 +1,40 @@
+%%{init: {"theme": "base", "themeVariables": {
+  "primaryColor": "#f4f5ff", "primaryBorderColor": "#6b6fcf", "primaryTextColor": "#1d1d1f",
+  "lineColor": "#6b6fcf", "actorBkg": "#ffffff", "actorBorder": "#6b6fcf", "actorTextColor": "#1d1d1f",
+  "noteBkgColor": "#ffffff", "noteBorderColor": "#4fc98a", "noteTextColor": "#1d1d1f",
+  "signalColor": "#444444", "signalTextColor": "#1d1d1f", "labelBoxBkgColor": "#ffffff",
+  "labelBoxBorderColor": "#c8c8c8", "loopTextColor": "#444444", "sequenceNumberColor": "#ffffff"}}}%%
+sequenceDiagram
+    autonumber
+
+    box rgb(238,248,242) GUI thread
+        participant W as AnalysisWindow
+    end
+    box rgb(244,245,255) Analysis thread
+        participant K as AnalysisWorker
+        participant H as HausdorffDistance<br/>and HausdorffStatistics
+    end
+
+    Note over W,K: The two shapes are selected, Compute is enabled
+
+    W->>W: Compute: copy the shapes, images and options
+    Note over W: the button is disabled and shows "Computing..."
+    W-)K: submit(request)
+    Note over W,K: queued command: only the latest request is kept
+
+    K->>K: intersection of the two shapes
+    K->>H: build with the shapes and the intersection
+    H-->>K: distance, centroids, sorted minima
+    K-->>W: analysisReady(result)
+
+    alt the selection did not change
+        W->>W: show the distances and the popup
+        Note over W: the statistics are kept (shared, read only)
+    else the selection changed meanwhile
+        W->>W: ignore the outdated result
+    end
+
+    loop the percentile changes
+        W->>W: quantile read from the kept statistics
+        Note over W: no new computation, no thread
+    end

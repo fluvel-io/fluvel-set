@@ -81,6 +81,50 @@ only the final result.
      </a>
    </div>
 
+Settings preview
+----------------
+
+The settings dialog shows a preview of the image after the downscale and the
+filters. Computing it can take a while on a large image, so the controller does
+not do it itself: it sends a numbered request to a preview worker that lives in
+its own thread, and the dialog shows that the result is awaited. If several
+requests arrive while one is running (for example while a slider is dragged),
+only the latest is computed. The worker answers with the images and the
+duration of the filters, and the controller ignores an answer that is already
+outdated. Editing the initial shape needs no computation of this kind and stays
+in the GUI thread.
+
+.. raw:: html
+
+   <div style="text-align:center;">
+     <a href="../../_static/settings_session_sequence.svg" target="_blank">
+       <img src="../../_static/settings_session_sequence.svg"
+            style="max-width:760px; width:100%; height:auto;">
+     </a>
+   </div>
+
+Analysis
+--------
+
+The analysis window compares two shapes (intersection, Hausdorff distance,
+quantile and distance between centroids). The measures can take a long time
+on large shapes, so they are computed by an analysis worker in its own thread:
+the window copies the shapes, the images and the options into a request, and the
+button stays disabled until the answer arrives. As for the preview, only the
+latest request is computed and a result that no longer matches the selection
+is ignored. The worker returns the statistics as a shared read-only object, so
+changing the percentile only reads the quantile from it, without any new
+computation.
+
+.. raw:: html
+
+   <div style="text-align:center;">
+     <a href="../../_static/analysis_sequence.svg" target="_blank">
+       <img src="../../_static/analysis_sequence.svg"
+            style="max-width:760px; width:100%; height:auto;">
+     </a>
+   </div>
+
 Recording
 ---------
 
