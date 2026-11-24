@@ -91,14 +91,18 @@ void ImageProcessingWorker::convergeImpl()
     post([this] { convergeImpl(); });
 }
 
-void ImageProcessingWorker::initialize(const QImage& image, const ImageComputeConfig& config)
+quint64 ImageProcessingWorker::initialize(const QImage& image, const ImageComputeConfig& config)
 {
+    const quint64 generation = ++initCount_;
+
     {
         const QMutexLocker lock(&requestMutex_);
-        pendingInit_ = InitRequest{image, config};
+        pendingInit_ = InitRequest{image, config, generation};
     }
 
     post([this] { initializeImpl(); });
+
+    return generation;
 }
 
 void ImageProcessingWorker::restartImpl()
@@ -282,7 +286,7 @@ void ImageProcessingWorker::applyProcessing()
     // 5. Emit
     //--------------------------------------------------
     if (!processedImage_.isNull())
-        emit processedImageReady(processedImage_);
+        emit processedImageReady(processedImage_, generation_);
 
     processingDirty_ = false;
 }
@@ -304,6 +308,7 @@ void ImageProcessingWorker::initializeImpl()
 
     image_ = std::move(request->image);
     config_ = std::move(request->config);
+    generation_ = request->generation;
     processingDirty_ = true;
 
     applyProcessing();

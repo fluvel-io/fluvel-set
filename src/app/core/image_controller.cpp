@@ -74,7 +74,12 @@ void ImageController::loadImage(const QString& path)
     else
         inputImage_ = inputImage_.convertToFormat(QImage::Format_RGB32);
 
+    // The processed image of the previous one no longer applies. Until the new
+    // one comes back from the worker, the image without filters is displayed.
+    processedImage_ = QImage();
+
     reinitializeWorker();
+    refreshView();
 
     emit inputImageReady(inputImage_);
     emit imageOpened(path);
@@ -104,18 +109,18 @@ void ImageController::downscaleImage()
     }
 }
 
-void ImageController::reinitializeWorker()
+bool ImageController::reinitializeWorker()
 {
     if (inputImage_.isNull())
-        return;
+        return false;
 
     downscaleImage();
 
     if (downscaledImage_.isNull())
-        return;
+        return false;
 
     if (computeConfig_.initialPhi.isNull())
-        return;
+        return false;
 
     ImageComputeConfig config = computeConfig_;
 
@@ -142,11 +147,17 @@ void ImageController::reinitializeWorker()
              << "phi:" << image_debug::describeImage(config.initialPhi);
 #endif
 
-    processingWorker_.initialize(downscaledImage_, config);
+    initGeneration_ = processingWorker_.initialize(downscaledImage_, config);
+
+    return true;
 }
 
-void ImageController::onProcessedImageReady(const QImage& processed)
+void ImageController::onProcessedImageReady(const QImage& processed, quint64 generation)
 {
+    // The image of an older initialization, overtaken by a new request.
+    if (generation != initGeneration_)
+        return;
+
     processedImage_ = processed;
 
     refreshView();
@@ -177,17 +188,22 @@ void ImageController::onImageDisplaySettingsChanged(const DisplayConfig& display
 
 void ImageController::refreshView()
 {
-    if (inputImage_.isNull() || processedImage_.isNull())
+    if (inputImage_.isNull())
         return;
+
+    // While the worker is processing a new image, the same image without
+    // filters (downscaled as the processed one will be) is shown instead.
+    const bool processed = !processedImage_.isNull();
 
     QImage img;
 
     if (displayConfig_.background == BackgroundImage::Source)
         img = inputImage_;
     else if (displayConfig_.background == BackgroundImage::Preprocessed)
-        img = processedImage_;
+        img = processed ? processedImage_ : downscaledImage_;
 
-    emit displayedImageReady(img);
+    if (!img.isNull())
+        emit displayedImageReady(img);
 }
 
 void ImageController::onContourUpdated(const fluvel_ip::Contour& outerContour,

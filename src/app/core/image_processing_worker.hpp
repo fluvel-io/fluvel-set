@@ -120,7 +120,7 @@ public:
      * @param image Input image.
      * @param config Processing configuration.
      */
-    void initialize(const QImage& image, const ImageComputeConfig& config);
+    quint64 initialize(const QImage& image, const ImageComputeConfig& config);
 
     /**
      * @brief Restart processing from scratch.
@@ -157,8 +157,13 @@ public:
 signals:
     /**
      * @brief Emitted when a processed image is available.
+     *
+     * @param img Processed image.
+     * @param generation Value returned by the initialize() call this image
+     *        belongs to. An image of an older call, still on its way when a
+     *        new one has been requested, must be ignored by the receiver.
      */
-    void processedImageReady(const QImage& img);
+    void processedImageReady(const QImage& img, quint64 generation);
 
     /**
      * @brief Emitted when contour geometry is updated.
@@ -182,6 +187,7 @@ private:
     {
         QImage image;
         ImageComputeConfig config;
+        quint64 generation{0};
     };
 
     using Clock = std::chrono::steady_clock;
@@ -260,6 +266,12 @@ private:
     std::atomic<bool> shuttingDown_{false};
 
     // Used by the worker thread only.
+    /// Number of initialize() calls made (any thread).
+    std::atomic<quint64> initCount_{0};
+
+    /// Generation of the image being processed (worker thread only).
+    quint64 generation_{0};
+
     WorkerState state_{WorkerState::Uninitialized};
     RunMode mode_{RunMode::Interactive};
     std::unique_ptr<fluvel_ip::ActiveContour> activeContour_;

@@ -114,7 +114,7 @@ signals:
 
 private:
     /// Handle processed image from worker.
-    void onProcessedImageReady(const QImage& processed);
+    void onProcessedImageReady(const QImage& processed, quint64 generation);
 
     /// Handle contour update from worker (core representation).
     void onContourUpdated(const fluvel_ip::Contour& outerContour,
@@ -130,7 +130,7 @@ private:
     void downscaleImage();
 
     /// Reinitialize the worker with current configuration.
-    void reinitializeWorker();
+    bool reinitializeWorker();
 
     /// Builds the styled layers of the last contour with the current configuration.
     [[nodiscard]] QVector<PointLayer> currentLayers() const;
@@ -146,6 +146,10 @@ private:
 
     /// Last processed image.
     QImage processedImage_;
+
+    /// Generation of the last initialization requested to the worker: its
+    /// processed image is the only one to display.
+    quint64 initGeneration_{0};
 
     /// Display configuration.
     DisplayConfig displayConfig_{};

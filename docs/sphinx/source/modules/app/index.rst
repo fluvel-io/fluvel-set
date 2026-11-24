@@ -113,7 +113,10 @@ that would converge in a few milliseconds. It never computes ahead of the
 display: the controller acknowledges each frame it has consumed. When one
 iteration takes longer than a frame, the worker simply runs as fast as it can.
 In converge mode the worker runs at full speed, without pacing, and publishes
-only the final result.
+only the final result. When a new image is loaded, the image without filters is
+displayed until the worker returns the processed one. Each initialization has
+a number, and an image that belongs to an older one, still on its way, is
+ignored, so it can never replace the current image.
 
 .. raw:: html
 
@@ -135,7 +138,8 @@ requests arrive while one is running (for example while a slider is dragged),
 only the latest is computed. The worker answers with the images and the
 duration of the filters, and the controller ignores an answer that is already
 outdated. Editing the initial shape needs no computation of this kind and stays
-in the GUI thread.
+in the GUI thread. When a new image arrives, it is shown without filters until
+its first preview is ready, instead of the previous image.
 
 .. raw:: html
 

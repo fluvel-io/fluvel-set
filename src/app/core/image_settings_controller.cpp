@@ -115,6 +115,9 @@ void ImageSettingsController::onInputImageReady(const QImage& input)
 {
     input_ = input;
 
+    // The preview shown (if any) is the one of the previous image.
+    awaitingFirstPreview_ = true;
+
     if (!viewVisible_)
     {
         needsRefresh_ = true;
@@ -198,6 +201,17 @@ void ImageSettingsController::refreshPreview()
 
     emit processingStarted();
 
+    // New image: until its preview is ready, show it without filters (and
+    // without phi, which refers to the size of the preview) rather than the
+    // previous image. This is decided from the state, not from timing: once
+    // the preview has arrived, nothing shows the unprocessed image again.
+    if (awaitingFirstPreview_)
+    {
+        emit layersChanged({});
+        emit overlayCleared();
+        emit viewChanged(input_);
+    }
+
     previewWorker_.submit(lastRequestId_, input_, editedDownscaleParams_, editedProcessingParams_);
 }
 
@@ -210,6 +224,8 @@ void ImageSettingsController::onPreviewReady(quint64 id, const QImage& downscale
 
     downscaled_ = downscaled;
     processed_ = processed;
+
+    awaitingFirstPreview_ = false;
 
     emit filterPipelineProcessed(elapsedSec);
 

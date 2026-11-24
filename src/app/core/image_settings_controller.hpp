@@ -196,6 +196,9 @@ private:
 
     /// Whether the view is currently visible.
     bool viewVisible_{false};
+
+    /// True from the arrival of a new input image until its preview is shown.
+    bool awaitingFirstPreview_{false};
 };
 
 } // namespace fluvel
