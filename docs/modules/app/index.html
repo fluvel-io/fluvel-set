@@ -396,6 +396,60 @@ together. The algorithm itself, in Fluvel IP, does not depend on Qt.</p>
          style="max-width:420px; width:100%; height:auto;">
   </a>
 </div></section>
+<section id="threads-and-data-flow">
+<h2>Threads and data flow<a class="headerlink" href="#threads-and-data-flow" title="Link to this heading">#</a></h2>
+<p>Every long computation of the application runs outside the GUI thread, and
+every thread follows the same producer/consumer scheme: a producer hands data
+to a consumer that lives in another thread, and the two never wait for each
+other, except where this is wanted. What changes from one case to another is
+the answer to a single question: <strong>what happens when the consumer is slower
+than the producer?</strong> The data can be dropped, the producer can wait, or the
+data can be stored.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 18.0%" />
+<col style="width: 24.0%" />
+<col style="width: 58.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Case</p></th>
+<th class="head"><p>Producer -&gt; consumer</p></th>
+<th class="head"><p>If the consumer is slower</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Video session</p></td>
+<td><p>video source -&gt; processing thread</p></td>
+<td><p><strong>Drop</strong>: only the latest frame is kept, the older ones are lost, so
+the latency stays bounded.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Image session</p></td>
+<td><p>worker -&gt; display</p></td>
+<td><p><strong>Wait</strong>: the worker does not compute a new frame until the controller
+has acknowledged the previous one (back-pressure).</p></td>
+</tr>
+<tr class="row-even"><td><p>Settings preview and analysis</p></td>
+<td><p>window -&gt; worker</p></td>
+<td><p><strong>Latest wins</strong>: only the latest request is computed. Each request has
+a number, and an answer that no longer matches the last request is
+ignored.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Recording</p></td>
+<td><p>GUI thread -&gt; encoder thread</p></td>
+<td><p><strong>Store</strong>: the buffer keeps the frames in memory and spills them to
+disk when its limit is reached, so no frame is lost.</p></td>
+</tr>
+<tr class="row-even"><td><p>Snapshot</p></td>
+<td><p>GUI thread -&gt; writer thread</p></td>
+<td><p><strong>Bounded queue</strong>: the files are written one at a time, in order.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The sections below detail each case. In all of them, the data crosses the
+thread boundary either by a queued signal (the value is copied or shared as
+read-only), or by a small structure protected by a mutex.</p>
+</section>
 <section id="video-session">
 <h2>Video session<a class="headerlink" href="#video-session" title="Link to this heading">#</a></h2>
 <p>Commands go from the window to the algorithm. Frames go the other way: the
@@ -425,7 +479,10 @@ that would converge in a few milliseconds. It never computes ahead of the
 display: the controller acknowledges each frame it has consumed. When one
 iteration takes longer than a frame, the worker simply runs as fast as it can.
 In converge mode the worker runs at full speed, without pacing, and publishes
-only the final result.</p>
+only the final result. When a new image is loaded, the image without filters is
+displayed until the worker returns the processed one. Each initialization has
+a number, and an image that belongs to an older one, still on its way, is
+ignored, so it can never replace the current image.</p>
 <div style="text-align:center;">
   <a href="../../_static/image_session_sequence.svg" target="_blank">
     <img src="../../_static/image_session_sequence.svg"
@@ -442,7 +499,8 @@ requests arrive while one is running (for example while a slider is dragged),
 only the latest is computed. The worker answers with the images and the
 duration of the filters, and the controller ignores an answer that is already
 outdated. Editing the initial shape needs no computation of this kind and stays
-in the GUI thread.</p>
+in the GUI thread. When a new image arrives, it is shown without filters until
+its first preview is ready, instead of the previous image.</p>
 <div style="text-align:center;">
   <a href="../../_static/settings_session_sequence.svg" target="_blank">
     <img src="../../_static/settings_session_sequence.svg"
@@ -653,6 +711,7 @@ apply to this dialog.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#threads-and-data-flow">Threads and data flow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-session">Video session</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-session">Image session</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#settings-preview">Settings preview</a></li>

@@ -581,6 +581,8 @@ document.write(`
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14AnalysisWindow13resultsPopup_E">fluvel::AnalysisWindow::resultsPopup_ (C++ member)</a>
 </li>
+      <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14AnalysisWindow16showPlaceholdersERK7QString">fluvel::AnalysisWindow::showPlaceholders (C++ function)</a>
+</li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14AnalysisWindow10timeLabel_E">fluvel::AnalysisWindow::timeLabel_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14AnalysisWindow8widget1_E">fluvel::AnalysisWindow::widget1_ (C++ member)</a>
@@ -1000,6 +1002,10 @@ document.write(`
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ContourPointsItem8setColorE6QColor">fluvel::ContourPointsItem::setColor (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ContourPointsItem9setPointsERK7QVectorI7QPointFE">fluvel::ContourPointsItem::setPoints (C++ function)</a>
+</li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ContourPointsItem9setSmoothEb">fluvel::ContourPointsItem::setSmooth (C++ function)</a>
+</li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ContourPointsItem7smooth_E">fluvel::ContourPointsItem::smooth_ (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel18ContourStyleConfigE">fluvel::ContourStyleConfig (C++ struct)</a>
 </li>
@@ -1521,8 +1527,6 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4NK6fluvel15ImageController13currentLayersEv">fluvel::ImageController::currentLayers (C++ function)</a>
 </li>
-      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController13currentSpeed_E">fluvel::ImageController::currentSpeed_ (C++ member)</a>
-</li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController14displayConfig_E">fluvel::ImageController::displayConfig_ (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController19displayedImageReadyERK6QImage">fluvel::ImageController::displayedImageReady (C++ function)</a>
@@ -1539,9 +1543,15 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController11imageOpenedERK7QString">fluvel::ImageController::imageOpened (C++ function)</a>
 </li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController15initGeneration_E">fluvel::ImageController::initGeneration_ (C++ member)</a>
+</li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController11inputImage_E">fluvel::ImageController::inputImage_ (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController15inputImageReadyERK6QImage">fluvel::ImageController::inputImageReady (C++ function)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController18kSmoothedRefreshMsE">fluvel::ImageController::kSmoothedRefreshMs (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController16kSmoothingWindowE">fluvel::ImageController::kSmoothingWindow (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController15lastComputeSec_E">fluvel::ImageController::lastComputeSec_ (C++ member)</a>
 </li>
@@ -1555,13 +1565,13 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController16onContourUpdatedERKN9fluvel_ip7ContourERKN9fluvel_ip7ContourE">fluvel::ImageController::onContourUpdated (C++ function)</a>
 </li>
-      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController20onDiagnosticsUpdatedERKN9fluvel_ip18ContourDiagnosticsE">fluvel::ImageController::onDiagnosticsUpdated (C++ function)</a>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController20onDiagnosticsUpdatedERKN9fluvel_ip18ContourDiagnosticsEb">fluvel::ImageController::onDiagnosticsUpdated (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController29onImageDisplaySettingsChangedERKN6fluvel13DisplayConfigE">fluvel::ImageController::onImageDisplaySettingsChanged (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController22onImageSettingsChangedERKN6fluvel20ImageSessionSettingsE">fluvel::ImageController::onImageSettingsChanged (C++ function)</a>
 </li>
-      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController21onProcessedImageReadyERK6QImage">fluvel::ImageController::onProcessedImageReady (C++ function)</a>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController21onProcessedImageReadyERK6QImage7quint64">fluvel::ImageController::onProcessedImageReady (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController14onStateChangedEN6fluvel11WorkerStateE">fluvel::ImageController::onStateChanged (C++ function)</a>
 </li>
@@ -1575,15 +1585,31 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController7restartEv">fluvel::ImageController::restart (C++ function)</a>
 </li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController16smoothedContour_E">fluvel::ImageController::smoothedContour_ (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController14smoothedSpeed_E">fluvel::ImageController::smoothedSpeed_ (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController14smoothedTimer_E">fluvel::ImageController::smoothedTimer_ (C++ member)</a>
+</li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController12stateChangedEN6fluvel11WorkerStateE">fluvel::ImageController::stateChanged (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController4stepEv">fluvel::ImageController::step (C++ function)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController12StreamSampleE">fluvel::ImageController::StreamSample (C++ struct)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController12StreamSample11contourSizeE">fluvel::ImageController::StreamSample::contourSize (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController12StreamSample3secE">fluvel::ImageController::StreamSample::sec (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController12StreamSample5stepsE">fluvel::ImageController::StreamSample::steps (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController22textDiagnosticsUpdatedE7QString">fluvel::ImageController::textDiagnosticsUpdated (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController11togglePauseEv">fluvel::ImageController::togglePause (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController15warningOccurredERK7QString">fluvel::ImageController::warningOccurred (C++ function)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel15ImageController7window_E">fluvel::ImageController::window_ (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel18ImagePreviewWorkerE">fluvel::ImagePreviewWorker (C++ class)</a>
 </li>
@@ -1637,7 +1663,7 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker5diag_E">fluvel::ImageProcessingWorker::diag_ (C++ member)</a>
 </li>
-      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker18diagnosticsUpdatedEN9fluvel_ip18ContourDiagnosticsE">fluvel::ImageProcessingWorker::diagnosticsUpdated (C++ function)</a>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker18diagnosticsUpdatedEN9fluvel_ip18ContourDiagnosticsEb">fluvel::ImageProcessingWorker::diagnosticsUpdated (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker11emitContourEv">fluvel::ImageProcessingWorker::emitContour (C++ function)</a>
 </li>
@@ -1647,9 +1673,13 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker14frameInFlight_E">fluvel::ImageProcessingWorker::frameInFlight_ (C++ member)</a>
 </li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker11generation_E">fluvel::ImageProcessingWorker::generation_ (C++ member)</a>
+</li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker6image_E">fluvel::ImageProcessingWorker::image_ (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker21ImageProcessingWorkerERK21ImageProcessingWorker">fluvel::ImageProcessingWorker::ImageProcessingWorker (C++ function)</a>, <a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker21ImageProcessingWorkerEv">[1]</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker10initCount_E">fluvel::ImageProcessingWorker::initCount_ (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker10initializeERK6QImageRK18ImageComputeConfig">fluvel::ImageProcessingWorker::initialize (C++ function)</a>
 </li>
@@ -1662,6 +1692,8 @@ document.write(`
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker11InitRequestE">fluvel::ImageProcessingWorker::InitRequest (C++ struct)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker11InitRequest6configE">fluvel::ImageProcessingWorker::InitRequest::config (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker11InitRequest10generationE">fluvel::ImageProcessingWorker::InitRequest::generation (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker11InitRequest5imageE">fluvel::ImageProcessingWorker::InitRequest::image (C++ member)</a>
 </li>
@@ -1695,13 +1727,13 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker15processedImage_E">fluvel::ImageProcessingWorker::processedImage_ (C++ member)</a>
 </li>
-      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker19processedImageReadyERK6QImage">fluvel::ImageProcessingWorker::processedImageReady (C++ function)</a>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker19processedImageReadyERK6QImage7quint64">fluvel::ImageProcessingWorker::processedImageReady (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker15processedOwner_E">fluvel::ImageProcessingWorker::processedOwner_ (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker16processingDirty_E">fluvel::ImageProcessingWorker::processingDirty_ (C++ member)</a>
 </li>
-      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker7publishEv">fluvel::ImageProcessingWorker::publish (C++ function)</a>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker7publishEb">fluvel::ImageProcessingWorker::publish (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker13requestMutex_E">fluvel::ImageProcessingWorker::requestMutex_ (C++ member)</a>
 </li>
@@ -1745,7 +1777,7 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker15togglePauseImplEv">fluvel::ImageProcessingWorker::togglePauseImpl (C++ function)</a>
 </li>
-      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker17updateDiagnosticsEv">fluvel::ImageProcessingWorker::updateDiagnostics (C++ function)</a>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorker17updateDiagnosticsEb">fluvel::ImageProcessingWorker::updateDiagnostics (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel21ImageProcessingWorkerD0Ev">fluvel::ImageProcessingWorker::~ImageProcessingWorker (C++ function)</a>
 </li>
@@ -1758,6 +1790,8 @@ document.write(`
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsControllerE">fluvel::ImageSettingsController (C++ class)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsController8addShapeE11UiShapeInfo">fluvel::ImageSettingsController::addShape (C++ function)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsController21awaitingFirstPreview_E">fluvel::ImageSettingsController::awaitingFirstPreview_ (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsController8clearPhiEv">fluvel::ImageSettingsController::clearPhi (C++ function)</a>
 </li>
@@ -1781,6 +1815,8 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsController14lastRequestId_E">fluvel::ImageSettingsController::lastRequestId_ (C++ member)</a>
 </li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsController13layersChangedERK7QVectorI10PointLayerE">fluvel::ImageSettingsController::layersChanged (C++ function)</a>
+</li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsController13needsRefresh_E">fluvel::ImageSettingsController::needsRefresh_ (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsController21onConnectivityChangedEN9fluvel_ip12ConnectivityE">fluvel::ImageSettingsController::onConnectivityChanged (C++ function)</a>
@@ -1792,6 +1828,10 @@ document.write(`
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsController15onUpdateOverlayEN6fluvel11UiShapeInfoE">fluvel::ImageSettingsController::onUpdateOverlay (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsController13onViewChangedERK6QImage">fluvel::ImageSettingsController::onViewChanged (C++ function)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsController14overlayChangedERK12QPainterPath">fluvel::ImageSettingsController::overlayChanged (C++ function)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsController14overlayClearedEv">fluvel::ImageSettingsController::overlayCleared (C++ function)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel23ImageSettingsController10phiEditor_E">fluvel::ImageSettingsController::phiEditor_ (C++ member)</a>
 </li>
@@ -1906,6 +1946,8 @@ document.write(`
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget15autoFitEnabled_E">fluvel::ImageViewerWidget::autoFitEnabled_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget5blur_E">fluvel::ImageViewerWidget::blur_ (C++ member)</a>
+</li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget17clearShapeOverlayEv">fluvel::ImageViewerWidget::clearShapeOverlay (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4NK6fluvel17ImageViewerWidget17computeZoomFactorEP11QWheelEvent">fluvel::ImageViewerWidget::computeZoomFactor (C++ function)</a>
 </li>
@@ -2097,6 +2139,8 @@ document.write(`
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget18setOverlayMinWidthE5qreal">fluvel::ImageViewerWidget::setOverlayMinWidth (C++ function)</a>
 </li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget15setShapeOverlayERK12QPainterPath">fluvel::ImageViewerWidget::setShapeOverlay (C++ function)</a>
+</li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget7setTextERK7QString">fluvel::ImageViewerWidget::setText (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget19setupGlobalOverlaysEv">fluvel::ImageViewerWidget::setupGlobalOverlays (C++ function)</a>
@@ -2112,6 +2156,12 @@ document.write(`
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget11setupTimersEv">fluvel::ImageViewerWidget::setupTimers (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget9setupViewEv">fluvel::ImageViewerWidget::setupView (C++ function)</a>
+</li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget14shapeClipItem_E">fluvel::ImageViewerWidget::shapeClipItem_ (C++ member)</a>
+</li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget10shapeItem_E">fluvel::ImageViewerWidget::shapeItem_ (C++ member)</a>
+</li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget17shapeOutlineItem_E">fluvel::ImageViewerWidget::shapeOutlineItem_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel17ImageViewerWidget17showCursorMessageERK7QString">fluvel::ImageViewerWidget::showCursorMessage (C++ function)</a>
 </li>
@@ -2607,7 +2657,11 @@ document.write(`
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel13MiniMapWidget12setSceneRectERK6QRectF">fluvel::MiniMapWidget::setSceneRect (C++ function)</a>
 </li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel13MiniMapWidget7setSideEi">fluvel::MiniMapWidget::setSide (C++ function)</a>
+</li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel13MiniMapWidget14setVisibleRectERK6QRectF">fluvel::MiniMapWidget::setVisibleRect (C++ function)</a>
+</li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel13MiniMapWidget5side_E">fluvel::MiniMapWidget::side_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel13MiniMapWidget10thumbnail_E">fluvel::MiniMapWidget::thumbnail_ (C++ member)</a>
 </li>
@@ -2705,13 +2759,13 @@ document.write(`
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel11background_E">fluvel::PhiViewModel::background_ (C++ member)</a>
 </li>
-      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel11composeViewEv">fluvel::PhiViewModel::composeView (C++ function)</a>
-</li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel13connectivity_E">fluvel::PhiViewModel::connectivity_ (C++ member)</a>
 </li>
-      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel13displayedPhi_E">fluvel::PhiViewModel::displayedPhi_ (C++ member)</a>
-</li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel7editor_E">fluvel::PhiViewModel::editor_ (C++ member)</a>
+</li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel10emitLayersEv">fluvel::PhiViewModel::emitLayers (C++ function)</a>
+</li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel11emitOverlayEv">fluvel::PhiViewModel::emitOverlay (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel11hideOverlayEv">fluvel::PhiViewModel::hideOverlay (C++ function)</a>
 </li>
@@ -2719,11 +2773,17 @@ document.write(`
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel16interactiveMode_E">fluvel::PhiViewModel::interactiveMode_ (C++ member)</a>
 </li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel13layersChangedERK7QVectorI10PointLayerE">fluvel::PhiViewModel::layersChanged (C++ function)</a>
+</li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel14listsGridSize_E">fluvel::PhiViewModel::listsGridSize_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel17onClearFromEditorEv">fluvel::PhiViewModel::onClearFromEditor (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel14outerBoundary_E">fluvel::PhiViewModel::outerBoundary_ (C++ member)</a>
+</li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel14overlayChangedERK12QPainterPath">fluvel::PhiViewModel::overlayChanged (C++ function)</a>
+</li>
+      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel14overlayClearedEv">fluvel::PhiViewModel::overlayCleared (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel13overlayShape_E">fluvel::PhiViewModel::overlayShape_ (C++ member)</a>
 </li>
@@ -2734,8 +2794,6 @@ document.write(`
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel4phi_E">fluvel::PhiViewModel::phi_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel12PhiViewModelEP9PhiEditorN9fluvel_ip12ConnectivityEP7QObject">fluvel::PhiViewModel::PhiViewModel (C++ function)</a>
-</li>
-      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel16pointIsRedundantEii">fluvel::PhiViewModel::pointIsRedundant (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel13setBackgroundERK6QImage">fluvel::PhiViewModel::setBackground (C++ function)</a>
 </li>
@@ -2750,8 +2808,6 @@ document.write(`
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel16updateFromEditorEv">fluvel::PhiViewModel::updateFromEditor (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel11updateListsEv">fluvel::PhiViewModel::updateLists (C++ function)</a>
-</li>
-      <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel18updatePhiFromListsEv">fluvel::PhiViewModel::updatePhiFromLists (C++ function)</a>
 </li>
       <li><a href="modules/app/ui/components.html#_CPPv4N6fluvel12PhiViewModel11viewChangedERK6QImage">fluvel::PhiViewModel::viewChanged (C++ function)</a>
 </li>
@@ -2820,6 +2876,8 @@ document.write(`
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel10PointLayer6pointsE">fluvel::PointLayer::points (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel10PointLayer5scaleE">fluvel::PointLayer::scale (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel10PointLayer6smoothE">fluvel::PointLayer::smooth (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel10PointLayer7visibleE">fluvel::PointLayer::visible (C++ member)</a>
 </li>
@@ -3083,6 +3141,8 @@ document.write(`
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14SettingsDialog6acceptEv">fluvel::SettingsDialog::accept (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14SettingsDialog10addButton_E">fluvel::SettingsDialog::addButton_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14SettingsDialog9algoPage_E">fluvel::SettingsDialog::algoPage_ (C++ member)</a>
@@ -3109,8 +3169,6 @@ document.write(`
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14SettingsDialog14dialogButtons_E">fluvel::SettingsDialog::dialogButtons_ (C++ member)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14SettingsDialog18downscaleFactorCb_E">fluvel::SettingsDialog::downscaleFactorCb_ (C++ member)</a>
 </li>
       <li><a href="modules/app/ui/windows.html#_CPPv4N6fluvel14SettingsDialog14downscalePage_E">fluvel::SettingsDialog::downscalePage_ (C++ member)</a>
@@ -4479,11 +4537,15 @@ document.write(`
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel10ViewConfig23algorithmOverlayEnabledE">fluvel::ViewConfig::algorithmOverlayEnabled (C++ member)</a>
 </li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel10ViewConfig19kDefaultMiniMapSizeE">fluvel::ViewConfig::kDefaultMiniMapSize (C++ member)</a>
+</li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel10ViewConfig22kDefaultOptionDisabledE">fluvel::ViewConfig::kDefaultOptionDisabled (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel10ViewConfig22kDefaultOverlayEnabledE">fluvel::ViewConfig::kDefaultOverlayEnabled (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel10ViewConfig14miniMapEnabledE">fluvel::ViewConfig::miniMapEnabled (C++ member)</a>
+</li>
+      <li><a href="modules/app/app_core.html#_CPPv4N6fluvel10ViewConfig11miniMapSizeE">fluvel::ViewConfig::miniMapSize (C++ member)</a>
 </li>
       <li><a href="modules/app/app_core.html#_CPPv4N6fluvel10ViewConfig10mirrorModeE">fluvel::ViewConfig::mirrorMode (C++ member)</a>
 </li>

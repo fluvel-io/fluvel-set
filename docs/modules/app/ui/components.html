@@ -1281,6 +1281,24 @@ independent behaviors that can be combined and extended.</p>
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget15setShapeOverlayERK12QPainterPath">
+<span id="_CPPv3N6fluvel17ImageViewerWidget15setShapeOverlayERK12QPainterPath"></span><span id="_CPPv2N6fluvel17ImageViewerWidget15setShapeOverlayERK12QPainterPath"></span><span id="fluvel::ImageViewerWidget::setShapeOverlay__QPainterPathCR"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1a4f4a63500d445e2af5283616e42a52b7"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setShapeOverlay</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QPainterPath</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget15setShapeOverlayERK12QPainterPath" title="Link to this definition">#</a><br /></dt>
+<dd><p>Shows an outline over the image (for example the shape being placed). </p>
+<p>The outline is a vector item of the scene, in image coordinates: it is drawn at the resolution of the screen, with a constant width and anti-aliasing, and moving it does not touch the image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> – Outline in image coordinates. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget17clearShapeOverlayEv">
+<span id="_CPPv3N6fluvel17ImageViewerWidget17clearShapeOverlayEv"></span><span id="_CPPv2N6fluvel17ImageViewerWidget17clearShapeOverlayEv"></span><span id="fluvel::ImageViewerWidget::clearShapeOverlay"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1a634095b94d3446f1f6cbd56204f9b1b2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clearShapeOverlay</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget17clearShapeOverlayEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Hides the outline set by <a class="reference internal" href="#classfluvel_1_1ImageViewerWidget_1a4f4a63500d445e2af5283616e42a52b7"><span class="std std-ref">setShapeOverlay()</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget15setDisplayFrameERK12DisplayFrame">
 <span id="_CPPv3N6fluvel17ImageViewerWidget15setDisplayFrameERK12DisplayFrame"></span><span id="_CPPv2N6fluvel17ImageViewerWidget15setDisplayFrameERK12DisplayFrame"></span><span id="fluvel::ImageViewerWidget::setDisplayFrame__DisplayFrameCR"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1aa2c8b9da76d8fea14c7a82c70db1b9fc"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setDisplayFrame</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel12DisplayFrameE" title="fluvel::DisplayFrame"><span class="n"><span class="pre">DisplayFrame</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget15setDisplayFrameERK12DisplayFrame" title="Link to this definition">#</a><br /></dt>
 <dd><p>Sets the current display frame. </p>
@@ -1986,6 +2004,22 @@ independent behaviors that can be combined and extended.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget11viewConfig_E">
 <span id="_CPPv3N6fluvel17ImageViewerWidget11viewConfig_E"></span><span id="_CPPv2N6fluvel17ImageViewerWidget11viewConfig_E"></span><span id="fluvel::ImageViewerWidget::viewConfig___ViewConfig"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1ae58d800835cc6f9ff7102fe974c62838"></span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel10ViewConfigE" title="fluvel::ViewConfig"><span class="n"><span class="pre">ViewConfig</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">viewConfig_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget11viewConfig_E" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget14shapeClipItem_E">
+<span id="_CPPv3N6fluvel17ImageViewerWidget14shapeClipItem_E"></span><span id="_CPPv2N6fluvel17ImageViewerWidget14shapeClipItem_E"></span><span id="fluvel::ImageViewerWidget::shapeClipItem___QGraphicsRectItemP"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1a97a38edb4b84c3796b48cb2225b97050"></span><span class="n"><span class="pre">QGraphicsRectItem</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">shapeClipItem_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">nullptr</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget14shapeClipItem_E" title="Link to this definition">#</a><br /></dt>
+<dd><p>Outline drawn under (wide) and over (narrow) to be visible on any background. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget17shapeOutlineItem_E">
+<span id="_CPPv3N6fluvel17ImageViewerWidget17shapeOutlineItem_E"></span><span id="_CPPv2N6fluvel17ImageViewerWidget17shapeOutlineItem_E"></span><span id="fluvel::ImageViewerWidget::shapeOutlineItem___QGraphicsPathItemP"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1ad94c2e2b51ff9672aa4587a7f36445bc"></span><span class="n"><span class="pre">QGraphicsPathItem</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">shapeOutlineItem_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">nullptr</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget17shapeOutlineItem_E" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget10shapeItem_E">
+<span id="_CPPv3N6fluvel17ImageViewerWidget10shapeItem_E"></span><span id="_CPPv2N6fluvel17ImageViewerWidget10shapeItem_E"></span><span id="fluvel::ImageViewerWidget::shapeItem___QGraphicsPathItemP"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1ad862230331f27b58a536169ad3a2fadf"></span><span class="n"><span class="pre">QGraphicsPathItem</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">shapeItem_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">nullptr</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget10shapeItem_E" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -3854,6 +3888,18 @@ independent behaviors that can be combined and extended.</p>
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel13MiniMapWidget7setSideEi">
+<span id="_CPPv3N6fluvel13MiniMapWidget7setSideEi"></span><span id="_CPPv2N6fluvel13MiniMapWidget7setSideEi"></span><span id="fluvel::MiniMapWidget::setSide__i"></span><span class="target" id="classfluvel_1_1MiniMapWidget_1a8fbf2f10efd0cf427a2d4b1ae92def4b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setSide</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">side</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel13MiniMapWidget7setSideEi" title="Link to this definition">#</a><br /></dt>
+<dd><p>Sets the side of the (square) mini-map. </p>
+<p>The thumbnail is rebuilt at the new size by the next call to <a class="reference internal" href="#classfluvel_1_1MiniMapWidget_1a16d5e17a7d32e9f1a4ec48b36f34e7ce"><span class="std std-ref">setImage()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>side</strong> – Side in pixels. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel13MiniMapWidget12setSceneRectERK6QRectF">
 <span id="_CPPv3N6fluvel13MiniMapWidget12setSceneRectERK6QRectF"></span><span id="_CPPv2N6fluvel13MiniMapWidget12setSceneRectERK6QRectF"></span><span id="fluvel::MiniMapWidget::setSceneRect__QRectFCR"></span><span class="target" id="classfluvel_1_1MiniMapWidget_1ae69bd2b9c9cf9f68c9623e9613492cd3"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setSceneRect</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QRectF</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sceneRect</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel13MiniMapWidget12setSceneRectERK6QRectF" title="Link to this definition">#</a><br /></dt>
 <dd><p>Sets the bounds of the scene represented by the mini-map. </p>
@@ -3936,6 +3982,12 @@ independent behaviors that can be combined and extended.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel13MiniMapWidget10thumbnail_E">
 <span id="_CPPv3N6fluvel13MiniMapWidget10thumbnail_E"></span><span id="_CPPv2N6fluvel13MiniMapWidget10thumbnail_E"></span><span id="fluvel::MiniMapWidget::thumbnail___QPixmap"></span><span class="target" id="classfluvel_1_1MiniMapWidget_1a584bd09f1217320566225d6f24ae634b"></span><span class="n"><span class="pre">QPixmap</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">thumbnail_</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel13MiniMapWidget10thumbnail_E" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel13MiniMapWidget5side_E">
+<span id="_CPPv3N6fluvel13MiniMapWidget5side_E"></span><span id="_CPPv2N6fluvel13MiniMapWidget5side_E"></span><span id="fluvel::MiniMapWidget::side___i"></span><span class="target" id="classfluvel_1_1MiniMapWidget_1a6578217509198e2754c37ee97de12af0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">side_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">160</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel13MiniMapWidget5side_E" title="Link to this definition">#</a><br /></dt>
+<dd><p>Side of the mini-map, also the largest side of the thumbnail. </p>
+</dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel13MiniMapWidget10sceneRect_E">
@@ -5676,6 +5728,13 @@ Breathe releases do not support Qt Q_PROPERTY members.</p>
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ContourPointsItem9setSmoothEb">
+<span id="_CPPv3N6fluvel17ContourPointsItem9setSmoothEb"></span><span id="_CPPv2N6fluvel17ContourPointsItem9setSmoothEb"></span><span id="fluvel::ContourPointsItem::setSmooth__b"></span><span class="target" id="classfluvel_1_1ContourPointsItem_1a2890bf463d5f8d51994acd561575ae3e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setSmooth</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">smooth</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17ContourPointsItem9setSmoothEb" title="Link to this definition">#</a><br /></dt>
+<dd><p>Draws the points as a smooth line of at least a few screen pixels. </p>
+<p>The width on the screen then does not shrink with the zoom, and the line is anti-aliased. By default the points are drawn as they are, one pen width wide in image pixels. </p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ContourPointsItem8setColorE6QColor">
 <span id="_CPPv3N6fluvel17ContourPointsItem8setColorE6QColor"></span><span id="_CPPv2N6fluvel17ContourPointsItem8setColorE6QColor"></span><span id="fluvel::ContourPointsItem::setColor__QColor"></span><span class="target" id="classfluvel_1_1ContourPointsItem_1aa4b662e9141fb574c65db4ed08651264"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColor</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QColor</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17ContourPointsItem8setColorE6QColor" title="Link to this definition">#</a><br /></dt>
 <dd><p>Sets the drawing color. </p>
@@ -5711,6 +5770,11 @@ Breathe releases do not support Qt Q_PROPERTY members.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ContourPointsItem6color_E">
 <span id="_CPPv3N6fluvel17ContourPointsItem6color_E"></span><span id="_CPPv2N6fluvel17ContourPointsItem6color_E"></span><span id="fluvel::ContourPointsItem::color___QColor"></span><span class="target" id="classfluvel_1_1ContourPointsItem_1a5006e022949188b8f36b0f234131dd35"></span><span class="n"><span class="pre">QColor</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">color_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="n"><span class="pre">Qt</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">red</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel17ContourPointsItem6color_E" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ContourPointsItem7smooth_E">
+<span id="_CPPv3N6fluvel17ContourPointsItem7smooth_E"></span><span id="_CPPv2N6fluvel17ContourPointsItem7smooth_E"></span><span id="fluvel::ContourPointsItem::smooth___b"></span><span class="target" id="classfluvel_1_1ContourPointsItem_1a9d3bb417e673af3dd7a471bbae5ed96b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">smooth_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">false</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel17ContourPointsItem7smooth_E" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -5850,11 +5914,41 @@ Breathe releases do not support Qt Q_PROPERTY members.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel12PhiViewModel11viewChangedERK6QImage">
 <span id="_CPPv3N6fluvel12PhiViewModel11viewChangedERK6QImage"></span><span id="_CPPv2N6fluvel12PhiViewModel11viewChangedERK6QImage"></span><span id="fluvel::PhiViewModel::viewChanged__QImageCR"></span><span class="target" id="classfluvel_1_1PhiViewModel_1a04bbd81e7f7f1e001dc29a6e3f9dbc25"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">viewChanged</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QImage</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">image</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel12PhiViewModel11viewChangedERK6QImage" title="Link to this definition">#</a><br /></dt>
 <dd><p>Emitted when the displayed view changes. </p>
+<p>The image is the background only: phi (see <a class="reference internal" href="#classfluvel_1_1PhiViewModel_1afba134c016775588ec4f291101696a47"><span class="std std-ref">layersChanged()</span></a>) and the overlay shape (see <a class="reference internal" href="#classfluvel_1_1PhiViewModel_1a8eff1e23c54249d032b2f69d292917db"><span class="std std-ref">overlayChanged()</span></a>) are sent separately.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>image</strong> – Updated image ready for display. </p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel12PhiViewModel13layersChangedERK7QVectorI10PointLayerE">
+<span id="_CPPv3N6fluvel12PhiViewModel13layersChangedERK7QVectorI10PointLayerE"></span><span id="_CPPv2N6fluvel12PhiViewModel13layersChangedERK7QVectorI10PointLayerE"></span><span id="fluvel::PhiViewModel::layersChanged__QVector:PointLayer:CR"></span><span class="target" id="classfluvel_1_1PhiViewModel_1afba134c016775588ec4f291101696a47"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">layersChanged</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QVector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel10PointLayerE" title="fluvel::PointLayer"><span class="n"><span class="pre">PointLayer</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layers</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel12PhiViewModel13layersChangedERK7QVectorI10PointLayerE" title="Link to this definition">#</a><br /></dt>
+<dd><p>Emitted when the boundaries of phi change. </p>
+<p>The outer and inner boundaries are sent as two layers of points (in the order outer, inner) to be drawn over the image by the viewer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>layers</strong> – Layers of points, in image coordinates. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel12PhiViewModel14overlayChangedERK12QPainterPath">
+<span id="_CPPv3N6fluvel12PhiViewModel14overlayChangedERK12QPainterPath"></span><span id="_CPPv2N6fluvel12PhiViewModel14overlayChangedERK12QPainterPath"></span><span id="fluvel::PhiViewModel::overlayChanged__QPainterPathCR"></span><span class="target" id="classfluvel_1_1PhiViewModel_1a8eff1e23c54249d032b2f69d292917db"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">overlayChanged</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QPainterPath</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel12PhiViewModel14overlayChangedERK12QPainterPath" title="Link to this definition">#</a><br /></dt>
+<dd><p>Emitted when the overlay shape changes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> – Outline of the shape, in image coordinates. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel12PhiViewModel14overlayClearedEv">
+<span id="_CPPv3N6fluvel12PhiViewModel14overlayClearedEv"></span><span id="_CPPv2N6fluvel12PhiViewModel14overlayClearedEv"></span><span id="fluvel::PhiViewModel::overlayCleared"></span><span class="target" id="classfluvel_1_1PhiViewModel_1a997046bc1dffab92e114b20b1e9ff1ee"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">overlayCleared</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel12PhiViewModel14overlayClearedEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Emitted when the overlay shape must no longer be displayed. </p>
 </dd></dl>
 
 </div>
@@ -5867,33 +5961,15 @@ Breathe releases do not support Qt Q_PROPERTY members.</p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6fluvel12PhiViewModel18updatePhiFromListsEv">
-<span id="_CPPv3N6fluvel12PhiViewModel18updatePhiFromListsEv"></span><span id="_CPPv2N6fluvel12PhiViewModel18updatePhiFromListsEv"></span><span id="fluvel::PhiViewModel::updatePhiFromLists"></span><span class="target" id="classfluvel_1_1PhiViewModel_1a5e3ead20f87ae16919d47bcc8c2870a9"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updatePhiFromLists</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel12PhiViewModel18updatePhiFromListsEv" title="Link to this definition">#</a><br /></dt>
-<dd><p>Rebuilds the phi image from boundary lists. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel12PhiViewModel10emitLayersEv">
+<span id="_CPPv3N6fluvel12PhiViewModel10emitLayersEv"></span><span id="_CPPv2N6fluvel12PhiViewModel10emitLayersEv"></span><span id="fluvel::PhiViewModel::emitLayers"></span><span class="target" id="classfluvel_1_1PhiViewModel_1a4805caf3395c8731bc39e2f6af81d58b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">emitLayers</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel12PhiViewModel10emitLayersEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Sends the boundaries of phi to the view. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6fluvel12PhiViewModel11composeViewEv">
-<span id="_CPPv3N6fluvel12PhiViewModel11composeViewEv"></span><span id="_CPPv2N6fluvel12PhiViewModel11composeViewEv"></span><span id="fluvel::PhiViewModel::composeView"></span><span class="target" id="classfluvel_1_1PhiViewModel_1a05954da9aad94c72684f19711d14a804"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">composeView</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel12PhiViewModel11composeViewEv" title="Link to this definition">#</a><br /></dt>
-<dd><p>Composes the final displayed image. </p>
-<p>Combines background, phi, and optional overlay. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6fluvel12PhiViewModel16pointIsRedundantEii">
-<span id="_CPPv3N6fluvel12PhiViewModel16pointIsRedundantEii"></span><span id="_CPPv2N6fluvel12PhiViewModel16pointIsRedundantEii"></span><span id="fluvel::PhiViewModel::pointIsRedundant__i.i"></span><span class="target" id="classfluvel_1_1PhiViewModel_1a7896755c6265e6f4e00cac55a191a0d5"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pointIsRedundant</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel12PhiViewModel16pointIsRedundantEii" title="Link to this definition">#</a><br /></dt>
-<dd><p>Checks whether a point is redundant in the contour. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> – X coordinate. </p></li>
-<li><p><strong>y</strong> – Y coordinate. </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if the point is redundant. </p>
-</dd>
-</dl>
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel12PhiViewModel11emitOverlayEv">
+<span id="_CPPv3N6fluvel12PhiViewModel11emitOverlayEv"></span><span id="_CPPv2N6fluvel12PhiViewModel11emitOverlayEv"></span><span id="fluvel::PhiViewModel::emitOverlay"></span><span class="target" id="classfluvel_1_1PhiViewModel_1a22a3ba5b06646d692ca626dcefc8fdb5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">emitOverlay</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel12PhiViewModel11emitOverlayEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Sends the overlay shape to the view, or clears it. </p>
 </dd></dl>
 
 </div>
@@ -5915,12 +5991,6 @@ Breathe releases do not support Qt Q_PROPERTY members.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel12PhiViewModel4phi_E">
 <span id="_CPPv3N6fluvel12PhiViewModel4phi_E"></span><span id="_CPPv2N6fluvel12PhiViewModel4phi_E"></span><span id="fluvel::PhiViewModel::phi___QImage"></span><span class="target" id="classfluvel_1_1PhiViewModel_1a20c4de4183ace392dfc9a5f178f2ddfc"></span><span class="n"><span class="pre">QImage</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">phi_</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel12PhiViewModel4phi_E" title="Link to this definition">#</a><br /></dt>
 <dd><p>Internal phi representation. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6fluvel12PhiViewModel13displayedPhi_E">
-<span id="_CPPv3N6fluvel12PhiViewModel13displayedPhi_E"></span><span id="_CPPv2N6fluvel12PhiViewModel13displayedPhi_E"></span><span id="fluvel::PhiViewModel::displayedPhi___QImage"></span><span class="target" id="classfluvel_1_1PhiViewModel_1a92384778b0e2156ceca0b828d2f20c76"></span><span class="n"><span class="pre">QImage</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">displayedPhi_</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel12PhiViewModel13displayedPhi_E" title="Link to this definition">#</a><br /></dt>
-<dd><p>Final composed image displayed to the user. </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -6616,6 +6686,8 @@ used throughout the application.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget15applyViewConfigERKN6fluvel10ViewConfigE"><code class="docutils literal notranslate"><span class="pre">applyViewConfig()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget8setImageERK6QImage"><code class="docutils literal notranslate"><span class="pre">setImage()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget9setLayersERK7QVectorI10PointLayerE"><code class="docutils literal notranslate"><span class="pre">setLayers()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget15setShapeOverlayERK12QPainterPath"><code class="docutils literal notranslate"><span class="pre">setShapeOverlay()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget17clearShapeOverlayEv"><code class="docutils literal notranslate"><span class="pre">clearShapeOverlay()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget15setDisplayFrameERK12DisplayFrame"><code class="docutils literal notranslate"><span class="pre">setDisplayFrame()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK6fluvel17ImageViewerWidget12displayFrameEv"><code class="docutils literal notranslate"><span class="pre">displayFrame()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget7setTextERK7QString"><code class="docutils literal notranslate"><span class="pre">setText()</span></code></a></li>
@@ -6725,6 +6797,9 @@ used throughout the application.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget11pixmapItem_E"><code class="docutils literal notranslate"><span class="pre">pixmapItem_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget19lastDisplayedImage_E"><code class="docutils literal notranslate"><span class="pre">lastDisplayedImage_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget11viewConfig_E"><code class="docutils literal notranslate"><span class="pre">viewConfig_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget14shapeClipItem_E"><code class="docutils literal notranslate"><span class="pre">shapeClipItem_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget17shapeOutlineItem_E"><code class="docutils literal notranslate"><span class="pre">shapeOutlineItem_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget10shapeItem_E"><code class="docutils literal notranslate"><span class="pre">shapeItem_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget11layerItems_E"><code class="docutils literal notranslate"><span class="pre">layerItems_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget12layerColors_E"><code class="docutils literal notranslate"><span class="pre">layerColors_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget13layerVisible_E"><code class="docutils literal notranslate"><span class="pre">layerVisible_</span></code></a></li>
@@ -6961,6 +7036,7 @@ used throughout the application.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel13MiniMapWidgetE"><code class="docutils literal notranslate"><span class="pre">fluvel::MiniMapWidget</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel13MiniMapWidget13MiniMapWidgetEP7QWidget"><code class="docutils literal notranslate"><span class="pre">MiniMapWidget()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel13MiniMapWidget8setImageERK6QImage"><code class="docutils literal notranslate"><span class="pre">setImage()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel13MiniMapWidget7setSideEi"><code class="docutils literal notranslate"><span class="pre">setSide()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel13MiniMapWidget12setSceneRectERK6QRectF"><code class="docutils literal notranslate"><span class="pre">setSceneRect()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel13MiniMapWidget14setVisibleRectERK6QRectF"><code class="docutils literal notranslate"><span class="pre">setVisibleRect()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel13MiniMapWidget15centerRequestedERK7QPointF"><code class="docutils literal notranslate"><span class="pre">centerRequested</span></code></a></li>
@@ -6969,6 +7045,7 @@ used throughout the application.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel13MiniMapWidget14mouseMoveEventEP11QMouseEvent"><code class="docutils literal notranslate"><span class="pre">mouseMoveEvent()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK6fluvel13MiniMapWidget24scenePositionFromMiniMapERK7QPointF"><code class="docutils literal notranslate"><span class="pre">scenePositionFromMiniMap()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel13MiniMapWidget10thumbnail_E"><code class="docutils literal notranslate"><span class="pre">thumbnail_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel13MiniMapWidget5side_E"><code class="docutils literal notranslate"><span class="pre">side_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel13MiniMapWidget10sceneRect_E"><code class="docutils literal notranslate"><span class="pre">sceneRect_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel13MiniMapWidget12visibleRect_E"><code class="docutils literal notranslate"><span class="pre">visibleRect_</span></code></a></li>
 </ul>
@@ -7208,11 +7285,13 @@ used throughout the application.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK6fluvel17ContourPointsItem12boundingRectEv"><code class="docutils literal notranslate"><span class="pre">boundingRect()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ContourPointsItem5paintEP8QPainterPK24QStyleOptionGraphicsItemP7QWidget"><code class="docutils literal notranslate"><span class="pre">paint()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ContourPointsItem17ContourPointsItemEP13QGraphicsItem"><code class="docutils literal notranslate"><span class="pre">ContourPointsItem()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ContourPointsItem9setSmoothEb"><code class="docutils literal notranslate"><span class="pre">setSmooth()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ContourPointsItem8setColorE6QColor"><code class="docutils literal notranslate"><span class="pre">setColor()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK6fluvel17ContourPointsItem19computeBoundingRectEv"><code class="docutils literal notranslate"><span class="pre">computeBoundingRect()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ContourPointsItem7points_E"><code class="docutils literal notranslate"><span class="pre">points_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ContourPointsItem13boundingRect_E"><code class="docutils literal notranslate"><span class="pre">boundingRect_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ContourPointsItem6color_E"><code class="docutils literal notranslate"><span class="pre">color_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ContourPointsItem7smooth_E"><code class="docutils literal notranslate"><span class="pre">smooth_</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModelE"><code class="docutils literal notranslate"><span class="pre">fluvel::PhiViewModel</span></code></a><ul class="nav section-nav flex-column">
@@ -7227,14 +7306,15 @@ used throughout the application.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel17onClearFromEditorEv"><code class="docutils literal notranslate"><span class="pre">onClearFromEditor()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel13setBackgroundERK6QImage"><code class="docutils literal notranslate"><span class="pre">setBackground()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel11viewChangedERK6QImage"><code class="docutils literal notranslate"><span class="pre">viewChanged</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel13layersChangedERK7QVectorI10PointLayerE"><code class="docutils literal notranslate"><span class="pre">layersChanged</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel14overlayChangedERK12QPainterPath"><code class="docutils literal notranslate"><span class="pre">overlayChanged</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel14overlayClearedEv"><code class="docutils literal notranslate"><span class="pre">overlayCleared</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel11updateListsEv"><code class="docutils literal notranslate"><span class="pre">updateLists()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel18updatePhiFromListsEv"><code class="docutils literal notranslate"><span class="pre">updatePhiFromLists()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel11composeViewEv"><code class="docutils literal notranslate"><span class="pre">composeView()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel16pointIsRedundantEii"><code class="docutils literal notranslate"><span class="pre">pointIsRedundant()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel10emitLayersEv"><code class="docutils literal notranslate"><span class="pre">emitLayers()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel11emitOverlayEv"><code class="docutils literal notranslate"><span class="pre">emitOverlay()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel7editor_E"><code class="docutils literal notranslate"><span class="pre">editor_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel11background_E"><code class="docutils literal notranslate"><span class="pre">background_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel4phi_E"><code class="docutils literal notranslate"><span class="pre">phi_</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel13displayedPhi_E"><code class="docutils literal notranslate"><span class="pre">displayedPhi_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel14outerBoundary_E"><code class="docutils literal notranslate"><span class="pre">outerBoundary_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel14innerBoundary_E"><code class="docutils literal notranslate"><span class="pre">innerBoundary_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel12PhiViewModel14listsGridSize_E"><code class="docutils literal notranslate"><span class="pre">listsGridSize_</span></code></a></li>
