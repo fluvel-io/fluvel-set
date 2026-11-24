@@ -10,10 +10,14 @@
 #include "point_layer.hpp"
 #endif
 
+#include <QElapsedTimer>
 #include <QImage>
 #include <QObject>
 #include <QString>
 #include <QVector>
+
+#include <cstddef>
+#include <deque>
 
 namespace fluvel
 {
@@ -120,7 +124,7 @@ private:
     void onStateChanged(fluvel::WorkerState state);
 
     /// Handle diagnostics update from worker.
-    void onDiagnosticsUpdated(const fluvel_ip::ContourDiagnostics& diag);
+    void onDiagnosticsUpdated(const fluvel_ip::ContourDiagnostics& diag, bool streaming);
 
     /// Apply downscaling to the input image if enabled.
     void downscaleImage();
@@ -151,8 +155,28 @@ private:
     int lastStepCount_{0};
     double lastComputeSec_{0.0};
 
-    /// Last computation speed measured, in iterations per second.
-    double currentSpeed_{0.0};
+    /// Number of updates averaged in the diagnostics while the run is streamed.
+    static constexpr std::size_t kSmoothingWindow{120};
+
+    /// Minimum delay between two refreshes of the smoothed values (ms), so
+    /// that the digits stay readable.
+    static constexpr qint64 kSmoothedRefreshMs{300};
+
+    /// One diagnostics update received while streaming.
+    struct StreamSample
+    {
+        std::size_t contourSize{0};
+        int steps{0};
+        double sec{0.0};
+    };
+
+    /// Sliding window of the last updates received while streaming.
+    std::deque<StreamSample> window_;
+
+    /// Smoothed values currently displayed, refreshed at most every kSmoothedRefreshMs.
+    QElapsedTimer smoothedTimer_;
+    QString smoothedSpeed_;
+    QString smoothedContour_;
 
     QVector<QPointF> lastOuterContour_;
     QVector<QPointF> lastInnerContour_;

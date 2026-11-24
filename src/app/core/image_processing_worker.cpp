@@ -472,11 +472,11 @@ void ImageProcessingWorker::onTick()
         }
     }
 
-    publish();
+    publish(true);
     scheduleTick();
 }
 
-void ImageProcessingWorker::publish()
+void ImageProcessingWorker::publish(bool streaming)
 {
     if (!activeContour_)
         return;
@@ -484,11 +484,11 @@ void ImageProcessingWorker::publish()
     lastPublish_ = Clock::now();
     frameInFlight_.store(true, std::memory_order_release);
 
-    updateDiagnostics();
+    updateDiagnostics(streaming);
     emitContour();
 }
 
-void ImageProcessingWorker::updateDiagnostics()
+void ImageProcessingWorker::updateDiagnostics(bool streaming)
 {
     if (!activeContour_)
         return;
@@ -502,7 +502,7 @@ void ImageProcessingWorker::updateDiagnostics()
 
     activeContour_->fillDiagnostics(diag);
 
-    emit diagnosticsUpdated(diag);
+    emit diagnosticsUpdated(diag, streaming);
 }
 
 void ImageProcessingWorker::emitContour()

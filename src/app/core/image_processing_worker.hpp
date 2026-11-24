@@ -170,7 +170,7 @@ signals:
     /**
      * @brief Emitted when diagnostics are updated.
      */
-    void diagnosticsUpdated(fluvel_ip::ContourDiagnostics diag);
+    void diagnosticsUpdated(fluvel_ip::ContourDiagnostics diag, bool streaming);
 
 private:
     /// Pending initialization request (latest one wins).
@@ -200,13 +200,13 @@ private:
     void onTick();
 
     /// Publish diagnostics and contour.
-    void publish();
+    void publish(bool streaming = false);
 
     /// Emit current contour data.
     void emitContour();
 
     /// Update diagnostics structure.
-    void updateDiagnostics();
+    void updateDiagnostics(bool streaming);
 
     /// Suspend execution.
     void suspend();

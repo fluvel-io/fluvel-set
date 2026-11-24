@@ -234,7 +234,8 @@ void ImageController::onStateChanged(fluvel::WorkerState state)
     emit stateChanged(state);
 }
 
-void ImageController::onDiagnosticsUpdated(const fluvel_ip::ContourDiagnostics& diag)
+void ImageController::onDiagnosticsUpdated(const fluvel_ip::ContourDiagnostics& diag,
+                                           bool streaming)
 {
     auto formatChannels = [](const fluvel_ip::ChannelVector& v)
     {
@@ -279,28 +280,71 @@ void ImageController::onDiagnosticsUpdated(const fluvel_ip::ContourDiagnostics& 
     // Time spent computing iterations (waits and pauses excluded).
     s += QString(tr("Compute time: %1 s\n")).arg(diag.elapsedSec, 0, 'f', 2);
 
-    // Computation speed between this update and the previous one. It is kept
-    // as is when no iteration was done (pause, end of run).
+    // A new run restarts the counters from zero.
     if (diag.stepCount < lastStepCount_ || diag.elapsedSec < lastComputeSec_)
     {
-        // A new run restarts the counters from zero.
         lastStepCount_ = 0;
         lastComputeSec_ = 0.0;
-        currentSpeed_ = 0.0;
+        window_.clear();
+        smoothedTimer_.invalidate();
     }
 
     const int newSteps = diag.stepCount - lastStepCount_;
     const double newSec = diag.elapsedSec - lastComputeSec_;
 
-    if (newSteps > 0 && newSec > 0.0)
-        currentSpeed_ = newSteps / newSec;
-
     lastStepCount_ = diag.stepCount;
     lastComputeSec_ = diag.elapsedSec;
 
-    s += QString(tr("Speed: %1 it/s\n")).arg(currentSpeed_, 0, 'f', 0);
+    if (streaming)
+    {
+        // Speed and contour size change at every frame: average them over a
+        // sliding window and refresh them only a few times per second, so
+        // that the numbers can be read.
+        window_.push_back({diag.contourSize, newSteps, newSec});
 
-    s += QString(tr("Contour: %1 pts")).arg(diag.contourSize);
+        if (window_.size() > kSmoothingWindow)
+            window_.pop_front();
+
+        if (!smoothedTimer_.isValid() || smoothedTimer_.elapsed() >= kSmoothedRefreshMs)
+        {
+            double sumContour = 0.0;
+            long long sumSteps = 0;
+            double sumSec = 0.0;
+
+            for (const auto& sample : window_)
+            {
+                sumContour += double(sample.contourSize);
+                sumSteps += sample.steps;
+                sumSec += sample.sec;
+            }
+
+            const double speed = sumSec > 0.0 ? double(sumSteps) / sumSec : 0.0;
+
+            smoothedSpeed_ = QString::number(speed, 'f', 0);
+            smoothedContour_ = QString::number(sumContour / double(window_.size()), 'f', 0);
+            smoothedTimer_.restart();
+        }
+
+        s += QString(tr("Speed: %1 it/s\n")).arg(smoothedSpeed_);
+        s += QString(tr("Contour: %1 pts")).arg(smoothedContour_);
+    }
+    else
+    {
+        // Pause, single step, initial state or end of run: exact values.
+        window_.clear();
+        smoothedTimer_.invalidate();
+
+        // The speed has no meaning for a pause or a single step, but it is the
+        // average speed of the run once it is over.
+        const bool runOver = diag.stoppingStatus != fluvel_ip::StoppingStatus::None;
+
+        if (runOver && diag.elapsedSec > 0.0)
+            s += QString(tr("Speed: %1 it/s\n")).arg(diag.stepCount / diag.elapsedSec, 0, 'f', 0);
+        else
+            s += QString(tr("Speed: %1 it/s\n")).arg(QStringLiteral("--"));
+
+        s += QString(tr("Contour: %1 pts")).arg(diag.contourSize);
+    }
 
     emit textDiagnosticsUpdated(s);
 }
