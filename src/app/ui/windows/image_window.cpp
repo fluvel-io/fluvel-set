@@ -316,7 +316,7 @@ void ImageWindow::setupActions()
         act->setIcon(recentIcon);
     }
 
-    analysisAct_ = new QAction(tr("&Analysis"), this);
+    analysisAct_ = new QAction(tr("Ha&usdorff distance..."), this);
     analysisAct_->setStatusTip(tr("Compute the Hausdorff distance."));
     analysisAct_->setShortcut(tr("Ctrl+A"));
 
@@ -358,16 +358,16 @@ void ImageWindow::setupMenus()
 
     fileMenu_->addAction(clearAct_);
 
-    segmentationMenu_ = new QMenu(tr("&Segmentation"), this);
-    segmentationMenu_->addAction(analysisAct_);
-    segmentationMenu_->addAction(histogramAct_);
+    analysisMenu_ = new QMenu(tr("&Analysis"), this);
+    analysisMenu_->addAction(analysisAct_);
+    analysisMenu_->addAction(histogramAct_);
 
     helpMenu_ = new QMenu(tr("&Help"), this);
     helpMenu_->addAction(aboutAct_);
 
     menuBar()->addMenu(sessionMenu_);
     menuBar()->addMenu(fileMenu_);
-    menuBar()->addMenu(segmentationMenu_);
+    menuBar()->addMenu(analysisMenu_);
     menuBar()->addMenu(helpMenu_);
 }
 

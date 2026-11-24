@@ -191,7 +191,7 @@ private:
     AboutDialog* AboutDialog_{nullptr};
 
     QMenu* fileMenu_{nullptr};
-    QMenu* segmentationMenu_{nullptr};
+    QMenu* analysisMenu_{nullptr};
     QMenu* sessionMenu_{nullptr};
     QMenu* helpMenu_{nullptr};
 
