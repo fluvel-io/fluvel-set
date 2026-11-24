@@ -290,7 +290,7 @@ private:
 
     /// Number of iterations computed between two published frames in
     /// interactive mode.
-    static constexpr int kIterationsPerFrame{10};
+    static constexpr int kIterationsPerFrame{6};
 
     /// Delay before checking again if the consumer has acknowledged a frame.
     static constexpr std::chrono::milliseconds kAckPollMs{2};
