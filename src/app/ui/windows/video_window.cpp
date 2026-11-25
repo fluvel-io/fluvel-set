@@ -444,7 +444,10 @@ void VideoWindow::setupView()
 
     imageViewer_ = new ImageViewerWidget(app.videoSettings().display.view, central_);
 
-    imageViewer_->setMaxDisplayFps(30.0);
+    // Upper bound of the view (frames per second). It only drops frames when the
+    // producer is faster than this, so 30 fps sources are not affected.
+    imageViewer_->setMaxDisplayFps(60.0);
+
     constexpr qreal kDebugOverlayMinWidth = 160.0;
     imageViewer_->setOverlayMinWidth(kDebugOverlayMinWidth);
     imageViewer_->setOverlayAlignment(Qt::AlignLeft | Qt::AlignTop);
