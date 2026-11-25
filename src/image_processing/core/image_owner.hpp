@@ -6,6 +6,7 @@
 #include "image_format.hpp"
 #include "image_view.hpp"
 
+#include <cstddef>
 #include <cstdint>
 #include <cstring>
 #include <stdexcept>
@@ -124,7 +125,7 @@ public:
     uint8_t* rowPtr(int y) noexcept
     {
         assert(y >= 0 && y < height_);
-        return data_.data() + y * stride_;
+        return data_.data() + static_cast<std::ptrdiff_t>(y) * stride_;
     }
 
     /**
@@ -133,7 +134,7 @@ public:
     const uint8_t* rowPtr(int y) const noexcept
     {
         assert(y >= 0 && y < height_);
-        return data_.data() + y * stride_;
+        return data_.data() + static_cast<std::ptrdiff_t>(y) * stride_;
     }
 
     /**
@@ -157,7 +158,8 @@ public:
         assert(x >= 0 && x < width_);
         assert(y >= 0 && y < height_);
 
-        return data_.data() + y * stride_ + x * channels_;
+        return data_.data() + static_cast<std::ptrdiff_t>(y) * stride_ +
+               static_cast<std::ptrdiff_t>(x) * channels_;
     }
 
     /**
@@ -168,7 +170,8 @@ public:
         assert(x >= 0 && x < width_);
         assert(y >= 0 && y < height_);
 
-        return data_.data() + y * stride_ + x * channels_;
+        return data_.data() + static_cast<std::ptrdiff_t>(y) * stride_ +
+               static_cast<std::ptrdiff_t>(x) * channels_;
     }
 
     /**

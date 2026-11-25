@@ -76,7 +76,7 @@ static void drawEllipseMask(QImage& img, const QRect& rect, uchar value)
         uchar* line = img.scanLine(y);
 
         if (x0 <= x1)
-            std::memset(line + x0, value, static_cast<size_t>(x1 - x0 + 1));
+            std::memset(line + x0, value, static_cast<size_t>(x1) - static_cast<size_t>(x0) + 1);
     }
 }
 

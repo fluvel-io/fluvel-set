@@ -17,7 +17,8 @@ InternalKernel MajorityInternalSpeed::makeInternalKernelOffsets(int diskRadius, 
     const int w = gridWidth;
 
     InternalKernel kernel;
-    kernel.offsets.reserve(static_cast<std::size_t>((2 * r + 1) * (2 * r + 1)));
+    kernel.offsets.reserve(static_cast<std::size_t>(2 * r + 1) *
+                           static_cast<std::size_t>(2 * r + 1));
 
     kernel.support.minDx = r;
     kernel.support.maxDx = -r;

@@ -354,8 +354,8 @@ void PreferencesDialog::showValues(Language language, const SnapshotPreferences&
 
     // Recording buffer
 
-    recordingRamSpin_->setValue(int(buffer.maxRamUsage / (1024 * 1024)));
-    recordingDiskSpin_->setValue(int(buffer.maxDiskUsage / (1024 * 1024 * 1024)));
+    recordingRamSpin_->setValue(int(buffer.maxRamUsage / (1024ULL * 1024ULL)));
+    recordingDiskSpin_->setValue(int(buffer.maxDiskUsage / (1024ULL * 1024ULL * 1024ULL)));
 
     recordingOverflowCombo_->setCurrentIndex(
         recordingOverflowCombo_->findData(int(buffer.overflowPolicy)));

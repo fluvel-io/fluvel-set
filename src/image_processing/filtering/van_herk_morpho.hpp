@@ -7,6 +7,7 @@
 #include "image_owner.hpp"
 
 #include <algorithm>
+#include <cstddef>
 #include <cstdint>
 #include <vector>
 
@@ -60,7 +61,7 @@ void slidingExtremum(const uint8_t* src, int srcStride, uint8_t* dst, int dstStr
         // (written as differences: no overflow, whatever the radius)
         while (next < n && next - out <= radius)
         {
-            const uint8_t b = src[next * srcStride];
+            const uint8_t b = src[static_cast<std::ptrdiff_t>(next) * srcStride];
 
             // Maintain monotonic deque
             while (count > 0)
@@ -95,7 +96,8 @@ void slidingExtremum(const uint8_t* src, int srcStride, uint8_t* dst, int dstStr
             --count;
         }
 
-        dst[out * dstStride] = src[ring[head] * srcStride];
+        dst[static_cast<std::ptrdiff_t>(out) * dstStride] =
+            src[static_cast<std::ptrdiff_t>(ring[head]) * srcStride];
     }
 }
 
@@ -159,7 +161,7 @@ void vanHerkVertical(const ImageOwner& buffer, ImageOwner& output, int width, in
         // Transpose: line j = (pixel, channel) of the tile, one sample per row.
         for (int y = 0; y < height; ++y)
         {
-            const uint8_t* row = buffer.rowPtr(y) + x0 * channels;
+            const uint8_t* row = buffer.rowPtr(y) + static_cast<std::ptrdiff_t>(x0) * channels;
 
             for (int px = 0; px < tileWidth; ++px)
                 for (int ch = 0; ch < activeChannels; ++ch)
@@ -177,7 +179,7 @@ void vanHerkVertical(const ImageOwner& buffer, ImageOwner& output, int width, in
         // Transpose back.
         for (int y = 0; y < height; ++y)
         {
-            uint8_t* row = output.rowPtr(y) + x0 * channels;
+            uint8_t* row = output.rowPtr(y) + static_cast<std::ptrdiff_t>(x0) * channels;
 
             for (int px = 0; px < tileWidth; ++px)
                 for (int ch = 0; ch < activeChannels; ++ch)

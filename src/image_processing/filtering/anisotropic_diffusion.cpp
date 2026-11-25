@@ -40,8 +40,11 @@ void AnisotropicDiffusion::reset(const ImageView& input)
     activeChannels_ = std::min(channels_, 3);
     stridePad_ = w_ + 2;
 
-    current_.resize((w_ + 2) * (h_ + 2) * activeChannels_);
-    next_.resize((w_ + 2) * (h_ + 2) * activeChannels_);
+    const size_t paddedSize = static_cast<size_t>(w_ + 2) * static_cast<size_t>(h_ + 2) *
+                              static_cast<size_t>(activeChannels_);
+
+    current_.resize(paddedSize);
+    next_.resize(paddedSize);
 
     output_ = ImageOwner::like(input);
 

@@ -216,7 +216,7 @@ public:
      */
     size_t offset(int x, int y) const noexcept
     {
-        return static_cast<size_t>(y * width_ + x);
+        return static_cast<size_t>(y) * static_cast<size_t>(width_) + static_cast<size_t>(x);
     }
 
     /**

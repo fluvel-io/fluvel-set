@@ -53,7 +53,7 @@ BoundaryFactory::BoundaryFactory(int gridWidth, int gridHeight, ContourPoints& o
     assert(gridWidth >= 1);
     assert(gridHeight >= 1);
 
-    const size_t perimeter = static_cast<size_t>(2 * (gridWidth + gridHeight));
+    const size_t perimeter = 2 * (static_cast<size_t>(gridWidth) + static_cast<size_t>(gridHeight));
 
     const size_t reserveSize = 3 * perimeter;
 
@@ -223,8 +223,8 @@ void BoundaryFactory::buildEllipseMidpointConnected(int x0, int y0, int a, int b
     int y = b;
 
     // Carrés
-    int64_t a2 = static_cast<int64_t>(a * a);
-    int64_t b2 = static_cast<int64_t>(b * b);
+    int64_t a2 = static_cast<int64_t>(a) * a;
+    int64_t b2 = static_cast<int64_t>(b) * b;
 
     int64_t dx = 0;
     int64_t dy = 2 * a2 * y;

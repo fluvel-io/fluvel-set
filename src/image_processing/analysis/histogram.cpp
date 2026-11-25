@@ -61,7 +61,7 @@ Histogram computeHistogram(const ImageView& image, int step)
 
             for (int x = 0; x < width; x += step)
             {
-                const uint8_t* pixel = row + x * channels;
+                const uint8_t* pixel = row + static_cast<std::ptrdiff_t>(x) * channels;
 
                 ++red[pixel[redOffset]];
                 ++green[pixel[greenOffset]];
