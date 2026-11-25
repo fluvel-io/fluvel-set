@@ -121,6 +121,12 @@ public:
     {
     }
     /** @} */
+
+protected:
+    /// Derived classes (e.g. InteractionSet) may be movable; moving through a
+    /// base reference stays impossible, which avoids slicing.
+    ImageViewerInteraction(ImageViewerInteraction&&) = default;
+    ImageViewerInteraction& operator=(ImageViewerInteraction&&) = default;
 };
 
 } // namespace fluvel
