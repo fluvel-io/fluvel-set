@@ -44,6 +44,11 @@ class ImageViewerInteraction
 public:
     virtual ~ImageViewerInteraction() = default;
 
+    /// Interface: not copyable, to avoid slicing.
+    ImageViewerInteraction() = default;
+    ImageViewerInteraction(const ImageViewerInteraction&) = delete;
+    ImageViewerInteraction& operator=(const ImageViewerInteraction&) = delete;
+
     /**
      * @name Event handlers
      * @brief Input event callbacks. Return true if the event is handled.

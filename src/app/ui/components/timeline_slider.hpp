@@ -17,6 +17,8 @@ namespace fluvel
  */
 class TimelineSlider : public StyledSlider
 {
+    Q_OBJECT
+
 public:
     /**
      * @brief Constructs a timeline slider.

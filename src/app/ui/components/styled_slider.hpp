@@ -32,7 +32,7 @@ class StyledSlider : public JumpSlider
 public:
     explicit StyledSlider(QWidget* parent = nullptr,
                           ui::Appearance appearance = ui::Appearance::Modern,
-                          SliderStyle style = {});
+                          const SliderStyle& style = {});
 
     /**
      * @brief Returns whether the slider uses the custom Fluvel appearance.

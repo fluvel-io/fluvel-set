@@ -10,7 +10,7 @@
 namespace fluvel
 {
 
-StyledSlider::StyledSlider(QWidget* parent, ui::Appearance appearance, SliderStyle style)
+StyledSlider::StyledSlider(QWidget* parent, ui::Appearance appearance, const SliderStyle& style)
     : JumpSlider(parent)
     , style_(style)
     , appearance_(appearance)

@@ -72,12 +72,12 @@ public:
     /**
      * @brief Add a shape to the phi mask.
      */
-    void addShape(UiShapeInfo uiShape);
+    void addShape(const UiShapeInfo& uiShape);
 
     /**
      * @brief Subtract a shape from the phi mask.
      */
-    void subtractShape(UiShapeInfo uiShape);
+    void subtractShape(const UiShapeInfo& uiShape);
 
     /**
      * @brief Clear the phi mask.
@@ -110,7 +110,7 @@ public:
     /**
      * @brief Update overlay shape during interactive editing.
      */
-    void onUpdateOverlay(fluvel::UiShapeInfo uiShape);
+    void onUpdateOverlay(const fluvel::UiShapeInfo& uiShape);
 
     /**
      * @brief Update connectivity mode of the contour.

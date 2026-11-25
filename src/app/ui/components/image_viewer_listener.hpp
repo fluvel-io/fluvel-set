@@ -29,6 +29,11 @@ public:
     /// Virtual destructor.
     virtual ~ImageViewerListener() = default;
 
+    /// Interface: not copyable, to avoid slicing.
+    ImageViewerListener() = default;
+    ImageViewerListener(const ImageViewerListener&) = delete;
+    ImageViewerListener& operator=(const ImageViewerListener&) = delete;
+
     /**
      * @brief Called when a pixel color is picked.
      *

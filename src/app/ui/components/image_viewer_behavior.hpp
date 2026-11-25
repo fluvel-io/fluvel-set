@@ -50,6 +50,11 @@ class ImageViewerBehavior
 public:
     virtual ~ImageViewerBehavior() = default;
 
+    /// Interface: not copyable, to avoid slicing.
+    ImageViewerBehavior() = default;
+    ImageViewerBehavior(const ImageViewerBehavior&) = delete;
+    ImageViewerBehavior& operator=(const ImageViewerBehavior&) = delete;
+
     /**
      * @name Event handlers
      * @brief Input event callbacks. Return true if the event is handled.

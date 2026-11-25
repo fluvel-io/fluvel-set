@@ -18,6 +18,8 @@ namespace fluvel
  */
 class VolumeSlider : public StyledSlider
 {
+    Q_OBJECT
+
 public:
     /**
      * @brief Constructs a volume slider.

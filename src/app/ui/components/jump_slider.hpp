@@ -18,6 +18,8 @@ namespace fluvel
  */
 class JumpSlider : public QSlider
 {
+    Q_OBJECT
+
 public:
     /**
      * @brief Constructs a jump slider with the specified orientation.

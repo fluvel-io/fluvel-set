@@ -43,6 +43,11 @@ public:
     /// Virtual destructor.
     virtual ~ISpeedModel() = default;
 
+    /// Interface: not copyable, to avoid slicing.
+    ISpeedModel() = default;
+    ISpeedModel(const ISpeedModel&) = delete;
+    ISpeedModel& operator=(const ISpeedModel&) = delete;
+
     /**
      * @brief Called when a new input image is provided.
      *

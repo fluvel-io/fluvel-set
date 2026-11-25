@@ -222,6 +222,8 @@ struct RegionColorParams : public RegionParams
         this->normalizeColorParams();
     }
 
+    ~RegionColorParams() = default;
+
     /**
      * @brief Copy assignment operator.
      */

@@ -78,6 +78,12 @@ public:
      */
     ContourData(ContourData&& contour) noexcept;
 
+    /// Not assignable (kept explicit: the boundary lists are tied to the phi buffer).
+    ContourData& operator=(const ContourData&) = delete;
+    ContourData& operator=(ContourData&&) = delete;
+
+    ~ContourData() = default;
+
     /**
      * @brief Convert an offset index into 2D coordinates.
      *

@@ -73,7 +73,7 @@ ShapeInfo ImageSettingsController::computeShapeInfo(const UiShapeInfo& uiShape,
     return info;
 }
 
-void ImageSettingsController::addShape(UiShapeInfo uiShape)
+void ImageSettingsController::addShape(const UiShapeInfo& uiShape)
 {
     if (!initializationEnabled_)
         return;
@@ -89,7 +89,7 @@ void ImageSettingsController::addShape(UiShapeInfo uiShape)
     phiEditor_->addShape(shape);
 }
 
-void ImageSettingsController::subtractShape(UiShapeInfo uiShape)
+void ImageSettingsController::subtractShape(const UiShapeInfo& uiShape)
 {
     if (!initializationEnabled_)
         return;
@@ -143,7 +143,7 @@ void ImageSettingsController::onConnectivityChanged(fluvel_ip::Connectivity c)
     phiViewModel_->setConnectivity(c);
 }
 
-void ImageSettingsController::onUpdateOverlay(UiShapeInfo uiShape)
+void ImageSettingsController::onUpdateOverlay(const UiShapeInfo& uiShape)
 {
     if (!initializationEnabled_ || !phiViewModel_)
         return;

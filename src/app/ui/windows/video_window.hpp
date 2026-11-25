@@ -107,6 +107,9 @@ public:
         flag_ = false;
     }
 
+    ScopedUiUpdateGuard(const ScopedUiUpdateGuard&) = delete;
+    ScopedUiUpdateGuard& operator=(const ScopedUiUpdateGuard&) = delete;
+
 private:
     bool& flag_;
 };

@@ -27,6 +27,11 @@ public:
      */
     virtual ~IVideoExporter() = default;
 
+    /// Interface: not copyable, to avoid slicing.
+    IVideoExporter() = default;
+    IVideoExporter(const IVideoExporter&) = delete;
+    IVideoExporter& operator=(const IVideoExporter&) = delete;
+
     /**
      * @brief Opens a new video.
      *
