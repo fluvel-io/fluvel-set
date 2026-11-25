@@ -49,7 +49,7 @@ public:
      * Stops the current recording session and waits for the worker thread
      * to terminate.
      */
-    ~VideoRecorderWorker();
+    ~VideoRecorderWorker() override;
 
     /**
      * @brief Starts a new recording session.

@@ -69,6 +69,7 @@ void StyledSlider::paintEvent(QPaintEvent* event)
         const QPoint handle = handleCenter();
 
         const int grooveHeight = groove.height();
+        const qreal grooveRadius = grooveHeight / 2.0; // half the height: pill-shaped groove
 
         const bool hovered = isEnabled() && hover_;
         const int currentHandleRadius = hovered ? style_.handleHoverRadius : style_.handleRadius;
@@ -97,10 +98,10 @@ void StyledSlider::paintEvent(QPaintEvent* event)
         painter.setPen(Qt::NoPen);
 
         painter.setBrush(grooveColor);
-        painter.drawRoundedRect(groove, grooveHeight / 2, grooveHeight / 2);
+        painter.drawRoundedRect(groove, grooveRadius, grooveRadius);
 
         painter.setBrush(progressColor);
-        painter.drawRoundedRect(progress, grooveHeight / 2, grooveHeight / 2);
+        painter.drawRoundedRect(progress, grooveRadius, grooveRadius);
 
         painter.setBrush(handleColor);
         painter.setPen(QPen(borderColor, 1));
