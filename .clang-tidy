@@ -25,59 +25,59 @@ CheckOptions:
   - key: readability-identifier-naming.NamespaceCase
     value: lower_case
 
-  # Classes → PascalCase
+  # Classes → CamelCase (UpperCamel)
   - key: readability-identifier-naming.ClassCase
-    value: PascalCase
+    value: CamelCase
 
-  # Structs → PascalCase
+  # Structs → CamelCase (UpperCamel)
   - key: readability-identifier-naming.StructCase
-    value: PascalCase
+    value: CamelCase
 
-  # Enums → PascalCase
+  # Enums → CamelCase (UpperCamel)
   - key: readability-identifier-naming.EnumCase
-    value: PascalCase
+    value: CamelCase
 
-  # Enum values → PascalCase (Qt-style)
+  # Enum values → CamelCase (UpperCamel)
   - key: readability-identifier-naming.EnumConstantCase
-    value: PascalCase
+    value: CamelCase
 
-  # Type aliases (using / typedef) → PascalCase
+  # Type aliases (using / typedef) → CamelCase (UpperCamel)
   - key: readability-identifier-naming.TypeAliasCase
-    value: PascalCase
+    value: CamelCase
 
-  # Functions → CamelCase
+  # Functions → camelBack
   - key: readability-identifier-naming.FunctionCase
-    value: CamelCase
+    value: camelBack
 
-  # Methods → CamelCase
+  # Methods → camelBack
   - key: readability-identifier-naming.MethodCase
-    value: CamelCase
+    value: camelBack
 
-  # Variables locales → CamelCase
+  # Local variables → camelBack
   - key: readability-identifier-naming.VariableCase
-    value: CamelCase
+    value: camelBack
 
-  # Paramètres → CamelCase
+  # Parameters → camelBack
   - key: readability-identifier-naming.ParameterCase
-    value: CamelCase
+    value: camelBack
 
-  # Membres privés → CamelCase
+  # Private members → camelBack
   - key: readability-identifier-naming.PrivateMemberCase
-    value: CamelCase
+    value: camelBack
   - key: readability-identifier-naming.PrivateMemberSuffix
     value: _
 
-  # Membres protégés → CamelCase
+  # Protected members → camelBack
   - key: readability-identifier-naming.ProtectedMemberCase
-    value: CamelCase
+    value: camelBack
   - key: readability-identifier-naming.ProtectedMemberSuffix
     value: _
 
-  # Membres publics → CamelCase
+  # Public members → camelBack
   - key: readability-identifier-naming.PublicMemberCase
-    value: CamelCase
+    value: camelBack
 
-  # Constantes globales → kConstantCase
+  # Global constants → kConstantName
   - key: readability-identifier-naming.GlobalConstantPrefix
     value: k
   - key: readability-identifier-naming.GlobalConstantCase
