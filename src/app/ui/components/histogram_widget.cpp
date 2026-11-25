@@ -92,6 +92,7 @@ HistogramWidget::HistogramWidget(QWidget* parent)
     : QWidget(parent)
 {
     setMouseTracking(true);
+    setCursor(Qt::CrossCursor);
     setMinimumSize(minimumSizeHint());
 }
 
@@ -316,16 +317,31 @@ void HistogramWidget::paintEvent(QPaintEvent*)
                          .arg(static_cast<qulonglong>(count));
         }
 
-        int textWidth = 0;
-        for (const QString& line : std::as_const(lines))
-            textWidth = std::max(textWidth, metrics.horizontalAdvance(line));
+        // The width is computed from the widest possible text (100 % and the largest count),
+        // so the box keeps the same size while the cursor moves.
+        int textWidth = metrics.horizontalAdvance(tr("Level %1").arg(kLevels - 1));
+        const QString widestCount = QString::number(static_cast<qulonglong>(histogram_.samples));
+
+        for (int c = 0; c < histogram_.channelCount(); ++c)
+        {
+            const QString name = histogram_.color ? QString::fromLatin1(kNames[c]) : tr("Gray");
+
+            textWidth = std::max(textWidth, metrics.horizontalAdvance(
+                                                QStringLiteral("%1: 100.00 %  (%2)")
+                                                    .arg(name, widestCount)));
+        }
 
         const double boxWidth = textWidth + 12;
         const double boxHeight = metrics.lineSpacing() * lines.size() + 8;
 
-        // The box goes on the side opposite to the cursor, at the top of the plots.
-        const double boxX = (x > area.center().x()) ? area.left() + 6 : area.right() - boxWidth - 6;
-        const QRectF box(boxX, area.top() + 6, boxWidth, boxHeight);
+        // The box stays at the top left of the plots. It only moves to the right when the
+        // cursor line would go under it.
+        constexpr double kBoxMargin = 6.0;
+        const double leftBoxRight = area.left() + kBoxMargin + boxWidth;
+        const double boxX =
+            (x > leftBoxRight + kBoxMargin) ? area.left() + kBoxMargin
+                                            : area.right() - boxWidth - kBoxMargin;
+        const QRectF box(boxX, area.top() + kBoxMargin, boxWidth, boxHeight);
 
         painter.setPen(QPen(colors.border, 1));
         painter.setBrush(colors.readoutBackground);
