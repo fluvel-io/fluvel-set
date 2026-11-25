@@ -15,7 +15,7 @@ Exec=fluvel-set
 Icon=org.fluvel.FluvelSet
 
 Terminal=false
-StartupNotify=false
+StartupNotify=true
 StartupWMClass=fluvel-set
 
 Categories=Graphics;Science;

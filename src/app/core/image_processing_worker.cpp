@@ -445,7 +445,7 @@ void ImageProcessingWorker::onTick()
     }
 
     // Interactive: one frame every kFrameIntervalMs, at most
-    // kIterationsPerFrame iterations per frame.
+    // kMaxIterationsPerFrame iterations per frame, within kFrameComputeBudgetMs.
     const auto now = Clock::now();
     const auto sinceLast = now - lastPublish_;
 
@@ -468,13 +468,19 @@ void ImageProcessingWorker::onTick()
     // If a frame took longer than the interval, do not try to catch up.
     nextFrameDue_ = std::max(nextFrameDue_ + kFrameIntervalMs, now);
 
-    for (int i = 0; i < kIterationsPerFrame; ++i)
+    fluvel_ip::ElapsedTimer frameBudget;
+    frameBudget.start();
+
+    for (int i = 0; i < kMaxIterationsPerFrame; ++i)
     {
         if (!stepOnceAlgo())
         {
             finalizeAndPrepareNextRun();
             return;
         }
+
+        if (!frameBudget.elapsedLessThan(kFrameComputeBudgetMs))
+            break;
     }
 
     publish(true);

@@ -99,6 +99,14 @@ public:
     void setInteractiveMode(bool enabled);
 
     /**
+     * @brief Set the colors of the outer and inner contours.
+     *
+     * Same colors as the ones chosen in the display settings, so the
+     * initialization shape is drawn like the final contour.
+     */
+    void setContourColors(const QColor& outer, const QColor& inner);
+
+    /**
      * @brief Updates the model from the editor state.
      *
      * Recomputes contour lists and updates the phi representation.
@@ -190,6 +198,8 @@ private:
 
     /// True if interactive mode is enabled.
     bool interactiveMode_{false};
+    QColor outerColor_{64, 0, 255};
+    QColor innerColor_{0, 230, 118};
 
     /// True if overlay is currently visible.
     bool overlayVisible_{false};

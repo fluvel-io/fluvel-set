@@ -64,11 +64,12 @@ enum class WorkerState
  * commands (pause, step, restart, ...) are handled between two ticks.
  *
  * - Interactive mode: the worker is paced by the clock. Every ~16 ms (60 FPS)
- *   it runs kIterationsPerFrame iterations (the computation time is part of
- *   the 16 ms), then publishes the result, so the evolution of the contour
- *   stays visible even on small images that would converge in a few
- *   milliseconds. With big images, where one iteration
- *   takes longer than a frame, it simply runs as fast as it can. It never
+ *   it runs iterations until kMaxIterationsPerFrame is reached or the compute
+ *   budget (kFrameComputeBudgetMs) is used up, then publishes the result, so
+ *   the evolution of the contour stays visible even on small images that
+ *   would converge in a few milliseconds. With big images, where one iteration
+ *   takes longer than the budget, it runs one iteration per frame (as fast as
+ *   it can) instead of a fixed batch that makes the display stutter. It never
  *   computes a frame ahead of the consumer: if the previous one has not been
  *   acknowledged (see acknowledgeFrame()), it waits.
  * - Converge mode: the algorithm runs at full speed, without pacing and
@@ -288,9 +289,14 @@ private:
     /// Delay between two published frames in interactive mode (~60 FPS).
     static constexpr std::chrono::milliseconds kFrameIntervalMs{16};
 
-    /// Number of iterations computed between two published frames in
-    /// interactive mode.
-    static constexpr int kIterationsPerFrame{6};
+    /// Maximum number of iterations computed between two published frames in
+    /// interactive mode (keeps the evolution readable on small images).
+    static constexpr int kMaxIterationsPerFrame{10};
+
+    /// Compute time budget of one frame in interactive mode. At least one
+    /// iteration is always computed, so large images get fewer iterations per
+    /// frame instead of a stuttering display.
+    static constexpr std::chrono::milliseconds kFrameComputeBudgetMs{12};
 
     /// Delay before checking again if the consumer has acknowledged a frame.
     static constexpr std::chrono::milliseconds kAckPollMs{2};

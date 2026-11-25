@@ -122,6 +122,11 @@ public:
      */
     void setInteractiveMode(bool enabled);
 
+    /**
+     * @brief Set the contour colors used to draw phi in the settings view.
+     */
+    void setContourColors(const QColor& outer, const QColor& inner);
+
 signals:
     /// Emitted when the preview image changes.
     void viewChanged(const QImage& imageSettings);

@@ -187,6 +187,12 @@ void ImageSettingsController::setInteractiveMode(bool enabled)
         phiViewModel_->hideOverlay();
 }
 
+void ImageSettingsController::setContourColors(const QColor& outer, const QColor& inner)
+{
+    if (phiViewModel_)
+        phiViewModel_->setContourColors(outer, inner);
+}
+
 void ImageSettingsController::refreshPreview()
 {
     // Any result of an older request becomes outdated.

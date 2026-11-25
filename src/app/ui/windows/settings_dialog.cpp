@@ -4,6 +4,8 @@
 #include "settings_dialog.hpp"
 
 #include "algo_settings_widget.hpp"
+#include "application_settings.hpp"
+#include "color_adapters.hpp"
 #include "animated_tab_widget.hpp"
 #include "image_viewer_widget.hpp"
 #include "initialization_behavior.hpp"
@@ -132,6 +134,11 @@ SettingsDialog::SettingsDialog(const ImageComputeConfig& config, QWidget* parent
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     imageSettingsController_ = new ImageSettingsController(editedConfig_, this);
+
+    const ContourStyleConfig& contourStyle =
+        ApplicationSettings::instance().imageSettings().display.contour;
+    imageSettingsController_->setContourColors(toQColor(contourStyle.outerColor),
+                                               toQColor(contourStyle.innerColor));
 
     updateUIFromConfig();
     setupConnections();

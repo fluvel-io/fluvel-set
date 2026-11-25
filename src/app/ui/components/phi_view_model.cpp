@@ -13,13 +13,8 @@
 namespace fluvel
 {
 
-// phi colors (Lout and Lin)
-const QColor kOutColor{64, 0, 255};
-const QColor kInColor{0, 230, 118};
-
-// phi (Lout and Lin colors) in interactive mode
-const QColor kInteractiveOuterColor{32, 0, 128};
-const QColor kInteractiveInnerColor{0, 115, 59};
+// Dimming factor (QColor::darker) applied to the contour colors in interactive mode.
+constexpr int kInteractiveDarkerFactor = 200;
 
 PhiViewModel::PhiViewModel(PhiEditor* editor, fluvel_ip::Connectivity connectivity, QObject* parent)
     : QObject(parent)
@@ -154,8 +149,10 @@ void PhiViewModel::updateLists()
 
 void PhiViewModel::emitLayers()
 {
-    const QColor& outColor = interactiveMode_ ? kInteractiveOuterColor : kOutColor;
-    const QColor& inColor = interactiveMode_ ? kInteractiveInnerColor : kInColor;
+    const QColor outColor =
+        interactiveMode_ ? outerColor_.darker(kInteractiveDarkerFactor) : outerColor_;
+    const QColor inColor =
+        interactiveMode_ ? innerColor_.darker(kInteractiveDarkerFactor) : innerColor_;
 
     QVector<PointLayer> layers(2);
 
@@ -209,6 +206,14 @@ void PhiViewModel::emitOverlay()
         path.addEllipse(box);
 
     emit overlayChanged(path);
+}
+
+void PhiViewModel::setContourColors(const QColor& outer, const QColor& inner)
+{
+    outerColor_ = outer;
+    innerColor_ = inner;
+
+    emitLayers();
 }
 
 void PhiViewModel::setInteractiveMode(bool enabled)
