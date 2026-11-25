@@ -11,12 +11,12 @@
 namespace
 {
 
-constexpr int kPressDurationMs = 140;
+constexpr int kPressDurationMs{140};
 
 /// Normalized animation time at which the minimum scale is reached.
-constexpr qreal kMinimumScaleTime = 0.4;
+constexpr qreal kMinimumScaleTime{0.4};
 
-constexpr qreal kMinimumScale = 0.84;
+constexpr qreal kMinimumScale{0.84};
 
 } // namespace
 

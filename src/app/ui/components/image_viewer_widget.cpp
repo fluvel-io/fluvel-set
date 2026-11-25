@@ -704,7 +704,7 @@ void ImageViewerWidget::updateInteractionAfterZoom()
 
 double ImageViewerWidget::computeZoomFactor(QWheelEvent* event) const
 {
-    constexpr double zoomFactor = 1.1;
+    constexpr double zoomFactor{1.1};
     return (event->angleDelta().y() > 0) ? zoomFactor : 1.0 / zoomFactor;
 }
 
@@ -1209,7 +1209,7 @@ void ImageViewerWidget::updateMiniMap()
 
 void ImageViewerWidget::positionMiniMap()
 {
-    constexpr int margin = 10;
+    constexpr int margin{10};
 
     miniMap_->move(viewport()->width() - miniMap_->width() - margin,
                    viewport()->height() - miniMap_->height() - margin);
@@ -1309,7 +1309,7 @@ void ImageViewerWidget::anchorOverlay(OverlayTextItem* overlay, OverlayPosition 
     if (!overlay)
         return;
 
-    static constexpr int kMargin = 10;
+    static constexpr int kMargin{10};
 
     const QRect viewportRect = viewport()->rect();
 
@@ -1352,7 +1352,7 @@ QPoint ImageViewerWidget::adjustOverlayPosition(const QPoint& anchorViewPos,
                                                 const QSize& overlaySize,
                                                 const QPoint& preferredOffset) const
 {
-    constexpr int kMargin = 8;
+    constexpr int kMargin{8};
 
     const QRect viewportRect = viewport()->rect();
 

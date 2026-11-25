@@ -6,7 +6,7 @@
 namespace
 {
 
-constexpr int kDefaultDurationMs = 280;
+constexpr int kDefaultDurationMs{280};
 
 qreal lerp(qreal a, qreal b, qreal t)
 {

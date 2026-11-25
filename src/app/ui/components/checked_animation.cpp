@@ -11,13 +11,13 @@
 namespace
 {
 
-constexpr int kAnimationDurationMs = 190;
+constexpr int kAnimationDurationMs{190};
 
 /// Normalized animation time at which the overshoot is reached.
-constexpr qreal kPeakTime = 0.60;
+constexpr qreal kPeakTime{0.60};
 
-constexpr qreal kCheckPeakScale = 1.14;
-constexpr qreal kUncheckPeakScale = 0.88;
+constexpr qreal kCheckPeakScale{1.14};
+constexpr qreal kUncheckPeakScale{0.88};
 
 } // namespace
 

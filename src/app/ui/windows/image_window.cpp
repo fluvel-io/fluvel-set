@@ -53,7 +53,7 @@
 
 #include <cassert>
 
-static constexpr int kControlSpacing = 6;
+static constexpr int kControlSpacing{6};
 
 namespace fluvel
 {
@@ -186,7 +186,7 @@ void ImageWindow::setupUi()
     imageViewer_ = new ImageViewerWidget(config.display.view, central);
     imageViewer_->setMaxDisplayFps(60.0);
 
-    constexpr qreal kDebugOverlayMinWidth = 160.0;
+    constexpr qreal kDebugOverlayMinWidth{160.0};
     imageViewer_->setOverlayMinWidth(kDebugOverlayMinWidth);
     imageViewer_->setOverlayAlignment(Qt::AlignLeft | Qt::AlignTop);
 
@@ -1051,7 +1051,7 @@ void ImageWindow::positionFullscreenBar()
 
     const QSize size = fullscreenBar_->size();
 
-    constexpr int kBottomMargin = 12;
+    constexpr int kBottomMargin{12};
 
     const int x = (imageViewer_->width() - size.width()) / 2;
 
@@ -1177,7 +1177,7 @@ void ImageWindow::onActivityDetected(const QPoint& pos)
     if (!isFullScreen_)
         return;
 
-    constexpr int kTriggerZoneHeight = 150;
+    constexpr int kTriggerZoneHeight{150};
 
     const bool inBottomZone = pos.y() > imageViewer_->height() - kTriggerZoneHeight;
 

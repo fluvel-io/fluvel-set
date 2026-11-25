@@ -35,7 +35,7 @@ class QDropEvent;
 namespace fluvel
 {
 
-constexpr int kUserIdleTimeoutMs = 2000;
+constexpr int kUserIdleTimeoutMs{2000};
 
 class ImageViewerInteraction;
 class HudOverlayController;

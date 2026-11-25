@@ -52,8 +52,8 @@ struct CodecEntry
 // Frame size used to probe encoders. Hardware encoders often enforce a
 // minimum frame size (e.g. NVENC), so a tiny dummy size would wrongly
 // reject them and silently fall back to software.
-static constexpr int kProbeWidth = 1280;
-static constexpr int kProbeHeight = 720;
+static constexpr int kProbeWidth{1280};
+static constexpr int kProbeHeight{720};
 
 //
 // Preferred FFmpeg encoders.
@@ -70,8 +70,8 @@ static constexpr int kProbeHeight = 720;
 // Each list lives in its own static array so that the spans below never
 // point to temporary storage (std::initializer_list backing arrays inside a
 // constexpr table are not reliable with MSVC).
-static constexpr std::array kFfv1Encoders = {"ffv1"};
-static constexpr std::array kMpeg4Encoders = {"mpeg4"};
+static constexpr std::array kFfv1Encoders{"ffv1"};
+static constexpr std::array kMpeg4Encoders{"mpeg4"};
 static constexpr std::array kH264Encoders = {
     "h264_nvenc",        // NVIDIA
     "h264_amf",          // AMD
@@ -82,7 +82,7 @@ static constexpr std::array kH264Encoders = {
 };
 static constexpr std::array kH265Encoders = {"hevc_nvenc", "hevc_amf",  "hevc_qsv",
                                              "hevc_videotoolbox", "hevc_vaapi", "libx265"};
-static constexpr std::array kVp9Encoders = {"vp9_vaapi", "libvpx-vp9"};
+static constexpr std::array kVp9Encoders{"vp9_vaapi", "libvpx-vp9"};
 static constexpr std::array kAv1Encoders = {"av1_nvenc", "av1_amf",   "av1_qsv",
                                             "av1_videotoolbox", "av1_vaapi", "libsvtav1",
                                             "libaom-av1", "librav1e"};

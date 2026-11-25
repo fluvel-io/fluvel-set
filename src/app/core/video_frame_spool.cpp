@@ -24,11 +24,11 @@ SegmentLayout computeSegmentLayout(quint64 maximumSize)
 {
     assert(maximumSize > 0);
 
-    constexpr quint64 bytesPerMiB = 1024ull * 1024ull;
+    constexpr quint64 bytesPerMiB{1024ull * 1024ull};
 
-    constexpr quint64 minSegmentSize = 64 * bytesPerMiB;
-    constexpr quint64 maxSegmentSize = 512 * bytesPerMiB;
-    constexpr int targetSegmentCount = 64;
+    constexpr quint64 minSegmentSize{64 * bytesPerMiB};
+    constexpr quint64 maxSegmentSize{512 * bytesPerMiB};
+    constexpr int targetSegmentCount{64};
 
     const auto segmentSize =
         std::clamp(maximumSize / targetSegmentCount, minSegmentSize, maxSegmentSize);
@@ -232,7 +232,7 @@ std::optional<FrameLocation> VideoFrameSpool::write(const VideoFrame& frame)
     if (header.hasPresentationTimestamp)
         header.presentationTimestampNs = *frame.presentationTimestampNs;
 
-    constexpr quint64 headerSize = sizeof(VideoFrameHeader);
+    constexpr quint64 headerSize{sizeof(VideoFrameHeader)};
     const quint64 requiredSize = headerSize + header.imageSize;
 
     if (!prepareWriteSegment(requiredSize))

@@ -1127,7 +1127,7 @@ QPoint SettingsDialog::uiPositionFromView(const QPoint& viewPosition) const
 
 void SettingsDialog::onTabChanged(int index)
 {
-    constexpr int kInitializationTab = int(TabIndex::Initialization);
+    constexpr int kInitializationTab{int(TabIndex::Initialization)};
     emit initializationModeChanged(index == kInitializationTab);
 }
 

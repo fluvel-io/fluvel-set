@@ -21,8 +21,8 @@ void gaussian(const ImageView& input, ImageOwner& output, float sigma)
 {
     output.ensureLike(input);
 
-    constexpr float kSigmaMin = 1e-3f;
-    constexpr float kSigmaMax = 80.f;
+    constexpr float kSigmaMin{1e-3f};
+    constexpr float kSigmaMax{80.f};
 
     sigma = std::clamp(sigma, kSigmaMin, kSigmaMax);
 
@@ -125,8 +125,8 @@ void speckleUniform(const ImageView& input, ImageOwner& output, float sigma)
 {
     output.ensureLike(input);
 
-    constexpr float kSigmaMin = 1e-3f;
-    constexpr float kSigmaMax = 80.f;
+    constexpr float kSigmaMin{1e-3f};
+    constexpr float kSigmaMax{80.f};
 
     sigma = std::clamp(sigma, kSigmaMin, kSigmaMax);
 
@@ -175,8 +175,8 @@ void speckleGamma(const ImageView& input, ImageOwner& output, float sigma)
 {
     output.ensureLike(input);
 
-    constexpr float kSigmaMin = 1e-3f;
-    constexpr float kSigmaMax = 2.f;
+    constexpr float kSigmaMin{1e-3f};
+    constexpr float kSigmaMax{2.f};
 
     sigma = std::clamp(sigma, kSigmaMin, kSigmaMax);
 

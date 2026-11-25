@@ -171,7 +171,7 @@ private:
 
     int64_t statsTimestampNs_{0};
 
-    static constexpr int64_t kStatsIntervalNs = 1'000'000'000;
+    static constexpr int64_t kStatsIntervalNs{1'000'000'000};
 
     VideoFrameBuffer frameBuffer_;
 

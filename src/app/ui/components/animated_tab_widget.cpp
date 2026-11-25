@@ -15,29 +15,29 @@ namespace
 //--------------------------------------------------
 
 /// Slide animation duration in milliseconds.
-constexpr int kSlideDurationMs = 100;
+constexpr int kSlideDurationMs{100};
 
 /// Horizontal slide offset in pixels.
-constexpr int kSlideDistancePx = 10;
+constexpr int kSlideDistancePx{10};
 
 /// Easing curve used by the slide animation.
-constexpr QEasingCurve::Type kSlideEasing = QEasingCurve::OutCubic;
+constexpr QEasingCurve::Type kSlideEasing{QEasingCurve::OutCubic};
 
 //--------------------------------------------------
 // Fade animation
 //--------------------------------------------------
 
 /// Fade animation duration in milliseconds.
-constexpr int kFadeDurationMs = 100;
+constexpr int kFadeDurationMs{100};
 
 /// Initial page opacity.
-constexpr qreal kFadeStartOpacity = 0.90;
+constexpr qreal kFadeStartOpacity{0.90};
 
 /// Final page opacity.
-constexpr qreal kFadeEndOpacity = 1.0;
+constexpr qreal kFadeEndOpacity{1.0};
 
 /// Easing curve used by the fade animation.
-constexpr QEasingCurve::Type kFadeEasing = QEasingCurve::OutCubic;
+constexpr QEasingCurve::Type kFadeEasing{QEasingCurve::OutCubic};
 
 } // namespace
 

@@ -23,7 +23,7 @@ namespace
 {
 
 // Extra free space required on top of the file size.
-constexpr qint64 kSpaceMarginBytes = 16LL * 1024 * 1024;
+constexpr qint64 kSpaceMarginBytes{16LL * 1024 * 1024};
 
 bool hasEnoughSpace(const QFileInfo& info)
 {

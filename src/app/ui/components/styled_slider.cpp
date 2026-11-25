@@ -81,7 +81,7 @@ void StyledSlider::paintEvent(QPaintEvent* event)
 
         if (!isEnabled())
         {
-            constexpr qreal kDisabledOpacity = 0.45;
+            constexpr qreal kDisabledOpacity{0.45};
 
             auto dim = [=](QColor c)
             {

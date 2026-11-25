@@ -22,10 +22,10 @@ namespace
 {
 
 /// Minimum delay between two computations while images keep arriving.
-constexpr int kRefreshIntervalMs = 100;
+constexpr int kRefreshIntervalMs{100};
 
 /// Above this number of pixels the histogram is sampled (see sampleStep()).
-constexpr qint64 kFullResolutionPixels = 25'000'000;
+constexpr qint64 kFullResolutionPixels{25'000'000};
 
 /// Sampling step keeping the computation time bounded on huge images.
 int sampleStep(const QImage& image)

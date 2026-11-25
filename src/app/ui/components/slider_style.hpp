@@ -13,21 +13,21 @@ namespace fluvel
 // Default timeline slider metrics
 // ============================================================================
 
-constexpr int kSliderHeight = 62;
+constexpr int kSliderHeight{62};
 
-constexpr int kSliderSideMargin = 16;
-constexpr int kSliderTopMargin = 0;
-constexpr int kSliderBottomMargin = 0;
+constexpr int kSliderSideMargin{16};
+constexpr int kSliderTopMargin{0};
+constexpr int kSliderBottomMargin{0};
 
-constexpr int kSliderGrooveHeight = 8;
-constexpr int kSliderGrooveHoverHeight = 11;
+constexpr int kSliderGrooveHeight{8};
+constexpr int kSliderGrooveHoverHeight{11};
 
-constexpr int kSliderHandleRadius = 11;
-constexpr int kSliderHandleHoverRadius = 13;
+constexpr int kSliderHandleRadius{11};
+constexpr int kSliderHandleHoverRadius{13};
 
-constexpr int kSliderHoverFontPointSize = 10;
-constexpr int kSliderHoverBubbleRadius = 6;
-constexpr int kSliderHoverBubbleOffset = 16;
+constexpr int kSliderHoverFontPointSize{10};
+constexpr int kSliderHoverBubbleRadius{6};
+constexpr int kSliderHoverBubbleOffset{16};
 
 inline const QMargins kSliderHoverBubbleMargins{6, 2, 6, 2};
 
@@ -35,20 +35,20 @@ inline const QMargins kSliderHoverBubbleMargins{6, 2, 6, 2};
 // Volume slider metrics
 // ============================================================================
 
-constexpr int kVolumeSliderHeight = 58;
+constexpr int kVolumeSliderHeight{58};
 
-constexpr int kVolumeSliderTopMargin = 0;
-constexpr int kVolumeSliderBottomMargin = 0;
+constexpr int kVolumeSliderTopMargin{0};
+constexpr int kVolumeSliderBottomMargin{0};
 
-constexpr int kVolumeSliderGrooveHeight = 4;
-constexpr int kVolumeSliderGrooveHoverHeight = 6;
+constexpr int kVolumeSliderGrooveHeight{4};
+constexpr int kVolumeSliderGrooveHoverHeight{6};
 
-constexpr int kVolumeSliderHandleRadius = 7;
-constexpr int kVolumeSliderHandleHoverRadius = 9;
+constexpr int kVolumeSliderHandleRadius{7};
+constexpr int kVolumeSliderHandleHoverRadius{9};
 
-constexpr int kVolumeSliderHoverFontPointSize = 8;
-constexpr int kVolumeSliderHoverBubbleRadius = 6;
-constexpr int kVolumeSliderHoverBubbleOffset = 14;
+constexpr int kVolumeSliderHoverFontPointSize{8};
+constexpr int kVolumeSliderHoverBubbleRadius{6};
+constexpr int kVolumeSliderHoverBubbleOffset{14};
 
 inline const QMargins kVolumeSliderHoverBubbleMargins{6, 2, 6, 2};
 

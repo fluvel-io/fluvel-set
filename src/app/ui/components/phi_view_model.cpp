@@ -14,7 +14,7 @@ namespace fluvel
 {
 
 // Dimming factor (QColor::darker) applied to the contour colors in interactive mode.
-constexpr int kInteractiveDarkerFactor = 200;
+constexpr int kInteractiveDarkerFactor{200};
 
 PhiViewModel::PhiViewModel(PhiEditor* editor, fluvel_ip::Connectivity connectivity, QObject* parent)
     : QObject(parent)

@@ -81,7 +81,7 @@ void PixelInfoOverlay::updateInfo(const QPoint& pixel, const QRgb& color, bool i
 
 void PixelInfoOverlay::updatePlacement(const QPointF& anchorScenePos, ImageViewerWidget& view)
 {
-    constexpr int margin = 8;
+    constexpr int margin{8};
 
     const QPoint anchorViewPos = view.mapFromScene(anchorScenePos);
 

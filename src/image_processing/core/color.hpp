@@ -325,7 +325,7 @@ using Color_3i = Components_3i;
  */
 inline Color_3i scaleAndRound(float c1, float c2, float c3)
 {
-    constexpr float scale = 255.f;
+    constexpr float scale{255.f};
 
     return {static_cast<int>(std::lround(scale * c1)), static_cast<int>(std::lround(scale * c2)),
             static_cast<int>(std::lround(scale * c3))};
@@ -343,18 +343,18 @@ constexpr float invGammaCorrection(float val)
 }
 
 /** @brief XYZ color of the D65 white point */
-constexpr float kWhitePointX = 0.950456f;
-constexpr float kWhitePointY = 1.f;
-constexpr float kWhitePointZ = 1.088754f;
+constexpr float kWhitePointX{0.950456f};
+constexpr float kWhitePointY{1.f};
+constexpr float kWhitePointZ{1.088754f};
 
 /** @brief *u*v color of the D65 white point */
-constexpr float kWhitePointDenom = kWhitePointX + 15.f * kWhitePointY + 3.f * kWhitePointZ;
-constexpr float kWhitePointU = 4.f * kWhitePointX / kWhitePointDenom;
-constexpr float kWhitePointV = 9.f * kWhitePointY / kWhitePointDenom;
+constexpr float kWhitePointDenom{kWhitePointX + 15.f * kWhitePointY + 3.f * kWhitePointZ};
+constexpr float kWhitePointU{4.f * kWhitePointX / kWhitePointDenom};
+constexpr float kWhitePointV{9.f * kWhitePointY / kWhitePointDenom};
 
-constexpr float kLabEpsilon = 216.f / 24389.f;
-constexpr float kLabKappa = 841.f / 108.f;
-constexpr float kLabDelta = 4.f / 29.f;
+constexpr float kLabEpsilon{216.f / 24389.f};
+constexpr float kLabKappa{841.f / 108.f};
+constexpr float kLabDelta{4.f / 29.f};
 
 /**
  * @brief CIE L*a*b* helper function f(t).

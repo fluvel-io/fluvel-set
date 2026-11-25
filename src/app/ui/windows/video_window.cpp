@@ -77,15 +77,15 @@ constexpr auto kLastVideoDirectory = "video/last_directory";
 constexpr auto kVolumeKey = "media/volume";
 constexpr auto kMutedKey = "media/muted";
 
-constexpr int kDefaultVolume = 50;
-constexpr bool kDefaultMuted = false;
-constexpr int kSaveAudioSettingsDelayMs = 3000;
+constexpr int kDefaultVolume{50};
+constexpr bool kDefaultMuted{false};
+constexpr int kSaveAudioSettingsDelayMs{3000};
 
-constexpr int kControlSpacing = 6;
-constexpr int kSectionSpacing = 12;
-constexpr int kGroupSpacing = 20;
+constexpr int kControlSpacing{6};
+constexpr int kSectionSpacing{12};
+constexpr int kGroupSpacing{20};
 
-constexpr int kVerticalSpacing = 4;
+constexpr int kVerticalSpacing{4};
 } // namespace
 
 namespace fluvel
@@ -448,7 +448,7 @@ void VideoWindow::setupView()
     // producer is faster than this, so 30 fps sources are not affected.
     imageViewer_->setMaxDisplayFps(60.0);
 
-    constexpr qreal kDebugOverlayMinWidth = 160.0;
+    constexpr qreal kDebugOverlayMinWidth{160.0};
     imageViewer_->setOverlayMinWidth(kDebugOverlayMinWidth);
     imageViewer_->setOverlayAlignment(Qt::AlignLeft | Qt::AlignTop);
 
@@ -1323,7 +1323,7 @@ void VideoWindow::showPlaceholder(bool show)
 {
     assert(imageViewer_);
 
-    constexpr int kPlaceholderBlurRadius = 6;
+    constexpr int kPlaceholderBlurRadius{6};
 
     // Idempotent: the image must be darkened only once.
     if (placeholderVisible_ == show)
@@ -1590,7 +1590,7 @@ bool VideoWindow::shouldShowMediaError(const MediaPlayerErrorInfo& errorInfo)
     if (errorInfo.state != StreamingState::Streaming)
         return true;
 
-    constexpr int kDeduplicationDelayMs = 5000;
+    constexpr int kDeduplicationDelayMs{5000};
 
     const bool sameSource = lastReportedError_.source == errorInfo.sourceInfo.media.description;
 
@@ -1891,7 +1891,7 @@ void VideoWindow::addSourceToHistory(const QUrl& url)
 
     urlCombo_->setCurrentIndex(0);
 
-    constexpr int kMaxHistory = 20;
+    constexpr int kMaxHistory{20};
 
     while (urlCombo_->count() > kMaxHistory)
         urlCombo_->removeItem(urlCombo_->count() - 1);
@@ -2249,7 +2249,7 @@ void VideoWindow::leaveFullscreen()
 
 void VideoWindow::positionFullscreenBar()
 {
-    constexpr int kBottomMargin = 12;
+    constexpr int kBottomMargin{12};
 
     fullscreenBar_->layout()->activate();
     fullscreenBar_->adjustSize();
@@ -2276,7 +2276,7 @@ void VideoWindow::onActivityDetected(const QPoint& pos)
     if (!isFullScreen_)
         return;
 
-    constexpr int kTriggerZoneHeight = 150;
+    constexpr int kTriggerZoneHeight{150};
 
     const bool inBottomZone = pos.y() > imageViewer_->height() - kTriggerZoneHeight;
 

@@ -23,7 +23,7 @@ class ISpeedModel;
  *
  * Used to avoid frequent reallocations when computing speeds.
  */
-constexpr size_t kInitialSpeedArrayAllocSize = 10000u;
+constexpr size_t kInitialSpeedArrayAllocSize{10000u};
 
 /**
  * @brief Mapping used to perform generic boundary switching operations.

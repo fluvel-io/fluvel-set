@@ -28,9 +28,9 @@ constexpr std::array kIconSizes{16, 22, 24, 32, 48, 64};
 
 QIcon createShapeIcon(const QColor& color, IconShape shape)
 {
-    constexpr int kRenderScale = 4;
-    constexpr qreal kPenWidth = 1.5;
-    constexpr qreal kCornerRadiusRatio = 0.15;
+    constexpr int kRenderScale{4};
+    constexpr qreal kPenWidth{1.5};
+    constexpr qreal kCornerRadiusRatio{0.15};
 
     QIcon icon;
 

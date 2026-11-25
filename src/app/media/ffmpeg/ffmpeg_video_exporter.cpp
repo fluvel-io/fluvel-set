@@ -596,7 +596,7 @@ bool FFmpegVideoExporter::fillFrameBgr0(const QImage& image)
 
     auto* frame = context_->frame;
 
-    constexpr int kBytesPerPixel = 4;
+    constexpr int kBytesPerPixel{4};
     const int bytesPerRow = src->width() * kBytesPerPixel;
 
     //

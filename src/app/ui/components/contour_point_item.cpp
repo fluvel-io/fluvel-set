@@ -12,14 +12,14 @@ namespace
 {
 // Width of the pen used to draw the contour points, in image pixels
 // (the pen is not cosmetic, so it is scaled with the zoom).
-constexpr qreal kPenWidth = 1.1;
+constexpr qreal kPenWidth{1.1};
 
 // Smallest width on the screen of a smooth line, in screen pixels.
-constexpr qreal kSmoothMinScreenWidth = 2.0;
+constexpr qreal kSmoothMinScreenWidth{2.0};
 
 // Zoom out factor up to which the bounding rectangle contains the whole
 // stroke of a smooth line (its width in image pixels grows when zooming out).
-constexpr qreal kSmoothMaxZoomOut = 16.0;
+constexpr qreal kSmoothMaxZoomOut{16.0};
 } // namespace
 
 namespace fluvel

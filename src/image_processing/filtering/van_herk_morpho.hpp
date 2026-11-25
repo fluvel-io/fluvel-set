@@ -147,7 +147,7 @@ void vanHerkVertical(const ImageOwner& buffer, ImageOwner& output, int width, in
                      int channels, int activeChannels, int radius, std::vector<int>& ring)
 {
     // Pixels per tile: tile size = kTilePixels * activeChannels * height bytes (x2).
-    constexpr int kTilePixels = 16;
+    constexpr int kTilePixels{16};
 
     const size_t lineCount = static_cast<size_t>(kTilePixels) * activeChannels;
     std::vector<uint8_t> tileIn(lineCount * height);

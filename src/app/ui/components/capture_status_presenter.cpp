@@ -21,7 +21,7 @@ namespace fluvel
 
 namespace
 {
-constexpr int kStatusMessageTimeoutMs = 5000;
+constexpr int kStatusMessageTimeoutMs{5000};
 }
 
 CaptureStatusPresenter::CaptureStatusPresenter(QMainWindow* window, CaptureController* controller)

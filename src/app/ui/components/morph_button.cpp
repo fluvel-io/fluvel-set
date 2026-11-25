@@ -14,7 +14,7 @@
 namespace
 {
 
-constexpr qreal kDisabledOpacity = 0.45;
+constexpr qreal kDisabledOpacity{0.45};
 
 } // namespace
 

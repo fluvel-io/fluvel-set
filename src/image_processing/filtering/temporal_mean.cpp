@@ -38,7 +38,7 @@ void TemporalMean::reset(const ImageView& firstFrame)
     outputNeedsRefresh_ = true;
 
     const int pixelsCount = accum_.width() * accum_.height();
-    constexpr int targetSamples = 200000;
+    constexpr int targetSamples{200000};
 
     samplingStep_ = std::max(1, int(std::sqrt(float(pixelsCount) / targetSamples)));
 
@@ -116,10 +116,10 @@ float TemporalMean::computeMotion(const ImageView& frame) const
 // ------------------------------------------------------------
 void TemporalMean::updateNoiseEstimate(float motion, float deltaSeconds)
 {
-    constexpr float tauInit = 0.3f; // startup convergence
-    constexpr float tauUp = 0.3f;   // noise increase
-    constexpr float tauDown = 2.0f; // noise decrease
-    constexpr float warmupDurationSeconds = 0.5f;
+    constexpr float tauInit{0.3f}; // startup convergence
+    constexpr float tauUp{0.3f};   // noise increase
+    constexpr float tauDown{2.0f}; // noise decrease
+    constexpr float warmupDurationSeconds{0.5f};
 
     // Prevent large scene changes from instantly inflating
     // the estimated noise floor.
@@ -147,12 +147,12 @@ float TemporalMean::computeAdaptiveAlpha(float motion, float deltaSeconds)
     // --------------------------------------------------------
     // Motion normalized by noise
     // --------------------------------------------------------
-    constexpr float epsilon = 1e-6f;
+    constexpr float epsilon{1e-6f};
 
     const float motionRatio = motion / (noiseEstimate_ + epsilon);
 
     // Smooth the motion ratio to avoid rapid oscillations.
-    constexpr float tauRatio = 0.1f;
+    constexpr float tauRatio{0.1f};
 
     const float alphaRatio = 1.f - std::exp(-deltaSeconds / tauRatio);
 
@@ -165,11 +165,11 @@ float TemporalMean::computeAdaptiveAlpha(float motion, float deltaSeconds)
     // --------------------------------------------------------
     // Map motion ratio to time constant
     // --------------------------------------------------------
-    constexpr float tauMin = 0.02f; // very reactive
-    constexpr float tauMax = 0.2f;  // stable
+    constexpr float tauMin{0.02f}; // very reactive
+    constexpr float tauMax{0.2f};  // stable
 
-    constexpr float ratioLow = 1.1f;
-    constexpr float ratioHigh = 1.6f;
+    constexpr float ratioLow{1.1f};
+    constexpr float ratioHigh{1.6f};
 
     float t = 0.f;
 

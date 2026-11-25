@@ -24,10 +24,10 @@ namespace contour_layers
 {
 
 /// Index of the outer contour layer.
-inline constexpr int kOuter = 0;
+inline constexpr int kOuter{0};
 
 /// Index of the inner contour layer.
-inline constexpr int kInner = 1;
+inline constexpr int kInner{1};
 
 /**
  * @brief Computes the scale from contour coordinates to the displayed image.

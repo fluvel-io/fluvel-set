@@ -131,7 +131,7 @@ AnimatedPushButton::ButtonLayout AnimatedPushButton::calculateLayout() const
     const int textWidth = fm.horizontalAdvance(text());
     const int textHeight = fm.height();
 
-    constexpr int kIconSpacing = 4;
+    constexpr int kIconSpacing{4};
 
     const int spacing = hasIcon && hasText ? kIconSpacing : 0;
 

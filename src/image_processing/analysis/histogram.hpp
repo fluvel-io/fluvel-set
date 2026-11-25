@@ -14,7 +14,7 @@ namespace fluvel_ip
 /**
  * @brief Number of levels of an 8-bit channel.
  */
-inline constexpr int kHistogramLevels = 256;
+inline constexpr int kHistogramLevels{256};
 
 /**
  * @brief Intensity histogram of an 8-bit image.

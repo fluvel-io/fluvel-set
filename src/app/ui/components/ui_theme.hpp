@@ -79,26 +79,26 @@ inline const QColor kTooltipTextColor = kTextColor;
 // Metrics
 // ============================================================================
 
-constexpr int kButtonSize = 34;
-constexpr int kButtonIconSize = 22;
+constexpr int kButtonSize{34};
+constexpr int kButtonIconSize{22};
 
-constexpr int kControlRadius = 15;
-constexpr int kPopupRadius = 12;
-constexpr int kPanelRadius = 16;
+constexpr int kControlRadius{15};
+constexpr int kPopupRadius{12};
+constexpr int kPanelRadius{16};
 
 // ============================================================================
 // Layout
 // ============================================================================
 
-constexpr int kControlSpacing = 6;
-constexpr int kGroupSpacing = 14;
+constexpr int kControlSpacing{6};
+constexpr int kGroupSpacing{14};
 
 // ============================================================================
 // Animations
 // ============================================================================
 
-constexpr int kFastAnimationMs = 100;
-constexpr int kNormalAnimationMs = 200;
-constexpr int kSlowAnimationMs = 300;
+constexpr int kFastAnimationMs{100};
+constexpr int kNormalAnimationMs{200};
+constexpr int kSlowAnimationMs{300};
 
 } // namespace fluvel::ui

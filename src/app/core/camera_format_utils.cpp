@@ -9,7 +9,7 @@ namespace fluvel::camera_utils
 
 bool isSameCameraFormat(const QCameraFormat& a, const QCameraFormat& b)
 {
-    constexpr double kFpsEpsilon = 0.01;
+    constexpr double kFpsEpsilon{0.01};
 
     return a.pixelFormat() == b.pixelFormat() && a.resolution() == b.resolution() &&
            std::abs(a.maxFrameRate() - b.maxFrameRate()) < kFpsEpsilon;

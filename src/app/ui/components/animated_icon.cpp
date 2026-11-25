@@ -14,8 +14,8 @@
 namespace
 {
 
-constexpr int kFlipDurationMs = 220;
-constexpr qreal kFlipAngle = 80.0;
+constexpr int kFlipDurationMs{220};
+constexpr qreal kFlipAngle{80.0};
 
 } // namespace
 
@@ -80,8 +80,8 @@ void AnimatedIcon::paintSlide(QPainter& painter, const QRect& rect, const QSize&
 
     const qreal t = easing.valueForProgress(p);
 
-    constexpr qreal kSlideDistance = 10.0;
-    constexpr qreal kScaleMin = 0.90;
+    constexpr qreal kSlideDistance{10.0};
+    constexpr qreal kScaleMin{0.90};
 
     // Outgoing icon
     drawIcon(painter, center, iconSize, currentIcon_, 1.0 - t, 0.0,

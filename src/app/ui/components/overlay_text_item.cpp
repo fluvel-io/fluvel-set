@@ -9,7 +9,7 @@
 
 namespace
 {
-constexpr int kMaxTextWidth = 1000;
+constexpr int kMaxTextWidth{1000};
 }
 
 namespace fluvel

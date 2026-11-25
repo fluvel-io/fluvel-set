@@ -225,7 +225,7 @@ inline void BoundaryFactory::addPointUnique(ContourPoints& boundary, int x, int 
 {
     const ContourPoint point{x, y};
 
-    constexpr size_t window = 4;
+    constexpr size_t window{4};
     const size_t n = boundary.size();
 
     const size_t begin = (n > window) ? (n - window) : 0;

@@ -29,7 +29,7 @@ inline QVector<QPointF> convertToQVector(const fluvel_ip::Contour& contour)
     qContour.reserve(static_cast<qsizetype>(contour.size()));
 
     // map pixel to its center (x + 0.5, y + 0.5)
-    constexpr qreal kPixelCenterOffset = 0.5;
+    constexpr qreal kPixelCenterOffset{0.5};
 
     for (const auto& point : contour)
     {

@@ -22,15 +22,15 @@ namespace fluvel
 namespace
 {
 
-constexpr int kMarginLeft = 8;
-constexpr int kMarginRight = 8;
-constexpr int kMarginTop = 8;
-constexpr int kMarginBottom = 22;
+constexpr int kMarginLeft{8};
+constexpr int kMarginRight{8};
+constexpr int kMarginTop{8};
+constexpr int kMarginBottom{22};
 
 /// Vertical gap between the plots of two channels.
-constexpr int kPlotGap = 6;
+constexpr int kPlotGap{6};
 
-constexpr int kLevels = fluvel_ip::kHistogramLevels;
+constexpr int kLevels{fluvel_ip::kHistogramLevels};
 
 /// Colors of the plots, derived from the application palette (light or dark theme).
 struct PlotColors
