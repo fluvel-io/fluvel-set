@@ -31,14 +31,14 @@ R: 888  G: 888  B: 888</translation>
         <source>(0000, 0000)
 Intensity: 888</source>
         <translation>(0000, 0000)
-强度: 888</translation>
+强度：888</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/pixel_info_overlay.cpp" line="66"/>
         <source>(%1, %2)
 Intensity: %3</source>
         <translation>(%1, %2)
-强度: %3</translation>
+强度：%3</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/pixel_info_overlay.cpp" line="72"/>
@@ -70,7 +70,7 @@ R: %3  G: %4  B: %5</translation>
     <message>
         <location filename="../src/app/ui/components/capture_stats_utils.cpp" line="25"/>
         <source>Recorded: %1</source>
-        <translation>已录制: %1</translation>
+        <translation>已录制：%1</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/capture_stats_utils.cpp" line="38"/>
@@ -90,7 +90,7 @@ R: %3  G: %4  B: %5</translation>
     <message>
         <location filename="../src/app/ui/components/capture_stats_utils.cpp" line="67"/>
         <source> · Discarded frames: %1% (%2)</source>
-        <translation> · 丢弃帧: %1 % (%2)</translation>
+        <translation> · 丢弃帧：%1% (%2)</translation>
     </message>
 </context>
 <context>
@@ -134,7 +134,7 @@ R: %3  G: %4  B: %5</translation>
     <message>
         <location filename="../src/app/ui/windows/about_dialog.cpp" line="371"/>
         <source>&lt;p&gt;&lt;b&gt;Fabien Bessy&lt;/b&gt;&lt;/p&gt;&lt;p&gt;This project was originally developed in 2010 within the Pattern Recognition and Image Analysis research team, Laboratory of Computer Science (LIFAT), François Rabelais University, Tours, as part of the MSc in Medical Imaging.&lt;/p&gt;&lt;p&gt;It has been modernized and extended in 2024–2026.&lt;/p&gt;&lt;p&gt;Contact: &lt;a href=&apos;mailto:fabien.bessy@gmail.com&apos;&gt;fabien.bessy@gmail.com&lt;/a&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;b&gt;Fabien Bessy&lt;/b&gt;&lt;/p&gt;&lt;p&gt;本项目最初于 2010 年在图尔弗朗索瓦·拉伯雷大学计算机科学实验室（LIFAT）的模式识别与图像分析研究团队开发，属于医学影像硕士课程的一部分。&lt;/p&gt;&lt;p&gt;该项目已于 2024–2026 年进行了现代化改造和扩展。&lt;/p&gt;&lt;p&gt;联系方式: &lt;a href=&apos;mailto:fabien.bessy@gmail.com&apos;&gt;fabien.bessy@gmail.com&lt;/a&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;Fabien Bessy&lt;/b&gt;&lt;/p&gt;&lt;p&gt;本项目最初于 2010 年在图尔弗朗索瓦·拉伯雷大学计算机科学实验室（LIFAT）的模式识别与图像分析研究团队开发，属于医学影像硕士课程的一部分。&lt;/p&gt;&lt;p&gt;该项目已于 2024–2026 年进行了现代化改造和扩展。&lt;/p&gt;&lt;p&gt;联系方式：&lt;a href=&apos;mailto:fabien.bessy@gmail.com&apos;&gt;fabien.bessy@gmail.com&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/about_dialog.cpp" line="399"/>
@@ -244,17 +244,17 @@ R: %3  G: %4  B: %5</translation>
     <message>
         <location filename="../src/app/ui/windows/about_dialog.cpp" line="553"/>
         <source>Video codecs: %1</source>
-        <translation>视频编解码器: %1</translation>
+        <translation>视频编解码器：%1</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/about_dialog.cpp" line="554"/>
         <source>Audio codecs: %1</source>
-        <translation>音频编解码器: %1</translation>
+        <translation>音频编解码器：%1</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/about_dialog.cpp" line="555"/>
         <source>File formats: %1</source>
-        <translation>文件格式: %1</translation>
+        <translation>文件格式：%1</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/about_dialog.cpp" line="559"/>
@@ -362,7 +362,7 @@ R: %3  G: %4  B: %5</translation>
     <message>
         <location filename="../src/app/ui/components/algo_settings_widget.cpp" line="32"/>
         <source>Connectivity: </source>
-        <translation>连通性: </translation>
+        <translation>连通性：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/algo_settings_widget.cpp" line="34"/>
@@ -383,7 +383,7 @@ R: %3  G: %4  B: %5</translation>
     <message>
         <location filename="../src/app/ui/components/algo_settings_widget.cpp" line="43"/>
         <source>Na: </source>
-        <translation>Na: </translation>
+        <translation>Na：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/algo_settings_widget.cpp" line="49"/>
@@ -398,37 +398,37 @@ R: %3  G: %4  B: %5</translation>
     <message>
         <location filename="../src/app/ui/components/algo_settings_widget.cpp" line="59"/>
         <source>λout: </source>
-        <translation>λout: </translation>
+        <translation>λout：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/algo_settings_widget.cpp" line="60"/>
         <source>λin: </source>
-        <translation>λin: </translation>
+        <translation>λin：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/algo_settings_widget.cpp" line="98"/>
         <source>1st component weight: </source>
-        <translation>第 1 分量权重: </translation>
+        <translation>第 1 分量权重：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/algo_settings_widget.cpp" line="99"/>
         <source>2nd component weight: </source>
-        <translation>第 2 分量权重: </translation>
+        <translation>第 2 分量权重：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/algo_settings_widget.cpp" line="100"/>
         <source>3rd component weight: </source>
-        <translation>第 3 分量权重: </translation>
+        <translation>第 3 分量权重：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/algo_settings_widget.cpp" line="136"/>
         <source>Ns: </source>
-        <translation>Ns: </translation>
+        <translation>Ns：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/algo_settings_widget.cpp" line="137"/>
         <source>Radius: </source>
-        <translation>半径: </translation>
+        <translation>半径：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/algo_settings_widget.cpp" line="68"/>
@@ -502,17 +502,17 @@ R: %3  G: %4  B: %5</translation>
     <message>
         <location filename="../src/app/ui/components/capture_status_presenter.cpp" line="66"/>
         <source>Snapshot saved: %1</source>
-        <translation>截图已保存: %1</translation>
+        <translation>截图已保存：%1</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/capture_status_presenter.cpp" line="85"/>
         <source>Recording to: %1</source>
-        <translation>正在录制到: %1</translation>
+        <translation>正在录制到：%1</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/capture_status_presenter.cpp" line="101"/>
         <source>Recording saved: %1</source>
-        <translation>录制已保存: %1</translation>
+        <translation>录制已保存：%1</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/capture_status_presenter.cpp" line="94"/>
@@ -608,7 +608,7 @@ R: %3  G: %4  B: %5</translation>
     <message>
         <location filename="../src/app/ui/components/display_settings_widget.cpp" line="26"/>
         <source>Image:</source>
-        <translation>图像:</translation>
+        <translation>图像：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/display_settings_widget.cpp" line="27"/>
@@ -643,7 +643,7 @@ R: %3  G: %4  B: %5</translation>
     <message>
         <location filename="../src/app/ui/components/display_settings_widget.cpp" line="73"/>
         <source>Rendering:</source>
-        <translation>渲染:</translation>
+        <translation>渲染：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/display_settings_widget.cpp" line="79"/>
@@ -681,7 +681,7 @@ R: %3  G: %4  B: %5</translation>
     <message>
         <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="108"/>
         <source>Color: </source>
-        <translation>颜色: </translation>
+        <translation>颜色：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="76"/>
@@ -705,19 +705,19 @@ or click Open...</source>
     <message>
         <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="127"/>
         <source>Amount:</source>
-        <translation>数量:</translation>
+        <translation>数量：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="136"/>
         <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="270"/>
         <source>Shape 1 size: %1 pts</source>
-        <translation>形状 1 大小: %1 点</translation>
+        <translation>形状 1 大小：%1 点</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="141"/>
         <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="274"/>
         <source>Shape 2 size: %1 pts</source>
-        <translation>形状 2 大小: %1 点</translation>
+        <translation>形状 2 大小：%1 点</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="189"/>
@@ -732,7 +732,7 @@ or click Open...</source>
     <message>
         <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="221"/>
         <source>Failed to load image: %1</source>
-        <translation>无法加载图像: %1</translation>
+        <translation>无法加载图像：%1</translation>
     </message>
 </context>
 <context>
@@ -745,7 +745,7 @@ or click Open...</source>
     <message>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="111"/>
         <source>Percentile: </source>
-        <translation>百分位数: </translation>
+        <translation>百分位数：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="132"/>
@@ -766,13 +766,13 @@ or click Open...</source>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="266"/>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="297"/>
         <source>Computation time: %1 s</source>
-        <translation>计算时间: %1 秒</translation>
+        <translation>计算时间：%1 秒</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="236"/>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="290"/>
         <source>Hausdorff distance: %1 px</source>
-        <translation>豪斯多夫距离: %1 px</translation>
+        <translation>豪斯多夫距离：%1 px</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="54"/>
@@ -800,8 +800,8 @@ or click Open...</source>
         <source>Unchecked: distances are measured between the shapes as they are positioned in the images, so a shift between them increases the distance.
 Checked: the centroids of both shapes are superimposed first, so only the difference of shape is measured (the shift is given by the distance between centroids).
 Click on Compute again to apply the change.</source>
-        <translation>未勾选: 距离按形状在图像中的实际位置进行测量，因此形状之间的位移会增大距离。
-已勾选: 先使两个形状的质心重合，因此只测量形状差异（位移由质心之间的距离给出）。
+        <translation>未勾选：距离按形状在图像中的实际位置进行测量，因此形状之间的位移会增大距离。
+已勾选：先使两个形状的质心重合，因此只测量形状差异（位移由质心之间的距离给出）。
 再次点击“计算”以应用更改。</translation>
     </message>
     <message>
@@ -833,26 +833,26 @@ Click on Compute again to apply the change.</source>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="239"/>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="291"/>
         <source>Normalized Hausdorff distance: %1 %</source>
-        <translation>归一化豪斯多夫距离: %1 %</translation>
+        <translation>归一化豪斯多夫距离：%1%</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="249"/>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="282"/>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="293"/>
         <source>Normalized Hausdorff quantile: %1 %</source>
-        <translation>归一化豪斯多夫分位数: %1 %</translation>
+        <translation>归一化豪斯多夫分位数：%1%</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="256"/>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="294"/>
         <source>Distance between centroids: %1 px</source>
-        <translation>质心间距离: %1 px</translation>
+        <translation>质心间距离：%1 px</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="259"/>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="296"/>
         <source>Normalized distance between centroids: %1 %</source>
-        <translation>归一化质心间距离: %1 %</translation>
+        <translation>归一化质心间距离：%1%</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="126"/>
@@ -864,7 +864,7 @@ Click on Compute again to apply the change.</source>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="279"/>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="292"/>
         <source>Hausdorff quantile: %1 px</source>
-        <translation>豪斯多夫分位数: %1 px</translation>
+        <translation>豪斯多夫分位数：%1 px</translation>
     </message>
 </context>
 <context>
@@ -928,12 +928,12 @@ Click on Compute again to apply the change.</source>
     <message>
         <location filename="../src/app/core/image_controller.cpp" line="58"/>
         <source>Image file extension differs from detected format: .%1 → %2</source>
-        <translation>图像文件扩展名与检测到的格式不一致: .%1 → %2</translation>
+        <translation>图像文件扩展名与检测到的格式不一致：.%1 → %2</translation>
     </message>
     <message>
         <location filename="../src/app/core/image_controller.cpp" line="66"/>
         <source>Failed to load image: %1</source>
-        <translation>无法加载图像: %1</translation>
+        <translation>无法加载图像：%1</translation>
     </message>
     <message>
         <location filename="../src/app/core/image_controller.cpp" line="261"/>
@@ -944,56 +944,56 @@ Click on Compute again to apply the change.</source>
         <location filename="../src/app/core/image_controller.cpp" line="279"/>
         <source>Step: %1
 </source>
-        <translation>步骤: %1
+        <translation>步骤：%1
 </translation>
     </message>
     <message>
         <location filename="../src/app/core/image_controller.cpp" line="280"/>
         <source>State: %1
 </source>
-        <translation>状态: %1
+        <translation>状态：%1
 </translation>
     </message>
     <message>
         <location filename="../src/app/core/image_controller.cpp" line="283"/>
         <source>Reason: %1
 </source>
-        <translation>原因: %1
+        <translation>原因：%1
 </translation>
     </message>
     <message>
         <location filename="../src/app/core/image_controller.cpp" line="285"/>
         <source>Reason: 
 </source>
-        <translation>原因: 
+        <translation>原因：
 </translation>
     </message>
     <message>
         <location filename="../src/app/core/image_controller.cpp" line="289"/>
         <source>Mean in: %1
 </source>
-        <translation>内部均值: %1
+        <translation>内部均值：%1
 </translation>
     </message>
     <message>
         <location filename="../src/app/core/image_controller.cpp" line="291"/>
         <source>Mean out: %1
 </source>
-        <translation>外部均值: %1
+        <translation>外部均值：%1
 </translation>
     </message>
     <message>
         <location filename="../src/app/core/image_controller.cpp" line="294"/>
         <source>Hausdorff: %1 %
 </source>
-        <translation>豪斯多夫: %1 %
+        <translation>豪斯多夫：%1%
 </translation>
     </message>
     <message>
         <location filename="../src/app/core/image_controller.cpp" line="297"/>
         <source>Compute time: %1 s
 </source>
-        <translation>计算时间: %1 秒
+        <translation>计算时间：%1 秒
 </translation>
     </message>
     <message>
@@ -1002,14 +1002,14 @@ Click on Compute again to apply the change.</source>
         <location filename="../src/app/core/image_controller.cpp" line="360"/>
         <source>Speed: %1 it/s
 </source>
-        <translation>速度: %1 次/秒
+        <translation>速度：%1 次/秒
 </translation>
     </message>
     <message>
         <location filename="../src/app/core/image_controller.cpp" line="345"/>
         <location filename="../src/app/core/image_controller.cpp" line="362"/>
         <source>Contour: %1 pts</source>
-        <translation>轮廓: %1 点</translation>
+        <translation>轮廓：%1 点</translation>
     </message>
 </context>
 <context>
@@ -1181,7 +1181,7 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="294"/>
         <source>Supported image formats: %1</source>
-        <translation>支持的图像格式: %1</translation>
+        <translation>支持的图像格式：%1</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="271"/>
@@ -1241,7 +1241,7 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="880"/>
         <source>Opened image: %1</source>
-        <translation>已打开图像: %1</translation>
+        <translation>已打开图像：%1</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="925"/>
@@ -1327,7 +1327,7 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="220"/>
         <source>MP4 files are recorded in a fragmented form so they stay playable after a crash. This option rewrites them as standard MP4 files when the recording ends, which improves compatibility with some players and editors. The conversion does not re-encode the video, but it rewrites the whole file: it takes extra time and extra disk writes, especially for long recordings.</source>
-        <translation>MP4 文件以分片方式录制，以便在发生故障后仍可播放。此选项会在录制结束后将其重写为标准 MP4 文件，从而提高与某些播放器和编辑器的兼容性。转换不会重新编码视频，但会重写整个文件: 需要额外的时间和更多的磁盘写入，对长时间录制尤其如此。</translation>
+        <translation>MP4 文件以分片方式录制，以便在发生故障后仍可播放。此选项会在录制结束后将其重写为标准 MP4 文件，从而提高与某些播放器和编辑器的兼容性。转换不会重新编码视频，但会重写整个文件：需要额外的时间和更多的磁盘写入，对长时间录制尤其如此。</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="159"/>
@@ -1339,24 +1339,24 @@ or choose File → Open</source>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="172"/>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="242"/>
         <source>Directory:</source>
-        <translation>目录: </translation>
+        <translation>目录：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="173"/>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="243"/>
         <source>Base name:</source>
-        <translation>基本名称: </translation>
+        <translation>基本名称：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="174"/>
         <source>Format:</source>
-        <translation>格式: </translation>
+        <translation>格式：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="176"/>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="246"/>
         <source>Preview:</source>
-        <translation>预览: </translation>
+        <translation>预览：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="194"/>
@@ -1376,7 +1376,7 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="230"/>
         <source>Retention time:</source>
-        <translation>保留时间: </translation>
+        <translation>保留时间：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="233"/>
@@ -1386,22 +1386,22 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="235"/>
         <source>Segments:</source>
-        <translation>分段: </translation>
+        <translation>分段：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="239"/>
         <source>Segment duration:</source>
-        <translation>分段时长: </translation>
+        <translation>分段时长：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="244"/>
         <source>Codec:</source>
-        <translation>编解码器: </translation>
+        <translation>编解码器：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="247"/>
         <source>Recording mode:</source>
-        <translation>录制模式: </translation>
+        <translation>录制模式：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="284"/>
@@ -1431,17 +1431,17 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="303"/>
         <source>Maximum RAM usage:</source>
-        <translation>最大内存使用量: </translation>
+        <translation>最大内存使用量：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="304"/>
         <source>Maximum temporary storage usage:</source>
-        <translation>最大临时存储使用量: </translation>
+        <translation>最大临时存储使用量：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="305"/>
         <source>When buffer is full:</source>
-        <translation>缓冲区已满时: </translation>
+        <translation>缓冲区已满时：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="413"/>
@@ -1520,7 +1520,7 @@ or choose File → Open</source>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="168"/>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="170"/>
         <source>Middle mouse button: toggle rectangle / ellipse</source>
-        <translation>鼠标中键: 在矩形和椭圆之间切换</translation>
+        <translation>鼠标中键：在矩形和椭圆之间切换</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="167"/>
@@ -1546,17 +1546,17 @@ or choose File → Open</source>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="189"/>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="241"/>
         <source> % image width</source>
-        <translation> % 图像宽度</translation>
+        <translation>% 图像宽度</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="193"/>
         <source>Width: </source>
-        <translation>宽度: </translation>
+        <translation>宽度：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="213"/>
         <source>Height: </source>
-        <translation>高度: </translation>
+        <translation>高度：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="234"/>
@@ -1571,7 +1571,7 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="261"/>
         <source> % image height</source>
-        <translation> % 图像高度</translation>
+        <translation>% 图像高度</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="286"/>
@@ -1586,7 +1586,7 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="290"/>
         <source>Left mouse button in the image: add the shape</source>
-        <translation>在图像上单击鼠标左键: 添加形状</translation>
+        <translation>在图像上单击鼠标左键：添加形状</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="292"/>
@@ -1596,7 +1596,7 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="293"/>
         <source>Right mouse button in the image: remove the shape</source>
-        <translation>在图像上单击鼠标右键: 移除形状</translation>
+        <translation>在图像上单击鼠标右键：移除形状</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="295"/>
@@ -1623,7 +1623,7 @@ or choose File → Open</source>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="359"/>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="389"/>
         <source>σ: </source>
-        <translation>σ: </translation>
+        <translation>σ：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="372"/>
@@ -1633,7 +1633,7 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="375"/>
         <source>d: </source>
-        <translation>d: </translation>
+        <translation>d：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="486"/>
@@ -1648,12 +1648,12 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="448"/>
         <source>λ: </source>
-        <translation>λ: </translation>
+        <translation>λ：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="449"/>
         <source>κ: </source>
-        <translation>κ: </translation>
+        <translation>κ：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="463"/>
@@ -1667,7 +1667,7 @@ or choose File → Open</source>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="479"/>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="500"/>
         <source>SE size: </source>
-        <translation>结构元素大小: </translation>
+        <translation>结构元素大小：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="361"/>
@@ -1677,12 +1677,12 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="327"/>
         <source>Factor: </source>
-        <translation>系数: </translation>
+        <translation>系数：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="363"/>
         <source>Random pixel corruption. Grayscale: salt &amp; pepper (black or white pixels). Color: each channel can be independently corrupted.</source>
-        <translation>随机破坏像素。灰度图: 椒盐噪声（黑色或白色像素）。彩色图: 每个通道可被独立破坏。</translation>
+        <translation>随机破坏像素。灰度图：椒盐噪声（黑色或白色像素）。彩色图：每个通道可被独立破坏。</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="377"/>
@@ -1703,7 +1703,7 @@ or choose File → Open</source>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="412"/>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="426"/>
         <source>Kernel size: </source>
-        <translation>核大小: </translation>
+        <translation>核大小：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="416"/>
@@ -1718,17 +1718,17 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="447"/>
         <source>Iterations: </source>
-        <translation>迭代次数: </translation>
+        <translation>迭代次数：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="450"/>
         <source>Function 1: </source>
-        <translation>函数 1: </translation>
+        <translation>函数 1：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="451"/>
         <source>Function 2: </source>
-        <translation>函数 2: </translation>
+        <translation>函数 2：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="455"/>
@@ -1783,7 +1783,7 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="564"/>
         <source>Time: </source>
-        <translation>时间: </translation>
+        <translation>时间：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="565"/>
@@ -1801,7 +1801,7 @@ or choose File → Open</source>
     <message>
         <location filename="../src/app/core/snapshot_worker.cpp" line="81"/>
         <source>Failed to save snapshot: %1</source>
-        <translation>无法保存截图: %1</translation>
+        <translation>无法保存截图：%1</translation>
     </message>
 </context>
 <context>
@@ -1816,9 +1816,9 @@ or choose File → Open</source>
         <source>In | Proc | Disp: %1 | %2 | %3 fps
 Lat: %4 ms (proc %5) | Drop: %6 %
 Contour: %7 pts</source>
-        <translation>输入 | 处理 | 显示: %1 | %2 | %3 fps
-延迟: %4 ms (处理 %5) | 丢失: %6 %
-轮廓: %7 点</translation>
+        <translation>输入 | 处理 | 显示：%1 | %2 | %3 fps
+延迟：%4 ms (处理 %5) | 丢失：%6%
+轮廓：%7 点</translation>
     </message>
 </context>
 <context>
@@ -1836,17 +1836,17 @@ Contour: %7 pts</source>
     <message>
         <location filename="../src/app/core/video_recorder_worker.cpp" line="219"/>
         <source>Video recording stopped: an invalid video frame was received.</source>
-        <translation>视频录制已停止: 收到了无效的视频帧。</translation>
+        <translation>视频录制已停止：收到了无效的视频帧。</translation>
     </message>
     <message>
         <location filename="../src/app/core/video_recorder_worker.cpp" line="222"/>
         <source>Video recording stopped: the frame size or format changed during recording. The video file has been saved up to this point.</source>
-        <translation>视频录制已停止: 录制期间帧的大小或格式发生了变化。视频文件已保存到此处。</translation>
+        <translation>视频录制已停止：录制期间帧的大小或格式发生了变化。视频文件已保存到此处。</translation>
     </message>
     <message>
         <location filename="../src/app/core/video_recorder_worker.cpp" line="226"/>
         <source>Video recording stopped: unable to start a new video segment. Check the output folder and the available disk space.</source>
-        <translation>视频录制已停止: 无法开始新的视频分段。请检查输出文件夹和可用磁盘空间。</translation>
+        <translation>视频录制已停止：无法开始新的视频分段。请检查输出文件夹和可用磁盘空间。</translation>
     </message>
     <message>
         <location filename="../src/app/core/video_recorder_worker.cpp" line="234"/>
@@ -1899,7 +1899,7 @@ Contour: %7 pts</source>
     <message>
         <location filename="../src/app/ui/windows/video_settings_dialog.cpp" line="128"/>
         <source>Factor: </source>
-        <translation>系数: </translation>
+        <translation>系数：</translation>
     </message>
 </context>
 <context>
@@ -1907,12 +1907,12 @@ Contour: %7 pts</source>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="157"/>
         <source>Device: </source>
-        <translation>设备: </translation>
+        <translation>设备：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="178"/>
         <source>Format: </source>
-        <translation>格式: </translation>
+        <translation>格式：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="295"/>
@@ -1922,7 +1922,7 @@ Contour: %7 pts</source>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="138"/>
         <source>Source: </source>
-        <translation>来源: </translation>
+        <translation>来源：</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="147"/>
@@ -2007,12 +2007,12 @@ or click Open...</source>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="1436"/>
         <source>Camera started: %1</source>
-        <translation>摄像头已启动: %1</translation>
+        <translation>摄像头已启动：%1</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="1446"/>
         <source>Opened video: %1</source>
-        <translation>视频已打开: %1</translation>
+        <translation>视频已打开：%1</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="1542"/>
@@ -2025,7 +2025,7 @@ or click Open...</source>
         <source>Source: %1
 
 %2</source>
-        <translation>来源: %1
+        <translation>来源：%1
 
 %2</translation>
     </message>
@@ -2057,13 +2057,13 @@ or click Open...</source>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2182"/>
         <source>Volume: %1%</source>
-        <translation>音量: %1 %</translation>
+        <translation>音量：%1%</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2418"/>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2443"/>
         <source>Volume %1%</source>
-        <translation>音量: %1 %</translation>
+        <translation>音量：%1%</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2458"/>

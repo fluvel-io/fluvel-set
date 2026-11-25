@@ -90,7 +90,7 @@ R: %3  G: %4  B: %5</translation>
     <message>
         <location filename="../src/app/ui/components/capture_stats_utils.cpp" line="67"/>
         <source> · Discarded frames: %1% (%2)</source>
-        <translation> · Quadros descartados: %1 % (%2)</translation>
+        <translation> · Quadros descartados: %1% (%2)</translation>
     </message>
 </context>
 <context>
@@ -833,14 +833,14 @@ Clique novamente em Calcular para aplicar a alteração.</translation>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="239"/>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="291"/>
         <source>Normalized Hausdorff distance: %1 %</source>
-        <translation>Distância de Hausdorff normalizada: %1 %</translation>
+        <translation>Distância de Hausdorff normalizada: %1%</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="249"/>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="282"/>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="293"/>
         <source>Normalized Hausdorff quantile: %1 %</source>
-        <translation>Quantil de Hausdorff normalizado: %1 %</translation>
+        <translation>Quantil de Hausdorff normalizado: %1%</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="256"/>
@@ -852,7 +852,7 @@ Clique novamente em Calcular para aplicar a alteração.</translation>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="259"/>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="296"/>
         <source>Normalized distance between centroids: %1 %</source>
-        <translation>Distância normalizada entre centroides: %1 %</translation>
+        <translation>Distância normalizada entre centroides: %1%</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/hausdorff_window.cpp" line="126"/>
@@ -986,7 +986,7 @@ Clique novamente em Calcular para aplicar a alteração.</translation>
         <location filename="../src/app/core/image_controller.cpp" line="294"/>
         <source>Hausdorff: %1 %
 </source>
-        <translation>Hausdorff: %1 %
+        <translation>Hausdorff: %1%
 </translation>
     </message>
     <message>
@@ -1546,7 +1546,7 @@ ou escolha Arquivo → Abrir</translation>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="189"/>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="241"/>
         <source> % image width</source>
-        <translation> % da largura da imagem</translation>
+        <translation>% da largura da imagem</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="193"/>
@@ -1571,7 +1571,7 @@ ou escolha Arquivo → Abrir</translation>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="261"/>
         <source> % image height</source>
-        <translation> % da altura da imagem</translation>
+        <translation>% da altura da imagem</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/settings_dialog.cpp" line="286"/>
@@ -1817,7 +1817,7 @@ ou escolha Arquivo → Abrir</translation>
 Lat: %4 ms (proc %5) | Drop: %6 %
 Contour: %7 pts</source>
         <translation>Ent. | Proc. | Exib.: %1 | %2 | %3 fps
-Lat.: %4 ms (proc. %5) | Perda: %6 %
+Lat.: %4 ms (proc. %5) | Perda: %6%
 Contorno: %7 pts</translation>
     </message>
 </context>
@@ -2057,13 +2057,13 @@ ou clique em Abrir...</translation>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2182"/>
         <source>Volume: %1%</source>
-        <translation>Volume: %1 %</translation>
+        <translation>Volume: %1%</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2418"/>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2443"/>
         <source>Volume %1%</source>
-        <translation>Volume: %1 %</translation>
+        <translation>Volume: %1%</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2458"/>
