@@ -67,22 +67,23 @@ PlotColors plotColors(const QPalette& palette)
 }
 
 /// Color of a curve: red, green, blue for a color image, gray otherwise.
-/// The shades are chosen to stay readable on a dark or on a light background.
+/// The shades follow the Apple system colors (light and dark variants), which stay readable
+/// on a dark or on a light background.
 QColor curveColor(int channel, bool color, bool dark)
 {
     if (!color)
-        return dark ? QColor(200, 200, 200) : QColor(90, 90, 90);
+        return dark ? QColor(174, 174, 178) : QColor(142, 142, 147);
 
     switch (channel)
     {
         case 0:
-            return dark ? QColor(230, 60, 60) : QColor(205, 45, 45);
+            return dark ? QColor(255, 69, 58) : QColor(255, 59, 48);
 
         case 1:
-            return dark ? QColor(60, 200, 80) : QColor(35, 155, 65);
+            return dark ? QColor(48, 209, 88) : QColor(52, 199, 89);
 
         default:
-            return dark ? QColor(80, 130, 255) : QColor(50, 95, 225);
+            return dark ? QColor(10, 132, 255) : QColor(0, 122, 255);
     }
 }
 
