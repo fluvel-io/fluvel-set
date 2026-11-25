@@ -9,6 +9,8 @@
 #include <QFileInfo>
 #include <QImageReader>
 
+#include <cmath>
+
 #ifdef FLUVEL_DEBUG
 #include "image_debug.hpp"
 #endif
@@ -291,7 +293,10 @@ void ImageController::onDiagnosticsUpdated(const fluvel_ip::ContourDiagnostics& 
         s += QString(tr("Mean out: %1\n")).arg(formatChannels(diag.meanOutside));
     }
 
-    s += QString(tr("Hausdorff: %1 %\n")).arg(diag.hausdorffDistance, 0, 'f', 2);
+    // The distance is a variation between two successive steps: it is NaN until
+    // the first measure, so the line is skipped instead of showing "nan".
+    if (!std::isnan(diag.hausdorffDistance))
+        s += QString(tr("Hausdorff: %1 %\n")).arg(diag.hausdorffDistance, 0, 'f', 2);
 
     // Time spent computing iterations (waits and pauses excluded).
     s += QString(tr("Compute time: %1 s\n")).arg(diag.elapsedSec, 0, 'f', 2);
