@@ -92,8 +92,8 @@ enum class WorkerState
  *       calls to initialize() are coalesced: only the latest request is run.
  *
  * @note The display policy lives in onTick(). A future user option (for
- *       example the number of iterations per frame) would only change
- *       the iterations-per-frame value.
+ *       example the maximum number of iterations per frame) would only
+ *       change kMaxIterationsPerFrame.
  */
 class ImageProcessingWorker : public QObject
 {
@@ -200,14 +200,35 @@ private:
     void stepImpl();
     void convergeImpl();
 
-    /// Run a command in the worker thread.
+    /// Run a command in the worker thread (queued call: it is executed by the
+    /// worker event loop, never in the caller thread).
     template <typename F>
     void post(F&& f);
 
-    /// Schedule the next tick (at most one is pending).
+    /**
+     * @brief Schedule the next tick (at most one is pending).
+     *
+     * With a zero delay the tick is posted to the worker event loop and runs
+     * as soon as the loop is free. With a positive delay it is started on
+     * tickTimer_ (single shot). Nothing is done if a tick is already pending
+     * or if the worker is shutting down.
+     */
     void scheduleTick(std::chrono::milliseconds delay = std::chrono::milliseconds{0});
 
-    /// One tick of the execution loop.
+    /**
+     * @brief One tick of the execution loop.
+     *
+     * Ticks are not periodic: each one decides when the next one runs (see
+     * scheduleTick()). The chain stops by itself when the worker is no longer
+     * Running or when the contour is finished, so nothing is rescheduled.
+     *
+     * - Converge mode: iterates for kTimeSliceConvergeMs, without publishing,
+     *   then yields to the event loop so that pending commands are handled.
+     * - Interactive mode: waits for the frame deadline (nextFrameDue_) and for
+     *   the acknowledgement of the previous frame (frameInFlight_), then runs
+     *   iterations (see kMaxIterationsPerFrame and kFrameComputeBudgetMs) and
+     *   publishes one frame.
+     */
     void onTick();
 
     /// Publish diagnostics and contour.
@@ -260,9 +281,16 @@ private:
 
     // Shared between threads.
     QThread thread_;
+
+    /// Single-shot timer used by scheduleTick() for delayed ticks (lives in the
+    /// worker thread).
     QTimer* tickTimer_{nullptr};
     QMutex requestMutex_;
     std::optional<InitRequest> pendingInit_;
+
+    /// True between the publication of a frame and its acknowledgement by the
+    /// consumer (see acknowledgeFrame()). Set by the worker, cleared by the
+    /// consumer thread.
     std::atomic<bool> frameInFlight_{false};
     std::atomic<bool> shuttingDown_{false};
 
@@ -304,8 +332,13 @@ private:
     /// Safety net: go on if a frame has not been acknowledged after this delay.
     static constexpr std::chrono::milliseconds kAckTimeoutMs{250};
 
+    /// Time of the last publication (used by the acknowledgement timeout).
     Clock::time_point lastPublish_{};
+
+    /// Earliest start time of the next interactive frame.
     Clock::time_point nextFrameDue_{};
+
+    /// True while a tick is pending (posted or on tickTimer_). Worker thread only.
     bool tickScheduled_{false};
 
     bool initialShown_{false};
