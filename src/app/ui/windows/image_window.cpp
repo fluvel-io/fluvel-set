@@ -685,7 +685,7 @@ void ImageWindow::setupUserActionsConnections()
                 if (files.isEmpty())
                     return;
 
-                const QString fileName = files.first();
+                const QString& fileName = files.first();
 
                 if (fileName.isEmpty())
                     return;

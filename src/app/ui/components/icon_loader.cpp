@@ -49,13 +49,7 @@ QIcon createShapeIcon(const QColor& color, IconShape shape)
         switch (shape)
         {
             case IconShape::Disk:
-                shapeRatio = 0.75;
-                break;
-
             case IconShape::Circle:
-                shapeRatio = 0.75;
-                break;
-
             case IconShape::Square:
                 shapeRatio = 0.75;
                 break;

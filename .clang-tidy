@@ -1,3 +1,5 @@
+# bugprone-incorrect-roundings is disabled: the filters clamp the value to [0, 255] before
+# "(int)(v + 0.5)", so the rounding is correct.
 Checks: >
   clang-analyzer-*,
   bugprone-*,
@@ -9,6 +11,7 @@ Checks: >
   readability-identifier-naming,
   -bugprone-narrowing-conversions,
   -bugprone-easily-swappable-parameters,
+  -bugprone-incorrect-roundings,
   -performance-enum-size,
   misc-unused-includes,
   modernize-use-forward-declaration,

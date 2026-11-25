@@ -26,6 +26,8 @@ QValidator::State KernelSizeSpinBox::validate(QString& text, int& pos) const
 
     QValidator::State result;
 
+    // One branch per case of the validation table, kept separate for readability.
+    // NOLINTBEGIN(bugprone-branch-clone)
     if (textWithoutSuffix.isEmpty())
     {
         result = QValidator::Intermediate;
@@ -54,6 +56,7 @@ QValidator::State KernelSizeSpinBox::validate(QString& text, int& pos) const
     {
         result = QValidator::Invalid;
     }
+    // NOLINTEND(bugprone-branch-clone)
 
     if (hasFocus())
     {

@@ -10,7 +10,6 @@
 #include <QPoint>
 
 class QMouseEvent;
-class ImageViewerWidget;
 
 namespace fluvel
 {

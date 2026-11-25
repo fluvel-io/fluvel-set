@@ -211,8 +211,6 @@ public:
                 return {p[0], p[1], p[2]};
 
             case ImageFormat::Bgr24:
-                return {p[2], p[1], p[0]};
-
             case ImageFormat::Bgr32:
                 return {p[2], p[1], p[0]};
 

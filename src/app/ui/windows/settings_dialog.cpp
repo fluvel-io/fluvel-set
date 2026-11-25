@@ -879,12 +879,7 @@ UiShapeInfo SettingsDialog::getUiShapeAt(QPoint position) const
 {
     UiShapeInfo uiShape{};
 
-    if (rectangleRadio_->isChecked())
-        uiShape.shape = ShapeType::Rectangle;
-    else if (ellipseRadio_->isChecked())
-        uiShape.shape = ShapeType::Ellipse;
-    else
-        uiShape.shape = ShapeType::Rectangle;
+    uiShape.shape = ellipseRadio_->isChecked() ? ShapeType::Ellipse : ShapeType::Rectangle;
 
     uiShape.width = widthShapeSpin_->value();
     uiShape.height = heightShapeSpin_->value();

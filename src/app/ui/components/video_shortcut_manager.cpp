@@ -18,7 +18,7 @@ VideoShortcutManager::VideoShortcutManager(QWidget* parent)
 
 void VideoShortcutManager::createShortcuts(QWidget* parent)
 {
-    auto makeShortcut = [parent](QKeySequence key)
+    auto makeShortcut = [parent](const QKeySequence& key)
     {
         auto* shortcut = new QShortcut(key, parent);
         shortcut->setContext(Qt::WindowShortcut);

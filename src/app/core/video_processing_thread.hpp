@@ -104,7 +104,7 @@ private:
     /**
      * @brief Convert a QVideoFrame to QImage.
      */
-    QImage convertFrame(QVideoFrame frame) const;
+    QImage convertFrame(const QVideoFrame& frame) const;
 
     /**
      * @brief Apply downscaling to input image.

@@ -104,9 +104,9 @@ void VideoRecorderWorker::enqueue(const VideoFrame& frame)
             if (frame.presentationTimestampNs)
             {
                 if (!firstPresentationTimestampNs_)
-                    firstPresentationTimestampNs_ = *frame.presentationTimestampNs;
+                    firstPresentationTimestampNs_ = frame.presentationTimestampNs;
 
-                lastPresentationTimestampNs_ = *frame.presentationTimestampNs;
+                lastPresentationTimestampNs_ = frame.presentationTimestampNs;
             }
         }
 
@@ -119,8 +119,6 @@ void VideoRecorderWorker::enqueue(const VideoFrame& frame)
     switch (status)
     {
         case VideoFrameBuffer::PushStatus::Success:
-            break;
-
         case VideoFrameBuffer::PushStatus::TemporaryStorageActivated:
             break;
 

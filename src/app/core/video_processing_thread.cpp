@@ -67,7 +67,7 @@ void VideoProcessingThread::run()
     }
 }
 
-QImage VideoProcessingThread::convertFrame(QVideoFrame frame) const
+QImage VideoProcessingThread::convertFrame(const QVideoFrame& frame) const
 {
     QImage img = frame.toImage();
 

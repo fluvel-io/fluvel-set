@@ -546,7 +546,9 @@ bool FFmpegVideoExporter::fillFrameGray8(const QImage& image)
 
     for (int y = 0; y < src->height(); ++y)
     {
-        std::memcpy(frame->data[0] + y * frame->linesize[0], src->constScanLine(y),
+        const std::ptrdiff_t offset = static_cast<std::ptrdiff_t>(y) * frame->linesize[0];
+
+        std::memcpy(frame->data[0] + offset, src->constScanLine(y),
                     static_cast<std::size_t>(bytesPerRow));
     }
 
@@ -571,7 +573,9 @@ bool FFmpegVideoExporter::fillFrameRgb24(const QImage& image)
 
     for (int y = 0; y < src->height(); ++y)
     {
-        std::memcpy(frame->data[0] + y * frame->linesize[0], src->constScanLine(y),
+        const std::ptrdiff_t offset = static_cast<std::ptrdiff_t>(y) * frame->linesize[0];
+
+        std::memcpy(frame->data[0] + offset, src->constScanLine(y),
                     static_cast<std::size_t>(bytesPerRow));
     }
 
@@ -605,7 +609,9 @@ bool FFmpegVideoExporter::fillFrameBgr0(const QImage& image)
     //
     for (int y = 0; y < src->height(); ++y)
     {
-        std::memcpy(frame->data[0] + y * frame->linesize[0], src->constScanLine(y),
+        const std::ptrdiff_t offset = static_cast<std::ptrdiff_t>(y) * frame->linesize[0];
+
+        std::memcpy(frame->data[0] + offset, src->constScanLine(y),
                     static_cast<std::size_t>(bytesPerRow));
     }
 

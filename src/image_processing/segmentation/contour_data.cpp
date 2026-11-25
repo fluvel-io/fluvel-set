@@ -76,8 +76,8 @@ ContourData::ContourData(ContourPoints outerBoundary, ContourPoints innerBoundar
     , innerBoundary_(std::move(innerBoundary))
     , connectivity_(connectivity)
 {
-    assert(!outerBoundary.empty());
-    assert(!innerBoundary.empty());
+    assert(!outerBoundary_.empty());
+    assert(!innerBoundary_.empty());
     assert(phiWidth >= 1);
     assert(phiHeight >= 1);
 
