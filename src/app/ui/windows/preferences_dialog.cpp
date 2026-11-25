@@ -126,6 +126,14 @@ QWidget* PreferencesDialog::createLanguageSection()
     languageCombo_->addItem(tr("English"), QVariant::fromValue(int(Language::English)));
     languageCombo_->addItem(tr("French"), QVariant::fromValue(int(Language::French)));
 
+    // Native names, deliberately not translated: a user must recognize their own language.
+    languageCombo_->addItem(QStringLiteral("Español"), QVariant::fromValue(int(Language::Spanish)));
+    languageCombo_->addItem(QStringLiteral("Deutsch"), QVariant::fromValue(int(Language::German)));
+    languageCombo_->addItem(QStringLiteral("简体中文"),
+                            QVariant::fromValue(int(Language::ChineseSimplified)));
+    languageCombo_->addItem(QStringLiteral("Português (Brasil)"),
+                            QVariant::fromValue(int(Language::PortugueseBrazil)));
+
     auto* restartLabel = new QLabel(
         tr("The language change will take effect after restarting the application."), group);
 

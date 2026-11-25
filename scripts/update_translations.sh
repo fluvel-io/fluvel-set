@@ -46,8 +46,10 @@ mkdir -p "$TS_DIR"
 # =========================
 TS_FILES=(
     "fluvel_fr.ts"
-    # "fluvel_en.ts"
-    # "fluvel_es.ts"
+    "fluvel_es.ts"
+    "fluvel_de.ts"
+    "fluvel_zh_CN.ts"
+    "fluvel_pt_BR.ts"
 )
 
 # =========================

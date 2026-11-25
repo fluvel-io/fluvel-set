@@ -375,6 +375,10 @@ set_target_properties(${APP_TARGET_NAME} PROPERTIES
 # --- Translations (.ts -> .qm, embedded under :/i18n) ---
 qt_add_translations(${APP_TARGET_NAME}
     TS_FILES ${FLUVEL_TRANSLATIONS_DIR}/fluvel_fr.ts
+             ${FLUVEL_TRANSLATIONS_DIR}/fluvel_es.ts
+             ${FLUVEL_TRANSLATIONS_DIR}/fluvel_de.ts
+             ${FLUVEL_TRANSLATIONS_DIR}/fluvel_zh_CN.ts
+             ${FLUVEL_TRANSLATIONS_DIR}/fluvel_pt_BR.ts
 )
 
 set(APP_RESOURCES

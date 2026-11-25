@@ -21,6 +21,14 @@ QLocale localeFor(Language language)
             return QLocale(QLocale::French);
         case Language::English:
             return QLocale(QLocale::English);
+        case Language::Spanish:
+            return QLocale(QLocale::Spanish);
+        case Language::German:
+            return QLocale(QLocale::German);
+        case Language::ChineseSimplified:
+            return QLocale(QLocale::Chinese, QLocale::SimplifiedChineseScript, QLocale::China);
+        case Language::PortugueseBrazil:
+            return QLocale(QLocale::Portuguese, QLocale::Brazil);
         case Language::System:
         default:
             return QLocale::system();

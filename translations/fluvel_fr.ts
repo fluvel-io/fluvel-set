@@ -9,13 +9,13 @@
         <translation>Fichiers image (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/core/file_utils.cpp" line="156"/>
+        <location filename="../src/app/core/file_utils.cpp" line="158"/>
         <source>Video Files (%1)</source>
         <translation>Fichiers vidéo (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/core/file_utils.cpp" line="235"/>
-        <location filename="../src/app/core/file_utils.cpp" line="297"/>
+        <location filename="../src/app/core/file_utils.cpp" line="237"/>
+        <location filename="../src/app/core/file_utils.cpp" line="299"/>
         <source>Unspecified</source>
         <translation>Non spécifié</translation>
     </message>
@@ -1304,167 +1304,167 @@ ou choisissez Fichier → Ouvrir</translation>
         <translation>Français</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="130"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="138"/>
         <source>The language change will take effect after restarting the application.</source>
         <translation>Le changement de langue prendra effet après le redémarrage de l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="142"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="150"/>
         <source>Snapshots</source>
         <translation>Captures d&apos;écran</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="148"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="190"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="156"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="200"/>
         <source>Append timestamp</source>
         <translation>Ajouter un horodatage</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="206"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="218"/>
         <source>Convert to standard MP4 when recording ends</source>
         <translation>Convertir en MP4 standard à la fin de l’enregistrement</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="208"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="220"/>
         <source>MP4 files are recorded in a fragmented form so they stay playable after a crash. This option rewrites them as standard MP4 files when the recording ends, which improves compatibility with some players and editors. The conversion does not re-encode the video, but it rewrites the whole file: it takes extra time and extra disk writes, especially for long recordings.</source>
         <translation>Les fichiers MP4 sont enregistrés en mode fragmenté pour rester lisibles après un plantage. Cette option les réécrit en MP4 standard à la fin de l’enregistrement, ce qui améliore la compatibilité avec certains lecteurs et logiciels de montage. La conversion ne ré-encode pas la vidéo, mais elle réécrit tout le fichier : elle demande plus de temps et plus d’écritures sur le disque, surtout pour les longs enregistrements.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="151"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="193"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="159"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="203"/>
         <source>Browse...</source>
         <translation>Parcourir…</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="162"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="230"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="172"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="242"/>
         <source>Directory:</source>
         <translation>Répertoire :</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="163"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="231"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="173"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="243"/>
         <source>Base name:</source>
         <translation>Nom de base :</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="164"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="174"/>
         <source>Format:</source>
         <translation>Format :</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="166"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="234"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="176"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="246"/>
         <source>Preview:</source>
         <translation>Aperçu :</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="184"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="194"/>
         <source>Video recording</source>
         <translation>Enregistrement vidéo</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="215"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="227"/>
         <source>Single file</source>
         <translation>Fichier unique</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="216"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="228"/>
         <source>Circular</source>
         <translation>Circulaire</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="218"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="230"/>
         <source>Retention time:</source>
         <translation>Durée de conservation :</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="221"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="233"/>
         <source> min</source>
         <translation> min</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="223"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="235"/>
         <source>Segments:</source>
         <translation>Segments :</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="227"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="239"/>
         <source>Segment duration:</source>
         <translation>Durée d&apos;un segment :</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="232"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="244"/>
         <source>Codec:</source>
         <translation>Codec :</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="235"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="247"/>
         <source>Recording mode:</source>
         <translation>Mode d&apos;enregistrement :</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="272"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="284"/>
         <source>Recording buffer</source>
         <translation>Tampon d&apos;enregistrement</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="278"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="290"/>
         <source> MiB</source>
         <translation> MiB</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="282"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="294"/>
         <source> GiB</source>
         <translation> GiB</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="285"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="297"/>
         <source>Stop recording</source>
         <translation>Arrêter l&apos;enregistrement</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="288"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="300"/>
         <source>Discard oldest frames</source>
         <translation>Supprimer les images les plus anciennes</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="291"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="303"/>
         <source>Maximum RAM usage:</source>
         <translation>Utilisation maximale de la RAM :</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="292"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="304"/>
         <source>Maximum temporary storage usage:</source>
         <translation>Utilisation maximale du stockage temporaire :</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="293"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="305"/>
         <source>When buffer is full:</source>
         <translation>Lorsque le tampon est plein :</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="401"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="413"/>
         <source>Select snapshot directory</source>
         <translation>Sélectionner le répertoire des captures d&apos;écran</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="410"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="422"/>
         <source>Select video recording directory</source>
         <translation>Sélectionner le répertoire des enregistrements vidéo</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="525"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="537"/>
         <source>%1 min</source>
         <translation>%1 min</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="528"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="540"/>
         <source> %1 s</source>
         <translation> %1 s</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="532"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="544"/>
         <source>%1 s</source>
         <translation>%1 s</translation>
     </message>
@@ -1485,313 +1485,313 @@ ou choisissez Fichier → Ouvrir</translation>
 <context>
     <name>fluvel::SettingsDialog</name>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="37"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="39"/>
         <source>Image session settings</source>
         <translation>Paramètres de la session image</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="95"/>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="311"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="97"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="318"/>
         <source>Downscale</source>
         <translation>Réduction d’échelle</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="96"/>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="552"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="98"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="559"/>
         <source>Processing</source>
         <translation>Traitement</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="97"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="99"/>
         <source>Initialization</source>
         <translation>Initialisation</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="98"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="100"/>
         <source>Algorithm</source>
         <translation>Algorithme</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="157"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="164"/>
         <source>Shape</source>
         <translation>Forme</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="161"/>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="163"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="168"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="170"/>
         <source>Middle mouse button: toggle rectangle / ellipse</source>
         <translation>Bouton central de la souris : basculer entre rectangle et ellipse</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="160"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="167"/>
         <source>Rectangle</source>
         <translation>Rectangle</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="162"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="169"/>
         <source>Ellipse</source>
         <translation>Ellipse</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="175"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="182"/>
         <source>Size</source>
         <translation>Taille</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="176"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="183"/>
         <source>Ctrl + mouse wheel in the image to resize the shape</source>
         <translation>Ctrl + molette de la souris dans l’image pour redimensionner la forme</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="182"/>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="234"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="189"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="241"/>
         <source> % image width</source>
         <translation> % de la largeur de l’image</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="186"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="193"/>
         <source>Width: </source>
         <translation>Largeur : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="206"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="213"/>
         <source>Height: </source>
         <translation>Hauteur : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="227"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="234"/>
         <source>Position (x,y)</source>
         <translation>Position (x,y)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="228"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="235"/>
         <source>Move the cursor in the image to set the position</source>
         <translation>Déplacer le curseur dans l’image pour définir la position</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="254"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="261"/>
         <source> % image height</source>
         <translation> % de la hauteur de l’image</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="279"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="286"/>
         <source>Active contour modification</source>
         <translation>Modification du contour actif</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="282"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="289"/>
         <source>Add</source>
         <translation>Ajouter</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="283"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="290"/>
         <source>Left mouse button in the image: add the shape</source>
         <translation>Bouton gauche de la souris dans l’image : ajouter la forme</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="285"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="292"/>
         <source>Subtract</source>
         <translation>Soustraire</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="286"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="293"/>
         <source>Right mouse button in the image: remove the shape</source>
         <translation>Bouton droit de la souris dans l’image : supprimer la forme</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="288"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="295"/>
         <source>Clear</source>
         <translation>Effacer</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="340"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="347"/>
         <source>Gaussian Noise</source>
         <translation>Bruit gaussien</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="342"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="349"/>
         <source>Additive Gaussian (white) noise applied independently to each pixel.</source>
         <translation>Bruit gaussien additif (blanc) appliqué indépendamment à chaque pixel.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="349"/>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="379"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="356"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="386"/>
         <source>Standard deviation.</source>
         <translation>Écart-type.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="352"/>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="382"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="359"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="389"/>
         <source>σ: </source>
         <translation>σ : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="365"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="372"/>
         <source>Density or probability of impulse noise per pixel.</source>
         <translation>Densité ou probabilité de bruit impulsionnel par pixel.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="368"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="375"/>
         <source>d: </source>
         <translation>d : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="479"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="486"/>
         <source>White top-hat</source>
         <translation>Top-hat blanc</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="481"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="488"/>
         <source>Black top-hat</source>
         <translation>Top-hat noir</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="441"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="448"/>
         <source>λ: </source>
         <translation>λ : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="442"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="449"/>
         <source>κ: </source>
         <translation>κ : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="456"/>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="469"/>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="488"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="463"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="476"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="495"/>
         <source>The structuring element is a square centered at its origin.</source>
         <translation>L&apos;élément structurant est un carré centré sur son origine.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="459"/>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="472"/>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="493"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="466"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="479"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="500"/>
         <source>SE size: </source>
         <translation>Taille de l&apos;ES : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="354"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="361"/>
         <source>Impulsive Noise</source>
         <translation>Bruit impulsionnel</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="320"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="327"/>
         <source>Factor: </source>
         <translation>Facteur : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="356"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="363"/>
         <source>Random pixel corruption. Grayscale: salt &amp; pepper (black or white pixels). Color: each channel can be independently corrupted.</source>
         <translation>Corruption aléatoire des pixels. Niveaux de gris : sel et poivre (pixels noirs ou blancs). Couleur : chaque canal peut être corrompu indépendamment.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="370"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="377"/>
         <source>Speckle Noise</source>
         <translation>Bruit speckle</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="372"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="379"/>
         <source>Multiplicative noise applied to pixel intensities. Based on a gamma distribution (commonly used to model speckle in imaging systems).</source>
         <translation>Bruit multiplicatif appliqué aux intensités des pixels. Basé sur une distribution gamma (couramment utilisée pour modéliser le bruit de speckle dans les systèmes d’imagerie).</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="396"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="403"/>
         <source>Mean filter</source>
         <translation>Filtre moyenneur</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="405"/>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="419"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="412"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="426"/>
         <source>Kernel size: </source>
         <translation>Taille du noyau : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="409"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="416"/>
         <source>Median filter</source>
         <translation>Filtre médian</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="421"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="428"/>
         <source>Perona-Malik anisotropic diffusion</source>
         <translation>Diffusion anisotrope de Perona–Malik</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="440"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="447"/>
         <source>Iterations: </source>
         <translation>Itérations : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="443"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="450"/>
         <source>Function 1: </source>
         <translation>Fonction 1 : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="444"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="451"/>
         <source>Function 2: </source>
         <translation>Fonction 2 : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="448"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="455"/>
         <source>Opening</source>
         <translation>Ouverture</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="461"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="468"/>
         <source>Closing</source>
         <translation>Fermeture</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="476"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="483"/>
         <source>Top-hat transform</source>
         <translation>Transformation top-hat</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="480"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="487"/>
         <source>Difference between the input image and the opened result.</source>
         <translation>Différence entre l&apos;image d&apos;origine et le résultat de l&apos;ouverture.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="482"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="489"/>
         <source>Difference between the closed result and the input image.</source>
         <translation>Différence entre le résultat de la fermeture et l&apos;image d&apos;origine.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="545"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="552"/>
         <source>Linear</source>
         <translation>Linéaire</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="546"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="553"/>
         <source>Edge preserving</source>
         <translation>Préservation contour</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="547"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="554"/>
         <source>Math morpho</source>
         <translation>Morpho math</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="549"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="556"/>
         <source>Noise generators</source>
         <translation>Bruit</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="550"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="557"/>
         <source>Filters</source>
         <translation>Filtres</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="557"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="564"/>
         <source>Time: </source>
         <translation>Temps : </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="558"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="565"/>
         <source>Processing time</source>
         <translation>Temps de calcul</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="810"/>
+        <location filename="../src/app/ui/windows/settings_dialog.cpp" line="817"/>
         <source>%1 s</source>
         <translation>%1 s</translation>
     </message>
@@ -1829,37 +1829,37 @@ Contour : %7 pts</translation>
         <translation>Échec du démarrage de l’enregistrement vidéo.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/video_recorder_worker.cpp" line="130"/>
+        <location filename="../src/app/core/video_recorder_worker.cpp" line="128"/>
         <source>Video recording stopped because the recording buffer is full or cannot be written.</source>
         <translation>L&apos;enregistrement vidéo a été arrêté, car le tampon d&apos;enregistrement est plein ou ne peut pas être écrit.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/video_recorder_worker.cpp" line="221"/>
+        <location filename="../src/app/core/video_recorder_worker.cpp" line="219"/>
         <source>Video recording stopped: an invalid video frame was received.</source>
         <translation>L’enregistrement vidéo a été arrêté : une image vidéo invalide a été reçue.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/video_recorder_worker.cpp" line="224"/>
+        <location filename="../src/app/core/video_recorder_worker.cpp" line="222"/>
         <source>Video recording stopped: the frame size or format changed during recording. The video file has been saved up to this point.</source>
         <translation>L’enregistrement vidéo a été arrêté : la taille ou le format des images a changé pendant l’enregistrement. Le fichier vidéo a été sauvegardé jusqu’à ce point.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/video_recorder_worker.cpp" line="228"/>
+        <location filename="../src/app/core/video_recorder_worker.cpp" line="226"/>
         <source>Video recording stopped: unable to start a new video segment. Check the output folder and the available disk space.</source>
         <translation>L’enregistrement vidéo a été arrêté : impossible de démarrer un nouveau segment vidéo. Vérifiez le dossier de sortie et l’espace disque disponible.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/video_recorder_worker.cpp" line="236"/>
+        <location filename="../src/app/core/video_recorder_worker.cpp" line="234"/>
         <source>Failed to encode video frame.</source>
         <translation>Échec de l’encodage de l’image vidéo.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/video_recorder_worker.cpp" line="194"/>
+        <location filename="../src/app/core/video_recorder_worker.cpp" line="192"/>
         <source>Failed to finalize video recording.</source>
         <translation>Échec de la finalisation de l’enregistrement vidéo.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/video_recorder_worker.cpp" line="206"/>
+        <location filename="../src/app/core/video_recorder_worker.cpp" line="204"/>
         <source>Some video files could not be converted to standard MP4. They were kept as fragmented MP4 and remain playable.</source>
         <translation>Certains fichiers vidéo n’ont pas pu être convertis en MP4 standard. Ils ont été conservés en MP4 fragmenté et restent lisibles.</translation>
     </message>
@@ -1986,7 +1986,7 @@ rtsp://192.168.1.110:1935/live</translation>
         <translation>Redémarrer la source active avec la configuration sélectionnée.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="458"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="461"/>
         <source>Drop a video here
 
 or click Open...</source>
@@ -1995,33 +1995,33 @@ or click Open...</source>
 ou cliquez sur Ouvrir...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1227"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1230"/>
         <source>Recommended format</source>
         <translation>Format recommandé</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1428"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1431"/>
         <source>Started</source>
         <translation>Démarré</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1433"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1436"/>
         <source>Camera started: %1</source>
         <translation>Caméra démarrée : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1443"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1446"/>
         <source>Opened video: %1</source>
         <translation>Vidéo ouverte : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1539"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1542"/>
         <source>Stopped</source>
         <translation>Arrêté</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1553"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1575"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1556"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1578"/>
         <source>Source: %1
 
 %2</source>
@@ -2030,113 +2030,113 @@ ou cliquez sur Ouvrir...</translation>
 %2</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1555"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1558"/>
         <source>Camera error</source>
         <translation>Erreur de caméra</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1577"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1580"/>
         <source>Media error</source>
         <translation>Erreur multimédia</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1688"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1691"/>
         <source>Start</source>
         <translation>Démarrer</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1689"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1692"/>
         <source>Start selected source.</source>
         <translation>Démarrer la source sélectionnée.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1700"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1703"/>
         <source>Stop active source.</source>
         <translation>Arrêter la source active.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2179"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2182"/>
         <source>Volume: %1%</source>
         <translation>Volume : %1 %</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2415"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2440"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2418"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2443"/>
         <source>Volume %1%</source>
         <translation>Volume : %1 %</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2455"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2458"/>
         <source>Muted</source>
         <translation>Son coupé</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2455"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2458"/>
         <source>Unmuted</source>
         <translation>Son réactivé</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2467"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2470"/>
         <source>Play</source>
         <translation>Lecture</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2471"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2474"/>
         <source>Pause</source>
         <translation>Pause</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1503"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1939"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1506"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1942"/>
         <source>Video</source>
         <translation>Vidéo</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1611"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1614"/>
         <source>Source startup failed</source>
         <translation>Échec du démarrage de la source</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1612"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1615"/>
         <source>The source did not produce a valid frame within %1 seconds.
 The source may be unavailable or not responding.</source>
         <translation>La source n’a produit aucune image valide dans un délai de %1 secondes.
 La source est peut-être indisponible ou ne répond pas.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1629"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1632"/>
         <source>Source stream lost</source>
         <translation>Flux de la source perdu</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1630"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1633"/>
         <source>No valid frame was received for %1 seconds.
 The source stream may have stalled or become unavailable.</source>
         <translation>Aucune image valide n’a été reçue depuis %1 secondes.
 Le flux de la source est peut-être bloqué ou devenu indisponible.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1954"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1957"/>
         <source>Open Video File</source>
         <translation>Ouvrir un fichier vidéo</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2007"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2010"/>
         <source>Clear source history</source>
         <translation>Effacer l&apos;historique des sources</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1699"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1702"/>
         <source>Stop</source>
         <translation>Arrêter</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1709"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1712"/>
         <source>Starting...</source>
         <translation>Démarrage…</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1710"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1713"/>
         <source>Camera startup in progress.</source>
         <translation>Démarrage de la caméra en cours.</translation>
     </message>

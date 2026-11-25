@@ -34,9 +34,13 @@ namespace fluvel
  */
 enum class Language
 {
-    System,  ///< Use system locale
-    English, ///< English language
-    French   ///< French language
+    System,            ///< Use system locale
+    English,           ///< English language
+    French,            ///< French language
+    Spanish,           ///< Spanish language
+    German,            ///< German language
+    ChineseSimplified, ///< Simplified Chinese language
+    PortugueseBrazil   ///< Brazilian Portuguese language
 };
 
 /**
@@ -78,7 +82,7 @@ struct VideoRecordingPreferences
  * @brief Convert language enum to string identifier.
  *
  * @param lang Language value.
- * @return Corresponding string ("system", "en", "fr").
+ * @return Corresponding string ("system", "en", "fr", "es", "de", "zh_CN", "pt_BR").
  */
 inline constexpr const char* to_string(Language lang)
 {
@@ -90,6 +94,14 @@ inline constexpr const char* to_string(Language lang)
             return "en";
         case Language::French:
             return "fr";
+        case Language::Spanish:
+            return "es";
+        case Language::German:
+            return "de";
+        case Language::ChineseSimplified:
+            return "zh_CN";
+        case Language::PortugueseBrazil:
+            return "pt_BR";
     }
     return "system";
 }
@@ -106,6 +118,14 @@ inline Language languageFromString(std::string_view s)
         return Language::English;
     if (s == "fr")
         return Language::French;
+    if (s == "es")
+        return Language::Spanish;
+    if (s == "de")
+        return Language::German;
+    if (s == "zh_CN")
+        return Language::ChineseSimplified;
+    if (s == "pt_BR")
+        return Language::PortugueseBrazil;
     return Language::System;
 }
 
