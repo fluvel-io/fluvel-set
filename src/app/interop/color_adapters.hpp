@@ -30,7 +30,7 @@ inline QColor toQColor(const fluvel_ip::Rgb_uc& c)
  * @param c Input QColor.
  * @return Equivalent Fluvel RGB color.
  */
-inline fluvel_ip::Rgb_uc toRgb_uc(const QColor& c)
+inline fluvel_ip::Rgb_uc toRgbUc(const QColor& c)
 {
     return fluvel_ip::Rgb_uc{static_cast<unsigned char>(c.red()),
                              static_cast<unsigned char>(c.green()),
@@ -45,7 +45,7 @@ inline fluvel_ip::Rgb_uc toRgb_uc(const QColor& c)
  * @param pixel Input QRgb pixel value.
  * @return Equivalent Fluvel RGB color.
  */
-inline fluvel_ip::Rgb_uc toRgb_uc(QRgb pixel)
+inline fluvel_ip::Rgb_uc toRgbUc(QRgb pixel)
 {
     return {static_cast<unsigned char>(qRed(pixel)), static_cast<unsigned char>(qGreen(pixel)),
             static_cast<unsigned char>(qBlue(pixel))};

@@ -66,8 +66,8 @@ private:
 
     void addColorItem(const QColor& color, const QString& name);
 
-    QComboBox* color_cb_{nullptr};
-    AnimatedPushButton* custom_pb_{nullptr};
+    QComboBox* colorCb_{nullptr};
+    AnimatedPushButton* customPb_{nullptr};
 };
 
 } // namespace fluvel

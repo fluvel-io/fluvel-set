@@ -100,7 +100,7 @@ inline constexpr const char* to_string(Language lang)
  * @param s Input string.
  * @return Corresponding Language value (defaults to System).
  */
-inline Language language_from_string(std::string_view s)
+inline Language languageFromString(std::string_view s)
 {
     if (s == "en")
         return Language::English;

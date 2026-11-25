@@ -121,14 +121,14 @@ void ActiveContour::converge()
     }
 }
 
-void ActiveContour::runSteps(int n_steps)
+void ActiveContour::runSteps(int nSteps)
 {
-    if (n_steps < 1)
+    if (nSteps < 1)
     {
-        n_steps = 1;
+        nSteps = 1;
     }
 
-    for (int i = 0; i < n_steps; ++i)
+    for (int i = 0; i < nSteps; ++i)
     {
         if (isStopped())
             return;
@@ -149,16 +149,16 @@ void ActiveContour::step()
     runSteps(1);
 }
 
-void ActiveContour::runCycles(int n_cycles)
+void ActiveContour::runCycles(int nCycles)
 {
-    if (n_cycles < 1)
+    if (nCycles < 1)
     {
-        n_cycles = 1;
+        nCycles = 1;
     }
 
-    int n_steps = n_cycles * stepsPerCycle_;
+    int nSteps = nCycles * stepsPerCycle_;
 
-    runSteps(n_steps);
+    runSteps(nSteps);
 }
 
 void ActiveContour::stepCycle1()
@@ -421,7 +421,7 @@ void ActiveContour::checkHausdorffStoppingCondition()
     assert(state_ == PhaseState::Cycle2 &&
            params_.failureMode == FailureHandlingMode::StopOnFailure);
 
-    const float stepDelta = float(ed_.stepCount - ed_.previous_step_count);
+    const float stepDelta = float(ed_.stepCount - ed_.previousStepCount);
 
     const int w = cd_.phi().width();
     const int h = cd_.phi().height();
@@ -431,14 +431,14 @@ void ActiveContour::checkHausdorffStoppingCondition()
     // to handle different images sizes.
     if (stepDelta >= diagonal / 20.f)
     {
-        contourToShape(cd_.outerBoundary(), ed_.l_out_shape);
+        contourToShape(cd_.outerBoundary(), ed_.lOutShape);
 
         calculateShapesIntersection();
 
         // Exact Hausdorff distance in absolute coordinates: it is the largest
         // displacement of the contour since the previous check, so it covers
         // both a change of shape and a translation.
-        HausdorffDistance hd(ed_.l_out_shape, ed_.previousShape, &ed_.intersection);
+        HausdorffDistance hd(ed_.lOutShape, ed_.previousShape, &ed_.intersection);
 
         const float sizeFactor = 100.f / diagonal;
         ed_.hausdorffDistance = sizeFactor * hd.distance();
@@ -452,8 +452,8 @@ void ActiveContour::checkHausdorffStoppingCondition()
 
         // swap the shapes in constant time O(1)
         // to prepare data for the next periodic check of the hausdorff condition
-        ed_.l_out_shape.swap(ed_.previousShape);
-        ed_.previous_step_count = ed_.stepCount;
+        ed_.lOutShape.swap(ed_.previousShape);
+        ed_.previousStepCount = ed_.stepCount;
         ed_.previousHausdorff = ed_.hausdorffDistance;
     }
 }

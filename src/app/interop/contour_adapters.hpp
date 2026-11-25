@@ -25,19 +25,19 @@ namespace fluvel
 [[nodiscard]]
 inline QVector<QPointF> convertToQVector(const fluvel_ip::Contour& contour)
 {
-    QVector<QPointF> q_contour;
-    q_contour.reserve(static_cast<qsizetype>(contour.size()));
+    QVector<QPointF> qContour;
+    qContour.reserve(static_cast<qsizetype>(contour.size()));
 
     // map pixel to its center (x + 0.5, y + 0.5)
     constexpr qreal kPixelCenterOffset = 0.5;
 
     for (const auto& point : contour)
     {
-        q_contour.emplace_back(static_cast<qreal>(point.x) + kPixelCenterOffset,
+        qContour.emplace_back(static_cast<qreal>(point.x) + kPixelCenterOffset,
                                static_cast<qreal>(point.y) + kPixelCenterOffset);
     }
 
-    return q_contour;
+    return qContour;
 }
 
 } // namespace fluvel

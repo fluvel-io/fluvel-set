@@ -140,7 +140,7 @@ private:
 
     QString lastDirectoryUsed_;
 
-    static int countThis;
+    static int countThis_;
     int idThis_;
 };
 

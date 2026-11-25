@@ -337,7 +337,7 @@ namespace color
 /**
  * @brief Inverse sRGB gamma correction (R' -> R).
  */
-constexpr float INV_GAMMA_CORRECTION(float val)
+constexpr float invGammaCorrection(float val)
 {
     return val <= 0.0404482362771076f ? val / 12.92f : std::pow(((val) + 0.055f) / 1.055f, 2.4f);
 }
@@ -359,7 +359,7 @@ constexpr float kLabDelta = 4.f / 29.f;
 /**
  * @brief CIE L*a*b* helper function f(t).
  */
-inline float LAB_FUNC(float val)
+inline float labFunc(float val)
 {
     return val >= kLabEpsilon ? std::cbrtf(val) : kLabKappa * (val) + kLabDelta;
 }
@@ -367,32 +367,32 @@ inline float LAB_FUNC(float val)
 /**
  * @brief Convert RGB to XYZ color space.
  */
-inline Xyz_f rgb_to_xyz(const Rgb_uc& rgb)
+inline Xyz_f rgbToXyz(const Rgb_uc& rgb)
 {
-    Rgb_f rgb_f = rgb / 255.f;
+    Rgb_f rgbF = rgb / 255.f;
 
-    rgb_f.red = INV_GAMMA_CORRECTION(rgb_f.red);
-    rgb_f.green = INV_GAMMA_CORRECTION(rgb_f.green);
-    rgb_f.blue = INV_GAMMA_CORRECTION(rgb_f.blue);
+    rgbF.red = invGammaCorrection(rgbF.red);
+    rgbF.green = invGammaCorrection(rgbF.green);
+    rgbF.blue = invGammaCorrection(rgbF.blue);
 
-    return {0.4123956f * rgb_f.red + 0.35758343f * rgb_f.green + 0.18049265f * rgb_f.blue,
-            0.21258623f * rgb_f.red + 0.7151703f * rgb_f.green + 0.0722005f * rgb_f.blue,
-            0.019297216f * rgb_f.red + 0.11918387f * rgb_f.green + 0.95049715f * rgb_f.blue};
+    return {0.4123956f * rgbF.red + 0.35758343f * rgbF.green + 0.18049265f * rgbF.blue,
+            0.21258623f * rgbF.red + 0.7151703f * rgbF.green + 0.0722005f * rgbF.blue,
+            0.019297216f * rgbF.red + 0.11918387f * rgbF.green + 0.95049715f * rgbF.blue};
 }
 
 /**
  * @brief Convert XYZ to Lab color space.
  */
-inline Lab_f xyz_to_Lab(const Xyz_f& xyz)
+inline Lab_f xyzToLab(const Xyz_f& xyz)
 {
     Xyz_f tmp = xyz;
 
     tmp.X /= kWhitePointX;
     tmp.Y /= kWhitePointY;
     tmp.Z /= kWhitePointZ;
-    tmp.X = LAB_FUNC(tmp.X);
-    tmp.Y = LAB_FUNC(tmp.Y);
-    tmp.Z = LAB_FUNC(tmp.Z);
+    tmp.X = labFunc(tmp.X);
+    tmp.Y = labFunc(tmp.Y);
+    tmp.Z = labFunc(tmp.Z);
 
     return {116.f * tmp.Y - 16.f, 500.f * (tmp.X - tmp.Y), 200.f * (tmp.Y - tmp.Z)};
 }
@@ -400,7 +400,7 @@ inline Lab_f xyz_to_Lab(const Xyz_f& xyz)
 /**
  * @brief Convert XYZ to Luv color space.
  */
-inline Luv_f xyz_to_Luv(const Xyz_f& xyz)
+inline Luv_f xyzToLuv(const Xyz_f& xyz)
 {
     Xyz_f tmp = xyz;
     float u1, v1, denom;
@@ -419,7 +419,7 @@ inline Luv_f xyz_to_Luv(const Xyz_f& xyz)
     }
 
     tmp.Y /= kWhitePointY;
-    tmp.Y = LAB_FUNC(tmp.Y);
+    tmp.Y = labFunc(tmp.Y);
 
     float L = 116.f * tmp.Y - 16.f;
 
@@ -429,23 +429,23 @@ inline Luv_f xyz_to_Luv(const Xyz_f& xyz)
 /**
  * @brief Convert RGB to Lab color space.
  */
-inline Lab_f rgb_to_Lab(const Rgb_uc& rgb)
+inline Lab_f rgbToLab(const Rgb_uc& rgb)
 {
-    return xyz_to_Lab(rgb_to_xyz(rgb));
+    return xyzToLab(rgbToXyz(rgb));
 }
 
 /**
  * @brief Convert RGB to Luv color space.
  */
-inline Luv_f rgb_to_Luv(const Rgb_uc& rgb)
+inline Luv_f rgbToLuv(const Rgb_uc& rgb)
 {
-    return xyz_to_Luv(rgb_to_xyz(rgb));
+    return xyzToLuv(rgbToXyz(rgb));
 }
 
 /**
  * @brief Convert RGB to YUV (integer approximation).
  */
-inline Color_3i rgb_to_yuv(const Rgb_uc& rgb)
+inline Color_3i rgbToYuv(const Rgb_uc& rgb)
 {
     return {((66 * int(rgb.red) + 129 * int(rgb.green) + 25 * int(rgb.blue) + 128) >> 8) + 16,
             ((-38 * int(rgb.red) - 74 * int(rgb.green) + 112 * int(rgb.blue) + 128) >> 8) + 128,

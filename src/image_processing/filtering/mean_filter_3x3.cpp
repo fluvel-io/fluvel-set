@@ -60,13 +60,13 @@ void Mean3x3::apply(const ImageView& input)
     // =========================
     for (int y = 0; y < height; ++y)
     {
-        const uint8_t* row_m1 = buffer1_.rowPtr(std::max(0, y - 1));
-        const uint8_t* row_0 = buffer1_.rowPtr(y);
-        const uint8_t* row_p1 = buffer1_.rowPtr(std::min(height - 1, y + 1));
+        const uint8_t* rowM1 = buffer1_.rowPtr(std::max(0, y - 1));
+        const uint8_t* row0 = buffer1_.rowPtr(y);
+        const uint8_t* rowP1 = buffer1_.rowPtr(std::min(height - 1, y + 1));
 
         uint8_t* dst = buffer2_.rowPtr(y);
 
-        verticalPass(row_m1, row_0, row_p1, dst, width, channels);
+        verticalPass(rowM1, row0, rowP1, dst, width, channels);
     }
 
     std::swap(buffer1_, buffer2_);
@@ -113,14 +113,14 @@ void Mean3x3::horizontalPass(const uint8_t* src, uint8_t* dst, int width, int ch
     }
 }
 
-void Mean3x3::verticalPass(const uint8_t* row_m1, const uint8_t* row_0, const uint8_t* row_p1,
+void Mean3x3::verticalPass(const uint8_t* rowM1, const uint8_t* row0, const uint8_t* rowP1,
                            uint8_t* dst, int width, int channels)
 {
     const int rowBytes = width * channels;
 
     for (int idx = 0; idx < rowBytes; ++idx)
     {
-        int sum = row_m1[idx] + row_0[idx] + row_p1[idx];
+        int sum = rowM1[idx] + row0[idx] + rowP1[idx];
         dst[idx] = (sum + 1) / 3;
     }
 }

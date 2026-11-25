@@ -454,12 +454,12 @@ AboutDialog::AboutDialog(QWidget* parent)
     ///////////////////////////////////////
     ///////////////////////////////////////
 
-    QHBoxLayout* layout_this = new QHBoxLayout;
-    layout_this->addLayout(leftLayout);
-    layout_this->addWidget(tabs);
-    layout_this->setSizeConstraint(QLayout::SetMinimumSize);
+    QHBoxLayout* layoutThis = new QHBoxLayout;
+    layoutThis->addLayout(leftLayout);
+    layoutThis->addWidget(tabs);
+    layoutThis->setSizeConstraint(QLayout::SetMinimumSize);
 
-    this->setLayout(layout_this);
+    this->setLayout(layoutThis);
 }
 
 void AboutDialog::openHomepage()

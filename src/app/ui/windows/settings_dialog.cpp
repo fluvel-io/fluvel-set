@@ -116,16 +116,16 @@ SettingsDialog::SettingsDialog(const ImageComputeConfig& config, QWidget* parent
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Horizontal content: tabs | image
-    QHBoxLayout* content_layout = new QHBoxLayout;
-    content_layout->addWidget(tabs_);
-    content_layout->addWidget(imageViewer_, 1); // l'image prend l'espace restant
+    QHBoxLayout* contentLayout = new QHBoxLayout;
+    contentLayout->addWidget(tabs_);
+    contentLayout->addWidget(imageViewer_, 1); // l'image prend l'espace restant
 
     // Vertical root layout: content + buttons
-    QVBoxLayout* root_layout = new QVBoxLayout;
-    root_layout->addLayout(content_layout);
-    root_layout->addWidget(dialogButtons_);
+    QVBoxLayout* rootLayout = new QVBoxLayout;
+    rootLayout->addLayout(contentLayout);
+    rootLayout->addWidget(dialogButtons_);
 
-    setLayout(root_layout);
+    setLayout(rootLayout);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Controller
@@ -154,8 +154,8 @@ void SettingsDialog::setupUiInitTab()
     /// Initialization tab
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    QGroupBox* shape_groupbox = new QGroupBox(tr("Shape"));
-    shape_groupbox->setFlat(true);
+    QGroupBox* shapeGroupbox = new QGroupBox(tr("Shape"));
+    shapeGroupbox->setFlat(true);
 
     rectangleRadio_ = new QRadioButton(tr("Rectangle"));
     rectangleRadio_->setToolTip(tr("Middle mouse button: toggle rectangle / ellipse"));
@@ -165,15 +165,15 @@ void SettingsDialog::setupUiInitTab()
     rectangleRadio_->setChecked(false);
     ellipseRadio_->setChecked(true);
 
-    QHBoxLayout* shape_layout = new QHBoxLayout;
-    shape_layout->addWidget(rectangleRadio_);
-    shape_layout->addWidget(ellipseRadio_);
-    shape_groupbox->setLayout(shape_layout);
+    QHBoxLayout* shapeLayout = new QHBoxLayout;
+    shapeLayout->addWidget(rectangleRadio_);
+    shapeLayout->addWidget(ellipseRadio_);
+    shapeGroupbox->setLayout(shapeLayout);
 
     ////////////////////////////////////////////
 
-    QGroupBox* shape_size_groupbox = new QGroupBox(tr("Size"));
-    shape_size_groupbox->setToolTip(tr("Ctrl + mouse wheel in the image to resize the shape"));
+    QGroupBox* shapeSizeGroupbox = new QGroupBox(tr("Size"));
+    shapeSizeGroupbox->setToolTip(tr("Ctrl + mouse wheel in the image to resize the shape"));
 
     widthShapeSpin_ = new QSpinBox;
     widthShapeSpin_->setSingleStep(10);
@@ -182,8 +182,8 @@ void SettingsDialog::setupUiInitTab()
     widthShapeSpin_->setSuffix(tr(" % image width"));
     widthShapeSpin_->setValue(65);
 
-    QFormLayout* width_spin_layout = new QFormLayout;
-    width_spin_layout->addRow(tr("Width: "), widthShapeSpin_);
+    QFormLayout* widthSpinLayout = new QFormLayout;
+    widthSpinLayout->addRow(tr("Width: "), widthShapeSpin_);
 
     widthSlider_ = new QSlider(Qt::Horizontal, this);
 
@@ -202,8 +202,8 @@ void SettingsDialog::setupUiInitTab()
     heightShapeSpin_->setSuffix(tr((" % image height")));
     heightShapeSpin_->setValue(65);
 
-    QFormLayout* height_spin_layout = new QFormLayout;
-    height_spin_layout->addRow(tr("Height: "), heightShapeSpin_);
+    QFormLayout* heightSpinLayout = new QFormLayout;
+    heightSpinLayout->addRow(tr("Height: "), heightShapeSpin_);
 
     heightSlider_ = new QSlider(Qt::Horizontal, this);
 
@@ -215,17 +215,17 @@ void SettingsDialog::setupUiInitTab()
     heightSlider_->setSingleStep(10);
     heightSlider_->setValue(65);
 
-    QVBoxLayout* shape_size_layout = new QVBoxLayout;
-    shape_size_layout->addLayout(width_spin_layout);
-    shape_size_layout->addWidget(widthSlider_);
-    shape_size_layout->addLayout(height_spin_layout);
-    shape_size_layout->addWidget(heightSlider_);
-    shape_size_groupbox->setLayout(shape_size_layout);
+    QVBoxLayout* shapeSizeLayout = new QVBoxLayout;
+    shapeSizeLayout->addLayout(widthSpinLayout);
+    shapeSizeLayout->addWidget(widthSlider_);
+    shapeSizeLayout->addLayout(heightSpinLayout);
+    shapeSizeLayout->addWidget(heightSlider_);
+    shapeSizeGroupbox->setLayout(shapeSizeLayout);
 
     ////////////////////////////////////////////
 
-    QGroupBox* position_groupbox = new QGroupBox(tr("Position (x,y)"));
-    position_groupbox->setToolTip(tr("Move the cursor in the image to set the position"));
+    QGroupBox* positionGroupbox = new QGroupBox(tr("Position (x,y)"));
+    positionGroupbox->setToolTip(tr("Move the cursor in the image to set the position"));
 
     abscissaSpin_ = new QSpinBox;
     abscissaSpin_->setSingleStep(15);
@@ -234,8 +234,8 @@ void SettingsDialog::setupUiInitTab()
     abscissaSpin_->setSuffix(tr(" % image width"));
     abscissaSpin_->setValue(0);
 
-    QFormLayout* abscissa_spin_layout = new QFormLayout;
-    abscissa_spin_layout->addRow("x = Xo +", abscissaSpin_);
+    QFormLayout* abscissaSpinLayout = new QFormLayout;
+    abscissaSpinLayout->addRow("x = Xo +", abscissaSpin_);
 
     abscissaSlider_ = new QSlider(Qt::Horizontal, this);
 
@@ -254,8 +254,8 @@ void SettingsDialog::setupUiInitTab()
     ordinateSpin_->setSuffix(tr(" % image height"));
     ordinateSpin_->setValue(0);
 
-    QFormLayout* ordinate_spin_layout = new QFormLayout;
-    ordinate_spin_layout->addRow("y = Yo +", ordinateSpin_);
+    QFormLayout* ordinateSpinLayout = new QFormLayout;
+    ordinateSpinLayout->addRow("y = Yo +", ordinateSpin_);
 
     ordinateSlider_ = new QSlider(Qt::Horizontal, this);
 
@@ -267,17 +267,17 @@ void SettingsDialog::setupUiInitTab()
     ordinateSlider_->setSingleStep(15);
     ordinateSlider_->setValue(0);
 
-    QVBoxLayout* position_layout = new QVBoxLayout;
-    position_layout->addLayout(abscissa_spin_layout);
-    position_layout->addWidget(abscissaSlider_);
-    position_layout->addLayout(ordinate_spin_layout);
-    position_layout->addWidget(ordinateSlider_);
-    position_groupbox->setLayout(position_layout);
+    QVBoxLayout* positionLayout = new QVBoxLayout;
+    positionLayout->addLayout(abscissaSpinLayout);
+    positionLayout->addWidget(abscissaSlider_);
+    positionLayout->addLayout(ordinateSpinLayout);
+    positionLayout->addWidget(ordinateSlider_);
+    positionGroupbox->setLayout(positionLayout);
 
     ////////////////////////////////////////////
 
-    QGroupBox* modify_groupbox = new QGroupBox(tr("Active contour modification"));
-    modify_groupbox->setFlat(true);
+    QGroupBox* modifyGroupbox = new QGroupBox(tr("Active contour modification"));
+    modifyGroupbox->setFlat(true);
 
     addButton_ = new QPushButton(tr("Add"));
     addButton_->setToolTip(tr("Left mouse button in the image: add the shape"));
@@ -287,23 +287,23 @@ void SettingsDialog::setupUiInitTab()
 
     clearButton_ = new QPushButton(tr("Clear"));
 
-    QHBoxLayout* modify_layout = new QHBoxLayout;
-    modify_layout->addWidget(clearButton_);
-    modify_layout->addWidget(subtractButton_);
-    modify_layout->addWidget(addButton_);
-    modify_groupbox->setLayout(modify_layout);
+    QHBoxLayout* modifyLayout = new QHBoxLayout;
+    modifyLayout->addWidget(clearButton_);
+    modifyLayout->addWidget(subtractButton_);
+    modifyLayout->addWidget(addButton_);
+    modifyGroupbox->setLayout(modifyLayout);
 
     ////////////////////////////////////////////
 
-    QVBoxLayout* initialization_layout = new QVBoxLayout;
-    initialization_layout->addWidget(shape_groupbox);
-    initialization_layout->addWidget(shape_size_groupbox);
-    initialization_layout->addWidget(position_groupbox);
-    initialization_layout->addWidget(modify_groupbox);
-    initialization_layout->addStretch(1);
+    QVBoxLayout* initializationLayout = new QVBoxLayout;
+    initializationLayout->addWidget(shapeGroupbox);
+    initializationLayout->addWidget(shapeSizeGroupbox);
+    initializationLayout->addWidget(positionGroupbox);
+    initializationLayout->addWidget(modifyGroupbox);
+    initializationLayout->addStretch(1);
 
     initPage_ = new QWidget;
-    initPage_->setLayout(initialization_layout);
+    initPage_->setLayout(initializationLayout);
 }
 
 void SettingsDialog::setupUiDownscaleTab()
@@ -348,8 +348,8 @@ void SettingsDialog::setupUiPreprocessingTab()
     gaussianNoiseStdSpin_->setMaximum(80.0);
     gaussianNoiseStdSpin_->setToolTip(tr("Standard deviation."));
 
-    QFormLayout* gaussian_noise_layout = new QFormLayout;
-    gaussian_noise_layout->addRow(tr("σ: "), gaussianNoiseStdSpin_);
+    QFormLayout* gaussianNoiseLayout = new QFormLayout;
+    gaussianNoiseLayout->addRow(tr("σ: "), gaussianNoiseStdSpin_);
 
     impulsiveNoiseGroupbox_ = new QGroupBox(tr("Impulsive Noise"));
     impulsiveNoiseGroupbox_->setToolTip(
@@ -381,7 +381,7 @@ void SettingsDialog::setupUiPreprocessingTab()
     QFormLayout* speckleNoiseLayout = new QFormLayout;
     speckleNoiseLayout->addRow(tr("σ: "), speckleNoiseStdSpin_);
 
-    gaussianNoiseGroupbox_->setLayout(gaussian_noise_layout);
+    gaussianNoiseGroupbox_->setLayout(gaussianNoiseLayout);
     impulsiveNoiseGroupbox_->setLayout(impulsiveNoiseLayout);
     speckleNoiseGroupbox_->setLayout(speckleNoiseLayout);
 
@@ -915,48 +915,48 @@ void SettingsDialog::updateUIFromConfig()
 {
     QSignalBlocker blocker(this);
 
-    const auto& ds_config = editedConfig_.downscale;
+    const auto& dsConfig = editedConfig_.downscale;
 
-    downscalePage_->setChecked(ds_config.downscaleEnabled);
+    downscalePage_->setChecked(dsConfig.downscaleEnabled);
 
-    int index = downscaleFactorCb_->findData(ds_config.downscaleFactor);
+    int index = downscaleFactorCb_->findData(dsConfig.downscaleFactor);
     if (index >= 0)
         downscaleFactorCb_->setCurrentIndex(index);
 
-    const auto& config_filter = editedConfig_.processing;
+    const auto& configFilter = editedConfig_.processing;
 
-    processPage_->setChecked(config_filter.processingEnabled);
-    gaussianNoiseGroupbox_->setChecked(config_filter.gaussianNoiseEnabled);
-    gaussianNoiseStdSpin_->setValue(double(config_filter.noiseStdDev));
-    impulsiveNoiseGroupbox_->setChecked(config_filter.saltNoiseEnabled);
-    impulsiveNoisePercentSpin_->setValue(double(100.f * config_filter.saltNoiseProbability));
-    speckleNoiseGroupbox_->setChecked(config_filter.speckleNoiseEnabled);
-    speckleNoiseStdSpin_->setValue(double(config_filter.speckleNoiseStdDev));
+    processPage_->setChecked(configFilter.processingEnabled);
+    gaussianNoiseGroupbox_->setChecked(configFilter.gaussianNoiseEnabled);
+    gaussianNoiseStdSpin_->setValue(double(configFilter.noiseStdDev));
+    impulsiveNoiseGroupbox_->setChecked(configFilter.saltNoiseEnabled);
+    impulsiveNoisePercentSpin_->setValue(double(100.f * configFilter.saltNoiseProbability));
+    speckleNoiseGroupbox_->setChecked(configFilter.speckleNoiseEnabled);
+    speckleNoiseStdSpin_->setValue(double(configFilter.speckleNoiseStdDev));
 
-    medianGroupbox_->setChecked(config_filter.medianFilterEnabled);
-    medianKernelSizeSpin_->setValue(config_filter.medianKernelSize);
+    medianGroupbox_->setChecked(configFilter.medianFilterEnabled);
+    medianKernelSizeSpin_->setValue(configFilter.medianKernelSize);
 
-    meanGroupbox_->setChecked(config_filter.meanFilterEnabled);
-    meanKernelSizeSpin_->setValue(config_filter.meanKernelSize);
+    meanGroupbox_->setChecked(configFilter.meanFilterEnabled);
+    meanKernelSizeSpin_->setValue(configFilter.meanKernelSize);
 
-    anisoGroupbox_->setChecked(config_filter.anisotropicDiffusionEnabled);
-    iterationFilterSpin_->setValue(config_filter.aniso.iterations);
-    lambdaSpin_->setValue(config_filter.aniso.lambda);
-    kappaSpin_->setValue(config_filter.aniso.kappa);
-    anisoExpConductionRadio_->setChecked(config_filter.aniso.conduction ==
+    anisoGroupbox_->setChecked(configFilter.anisotropicDiffusionEnabled);
+    iterationFilterSpin_->setValue(configFilter.aniso.iterations);
+    lambdaSpin_->setValue(configFilter.aniso.lambda);
+    kappaSpin_->setValue(configFilter.aniso.kappa);
+    anisoExpConductionRadio_->setChecked(configFilter.aniso.conduction ==
                                          fluvel_ip::filter::ConductionFunction::Exponential);
-    anisoReciprocalConductionRadio_->setChecked(config_filter.aniso.conduction ==
+    anisoReciprocalConductionRadio_->setChecked(configFilter.aniso.conduction ==
                                                 fluvel_ip::filter::ConductionFunction::Rational);
 
-    openGroupbox_->setChecked(config_filter.openingEnabled);
-    openKernelSizeSpin_->setValue(config_filter.openingKernelSize);
+    openGroupbox_->setChecked(configFilter.openingEnabled);
+    openKernelSizeSpin_->setValue(configFilter.openingKernelSize);
 
-    closeGroupbox_->setChecked(config_filter.closingEnabled);
-    closeKernelSizeSpin_->setValue(config_filter.closingKernelSize);
+    closeGroupbox_->setChecked(configFilter.closingEnabled);
+    closeKernelSizeSpin_->setValue(configFilter.closingKernelSize);
 
-    tophatGroupbox_->setChecked(config_filter.topHatEnabled);
+    tophatGroupbox_->setChecked(configFilter.topHatEnabled);
 
-    if (config_filter.useWhiteTopHat)
+    if (configFilter.useWhiteTopHat)
     {
         whitetophatRadio_->setChecked(true);
     }
@@ -964,7 +964,7 @@ void SettingsDialog::updateUIFromConfig()
     {
         blacktophatRadio_->setChecked(true);
     }
-    tophatKernelSizeSpin_->setValue(config_filter.topHatKernelSize);
+    tophatKernelSizeSpin_->setValue(configFilter.topHatKernelSize);
 
     imageSettingsController_->revert();
 

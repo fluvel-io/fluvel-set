@@ -20,7 +20,7 @@ namespace fluvel
 ColorSelectorWidget::ColorSelectorWidget(QWidget* parent, QColor initialColor)
     : QWidget(parent)
 {
-    color_cb_ = new QComboBox;
+    colorCb_ = new QComboBox;
 
     addColorItem(Qt::red, tr("Red"));
     addColorItem(Qt::green, tr("Green"));
@@ -35,28 +35,28 @@ ColorSelectorWidget::ColorSelectorWidget(QWidget* parent, QColor initialColor)
     QIcon pickerIcon =
         il::loadIcon("color-picker-symbolic", ":/icons/actions/color-picker-symbolic.svg");
 
-    custom_pb_ = new AnimatedPushButton;
-    custom_pb_->setIcon(pickerIcon);
+    customPb_ = new AnimatedPushButton;
+    customPb_->setIcon(pickerIcon);
 
     auto* layout = new QHBoxLayout(this);
-    layout->addWidget(color_cb_);
-    layout->addWidget(custom_pb_);
+    layout->addWidget(colorCb_);
+    layout->addWidget(customPb_);
 
     setSelectedColor(initialColor);
 
-    connect(color_cb_, &QComboBox::currentIndexChanged, this, &ColorSelectorWidget::onIndexChanged);
+    connect(colorCb_, &QComboBox::currentIndexChanged, this, &ColorSelectorWidget::onIndexChanged);
 
-    connect(custom_pb_, &QPushButton::clicked, this, &ColorSelectorWidget::onCustomClicked);
+    connect(customPb_, &QPushButton::clicked, this, &ColorSelectorWidget::onCustomClicked);
 }
 
 void ColorSelectorWidget::addColorItem(const QColor& color, const QString& name)
 {
-    color_cb_->addItem(il::createSquare(color), name, color);
+    colorCb_->addItem(il::createSquare(color), name, color);
 }
 
 QColor ColorSelectorWidget::color() const
 {
-    return color_cb_->currentData().value<QColor>();
+    return colorCb_->currentData().value<QColor>();
 }
 
 void ColorSelectorWidget::onIndexChanged()
@@ -71,30 +71,30 @@ void ColorSelectorWidget::onCustomClicked()
     if (!chosen.isValid())
         return;
 
-    const int customIndex = color_cb_->findText(tr("Custom"));
+    const int customIndex = colorCb_->findText(tr("Custom"));
     if (customIndex < 0)
         return;
 
-    QSignalBlocker blocker(color_cb_);
+    QSignalBlocker blocker(colorCb_);
 
-    color_cb_->setItemIcon(customIndex, il::createSquare(chosen));
-    color_cb_->setItemData(customIndex, chosen);
-    color_cb_->setCurrentIndex(customIndex);
+    colorCb_->setItemIcon(customIndex, il::createSquare(chosen));
+    colorCb_->setItemData(customIndex, chosen);
+    colorCb_->setCurrentIndex(customIndex);
 
     emit colorSelected(chosen);
 }
 
 void ColorSelectorWidget::setSelectedColor(const QColor& color)
 {
-    QSignalBlocker blocker(color_cb_);
+    QSignalBlocker blocker(colorCb_);
 
     // chercher si la couleur existe déjà
-    for (int i = 0; i < color_cb_->count(); ++i)
+    for (int i = 0; i < colorCb_->count(); ++i)
     {
-        const QVariant v = color_cb_->itemData(i);
+        const QVariant v = colorCb_->itemData(i);
         if (v.canConvert<QColor>() && v.value<QColor>() == color)
         {
-            color_cb_->setCurrentIndex(i);
+            colorCb_->setCurrentIndex(i);
 
             emit colorSelected(color);
             return;
@@ -102,12 +102,12 @@ void ColorSelectorWidget::setSelectedColor(const QColor& color)
     }
 
     // sinon → custom
-    const int customIndex = color_cb_->findText(tr("Custom"));
+    const int customIndex = colorCb_->findText(tr("Custom"));
     if (customIndex >= 0)
     {
-        color_cb_->setItemIcon(customIndex, il::createSquare(color));
-        color_cb_->setItemData(customIndex, color);
-        color_cb_->setCurrentIndex(customIndex);
+        colorCb_->setItemIcon(customIndex, il::createSquare(color));
+        colorCb_->setItemData(customIndex, color);
+        colorCb_->setCurrentIndex(customIndex);
 
         emit colorSelected(color);
     }

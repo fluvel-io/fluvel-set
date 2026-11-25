@@ -232,8 +232,8 @@ void BoundaryFactory::buildEllipseMidpointConnected(int x0, int y0, int a, int b
     // Paramètre de décision région 1
     int64_t d1 = b2 - (a2 * b) + (a2 / 4);
 
-    int prev_x = x;
-    int prev_y = y;
+    int prevX = x;
+    int prevY = y;
 
     // -------- Région 1 --------
     while (dx < dy)
@@ -242,17 +242,17 @@ void BoundaryFactory::buildEllipseMidpointConnected(int x0, int y0, int a, int b
         add4pointsInEllipse(outerBoundary, x, y, x0, y0);
 
         // ---- Connexité 8 ----
-        int dxp = x - prev_x;
-        int dyp = y - prev_y;
+        int dxp = x - prevX;
+        int dyp = y - prevY;
 
         if (abs(dxp) == 1 && abs(dyp) == 1)
         {
             // pixel correcteur (choix simple et sûr)
-            add4pointsInEllipse(outerBoundary, prev_x, y, x0, y0);
+            add4pointsInEllipse(outerBoundary, prevX, y, x0, y0);
         }
 
-        prev_x = x;
-        prev_y = y;
+        prevX = x;
+        prevY = y;
 
         ++x;
         dx += (2 * b2);
@@ -270,10 +270,10 @@ void BoundaryFactory::buildEllipseMidpointConnected(int x0, int y0, int a, int b
     }
 
     // Paramètre région 2
-    const int64_t x_shift = static_cast<int64_t>(x) * 2 + 1; // 2*(x + 0.5)
-    const int64_t y_shift = static_cast<int64_t>(y) - 1;
+    const int64_t xShift = static_cast<int64_t>(x) * 2 + 1; // 2*(x + 0.5)
+    const int64_t yShift = static_cast<int64_t>(y) - 1;
 
-    int64_t d2 = (b2 * x_shift * x_shift / 4) + (a2 * y_shift * y_shift) - (a2 * b2);
+    int64_t d2 = (b2 * xShift * xShift / 4) + (a2 * yShift * yShift) - (a2 * b2);
 
     // -------- Région 2 --------
     while (y >= 0)
@@ -281,16 +281,16 @@ void BoundaryFactory::buildEllipseMidpointConnected(int x0, int y0, int a, int b
         add4pointsInEllipse(outerBoundary, x, y, x0, y0);
 
         // ---- Connexité 8 ----
-        int dxp = x - prev_x;
-        int dyp = y - prev_y;
+        int dxp = x - prevX;
+        int dyp = y - prevY;
 
         if (std::abs(dxp) == 1 && std::abs(dyp) == 1)
         {
-            add4pointsInEllipse(outerBoundary, x, prev_y, x0, y0);
+            add4pointsInEllipse(outerBoundary, x, prevY, x0, y0);
         }
 
-        prev_x = x;
-        prev_y = y;
+        prevX = x;
+        prevY = y;
 
         --y;
         dy -= (2 * a2);

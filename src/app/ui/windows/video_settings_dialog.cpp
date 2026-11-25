@@ -91,11 +91,11 @@ VideoSettingsDialog::VideoSettingsDialog(const VideoComputeConfig& config, QWidg
     auto* algoLayout = new QVBoxLayout;
     algoLayout->addWidget(algoWidget_);
 
-    auto* algo_gb = new QGroupBox;
-    algo_gb->setLayout(algoLayout);
+    auto* algoGb = new QGroupBox;
+    algoGb->setLayout(algoLayout);
 
     tabs_->addTab(preprocessGb, tr("Preprocess"));
-    tabs_->addTab(algo_gb, tr("Algorithm"));
+    tabs_->addTab(algoGb, tr("Algorithm"));
 
     auto* layout = new QVBoxLayout;
     layout->addWidget(tabs_);

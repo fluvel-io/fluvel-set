@@ -82,10 +82,10 @@ struct EvolutionData
 
     bool didMove{true}; //!< Indicates if the contour moved during Cycle1.
 
-    Shape l_out_shape;   //!< Outer boundary shape at the end of the current Cycle2.
+    Shape lOutShape;   //!< Outer boundary shape at the end of the current Cycle2.
     Shape previousShape; //!< Outer boundary shape at the end of the previous Cycle2.
 
-    int previous_step_count{0}; //!< Step count at the previous Cycle2.
+    int previousStepCount{0}; //!< Step count at the previous Cycle2.
 
     float previousHausdorff{
         std::numeric_limits<float>::quiet_NaN()}; //!< Previous normalized Hausdorff distance.
@@ -107,7 +107,7 @@ struct EvolutionData
     EvolutionData(const ContourData& cd)
         : maxStepCount(5 * std::max(cd.phi().width(), cd.phi().height()))
     {
-        l_out_shape.reserve(cd.outerBoundary().capacity());
+        lOutShape.reserve(cd.outerBoundary().capacity());
         previousShape.reserve(cd.outerBoundary().capacity());
         intersection.reserve(cd.outerBoundary().capacity());
     }
@@ -184,7 +184,7 @@ public:
      *
      * @param n_cycles Number of cycles.
      */
-    void runCycles(int n_cycles);
+    void runCycles(int nCycles);
 
     /**
      * @brief Exports the outer boundary as a geometric contour.
@@ -267,7 +267,7 @@ private:
     /**
      * @brief Runs a fixed number of elementary steps.
      */
-    void runSteps(int n_steps);
+    void runSteps(int nSteps);
 
     /**
      * @brief Performs one Cycle1 step (data-driven evolution).

@@ -122,9 +122,9 @@ namespace speed_value
  * @param speed Signed speed value.
  * @return Corresponding discrete speed.
  */
-constexpr SpeedValue get_discrete_speed(int speed);
+constexpr SpeedValue getDiscreteSpeed(int speed);
 
-constexpr SpeedValue get_discrete_speed(int speed)
+constexpr SpeedValue getDiscreteSpeed(int speed)
 {
     if (speed < 0)
         return SpeedValue::GoInward;
@@ -302,7 +302,7 @@ inline constexpr const char* to_string(Connectivity connectivity)
 /**
  * @brief Parse connectivity from string.
  */
-inline Connectivity connectivity_from_string(std::string_view c)
+inline Connectivity connectivityFromString(std::string_view c)
 {
     if (c == "4")
         return Connectivity::Four;

@@ -172,11 +172,11 @@ void ImageController::onImageSettingsChanged(const ImageSessionSettings& session
 
 void ImageController::onImageDisplaySettingsChanged(const DisplayConfig& display)
 {
-    bool needs_refresh = (displayConfig_.background != display.background);
+    bool needsRefresh = (displayConfig_.background != display.background);
 
     displayConfig_ = display;
 
-    if (needs_refresh)
+    if (needsRefresh)
         refreshView();
 
     // Contour colors and visibility may have changed: restyle the displayed contour.

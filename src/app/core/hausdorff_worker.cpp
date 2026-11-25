@@ -60,7 +60,7 @@ fluvel_ip::PointSet HausdorffWorker::computeIntersection(const HausdorffRequest&
     {
         if (p.x >= 0 && p.x < largerShapeImg.width() && p.y >= 0 && p.y < largerShapeImg.height())
         {
-            if (toRgb_uc(largerShapeImg.pixel(p.x, p.y)) == chosenRgb)
+            if (toRgbUc(largerShapeImg.pixel(p.x, p.y)) == chosenRgb)
                 intersection.insert(p);
         }
     }

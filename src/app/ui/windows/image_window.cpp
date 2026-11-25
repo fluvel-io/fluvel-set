@@ -422,7 +422,7 @@ void ImageWindow::setupChildWindows()
     histogramWindow_ = std::make_unique<HistogramWindow>();
 
     settingsDialog_ = new SettingsDialog(config.compute, this);
-    AboutDialog_ = new AboutDialog(this);
+    aboutDialog_ = new AboutDialog(this);
 }
 
 void ImageWindow::applyInitialSettings()
@@ -730,7 +730,7 @@ void ImageWindow::setupUserActionsConnections()
 
     // ---   4th menu   ---
 
-    connect(aboutAct_, &QAction::triggered, AboutDialog_, &AboutDialog::show);
+    connect(aboutAct_, &QAction::triggered, aboutDialog_, &AboutDialog::show);
 
     // ---   6 buttons   ---
 

@@ -19,10 +19,10 @@ namespace fluvel_ip
  */
 struct KernelSupport
 {
-    int min_dx{0}; ///< Minimum horizontal offset (left extent).
-    int max_dx{0}; ///< Maximum horizontal offset (right extent).
-    int min_dy{0}; ///< Minimum vertical offset (top extent).
-    int max_dy{0}; ///< Maximum vertical offset (bottom extent).
+    int minDx{0}; ///< Minimum horizontal offset (left extent).
+    int maxDx{0}; ///< Maximum horizontal offset (right extent).
+    int minDy{0}; ///< Minimum vertical offset (top extent).
+    int maxDy{0}; ///< Maximum vertical offset (bottom extent).
 };
 
 /**
@@ -50,10 +50,10 @@ struct InternalKernel
      * @param height Image height.
      * @return true if the kernel is entirely inside the image.
      */
-    bool fully_inside(int x, int y, int width, int height) const
+    bool fullyInside(int x, int y, int width, int height) const
     {
-        return x + support.min_dx >= 0 && x + support.max_dx < width && y + support.min_dy >= 0 &&
-               y + support.max_dy < height;
+        return x + support.minDx >= 0 && x + support.maxDx < width && y + support.minDy >= 0 &&
+               y + support.maxDy < height;
     }
 };
 

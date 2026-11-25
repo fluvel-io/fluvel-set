@@ -29,12 +29,12 @@ struct Point2D
     /**
      * @brief Construct a point from coordinates.
      *
-     * @param x_ X coordinate.
-     * @param y_ Y coordinate.
+     * @param xValue X coordinate.
+     * @param yValue Y coordinate.
      */
-    constexpr Point2D(T x_, T y_) noexcept
-        : x(x_)
-        , y(y_)
+    constexpr Point2D(T xValue, T yValue) noexcept
+        : x(xValue)
+        , y(yValue)
     {
     }
 

@@ -122,10 +122,10 @@ ContourData::ContourData(ContourData&& contour) noexcept
 void ContourData::allocateLists()
 {
     const size_t perimeter = static_cast<size_t>(2 * (phi_.width() + phi_.height()));
-    const size_t elem_alloc_size_ = 3 * perimeter;
+    const size_t elemAllocSize = 3 * perimeter;
 
-    outerBoundary_.reserve(elem_alloc_size_);
-    innerBoundary_.reserve(elem_alloc_size_);
+    outerBoundary_.reserve(elemAllocSize);
+    innerBoundary_.reserve(elemAllocSize);
 }
 
 void ContourData::defineFromEllipse()

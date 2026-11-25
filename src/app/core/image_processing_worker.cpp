@@ -347,11 +347,11 @@ void ImageProcessingWorker::initializeActiveContour()
 
     fluvel_ip::ContourData initialCD(initialPhi.view(), config_.contourConfig.connectivity);
 
-    bool is_rgb = (processedImage_.format() != QImage::Format_Grayscale8);
+    bool isRgb = (processedImage_.format() != QImage::Format_Grayscale8);
 
     processedOwner_ = imageOwnerFromQImage(processedImage_);
 
-    if (is_rgb)
+    if (isRgb)
     {
         activeContour_ = std::make_unique<fluvel_ip::ActiveContour>(
             std::move(initialCD),

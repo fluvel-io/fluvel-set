@@ -447,7 +447,7 @@ void ApplicationSettings::loadAlgo(Session session, ActiveContourConfig& algoCon
                                  fluvel_ip::to_string(ActiveContourConfig::kDefaultConnectivity))
                           .toString();
 
-    algoConfig.connectivity = fluvel_ip::connectivity_from_string(s.toStdString());
+    algoConfig.connectivity = fluvel_ip::connectivityFromString(s.toStdString());
 
     algoConfig.contourParams.Na =
         settings.value("algo/cycle1_iterations", fluvel_ip::ActiveContourParams::kDefaultNa)
@@ -481,13 +481,13 @@ void ApplicationSettings::loadAlgo(Session session, ActiveContourConfig& algoCon
     algoConfig.regionParams.lambdaIn =
         settings.value("algo/lambda_in", fluvel_ip::RegionParams::kDefaultLambdaIn).toInt();
 
-    const QString s_cs =
+    const QString sCs =
         settings
             .value("algo/color_space",
                    fluvel_ip::to_string(fluvel_ip::RegionColorParams::kDefaultColorSpace))
             .toString();
 
-    algoConfig.regionParams.colorSpace = fluvel_ip::colorSpaceFromString(s_cs.toStdString());
+    algoConfig.regionParams.colorSpace = fluvel_ip::colorSpaceFromString(sCs.toStdString());
 
     algoConfig.regionParams.weights.c1 =
         settings.value("algo/color_weight_w1", fluvel_ip::RegionColorParams::kDefaultWeights.c1)
@@ -674,7 +674,7 @@ void ApplicationSettings::loadUserPreferences()
     QSettings settings = userSettings();
 
     const QString language = settings.value("ui/language", "system").toString();
-    appLanguage_ = language_from_string(language.toStdString());
+    appLanguage_ = languageFromString(language.toStdString());
 
     snapshotPreferences_.directory =
         settings.value("preferences/snapshot/directory", defaultSnapshotPreferences().directory)

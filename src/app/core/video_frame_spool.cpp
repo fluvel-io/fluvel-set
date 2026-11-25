@@ -24,10 +24,10 @@ SegmentLayout computeSegmentLayout(quint64 maximumSize)
 {
     assert(maximumSize > 0);
 
-    constexpr quint64 MiB = 1024ull * 1024ull;
+    constexpr quint64 bytesPerMiB = 1024ull * 1024ull;
 
-    constexpr quint64 minSegmentSize = 64 * MiB;
-    constexpr quint64 maxSegmentSize = 512 * MiB;
+    constexpr quint64 minSegmentSize = 64 * bytesPerMiB;
+    constexpr quint64 maxSegmentSize = 512 * bytesPerMiB;
     constexpr int targetSegmentCount = 64;
 
     const auto segmentSize =

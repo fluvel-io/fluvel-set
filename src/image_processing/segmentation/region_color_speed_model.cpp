@@ -98,17 +98,17 @@ Color_3i RegionColorSpeedModel::rgbToColor(const Rgb_uc& rgb) const
     switch (params_.colorSpace)
     {
         case ColorSpaceOption::YUV:
-            return color::rgb_to_yuv(rgb);
+            return color::rgbToYuv(rgb);
 
         case ColorSpaceOption::Lab:
         {
-            const auto col = color::rgb_to_Lab(rgb);
+            const auto col = color::rgbToLab(rgb);
             return scaleAndRound(col.L, col.a, col.b);
         }
 
         case ColorSpaceOption::Luv:
         {
-            const auto col = color::rgb_to_Luv(rgb);
+            const auto col = color::rgbToLuv(rgb);
             return scaleAndRound(col.L, col.u, col.v);
         }
 
@@ -140,7 +140,7 @@ void RegionColorSpeedModel::computeSpeed(ContourPoint& point, const DiscreteLeve
     const int scalarSpeedIn = speedIn.scalar();
 
     point.setSpeed(
-        speed_value::get_discrete_speed(lambdaOut * scalarSpeedOut - lambdaIn * scalarSpeedIn));
+        speed_value::getDiscreteSpeed(lambdaOut * scalarSpeedOut - lambdaIn * scalarSpeedIn));
 }
 
 void RegionColorSpeedModel::onSwitch(const ContourPoint& point, SwitchDirection direction)

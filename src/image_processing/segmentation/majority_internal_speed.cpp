@@ -19,10 +19,10 @@ InternalKernel MajorityInternalSpeed::makeInternalKernelOffsets(int diskRadius, 
     InternalKernel kernel;
     kernel.offsets.reserve(static_cast<std::size_t>((2 * r + 1) * (2 * r + 1)));
 
-    kernel.support.min_dx = r;
-    kernel.support.max_dx = -r;
-    kernel.support.min_dy = r;
-    kernel.support.max_dy = -r;
+    kernel.support.minDx = r;
+    kernel.support.maxDx = -r;
+    kernel.support.minDy = r;
+    kernel.support.maxDy = -r;
 
     for (int dy = -r; dy <= r; ++dy)
     {
@@ -32,10 +32,10 @@ InternalKernel MajorityInternalSpeed::makeInternalKernelOffsets(int diskRadius, 
             {
                 kernel.offsets.push_back(dy * w + dx);
 
-                kernel.support.min_dx = std::min(kernel.support.min_dx, dx);
-                kernel.support.max_dx = std::max(kernel.support.max_dx, dx);
-                kernel.support.min_dy = std::min(kernel.support.min_dy, dy);
-                kernel.support.max_dy = std::max(kernel.support.max_dy, dy);
+                kernel.support.minDx = std::min(kernel.support.minDx, dx);
+                kernel.support.maxDx = std::max(kernel.support.maxDx, dx);
+                kernel.support.minDy = std::min(kernel.support.minDy, dy);
+                kernel.support.maxDy = std::max(kernel.support.maxDy, dy);
             }
         }
     }
@@ -61,7 +61,7 @@ void MajorityInternalSpeed::computeSpeed(ContourPoint& point, const DiscreteLeve
     int inside = 0;
     int outside = 0;
 
-    if (kernel_.fully_inside(point.x(), point.y(), phi.width(), phi.height()))
+    if (kernel_.fullyInside(point.x(), point.y(), phi.width(), phi.height()))
     {
         // fast path without all neighbors existence checks
 

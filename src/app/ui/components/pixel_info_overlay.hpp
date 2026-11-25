@@ -99,9 +99,9 @@ private:
     QString text_;
 
     /// Individual channel strings (RGB or grayscale).
-    QString text_r_;
-    QString text_g_;
-    QString text_b_;
+    QString textR_;
+    QString textG_;
+    QString textB_;
 
     /// Font used for rendering.
     QFont font_;

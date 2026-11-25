@@ -47,13 +47,13 @@ ViewConfig hausdorffViewConfig()
 }
 } // namespace
 
-int HausdorffWidget::countThis = 0;
+int HausdorffWidget::countThis_ = 0;
 
 HausdorffWidget::HausdorffWidget(QWidget* parent)
     : QWidget(parent)
 {
-    ++countThis;         // static variable to count the instances
-    idThis_ = countThis; // in order to know if *this is the first or the second widget of
+    ++countThis_;         // static variable to count the instances
+    idThis_ = countThis_; // in order to know if *this is the first or the second widget of
                          // hausdorff_window
 
     QSettings settings;
@@ -85,12 +85,12 @@ HausdorffWidget::HausdorffWidget(QWidget* parent)
     openButton_ = new AnimatedPushButton(tr("Open..."));
     openButton_->setIcon(imageIcon);
 
-    QVBoxLayout* img_layout = new QVBoxLayout;
-    img_layout->addWidget(nameLabel_);
-    img_layout->addWidget(imageViewer_);
-    img_layout->addWidget(openButton_);
-    QGroupBox* img_group = new QGroupBox(tr("Image") + " " + QString::number(idThis_));
-    img_group->setLayout(img_layout);
+    QVBoxLayout* imgLayout = new QVBoxLayout;
+    imgLayout->addWidget(nameLabel_);
+    imgLayout->addWidget(imageViewer_);
+    imgLayout->addWidget(openButton_);
+    QGroupBox* imgGroup = new QGroupBox(tr("Image") + " " + QString::number(idThis_));
+    imgGroup->setLayout(imgLayout);
 
     //////////////////////////////////////////////////////////////////////////////////
 
@@ -107,8 +107,8 @@ HausdorffWidget::HausdorffWidget(QWidget* parent)
     QFormLayout* form = new QFormLayout;
     form->addRow(tr("Color: "), colorSelector_);
 
-    QGroupBox* color_group = new QGroupBox(tr("Color") + " " + QString::number(idThis_));
-    color_group->setLayout(form);
+    QGroupBox* colorGroup = new QGroupBox(tr("Color") + " " + QString::number(idThis_));
+    colorGroup->setLayout(form);
 
     ///////////////////////////////////////
 
@@ -141,13 +141,13 @@ HausdorffWidget::HausdorffWidget(QWidget* parent)
                                  tr("Shape 2 size: %1 pts").arg(shape_.points().size()));
     }
 
-    QVBoxLayout* this_layout = new QVBoxLayout;
-    this_layout->addWidget(img_group);
-    this_layout->addWidget(color_group);
-    this_layout->addWidget(noiseGroup_);
-    this_layout->addWidget(textListLength_);
+    QVBoxLayout* thisLayout = new QVBoxLayout;
+    thisLayout->addWidget(imgGroup);
+    thisLayout->addWidget(colorGroup);
+    thisLayout->addWidget(noiseGroup_);
+    thisLayout->addWidget(textListLength_);
 
-    setLayout(this_layout);
+    setLayout(thisLayout);
 
     lastDirectoryUsed_ = settings.value("history/last_directory", QDir().homePath()).toString();
 
@@ -179,7 +179,7 @@ HausdorffWidget::HausdorffWidget(QWidget* parent)
 
 void HausdorffWidget::onColorSelected(const QColor& c)
 {
-    selectedColor_ = toRgb_uc(c);
+    selectedColor_ = toRgbUc(c);
     refresh();
 }
 
@@ -228,9 +228,9 @@ void HausdorffWidget::openImage()
     QFileInfo fi(absoluteName_);
     QString name = fi.fileName();
 
-    QString string_lists_text;
-    string_lists_text = QString::number(image_.width()) + "×" + QString::number(image_.height());
-    nameLabel_->setText(name + " - " + string_lists_text);
+    QString stringListsText;
+    stringListsText = QString::number(image_.width()) + "×" + QString::number(image_.height());
+    nameLabel_->setText(name + " - " + stringListsText);
 }
 
 void HausdorffWidget::refresh()
@@ -250,28 +250,28 @@ void HausdorffWidget::createList()
         {
             pix = noiseImage_.pixel(x, y);
 
-            if (toRgb_uc(pix) == selectedColor_)
+            if (toRgbUc(pix) == selectedColor_)
                 shape_.pushBack(x, y);
         }
     }
 
     shape_.calculateCentroid();
 
-    QString size_str = QString::number(shape_.points().size());
+    QString sizeStr = QString::number(shape_.points().size());
 
-    QString color_str;
+    QString colorStr;
     if (shape_.points().empty())
-        color_str = "<font color=red>";
+        colorStr = "<font color=red>";
     else
-        color_str = "<font color=green>";
+        colorStr = "<font color=green>";
 
     if (idThis_ == 1)
     {
-        textListLength_->setText(color_str + tr("Shape 1 size: %1 pts").arg(size_str));
+        textListLength_->setText(colorStr + tr("Shape 1 size: %1 pts").arg(sizeStr));
     }
     else if (idThis_ == 2)
     {
-        textListLength_->setText(color_str + tr("Shape 2 size: %1 pts").arg(size_str));
+        textListLength_->setText(colorStr + tr("Shape 2 size: %1 pts").arg(sizeStr));
     }
 
     emit listChanged();
@@ -292,17 +292,17 @@ void HausdorffWidget::refreshWithNoise(int noisePercent)
         return;
     }
 
-    std::bernoulli_distribution proba_distri{float(noisePercent) / 100.f};
+    std::bernoulli_distribution probaDistri{float(noisePercent) / 100.f};
 
-    QRgb rgb_color =
+    QRgb rgbColor =
         QColor(int(selectedColor_.red), int(selectedColor_.green), int(selectedColor_.blue)).rgb();
 
     for (int y = 0; y < noiseImage_.height(); ++y)
     {
         for (int x = 0; x < noiseImage_.width(); ++x)
         {
-            if (proba_distri(rng_))
-                noiseImage_.setPixel(x, y, rgb_color);
+            if (probaDistri(rng_))
+                noiseImage_.setPixel(x, y, rgbColor);
         }
     }
 

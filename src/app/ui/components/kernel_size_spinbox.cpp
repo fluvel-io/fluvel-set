@@ -21,8 +21,8 @@ QValidator::State KernelSizeSpinBox::validate(QString& text, int& pos) const
     textWithoutSuffix.chop(suffix().size());
 
     qsizetype size = textWithoutSuffix.size();
-    bool is_successed;
-    int value = textWithoutSuffix.toInt(&is_successed);
+    bool isSuccessed;
+    int value = textWithoutSuffix.toInt(&isSuccessed);
 
     QValidator::State result;
 
@@ -30,7 +30,7 @@ QValidator::State KernelSizeSpinBox::validate(QString& text, int& pos) const
     {
         result = QValidator::Intermediate;
     }
-    else if (!is_successed)
+    else if (!isSuccessed)
     {
         result = QValidator::Invalid;
     }

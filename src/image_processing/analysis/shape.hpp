@@ -34,7 +34,7 @@ public:
      *
      * @param elem_alloc_size Number of elements to reserve.
      */
-    void reserve(size_t elem_alloc_size);
+    void reserve(size_t elemAllocSize);
 
     /**
      * @brief Remove all points from the shape.

@@ -110,7 +110,7 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
     connect(outerContourColorSelector_, &ColorSelectorWidget::colorSelected, this,
             [this](const QColor& color)
             {
-                config_.contour.outerColor = toRgb_uc(color);
+                config_.contour.outerColor = toRgbUc(color);
                 emit displayConfigChanged(config_);
             });
 
@@ -124,7 +124,7 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
     connect(innerContourColorSelector_, &ColorSelectorWidget::colorSelected, this,
             [this](const QColor& color)
             {
-                config_.contour.innerColor = toRgb_uc(color);
+                config_.contour.innerColor = toRgbUc(color);
                 emit displayConfigChanged(config_);
             });
 

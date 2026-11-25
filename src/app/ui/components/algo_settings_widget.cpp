@@ -28,10 +28,10 @@ AlgoSettingsWidget::AlgoSettingsWidget(ActiveContourConfig& config, QWidget* par
     connectivityCb_->setToolTip(tr("Defines the neighborhood used for contour connectivity "
                                    "(4-connected or 8-connected)."));
 
-    QFormLayout* connect_layout = new QFormLayout;
-    connect_layout->addRow(tr("Connectivity: "), connectivityCb_);
+    QFormLayout* connectLayout = new QFormLayout;
+    connectLayout->addRow(tr("Connectivity: "), connectivityCb_);
 
-    QGroupBox* externalspeed_groupbox = new QGroupBox(tr("Cycle 1 – Data-driven evolution"));
+    QGroupBox* externalspeedGroupbox = new QGroupBox(tr("Cycle 1 – Data-driven evolution"));
 
     naSpin_ = new QSpinBox;
     naSpin_->setSingleStep(1);
@@ -39,8 +39,8 @@ AlgoSettingsWidget::AlgoSettingsWidget(ActiveContourConfig& config, QWidget* par
     naSpin_->setMaximum(999);
     naSpin_->setSuffix(tr(" iterations"));
     naSpin_->setToolTip(tr("Number of iterations of the data-driven evolution (Cycle 1)."));
-    QFormLayout* Na_layout = new QFormLayout;
-    Na_layout->addRow(tr("Na: "), naSpin_);
+    QFormLayout* naLayout = new QFormLayout;
+    naLayout->addRow(tr("Na: "), naSpin_);
 
     lambdaOutSpin_ = new QSpinBox;
     lambdaOutSpin_->setSingleStep(1);
@@ -54,16 +54,16 @@ AlgoSettingsWidget::AlgoSettingsWidget(ActiveContourConfig& config, QWidget* par
     lambdaInSpin_->setMaximum(100000);
     lambdaInSpin_->setToolTip(tr("Weight of the inside homogeneity criterion."));
 
-    QFormLayout* lambda_layout = new QFormLayout;
+    QFormLayout* lambdaLayout = new QFormLayout;
 
-    lambda_layout->addRow(tr("λout: "), lambdaOutSpin_);
-    lambda_layout->addRow(tr("λin: "), lambdaInSpin_);
+    lambdaLayout->addRow(tr("λout: "), lambdaOutSpin_);
+    lambdaLayout->addRow(tr("λin: "), lambdaInSpin_);
 
-    QVBoxLayout* chanvese_layout = new QVBoxLayout;
-    chanvese_layout->addLayout(lambda_layout);
+    QVBoxLayout* chanveseLayout = new QVBoxLayout;
+    chanveseLayout->addLayout(lambdaLayout);
 
-    QHBoxLayout* speed_layout = new QHBoxLayout;
-    speed_layout->addLayout(chanvese_layout);
+    QHBoxLayout* speedLayout = new QHBoxLayout;
+    speedLayout->addLayout(chanveseLayout);
 
     colorWeightsGroupbox_ = new QGroupBox(tr("Color space"));
     colorWeightsGroupbox_->setFlat(true);
@@ -94,23 +94,23 @@ AlgoSettingsWidget::AlgoSettingsWidget(ActiveContourConfig& config, QWidget* par
     gammaSpin_->setMinimum(1);
     gammaSpin_->setMaximum(100000);
 
-    QFormLayout* color_weights_layout = new QFormLayout;
-    color_weights_layout->addRow(tr("1st component weight: "), alphaSpin_);
-    color_weights_layout->addRow(tr("2nd component weight: "), betaSpin_);
-    color_weights_layout->addRow(tr("3rd component weight: "), gammaSpin_);
+    QFormLayout* colorWeightsLayout = new QFormLayout;
+    colorWeightsLayout->addRow(tr("1st component weight: "), alphaSpin_);
+    colorWeightsLayout->addRow(tr("2nd component weight: "), betaSpin_);
+    colorWeightsLayout->addRow(tr("3rd component weight: "), gammaSpin_);
 
-    QVBoxLayout* vcolor_layout = new QVBoxLayout;
-    vcolor_layout->addWidget(colorSpaceCb_);
-    vcolor_layout->addLayout(color_weights_layout);
+    QVBoxLayout* vcolorLayout = new QVBoxLayout;
+    vcolorLayout->addWidget(colorSpaceCb_);
+    vcolorLayout->addLayout(colorWeightsLayout);
 
-    colorWeightsGroupbox_->setLayout(vcolor_layout);
+    colorWeightsGroupbox_->setLayout(vcolorLayout);
 
-    QVBoxLayout* externalspeed_layout = new QVBoxLayout;
+    QVBoxLayout* externalspeedLayout = new QVBoxLayout;
 
-    externalspeed_layout->addLayout(Na_layout);
-    externalspeed_layout->addLayout(speed_layout);
-    externalspeed_layout->addWidget(colorWeightsGroupbox_);
-    externalspeed_groupbox->setLayout(externalspeed_layout);
+    externalspeedLayout->addLayout(naLayout);
+    externalspeedLayout->addLayout(speedLayout);
+    externalspeedLayout->addWidget(colorWeightsGroupbox_);
+    externalspeedGroupbox->setLayout(externalspeedLayout);
 
     ////////////////////////////////////////////
 
@@ -132,24 +132,24 @@ AlgoSettingsWidget::AlgoSettingsWidget(ActiveContourConfig& config, QWidget* par
     diskRadiusSpin_->setToolTip(tr("Radius of the disk-shaped neighborhood used for the "
                                      "majority vote during internal smoothing."));
 
-    QFormLayout* internalspeed_layout = new QFormLayout;
-    internalspeed_layout->addRow(tr("Ns: "), nsSpin_);
-    internalspeed_layout->addRow(tr("Radius: "), diskRadiusSpin_);
+    QFormLayout* internalspeedLayout = new QFormLayout;
+    internalspeedLayout->addRow(tr("Ns: "), nsSpin_);
+    internalspeedLayout->addRow(tr("Radius: "), diskRadiusSpin_);
 
-    internalspeedGroupbox_->setLayout(internalspeed_layout);
+    internalspeedGroupbox_->setLayout(internalspeedLayout);
 
     ////////////////////////////////////////////
 
-    QVBoxLayout* algorithm_layout = new QVBoxLayout;
-    algorithm_layout->setContentsMargins(0, 0, 0, 0);
-    algorithm_layout->addLayout(connect_layout);
-    algorithm_layout->addSpacing(8);
-    algorithm_layout->addWidget(externalspeed_groupbox);
-    algorithm_layout->addSpacing(8);
-    algorithm_layout->addWidget(internalspeedGroupbox_);
-    algorithm_layout->addStretch(1);
+    QVBoxLayout* algorithmLayout = new QVBoxLayout;
+    algorithmLayout->setContentsMargins(0, 0, 0, 0);
+    algorithmLayout->addLayout(connectLayout);
+    algorithmLayout->addSpacing(8);
+    algorithmLayout->addWidget(externalspeedGroupbox);
+    algorithmLayout->addSpacing(8);
+    algorithmLayout->addWidget(internalspeedGroupbox_);
+    algorithmLayout->addStretch(1);
 
-    setLayout(algorithm_layout);
+    setLayout(algorithmLayout);
 
     // to initialize ui state in function of the configuration
     reject();

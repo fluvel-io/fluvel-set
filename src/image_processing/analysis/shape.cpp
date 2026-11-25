@@ -10,9 +10,9 @@
 namespace fluvel_ip
 {
 
-void Shape::reserve(size_t elem_alloc_size)
+void Shape::reserve(size_t elemAllocSize)
 {
-    points_.reserve(elem_alloc_size);
+    points_.reserve(elemAllocSize);
 }
 
 void Shape::clear()

@@ -81,11 +81,11 @@ void MeanSliding::apply(const ImageView& input, int radius)
                 const int idx = x * channels + c;
                 dst[idx] = static_cast<uint8_t>((sum + kernelSize / 2) / kernelSize);
 
-                const int x_out = std::clamp(x - radius, 0, width_ - 1);
-                const int x_in = std::clamp(x + radius + 1, 0, width_ - 1);
+                const int xOut = std::clamp(x - radius, 0, width_ - 1);
+                const int xIn = std::clamp(x + radius + 1, 0, width_ - 1);
 
-                sum -= src[x_out * channels + c];
-                sum += src[x_in * channels + c];
+                sum -= src[xOut * channels + c];
+                sum += src[xIn * channels + c];
             }
 
             // -------- CENTER (FAST PATH) --------
@@ -94,11 +94,11 @@ void MeanSliding::apply(const ImageView& input, int radius)
                 const int idx = x * channels + c;
                 dst[idx] = static_cast<uint8_t>((sum + kernelSize / 2) / kernelSize);
 
-                const int x_out = x - radius;
-                const int x_in = x + radius + 1;
+                const int xOut = x - radius;
+                const int xIn = x + radius + 1;
 
-                sum -= src[x_out * channels + c];
-                sum += src[x_in * channels + c];
+                sum -= src[xOut * channels + c];
+                sum += src[xIn * channels + c];
             }
 
             // -------- RIGHT BORDER --------
@@ -107,11 +107,11 @@ void MeanSliding::apply(const ImageView& input, int radius)
                 const int idx = x * channels + c;
                 dst[idx] = static_cast<uint8_t>((sum + kernelSize / 2) / kernelSize);
 
-                const int x_out = std::clamp(x - radius, 0, width_ - 1);
-                const int x_in = std::clamp(x + radius + 1, 0, width_ - 1);
+                const int xOut = std::clamp(x - radius, 0, width_ - 1);
+                const int xIn = std::clamp(x + radius + 1, 0, width_ - 1);
 
-                sum -= src[x_out * channels + c];
-                sum += src[x_in * channels + c];
+                sum -= src[xOut * channels + c];
+                sum += src[xIn * channels + c];
             }
         }
     }
@@ -146,14 +146,14 @@ void MeanSliding::apply(const ImageView& input, int radius)
                 dst[idx] = static_cast<uint8_t>((sums[idx] + kernelSize / 2) / kernelSize);
             }
 
-        const uint8_t* row_out = buffer1_.rowPtr(std::clamp(y - radius, 0, height_ - 1));
-        const uint8_t* row_in = buffer1_.rowPtr(std::clamp(y + radius + 1, 0, height_ - 1));
+        const uint8_t* rowOut = buffer1_.rowPtr(std::clamp(y - radius, 0, height_ - 1));
+        const uint8_t* rowIn = buffer1_.rowPtr(std::clamp(y + radius + 1, 0, height_ - 1));
 
         for (int x = 0; x < width_; ++x)
             for (int c = 0; c < activeChannels; ++c)
             {
                 const int idx = x * channels + c;
-                sums[idx] += row_in[idx] - row_out[idx];
+                sums[idx] += rowIn[idx] - rowOut[idx];
             }
     }
 

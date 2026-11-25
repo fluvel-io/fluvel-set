@@ -188,7 +188,7 @@ private:
     std::unique_ptr<HausdorffWindow> hausdorffWindow_;
     std::unique_ptr<HistogramWindow> histogramWindow_;
     SettingsDialog* settingsDialog_{nullptr};
-    AboutDialog* AboutDialog_{nullptr};
+    AboutDialog* aboutDialog_{nullptr};
 
     QMenu* fileMenu_{nullptr};
     QMenu* analysisMenu_{nullptr};

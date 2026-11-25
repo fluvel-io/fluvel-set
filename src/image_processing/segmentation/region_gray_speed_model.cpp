@@ -94,7 +94,7 @@ void RegionGraySpeedModel::computeSpeed(ContourPoint& point, const DiscreteLevel
     const int speed =
         params_.lambdaOut * (math::square(diffOut)) - params_.lambdaIn * (math::square(diffIn));
 
-    point.setSpeed(speed_value::get_discrete_speed(speed));
+    point.setSpeed(speed_value::getDiscreteSpeed(speed));
 }
 
 void RegionGraySpeedModel::onSwitch(const ContourPoint& point, SwitchDirection direction)

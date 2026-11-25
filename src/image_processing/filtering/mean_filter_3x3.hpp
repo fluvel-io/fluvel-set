@@ -109,7 +109,7 @@ private:
      * @param width Image width in pixels.
      * @param channels Number of channels per pixel.
      */
-    static void verticalPass(const uint8_t* row_m1, const uint8_t* row_0, const uint8_t* row_p1,
+    static void verticalPass(const uint8_t* rowM1, const uint8_t* row0, const uint8_t* rowP1,
                              uint8_t* dst, int width, int channels);
 
     ImageOwner buffer1_; ///< Intermediate buffer (horizontal pass).
