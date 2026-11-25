@@ -29,19 +29,19 @@ R : 888  G : 888  B : 888</translation>
     <message>
         <location filename="../src/app/ui/components/pixel_info_overlay.cpp" line="21"/>
         <source>(0000, 0000)
-Gray: 888</source>
+Intensity: 888</source>
         <translation>(0000, 0000)
 Intensité : 888</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/pixel_info_overlay.cpp" line="65"/>
+        <location filename="../src/app/ui/components/pixel_info_overlay.cpp" line="66"/>
         <source>(%1, %2)
-Gray: %3</source>
+Intensity: %3</source>
         <translation>(%1, %2)
 Intensité : %3</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/pixel_info_overlay.cpp" line="71"/>
+        <location filename="../src/app/ui/components/pixel_info_overlay.cpp" line="72"/>
         <source>(%1, %2)
 R: %3  G: %4  B: %5</source>
         <translation>(%1, %2)
