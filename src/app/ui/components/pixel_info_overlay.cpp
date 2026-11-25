@@ -18,7 +18,7 @@ QString maxText()
 
 QString maxGrayText()
 {
-    return QObject::tr("(0000, 0000)\nGray: 888");
+    return QObject::tr("(0000, 0000)\nIntensity: 888");
 }
 
 PixelInfoOverlay::PixelInfoOverlay(QGraphicsScene* scene)
@@ -62,7 +62,8 @@ void PixelInfoOverlay::updateInfo(const QPoint& pixel, const QRgb& color, bool i
     {
         calcBounding(maxGrayText());
 
-        text_ = QObject::tr("(%1, %2)\nGray: %3").arg(pixel.x()).arg(pixel.y()).arg(qRed(color));
+        text_ =
+            QObject::tr("(%1, %2)\nIntensity: %3").arg(pixel.x()).arg(pixel.y()).arg(qRed(color));
     }
     else
     {
