@@ -87,7 +87,7 @@ private slots:
      *
      * @param state Current recorder state.
      */
-    void onRecordingStateChanged(RecorderState state);
+    void onRecordingStateChanged(fluvel::RecorderState state);
 
     /**
      * @brief Saves and applies the automatic recording option.

@@ -151,7 +151,7 @@ signals:
     /**
      * @brief Reports updated media metadata.
      */
-    void mediaInfoChanged(const MediaInfo& info);
+    void mediaInfoChanged(const fluvel::MediaInfo& info);
 
 private:
     void updateMediaInfo();

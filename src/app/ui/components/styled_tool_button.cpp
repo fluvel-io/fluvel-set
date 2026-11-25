@@ -192,15 +192,15 @@ QToolButton:checked:hover
 }
 
 )")
-                      .arg(qcolor_utils::rgba(ui::kControlBackground))
-                      .arg(qcolor_utils::rgba(ui::kControlBorder))
+                      .arg(qcolor_utils::rgba(ui::kControlBackground),
+                           qcolor_utils::rgba(ui::kControlBorder))
                       .arg(ui::kControlRadius)
-                      .arg(qcolor_utils::rgba(ui::kControlHover))
-                      .arg(qcolor_utils::rgba(ui::kControlPressed))
-                      .arg(qcolor_utils::rgba(ui::kControlDisabled))
-                      .arg(qcolor_utils::rgba(ui::kControlDisabledBorder))
-                      .arg(qcolor_utils::rgba(ui::kAccentColor))
-                      .arg(qcolor_utils::rgba(ui::kAccentHoverColor)));
+                      .arg(qcolor_utils::rgba(ui::kControlHover),
+                           qcolor_utils::rgba(ui::kControlPressed),
+                           qcolor_utils::rgba(ui::kControlDisabled),
+                           qcolor_utils::rgba(ui::kControlDisabledBorder),
+                           qcolor_utils::rgba(ui::kAccentColor),
+                           qcolor_utils::rgba(ui::kAccentHoverColor)));
 }
 
 } // namespace fluvel

@@ -112,14 +112,14 @@ signals:
      *
      * @param state New recorder state.
      */
-    void stateChanged(RecorderState state);
+    void stateChanged(fluvel::RecorderState state);
 
     /**
      * @brief Emitted when recorder statistics are updated.
      *
      * @param stats Current recorder statistics.
      */
-    void statsChanged(const RecorderStats& stats);
+    void statsChanged(const fluvel::RecorderStats& stats);
 
     /**
      * @brief Emitted when the recorded files start being converted to

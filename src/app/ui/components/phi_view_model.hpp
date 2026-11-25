@@ -140,7 +140,7 @@ signals:
      *
      * @param layers Layers of points, in image coordinates.
      */
-    void layersChanged(const QVector<PointLayer>& layers);
+    void layersChanged(const QVector<fluvel::PointLayer>& layers);
 
     /**
      * @brief Emitted when the overlay shape changes.

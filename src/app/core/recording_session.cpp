@@ -10,6 +10,7 @@
 #include <QFileInfo>
 
 #include <cassert>
+#include <utility>
 
 namespace fluvel
 {
@@ -174,7 +175,7 @@ void RecordingSession::convertFiles()
     }
 
     // A failed file keeps its fragmented original; the others are still converted.
-    for (const QString& file : files)
+    for (const QString& file : std::as_const(files))
     {
         if (!VideoExporter::convertToStandardMp4(file))
             conversionFailed_ = true;
@@ -213,8 +214,7 @@ QString RecordingSession::segmentFilename(int index) const
     const QString ext = exporter_utils::expectedExtension(settings_.container);
 
     return QString("%1/%2_%3.%4")
-        .arg(segmentDirectory_)
-        .arg(base)
+        .arg(segmentDirectory_, base)
         .arg(index, 6, 10, QLatin1Char('0'))
         .arg(ext);
 }

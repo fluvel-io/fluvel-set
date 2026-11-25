@@ -154,7 +154,9 @@ QWidget* PreferencesDialog::createSnapshotSection()
     directoryLayout->addWidget(snapshotDirectoryEdit_, 1);
     directoryLayout->addWidget(browseButton);
 
-    for (const QByteArray& format : file_utils::writableImageFormats())
+    const QList<QByteArray> formats = file_utils::writableImageFormats();
+
+    for (const QByteArray& format : formats)
     {
         snapshotFormatCombo_->addItem(QString::fromLatin1(format).toUpper(), format);
     }
@@ -198,7 +200,9 @@ QWidget* PreferencesDialog::createVideoRecordingSection()
 
     VideoExporter exporter;
 
-    for (VideoCodec codec : exporter.availableCodecs())
+    const QList<VideoCodec> codecs = exporter.availableCodecs();
+
+    for (VideoCodec codec : codecs)
     {
         videoCodecCombo_->addItem(exporter_utils::toString(codec), int(codec));
     }

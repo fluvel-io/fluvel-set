@@ -202,12 +202,12 @@ signals:
     /**
      * @brief Emitted whenever the recorder state changes.
      */
-    void recordingStateChanged(RecorderState state);
+    void recordingStateChanged(fluvel::RecorderState state);
 
     /**
      * @brief Emitted periodically with recorder statistics.
      */
-    void recordingStatsChanged(const RecorderStats& stats);
+    void recordingStatsChanged(const fluvel::RecorderStats& stats);
 
     /**
      * @brief Emitted when recording starts.

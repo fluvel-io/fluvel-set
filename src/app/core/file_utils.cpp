@@ -65,7 +65,9 @@ QString buildWritableImageFilter()
 {
     QStringList filters;
 
-    for (const QByteArray& format : writableImageFormats())
+    const QList<QByteArray> formats = writableImageFormats();
+
+    for (const QByteArray& format : formats)
     {
         const QString ext = QString::fromLatin1(format).toLower();
 

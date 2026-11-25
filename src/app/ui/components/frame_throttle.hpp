@@ -50,7 +50,7 @@ signals:
     /**
      * @brief Emitted when a frame must be displayed.
      */
-    void frameReady(const DisplayFrame& frame);
+    void frameReady(const fluvel::DisplayFrame& frame);
 
 private:
     void emitPending();

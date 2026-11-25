@@ -325,7 +325,7 @@ signals:
      *
      * @param state New recorder state.
      */
-    void recordingStateChanged(RecorderState state);
+    void recordingStateChanged(fluvel::RecorderState state);
 
     /**
      * @brief Emitted when video recording starts.
@@ -354,7 +354,7 @@ signals:
      *
      * @param stats Current video recorder statistics.
      */
-    void recordingStatsChanged(const RecorderStats& stats);
+    void recordingStatsChanged(const fluvel::RecorderStats& stats);
 
     /**
      * @brief Emitted when a non-fatal video recording warning occurs.
