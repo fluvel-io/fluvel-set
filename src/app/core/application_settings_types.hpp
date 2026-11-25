@@ -45,7 +45,12 @@ enum class Language
     Italian,            ///< Italian language
     Russian,            ///< Russian language
     Japanese,           ///< Japanese language
-    Korean              ///< Korean language
+    Korean,             ///< Korean language
+    Polish,             ///< Polish language
+    Dutch,              ///< Dutch language
+    Turkish,            ///< Turkish language
+    Indonesian,         ///< Indonesian language
+    Vietnamese          ///< Vietnamese language
 };
 
 /**
@@ -88,7 +93,7 @@ struct VideoRecordingPreferences
  *
  * @param lang Language value.
  * @return Corresponding string ("system", "en", "fr", "es", "de", "zh_CN", "pt_BR", "pt_PT",
- *         "it", "ru", "ja", "ko").
+ *         "it", "ru", "ja", "ko", "pl", "nl", "tr", "id", "vi").
  */
 inline constexpr const char* to_string(Language lang)
 {
@@ -118,6 +123,16 @@ inline constexpr const char* to_string(Language lang)
             return "ja";
         case Language::Korean:
             return "ko";
+        case Language::Polish:
+            return "pl";
+        case Language::Dutch:
+            return "nl";
+        case Language::Turkish:
+            return "tr";
+        case Language::Indonesian:
+            return "id";
+        case Language::Vietnamese:
+            return "vi";
     }
     return "system";
 }
@@ -152,6 +167,16 @@ inline Language languageFromString(std::string_view s)
         return Language::Japanese;
     if (s == "ko")
         return Language::Korean;
+    if (s == "pl")
+        return Language::Polish;
+    if (s == "nl")
+        return Language::Dutch;
+    if (s == "tr")
+        return Language::Turkish;
+    if (s == "id")
+        return Language::Indonesian;
+    if (s == "vi")
+        return Language::Vietnamese;
     return Language::System;
 }
 

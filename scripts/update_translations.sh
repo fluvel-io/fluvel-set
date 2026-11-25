@@ -55,6 +55,11 @@ TS_FILES=(
     "fluvel_ru.ts"
     "fluvel_ja.ts"
     "fluvel_ko.ts"
+    "fluvel_pl.ts"
+    "fluvel_nl.ts"
+    "fluvel_tr.ts"
+    "fluvel_id.ts"
+    "fluvel_vi.ts"
 )
 
 # =========================

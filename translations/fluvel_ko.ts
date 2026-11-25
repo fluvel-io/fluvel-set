@@ -1304,167 +1304,167 @@ or choose File → Open</source>
         <translation>프랑스어</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="144"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="150"/>
         <source>The language change will take effect after restarting the application.</source>
         <translation>언어 변경은 애플리케이션을 다시 시작한 후에 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="156"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="162"/>
         <source>Snapshots</source>
         <translation>스냅샷</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="162"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="206"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="168"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="212"/>
         <source>Append timestamp</source>
         <translation>타임스탬프 추가</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="224"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="230"/>
         <source>Convert to standard MP4 when recording ends</source>
         <translation>녹화가 끝나면 표준 MP4로 변환</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="226"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="232"/>
         <source>MP4 files are recorded in a fragmented form so they stay playable after a crash. This option rewrites them as standard MP4 files when the recording ends, which improves compatibility with some players and editors. The conversion does not re-encode the video, but it rewrites the whole file: it takes extra time and extra disk writes, especially for long recordings.</source>
         <translation>MP4 파일은 충돌 후에도 재생할 수 있도록 조각난 형태로 녹화됩니다. 이 옵션은 녹화가 끝나면 이를 표준 MP4 파일로 다시 쓰며, 일부 플레이어 및 편집기와의 호환성이 좋아집니다. 변환 과정에서 비디오를 다시 인코딩하지는 않지만 파일 전체를 다시 쓰므로, 특히 긴 녹화의 경우 추가 시간과 더 많은 디스크 쓰기가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="165"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="209"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="171"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="215"/>
         <source>Browse...</source>
         <translation>찾아보기...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="178"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="248"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="184"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="254"/>
         <source>Directory:</source>
         <translation>디렉터리: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="179"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="249"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="185"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="255"/>
         <source>Base name:</source>
         <translation>기본 이름: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="180"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="186"/>
         <source>Format:</source>
         <translation>형식: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="182"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="252"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="188"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="258"/>
         <source>Preview:</source>
         <translation>미리 보기: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="200"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="206"/>
         <source>Video recording</source>
         <translation>비디오 녹화</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="233"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="239"/>
         <source>Single file</source>
         <translation>단일 파일</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="234"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="240"/>
         <source>Circular</source>
         <translation>순환</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="236"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="242"/>
         <source>Retention time:</source>
         <translation>보관 시간: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="239"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="245"/>
         <source> min</source>
         <translation> 분</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="241"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="247"/>
         <source>Segments:</source>
         <translation>세그먼트: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="245"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="251"/>
         <source>Segment duration:</source>
         <translation>세그먼트 길이: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="250"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="256"/>
         <source>Codec:</source>
         <translation>코덱: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="253"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="259"/>
         <source>Recording mode:</source>
         <translation>녹화 모드: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="290"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="296"/>
         <source>Recording buffer</source>
         <translation>녹화 버퍼</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="296"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="302"/>
         <source> MiB</source>
         <translation> MiB</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="300"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="306"/>
         <source> GiB</source>
         <translation> GiB</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="303"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="309"/>
         <source>Stop recording</source>
         <translation>녹화 중지</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="306"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="312"/>
         <source>Discard oldest frames</source>
         <translation>가장 오래된 프레임 버리기</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="309"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="315"/>
         <source>Maximum RAM usage:</source>
         <translation>최대 RAM 사용량: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="310"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="316"/>
         <source>Maximum temporary storage usage:</source>
         <translation>최대 임시 저장소 사용량: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="311"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="317"/>
         <source>When buffer is full:</source>
         <translation>버퍼가 가득 찼을 때: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="419"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="425"/>
         <source>Select snapshot directory</source>
         <translation>스냅샷 디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="428"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="434"/>
         <source>Select video recording directory</source>
         <translation>비디오 녹화 디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="543"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="549"/>
         <source>%1 min</source>
         <translation>%1분</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="546"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="552"/>
         <source> %1 s</source>
         <translation> %1초</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="550"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="556"/>
         <source>%1 s</source>
         <translation>%1초</translation>
     </message>
