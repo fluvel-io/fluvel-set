@@ -5,15 +5,10 @@
   <id>org.fluvel.FluvelSet</id>
 
   <name>Fluvel Set</name>
-  <name xml:lang="fr">Fluvel Set</name>
 
-  <summary>
-    Real-time computer vision and image analysis for research
-  </summary>
+  <summary>Level-set image segmentation</summary>
 
-  <summary xml:lang="fr">
-    Vision par ordinateur et analyse d’image en temps réel pour la recherche
-  </summary>
+  <summary xml:lang="fr">Segmentation d’image par level-set</summary>
 
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>CECILL-2.1-only</project_license>
@@ -69,6 +64,14 @@
     https://github.com/fluvel-io/fluvel-set
   </url>
 
+  <url type="bugtracker">
+    https://github.com/fluvel-io/fluvel-set/issues
+  </url>
+
+  <url type="donation">
+    https://www.paypal.me/fabienbessy
+  </url>
+
   <releases>
     <release version="@PROJECT_VERSION@"
              date="@FLUVEL_RELEASE_DATE@"/>
@@ -80,18 +83,24 @@
       <image>
         https://fluvel-io.github.io/fluvel-set/assets/images/segmentation-start.webp
       </image>
+      <caption>Starting a level-set segmentation from an initial contour</caption>
+      <caption xml:lang="fr">Début d’une segmentation par level-set à partir d’un contour initial</caption>
     </screenshot>
 
     <screenshot>
       <image>
         https://fluvel-io.github.io/fluvel-set/assets/images/segmentation-result.webp
       </image>
+      <caption>Segmentation result with the final contour</caption>
+      <caption xml:lang="fr">Résultat de la segmentation avec le contour final</caption>
     </screenshot>
 
     <screenshot>
       <image>
         https://fluvel-io.github.io/fluvel-set/assets/images/settings.webp
       </image>
+      <caption>Session settings of the active contour algorithm</caption>
+      <caption xml:lang="fr">Réglages de session de l’algorithme de contour actif</caption>
     </screenshot>
 
   </screenshots>
