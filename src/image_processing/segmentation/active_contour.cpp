@@ -26,7 +26,6 @@ ActiveContour::ActiveContour(ContourData initialContour, std::unique_ptr<ISpeedM
     , switchInMapping_(BoundarySwitchMapping::makeSwitchIn(cd_))
     , switchOutMapping_(BoundarySwitchMapping::makeSwitchOut(cd_))
     , currentMapping_(&switchInMapping_)
-    , state_(PhaseState::Cycle1)
     , ed_(cd_)
 {
     assert(params_.diskRadius >= 1);

@@ -371,9 +371,9 @@ private:
 
     ContourPoints pendingBoundaryPoints_; //!< Temporary storage for boundary updates.
 
-    int stepsPerCycle_; //!< Number of steps per full cycle.
+    int stepsPerCycle_{0}; //!< Number of steps per full cycle.
 
-    PhaseState state_; //!< Current phase state.
+    PhaseState state_{PhaseState::Cycle1}; //!< Current phase state.
 
     EvolutionData ed_; //!< Evolution tracking data.
 };

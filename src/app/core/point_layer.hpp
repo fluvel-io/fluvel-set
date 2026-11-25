@@ -19,7 +19,7 @@ namespace fluvel
 struct PointLayer
 {
     /// Points, in image coordinates.
-    QVector<QPointF> points;
+    QVector<QPointF> points{};
 
     /// Drawing color.
     QColor color{Qt::red};

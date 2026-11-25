@@ -133,7 +133,7 @@ private:
     VideoComputeConfig config_{};
 
     /// Current display mode.
-    BackgroundImage background_;
+    BackgroundImage background_{BackgroundImage::Preprocessed};
 
     /// Mutex protecting frame access.
     QMutex frameMutex_;

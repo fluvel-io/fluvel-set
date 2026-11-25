@@ -31,7 +31,7 @@ namespace fluvel::file_utils
  */
 struct MediaFormatInfo
 {
-    QMediaFormat::FileFormat format;
+    QMediaFormat::FileFormat format{QMediaFormat::UnspecifiedFormat};
     QStringList extensions;
 };
 

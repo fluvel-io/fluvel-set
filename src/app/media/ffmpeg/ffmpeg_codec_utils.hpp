@@ -29,13 +29,13 @@ namespace fluvel
 struct CodecInfo
 {
     /// Fluvel video codec.
-    VideoCodec codec;
+    VideoCodec codec{};
 
     /// Indicates whether the codec uses lossless compression.
-    bool lossless;
+    bool lossless{false};
 
     /// Selected FFmpeg encoder.
-    const AVCodec* encoder;
+    const AVCodec* encoder{nullptr};
 };
 
 class FFmpegCodecUtils

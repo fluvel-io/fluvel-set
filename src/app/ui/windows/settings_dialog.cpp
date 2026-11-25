@@ -877,7 +877,7 @@ UiShapeInfo SettingsDialog::getUiShape() const
 
 UiShapeInfo SettingsDialog::getUiShapeAt(QPoint position) const
 {
-    UiShapeInfo uiShape;
+    UiShapeInfo uiShape{};
 
     if (rectangleRadio_->isChecked())
         uiShape.shape = ShapeType::Rectangle;

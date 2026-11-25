@@ -37,16 +37,16 @@ namespace
 struct CodecEntry
 {
     /// Fluvel video codec.
-    VideoCodec codec;
+    VideoCodec codec{};
 
     /// FFmpeg codec identifier.
-    AVCodecID codecId;
+    AVCodecID codecId{AV_CODEC_ID_NONE};
 
     /// Preferred FFmpeg encoders ordered by priority.
-    std::span<const char* const> preferredEncoders;
+    std::span<const char* const> preferredEncoders{};
 
     /// Indicates whether the codec uses lossless compression.
-    bool lossless;
+    bool lossless{false};
 };
 
 // Frame size used to probe encoders. Hardware encoders often enforce a

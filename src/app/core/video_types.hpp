@@ -284,7 +284,7 @@ struct CameraErrorInfo
     /**
      * @brief Camera error reported by Qt Multimedia.
      */
-    QCamera::Error error;
+    QCamera::Error error{QCamera::NoError};
 
     /**
      * @brief Human-readable error description.
@@ -317,7 +317,7 @@ struct MediaPlayerErrorInfo
     /**
      * @brief Media player error reported by Qt Multimedia.
      */
-    QMediaPlayer::Error error;
+    QMediaPlayer::Error error{QMediaPlayer::NoError};
 
     /**
      * @brief Human-readable error description.

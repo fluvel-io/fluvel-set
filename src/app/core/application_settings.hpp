@@ -269,7 +269,7 @@ private:
     VideoSessionSettings videoSettings_{};
 
     /// Current application language.
-    Language appLanguage_;
+    Language appLanguage_{Language::System};
 
     /// Current persistent snapshot preferences.
     SnapshotPreferences snapshotPreferences_{};

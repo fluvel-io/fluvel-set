@@ -19,7 +19,7 @@ namespace fluvel
  */
 struct ShapeInfo
 {
-    ShapeType type;    ///< Shape type (e.g. rectangle, ellipse)
+    ShapeType type{};  ///< Shape type (e.g. rectangle, ellipse)
     QRect boundingBox; ///< Bounding box in image coordinates
 };
 
