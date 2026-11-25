@@ -379,6 +379,11 @@ qt_add_translations(${APP_TARGET_NAME}
              ${FLUVEL_TRANSLATIONS_DIR}/fluvel_de.ts
              ${FLUVEL_TRANSLATIONS_DIR}/fluvel_zh_CN.ts
              ${FLUVEL_TRANSLATIONS_DIR}/fluvel_pt_BR.ts
+             ${FLUVEL_TRANSLATIONS_DIR}/fluvel_pt_PT.ts
+             ${FLUVEL_TRANSLATIONS_DIR}/fluvel_it.ts
+             ${FLUVEL_TRANSLATIONS_DIR}/fluvel_ru.ts
+             ${FLUVEL_TRANSLATIONS_DIR}/fluvel_ja.ts
+             ${FLUVEL_TRANSLATIONS_DIR}/fluvel_ko.ts
 )
 
 set(APP_RESOURCES

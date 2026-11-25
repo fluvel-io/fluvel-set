@@ -1304,167 +1304,167 @@ oder Datei → Öffnen wählen</translation>
         <translation>Französisch</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="138"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="144"/>
         <source>The language change will take effect after restarting the application.</source>
         <translation>Die Sprachänderung wird beim Neustart der Anwendung wirksam.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="150"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="156"/>
         <source>Snapshots</source>
         <translation>Aufnahmen</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="156"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="200"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="162"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="206"/>
         <source>Append timestamp</source>
         <translation>Zeitstempel hinzufügen</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="218"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="224"/>
         <source>Convert to standard MP4 when recording ends</source>
         <translation>Nach der Aufzeichnung in Standard-MP4 konvertieren</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="220"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="226"/>
         <source>MP4 files are recorded in a fragmented form so they stay playable after a crash. This option rewrites them as standard MP4 files when the recording ends, which improves compatibility with some players and editors. The conversion does not re-encode the video, but it rewrites the whole file: it takes extra time and extra disk writes, especially for long recordings.</source>
         <translation>MP4-Dateien werden fragmentiert aufgezeichnet, damit sie auch nach einem Absturz abspielbar bleiben. Diese Option schreibt sie nach der Aufzeichnung als Standard-MP4-Dateien neu, was die Kompatibilität mit manchen Playern und Editoren verbessert. Die Konvertierung kodiert das Video nicht neu, schreibt aber die gesamte Datei neu: Das erfordert zusätzliche Zeit und mehr Schreibzugriffe auf den Datenträger, besonders bei langen Aufzeichnungen.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="159"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="203"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="165"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="209"/>
         <source>Browse...</source>
         <translation>Durchsuchen...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="172"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="242"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="178"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="248"/>
         <source>Directory:</source>
         <translation>Verzeichnis: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="173"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="243"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="179"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="249"/>
         <source>Base name:</source>
         <translation>Basisname: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="174"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="180"/>
         <source>Format:</source>
         <translation>Format: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="176"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="246"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="182"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="252"/>
         <source>Preview:</source>
         <translation>Vorschau: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="194"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="200"/>
         <source>Video recording</source>
         <translation>Videoaufzeichnung</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="227"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="233"/>
         <source>Single file</source>
         <translation>Einzelne Datei</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="228"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="234"/>
         <source>Circular</source>
         <translation>Zirkulär</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="230"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="236"/>
         <source>Retention time:</source>
         <translation>Aufbewahrungsdauer: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="233"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="239"/>
         <source> min</source>
         <translation> Min.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="235"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="241"/>
         <source>Segments:</source>
         <translation>Segmente: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="239"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="245"/>
         <source>Segment duration:</source>
         <translation>Segmentdauer: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="244"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="250"/>
         <source>Codec:</source>
         <translation>Codec: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="247"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="253"/>
         <source>Recording mode:</source>
         <translation>Aufzeichnungsmodus: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="284"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="290"/>
         <source>Recording buffer</source>
         <translation>Aufzeichnungspuffer</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="290"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="296"/>
         <source> MiB</source>
         <translation> MiB</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="294"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="300"/>
         <source> GiB</source>
         <translation> GiB</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="297"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="303"/>
         <source>Stop recording</source>
         <translation>Aufzeichnung beenden</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="300"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="306"/>
         <source>Discard oldest frames</source>
         <translation>Älteste Bilder verwerfen</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="303"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="309"/>
         <source>Maximum RAM usage:</source>
         <translation>Maximale RAM-Nutzung: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="304"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="310"/>
         <source>Maximum temporary storage usage:</source>
         <translation>Maximale Nutzung des temporären Speichers: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="305"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="311"/>
         <source>When buffer is full:</source>
         <translation>Wenn der Puffer voll ist: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="413"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="419"/>
         <source>Select snapshot directory</source>
         <translation>Verzeichnis für Aufnahmen auswählen</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="422"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="428"/>
         <source>Select video recording directory</source>
         <translation>Verzeichnis für Videoaufzeichnungen auswählen</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="537"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="543"/>
         <source>%1 min</source>
         <translation>%1 Min.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="540"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="546"/>
         <source> %1 s</source>
         <translation> %1 s</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="544"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="550"/>
         <source>%1 s</source>
         <translation>%1 s</translation>
     </message>

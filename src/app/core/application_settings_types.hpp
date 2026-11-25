@@ -34,13 +34,18 @@ namespace fluvel
  */
 enum class Language
 {
-    System,            ///< Use system locale
-    English,           ///< English language
-    French,            ///< French language
-    Spanish,           ///< Spanish language
-    German,            ///< German language
-    ChineseSimplified, ///< Simplified Chinese language
-    PortugueseBrazil   ///< Brazilian Portuguese language
+    System,             ///< Use system locale
+    English,            ///< English language
+    French,             ///< French language
+    Spanish,            ///< Spanish language
+    German,             ///< German language
+    ChineseSimplified,  ///< Simplified Chinese language
+    PortugueseBrazil,   ///< Brazilian Portuguese language
+    PortuguesePortugal, ///< European Portuguese language
+    Italian,            ///< Italian language
+    Russian,            ///< Russian language
+    Japanese,           ///< Japanese language
+    Korean              ///< Korean language
 };
 
 /**
@@ -82,7 +87,8 @@ struct VideoRecordingPreferences
  * @brief Convert language enum to string identifier.
  *
  * @param lang Language value.
- * @return Corresponding string ("system", "en", "fr", "es", "de", "zh_CN", "pt_BR").
+ * @return Corresponding string ("system", "en", "fr", "es", "de", "zh_CN", "pt_BR", "pt_PT",
+ *         "it", "ru", "ja", "ko").
  */
 inline constexpr const char* to_string(Language lang)
 {
@@ -102,6 +108,16 @@ inline constexpr const char* to_string(Language lang)
             return "zh_CN";
         case Language::PortugueseBrazil:
             return "pt_BR";
+        case Language::PortuguesePortugal:
+            return "pt_PT";
+        case Language::Italian:
+            return "it";
+        case Language::Russian:
+            return "ru";
+        case Language::Japanese:
+            return "ja";
+        case Language::Korean:
+            return "ko";
     }
     return "system";
 }
@@ -126,6 +142,16 @@ inline Language languageFromString(std::string_view s)
         return Language::ChineseSimplified;
     if (s == "pt_BR")
         return Language::PortugueseBrazil;
+    if (s == "pt_PT")
+        return Language::PortuguesePortugal;
+    if (s == "it")
+        return Language::Italian;
+    if (s == "ru")
+        return Language::Russian;
+    if (s == "ja")
+        return Language::Japanese;
+    if (s == "ko")
+        return Language::Korean;
     return Language::System;
 }
 
