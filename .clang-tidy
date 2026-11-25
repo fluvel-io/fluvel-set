@@ -8,6 +8,8 @@ Checks: >
   modernize-use-static-cast,
   readability-identifier-naming,
   -bugprone-narrowing-conversions,
+  -bugprone-easily-swappable-parameters,
+  -performance-enum-size,
   misc-unused-includes,
   modernize-use-forward-declaration,
   cppcoreguidelines-pro-type-member-init,
@@ -32,6 +34,9 @@ CheckOptions:
   # Structs → CamelCase (UpperCamel)
   - key: readability-identifier-naming.StructCase
     value: CamelCase
+  # Allowed: a type-suffix such as Lab_f, Components_3i
+  - key: readability-identifier-naming.StructIgnoredRegexp
+    value: '^[A-Z][A-Za-z0-9]*_[a-z0-9]+$'
 
   # Enums → CamelCase (UpperCamel)
   - key: readability-identifier-naming.EnumCase
@@ -44,10 +49,16 @@ CheckOptions:
   # Type aliases (using / typedef) → CamelCase (UpperCamel)
   - key: readability-identifier-naming.TypeAliasCase
     value: CamelCase
+  # Allowed: a type-suffix such as Rgb_uc, Point2D_f, and the std::chrono-style 'clock'
+  - key: readability-identifier-naming.TypeAliasIgnoredRegexp
+    value: '^([A-Z][A-Za-z0-9]*_[a-z0-9]+|clock)$'
 
   # Functions → camelBack
   - key: readability-identifier-naming.FunctionCase
     value: camelBack
+  # Allowed: to_string(), the standard library convention (found by ADL)
+  - key: readability-identifier-naming.FunctionIgnoredRegexp
+    value: '^to_string$'
 
   # Methods → camelBack
   - key: readability-identifier-naming.MethodCase
@@ -56,6 +67,9 @@ CheckOptions:
   # Local variables → camelBack
   - key: readability-identifier-naming.VariableCase
     value: camelBack
+  # Allowed: single capital letter (mathematical notation, e.g. L of Lab)
+  - key: readability-identifier-naming.VariableIgnoredRegexp
+    value: '^[A-Z]$'
 
   # Parameters → camelBack
   - key: readability-identifier-naming.ParameterCase
@@ -73,9 +87,18 @@ CheckOptions:
   - key: readability-identifier-naming.ProtectedMemberSuffix
     value: _
 
+  # Static data members → camelBack with the private suffix
+  - key: readability-identifier-naming.ClassMemberCase
+    value: camelBack
+  - key: readability-identifier-naming.ClassMemberSuffix
+    value: _
+
   # Public members → camelBack
   - key: readability-identifier-naming.PublicMemberCase
     value: camelBack
+  # Allowed: mathematical notation (L, X, Y, Z of a color space, Na, Ns of the algorithm)
+  - key: readability-identifier-naming.PublicMemberIgnoredRegexp
+    value: '^[A-Z][a-z]?$'
 
   # Global constants → kConstantName
   - key: readability-identifier-naming.GlobalConstantPrefix
