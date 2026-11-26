@@ -443,21 +443,15 @@ void ImageViewerWidget::handleImageSizeChanged()
 
 void ImageViewerWidget::scaleView(double sx, double sy)
 {
-    const QPoint overlayPos = overlayPosition(infoOverlay_);
+    keepOverlayInPlace([&] { scale(sx, sy); });
 
-    scale(sx, sy);
-
-    moveOverlay(infoOverlay_, overlayPos);
     updateMiniMap();
 }
 
 void ImageViewerWidget::translateView(double dx, double dy)
 {
-    const QPoint overlayPos = overlayPosition(infoOverlay_);
+    keepOverlayInPlace([&] { translate(dx, dy); });
 
-    translate(dx, dy);
-
-    moveOverlay(infoOverlay_, overlayPos);
     updateMiniMap();
 }
 
@@ -571,16 +565,17 @@ void ImageViewerWidget::leaveFullscreenMode()
 
 void ImageViewerWidget::applyAutoFit()
 {
-    const QPoint overlayPos = overlayPosition(infoOverlay_);
     if (!hasImage())
         return;
 
     autoFitEnabled_ = true;
-    resetTransform();
 
-    fitInView(pixmapItem_, Qt::KeepAspectRatio);
-
-    moveOverlay(infoOverlay_, overlayPos);
+    keepOverlayInPlace(
+        [&]
+        {
+            resetTransform();
+            fitInView(pixmapItem_, Qt::KeepAspectRatio);
+        });
 
     updateMiniMap();
 }
@@ -1240,12 +1235,12 @@ void ImageViewerWidget::positionMiniMap()
 
 void ImageViewerWidget::onMiniMapCenterRequested(const QPointF& scenePoint)
 {
-    const QPoint overlayPos = overlayPosition(infoOverlay_);
-
-    centerOn(scenePoint);
-    updateMiniMap();
-
-    moveOverlay(infoOverlay_, overlayPos);
+    keepOverlayInPlace(
+        [&]
+        {
+            centerOn(scenePoint);
+            updateMiniMap();
+        });
 }
 
 void ImageViewerWidget::updateMiniMapThumbnail()

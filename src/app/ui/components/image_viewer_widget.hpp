@@ -23,6 +23,8 @@
 #include <QTimer>
 #include <QTransform>
 
+#include <utility>
+
 class QWheelEvent;
 class QMouseEvent;
 class QResizeEvent;
@@ -458,6 +460,25 @@ private:
      * @param position Desired position in viewport coordinates.
      */
     void moveOverlay(OverlayTextItem* overlay, const QPoint& position);
+
+    /**
+     * @brief Runs an action that moves or scales the view, and keeps the info overlay in place.
+     *
+     * The info overlay is an item of the scene, so it would follow the scene when the view
+     * scrolls or zooms. Its position on the screen is read before the action and restored
+     * after it.
+     *
+     * @param action Callable without parameters, for example a lambda.
+     */
+    template <typename Action>
+    void keepOverlayInPlace(Action&& action)
+    {
+        const QPoint position = overlayPosition(infoOverlay_);
+
+        std::forward<Action>(action)();
+
+        moveOverlay(infoOverlay_, position);
+    }
 
     /**
      * @brief Anchors an overlay to a predefined viewport location.
