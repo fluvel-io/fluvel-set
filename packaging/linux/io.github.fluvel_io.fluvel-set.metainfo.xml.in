@@ -2,7 +2,7 @@
 
 <component type="desktop-application">
 
-  <id>org.fluvel.FluvelSet</id>
+  <id>io.github.fluvel_io.fluvel-set</id>
 
   <name>Fluvel Set</name>
 
@@ -49,10 +49,10 @@
   </categories>
 
   <launchable type="desktop-id">
-    org.fluvel.FluvelSet.desktop
+    io.github.fluvel_io.fluvel-set.desktop
   </launchable>
 
-  <developer id="org.fluvel">
+  <developer id="io.github.fluvel_io">
     <name>Fabien Bessy</name>
   </developer>
 

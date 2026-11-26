@@ -63,7 +63,7 @@ jobs:
               APP_DATE=\$(date +%Y-%m-%d)
 
               cp packaging/flatpak/fluvel.json fluvel.ci.json
-              cp packaging/linux/org.fluvel.FluvelSet.metainfo.xml.in metainfo.ci.xml
+              cp packaging/linux/io.github.fluvel_io.fluvel-set.metainfo.xml.in metainfo.ci.xml
 
               ESCAPED_ROOT=\$(printf '%s\n' \"\$PROJECT_ROOT\" | sed 's/[\/&]/\\\\&/g')
 
@@ -84,7 +84,7 @@ jobs:
 
               flatpak-builder --repo=repo --force-clean build-flatpak fluvel.ci.json
               flatpak build-export repo build-flatpak
-              flatpak build-bundle repo FluvelSet-linux.flatpak org.fluvel.FluvelSet
+              flatpak build-bundle repo FluvelSet-linux.flatpak io.github.fluvel_io.fluvel-set
             "
 
       - name: Generate checksum

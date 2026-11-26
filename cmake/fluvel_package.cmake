@@ -55,7 +55,7 @@ if(FLUVEL_PLATFORM_LINUX)
     # =====================================================
 
     install(FILES
-        ${FLUVEL_PACKAGING_DIR}/linux/org.fluvel.FluvelSet.desktop
+        ${FLUVEL_PACKAGING_DIR}/linux/io.github.fluvel_io.fluvel-set.desktop
         DESTINATION ${LINUX_INSTALL_DESKTOPDIR}
     )
 
@@ -66,13 +66,13 @@ if(FLUVEL_PLATFORM_LINUX)
     string(TIMESTAMP FLUVEL_RELEASE_DATE "%Y-%m-%d")
 
     configure_file(
-        ${FLUVEL_PACKAGING_DIR}/linux/org.fluvel.FluvelSet.metainfo.xml.in
-        ${CMAKE_CURRENT_BINARY_DIR}/org.fluvel.FluvelSet.metainfo.xml
+        ${FLUVEL_PACKAGING_DIR}/linux/io.github.fluvel_io.fluvel-set.metainfo.xml.in
+        ${CMAKE_CURRENT_BINARY_DIR}/io.github.fluvel_io.fluvel-set.metainfo.xml
         @ONLY
     )
 
     install(FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/org.fluvel.FluvelSet.metainfo.xml
+        ${CMAKE_CURRENT_BINARY_DIR}/io.github.fluvel_io.fluvel-set.metainfo.xml
         DESTINATION ${LINUX_INSTALL_METAINFO_DIR}
     )
 
@@ -81,7 +81,7 @@ if(FLUVEL_PLATFORM_LINUX)
     # =====================================================
 
     install(FILES
-        ${FLUVEL_PACKAGING_DIR}/linux/org.fluvel.FluvelSet.svg
+        ${FLUVEL_PACKAGING_DIR}/linux/io.github.fluvel_io.fluvel-set.svg
         DESTINATION ${LINUX_INSTALL_ICONS_DIR}/scalable/apps
     )
 
@@ -92,31 +92,31 @@ if(FLUVEL_PLATFORM_LINUX)
     install(FILES
         ${FLUVEL_RESOURCES_DIR}/icons/app/fluvel-32.png
         DESTINATION ${LINUX_INSTALL_ICONS_DIR}/32x32/apps
-        RENAME org.fluvel.FluvelSet.png
+        RENAME io.github.fluvel_io.fluvel-set.png
     )
 
     install(FILES
         ${FLUVEL_RESOURCES_DIR}/icons/app/fluvel-48.png
         DESTINATION ${LINUX_INSTALL_ICONS_DIR}/48x48/apps
-        RENAME org.fluvel.FluvelSet.png
+        RENAME io.github.fluvel_io.fluvel-set.png
     )
 
     install(FILES
         ${FLUVEL_RESOURCES_DIR}/icons/app/fluvel-64.png
         DESTINATION ${LINUX_INSTALL_ICONS_DIR}/64x64/apps
-        RENAME org.fluvel.FluvelSet.png
+        RENAME io.github.fluvel_io.fluvel-set.png
     )
 
     install(FILES
         ${FLUVEL_RESOURCES_DIR}/icons/app/fluvel-128.png
         DESTINATION ${LINUX_INSTALL_ICONS_DIR}/128x128/apps
-        RENAME org.fluvel.FluvelSet.png
+        RENAME io.github.fluvel_io.fluvel-set.png
     )
 
     install(FILES
         ${FLUVEL_RESOURCES_DIR}/icons/app/fluvel-256.png
         DESTINATION ${LINUX_INSTALL_ICONS_DIR}/256x256/apps
-        RENAME org.fluvel.FluvelSet.png
+        RENAME io.github.fluvel_io.fluvel-set.png
     )
 
 endif()
@@ -230,7 +230,7 @@ if(FLUVEL_PLATFORM_ANDROID)
         # --- Options possibles ---
         # QT_ANDROID_APP_NAME ${APP_TARGET_NAME}
         # QT_ANDROID_APP_LIB_NAME ${APP_TARGET_NAME}
-        # QT_ANDROID_PACKAGE_NAME "org.fluvel.app"
+        # QT_ANDROID_PACKAGE_NAME "io.github.fluvel_io.fluvelset"
         # QT_ANDROID_GUI TRUE
         # QT_ANDROID_DEPLOYMENT_SETTINGS_FILE
         # ${CMAKE_CURRENT_BINARY_DIR}/android-${APP_TARGET_NAME}-deployment-settings.json

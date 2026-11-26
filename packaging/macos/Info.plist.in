@@ -10,7 +10,7 @@
         <string>Fluvel Set</string>
 
         <key>CFBundleIdentifier</key>
-        <string>org.fluvel.FluvelSet</string>
+        <string>io.github.fluvel-io.fluvel-set</string>
 
         <key>CFBundleExecutable</key>
         <string>FluvelSet</string>

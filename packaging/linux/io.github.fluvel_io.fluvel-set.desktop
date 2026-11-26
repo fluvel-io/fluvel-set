@@ -12,7 +12,7 @@ Comment=Explore image segmentation with interactive and real-time visualization
 Comment[fr]=Explorer la segmentation d'images avec visualisation interactive et en temps réel
 
 Exec=fluvel-set
-Icon=org.fluvel.FluvelSet
+Icon=io.github.fluvel_io.fluvel-set
 
 Terminal=false
 StartupNotify=true
