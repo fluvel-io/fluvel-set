@@ -225,8 +225,11 @@ three listeners react independently:
 * the **controller** forwards the processing settings to the thread or worker
   (they are applied from the next frame) and restyles the current layers, so
   a display change is visible immediately, even when the video is paused;
-* the **window** applies the view settings (mirror, smoothing, minimap,
-  overlay) directly to the viewer, without going through the controller;
+* the **window** applies the view settings (mirror, smoothing, brightness,
+  contrast, auto-contrast, minimap, overlay) directly to the viewer, without
+  going through the controller. The viewer only hands its images to a
+  ``DisplayAdjuster``, which prepares the copy drawn on screen and keeps the
+  original untouched;
 * the **window** also refreshes its own widgets;
 * the **capture controller** keeps its own copy of the snapshot and recording
   preferences. It never reads the singleton: the window gives it the values at

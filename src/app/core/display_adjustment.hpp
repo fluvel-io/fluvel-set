@@ -35,6 +35,12 @@ struct IntensityRange
 bool isNeutral(const ViewConfig& view);
 
 /**
+ * @brief Returns true when the two view options give the same brightness, contrast and
+ * auto-contrast (the other view options are ignored).
+ */
+bool sameAdjustments(const ViewConfig& a, const ViewConfig& b);
+
+/**
  * @brief Measures the intensity range of an image for auto-contrast.
  *
  * The lowest and highest 1% of the pixels are ignored, so that a few isolated dark or bright
@@ -70,5 +76,33 @@ std::array<uchar, 256> buildLut(int brightness, int contrast, IntensityRange ran
  * @param range Range used when auto-contrast is enabled (ignored otherwise).
  */
 QImage applyAdjustments(const QImage& image, const ViewConfig& view, IntensityRange range);
+
+/**
+ * @brief Prepares the images shown by a viewer, from the original ones.
+ *
+ * It owns what must be remembered from one image to the next: on video, the range measured by
+ * auto-contrast is smoothed over the frames, which avoids flicker. The viewer only has to give
+ * its images and its view options.
+ */
+class DisplayAdjuster
+{
+public:
+    /**
+     * @brief Returns the image to show for an original image.
+     *
+     * @param image Original image (never modified).
+     * @param view View options holding brightness, contrast and the auto-contrast flag.
+     * @param smoothRange True for a new frame of a stream: the auto-contrast range is then
+     * mixed with the ones of the previous frames. False when the same image is shown again
+     * (for example after a change of option): the range is measured directly.
+     * @return The adjusted image, or the original one if the options leave it unchanged.
+     */
+    QImage adjust(const QImage& image, const ViewConfig& view, bool smoothRange);
+
+private:
+    /// Range used for the previous image, valid if hasRange_ is true.
+    IntensityRange range_{};
+    bool hasRange_{false};
+};
 
 } // namespace fluvel::display

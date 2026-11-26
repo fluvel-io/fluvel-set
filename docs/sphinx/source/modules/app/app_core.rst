@@ -47,6 +47,14 @@ Configuration
 
 .. doxygenfile:: application_settings_types.hpp
 
+
+Display
+-------
+
+The colors and the adjustments applied to what the viewer draws. They only
+change the screen: the images given to the algorithms, the pixel values read
+under the cursor and the exported files are never modified.
+
 .. doxygenfile:: color_palette.hpp
 
 .. doxygenfile:: display_adjustment.hpp

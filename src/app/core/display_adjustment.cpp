@@ -23,6 +23,10 @@ constexpr qint64 kSampleCount{200000};
 /// Below this width the range is considered flat: stretching it would only amplify noise.
 constexpr int kMinimumRangeWidth{8};
 
+/// Share of the new auto-contrast range taken at each frame of a stream (the rest comes from
+/// the previous frames).
+constexpr double kRangeSmoothing{0.2};
+
 /// Contrast slope: 1 at 0, up to 5 at +100 and 0 at -100.
 constexpr double kContrastGainPerStep{0.04};
 constexpr double kContrastLossPerStep{0.01};
@@ -56,6 +60,12 @@ QImage toSupportedFormat(const QImage& image)
 bool isNeutral(const ViewConfig& view)
 {
     return view.brightness == 0 && view.contrast == 0 && !view.autoContrast;
+}
+
+bool sameAdjustments(const ViewConfig& a, const ViewConfig& b)
+{
+    return a.brightness == b.brightness && a.contrast == b.contrast &&
+           a.autoContrast == b.autoContrast;
 }
 
 IntensityRange measureRange(const QImage& image)
@@ -172,6 +182,39 @@ QImage applyAdjustments(const QImage& image, const ViewConfig& view, IntensityRa
     }
 
     return out;
+}
+
+QImage DisplayAdjuster::adjust(const QImage& image, const ViewConfig& view, bool smoothRange)
+{
+    if (isNeutral(view))
+    {
+        hasRange_ = false;
+        return image;
+    }
+
+    IntensityRange range;
+
+    if (view.autoContrast)
+    {
+        range = measureRange(image);
+
+        if (smoothRange && hasRange_)
+        {
+            range.low = static_cast<int>(
+                std::lround(range_.low + kRangeSmoothing * (range.low - range_.low)));
+            range.high = static_cast<int>(
+                std::lround(range_.high + kRangeSmoothing * (range.high - range_.high)));
+        }
+
+        range_ = range;
+        hasRange_ = true;
+    }
+    else
+    {
+        hasRange_ = false;
+    }
+
+    return applyAdjustments(image, view, range);
 }
 
 } // namespace fluvel::display

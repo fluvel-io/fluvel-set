@@ -411,8 +411,8 @@ private:
     void displayFrameNow(const DisplayFrame& f);
     void updatePixmap(const QImage& img);
     void updatePixmapItem(const QImage& img);
+    void showPixmap(const QImage& shown);
     void refreshDisplayedPixmap();
-    QImage adjustedForDisplay(const QImage& img, bool smoothRange);
     void updateSceneRect(const QImage& img);
     void handleImageSizeChanged();
 
@@ -480,9 +480,8 @@ private:
     /// Original image: pixel values, color picking and exports always read this one.
     QImage lastDisplayedImage_;
 
-    /// Range used by auto-contrast, smoothed from one frame to the next to avoid flicker.
-    display::IntensityRange autoRange_{};
-    bool hasAutoRange_{false};
+    /// Prepares the image drawn on screen (brightness, contrast, auto-contrast).
+    display::DisplayAdjuster displayAdjuster_;
 
     ViewConfig viewConfig_{};
 
