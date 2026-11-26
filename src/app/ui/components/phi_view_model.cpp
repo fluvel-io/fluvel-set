@@ -2,6 +2,8 @@
 // Copyright (C) 2010-2026 Fabien Bessy
 
 #include "phi_view_model.hpp"
+#include "color_adapters.hpp"
+#include "color_palette.hpp"
 #include "contour_adapters.hpp"
 #include "phi_editor.hpp"
 
@@ -20,6 +22,8 @@ PhiViewModel::PhiViewModel(PhiEditor* editor, fluvel_ip::Connectivity connectivi
     : QObject(parent)
     , editor_(editor)
     , connectivity_(connectivity)
+    , outerColor_(toQColor(palette::kDefaultOuterContour))
+    , innerColor_(toQColor(palette::kDefaultInnerContour))
 {
     Q_ASSERT(editor_);
 

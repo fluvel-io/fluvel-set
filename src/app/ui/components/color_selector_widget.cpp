@@ -4,6 +4,8 @@
 #include "color_selector_widget.hpp"
 
 #include "animated_push_button.hpp"
+#include "color_adapters.hpp"
+#include "color_palette.hpp"
 #include "icon_loader.hpp"
 
 #include <QColorDialog>
@@ -22,12 +24,15 @@ ColorSelectorWidget::ColorSelectorWidget(QWidget* parent, QColor initialColor)
 {
     colorCb_ = new QComboBox;
 
-    addColorItem(Qt::red, tr("Red"));
-    addColorItem(Qt::green, tr("Green"));
-    addColorItem(Qt::blue, tr("Blue"));
-    addColorItem(Qt::cyan, tr("Cyan"));
-    addColorItem(Qt::magenta, tr("Magenta"));
-    addColorItem(Qt::yellow, tr("Yellow"));
+    // The values are defined in color_palette.hpp.
+    addColorItem(toQColor(palette::kRed), tr("Red"));
+    addColorItem(toQColor(palette::kOrange), tr("Orange"));
+    addColorItem(toQColor(palette::kYellow), tr("Yellow"));
+    addColorItem(toQColor(palette::kGreen), tr("Green"));
+    addColorItem(toQColor(palette::kCyan), tr("Cyan"));
+    addColorItem(toQColor(palette::kBlue), tr("Blue"));
+    addColorItem(toQColor(palette::kPurple), tr("Purple"));
+    addColorItem(toQColor(palette::kPink), tr("Pink"));
     addColorItem(Qt::black, tr("Black"));
     addColorItem(Qt::white, tr("White"));
     addColorItem(Qt::transparent, tr("Custom"));

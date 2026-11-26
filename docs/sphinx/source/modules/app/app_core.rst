@@ -47,6 +47,8 @@ Configuration
 
 .. doxygenfile:: application_settings_types.hpp
 
+.. doxygenfile:: color_palette.hpp
+
 
 Video Sources
 -------------

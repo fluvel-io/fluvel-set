@@ -2,6 +2,8 @@
 // Copyright (C) 2010-2026 Fabien Bessy
 
 #include "image_viewer_widget.hpp"
+#include "color_adapters.hpp"
+#include "color_palette.hpp"
 #include "drag_drop_behavior.hpp"
 #include "frame_clock.hpp"
 #include "frame_throttle.hpp"
@@ -25,9 +27,9 @@ namespace
 {
 constexpr QPoint kCursorOverlayOffset{8, -8};
 
-// Outline of the shape being placed (same colors as the phi boundaries).
-const QColor kShapeMainColor{0, 230, 118};
-const QColor kShapeOutlineColor{64, 0, 255};
+// Outline of the shape being placed (default colors of the phi boundaries).
+const QColor kShapeMainColor{fluvel::toQColor(fluvel::palette::kDefaultInnerContour)};
+const QColor kShapeOutlineColor{fluvel::toQColor(fluvel::palette::kDefaultOuterContour)};
 constexpr qreal kShapeMainWidth{2.0};
 constexpr qreal kShapeOutlineWidth{4.0};
 

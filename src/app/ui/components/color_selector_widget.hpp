@@ -17,8 +17,8 @@ class AnimatedPushButton;
 /**
  * @brief Widget for selecting a color.
  *
- * This widget provides a combo box with predefined colors and an option
- * to choose a custom color.
+ * This widget provides a combo box with the predefined colors of
+ * color_palette.hpp and an option to choose a custom color.
  *
  * It emits colorSelected() whenever the selected color changes.
  *

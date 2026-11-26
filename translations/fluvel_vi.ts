@@ -533,29 +533,39 @@ R: %3  G: %4  B: %5</translation>
 <context>
     <name>fluvel::ColorSelectorWidget</name>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="25"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="28"/>
         <source>Red</source>
         <translation>Đỏ</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="26"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="31"/>
         <source>Green</source>
         <translation>Xanh lá</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="27"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="33"/>
         <source>Blue</source>
         <translation>Xanh dương</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="28"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="32"/>
         <source>Cyan</source>
         <translation>Lục lam</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/color_selector_widget.cpp" line="29"/>
-        <source>Magenta</source>
-        <translation>Đỏ tươi</translation>
+        <source>Orange</source>
+        <translation>Cam</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="34"/>
+        <source>Purple</source>
+        <translation>Tím</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="35"/>
+        <source>Pink</source>
+        <translation>Hồng</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/color_selector_widget.cpp" line="30"/>
@@ -563,24 +573,24 @@ R: %3  G: %4  B: %5</translation>
         <translation>Vàng</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="31"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="36"/>
         <source>Black</source>
         <translation>Đen</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="32"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="37"/>
         <source>White</source>
         <translation>Trắng</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="33"/>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="74"/>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="105"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="38"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="79"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="110"/>
         <source>Custom</source>
         <translation>Tùy chỉnh</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="69"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="74"/>
         <source>Custom color selection</source>
         <translation>Chọn màu tùy chỉnh</translation>
     </message>
@@ -870,17 +880,19 @@ Nhấp Tính một lần nữa để áp dụng thay đổi.</translation>
 <context>
     <name>fluvel::HistogramWidget</name>
     <message>
-        <location filename="../src/app/ui/components/histogram_widget.cpp" line="237"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="239"/>
         <source>No image</source>
         <translation>Không có ảnh</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/histogram_widget.cpp" line="304"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="306"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="323"/>
         <source>Level %1</source>
         <translation>Mức %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/histogram_widget.cpp" line="311"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="313"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="328"/>
         <source>Gray</source>
         <translation>Xám</translation>
     </message>
@@ -921,93 +933,93 @@ Nhấp Tính một lần nữa để áp dụng thay đổi.</translation>
 <context>
     <name>fluvel::ImageController</name>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="45"/>
+        <location filename="../src/app/core/image_controller.cpp" line="47"/>
         <source>Unsupported image format.</source>
         <translation>Định dạng ảnh không được hỗ trợ.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="58"/>
+        <location filename="../src/app/core/image_controller.cpp" line="60"/>
         <source>Image file extension differs from detected format: .%1 → %2</source>
         <translation>Phần mở rộng của tệp ảnh khác với định dạng được phát hiện: .%1 → %2</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="66"/>
+        <location filename="../src/app/core/image_controller.cpp" line="68"/>
         <source>Failed to load image: %1</source>
         <translation>Không thể tải ảnh: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="261"/>
+        <location filename="../src/app/core/image_controller.cpp" line="263"/>
         <source>n/a</source>
         <translation>không có</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="279"/>
+        <location filename="../src/app/core/image_controller.cpp" line="281"/>
         <source>Step: %1
 </source>
         <translation>Bước: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="280"/>
+        <location filename="../src/app/core/image_controller.cpp" line="282"/>
         <source>State: %1
 </source>
         <translation>Trạng thái: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="283"/>
+        <location filename="../src/app/core/image_controller.cpp" line="285"/>
         <source>Reason: %1
 </source>
         <translation>Lý do: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="285"/>
+        <location filename="../src/app/core/image_controller.cpp" line="287"/>
         <source>Reason: 
 </source>
         <translation>Lý do: 
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="289"/>
+        <location filename="../src/app/core/image_controller.cpp" line="291"/>
         <source>Mean in: %1
 </source>
         <translation>Trung bình trong: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="291"/>
+        <location filename="../src/app/core/image_controller.cpp" line="293"/>
         <source>Mean out: %1
 </source>
         <translation>Trung bình ngoài: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="294"/>
+        <location filename="../src/app/core/image_controller.cpp" line="299"/>
         <source>Hausdorff: %1 %
 </source>
         <translation>Hausdorff: %1%
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="297"/>
+        <location filename="../src/app/core/image_controller.cpp" line="302"/>
         <source>Compute time: %1 s
 </source>
         <translation>Thời gian tính toán: %1 giây
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="344"/>
-        <location filename="../src/app/core/image_controller.cpp" line="358"/>
-        <location filename="../src/app/core/image_controller.cpp" line="360"/>
+        <location filename="../src/app/core/image_controller.cpp" line="349"/>
+        <location filename="../src/app/core/image_controller.cpp" line="363"/>
+        <location filename="../src/app/core/image_controller.cpp" line="365"/>
         <source>Speed: %1 it/s
 </source>
         <translation>Tốc độ: %1 lần lặp/giây
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="345"/>
-        <location filename="../src/app/core/image_controller.cpp" line="362"/>
+        <location filename="../src/app/core/image_controller.cpp" line="350"/>
+        <location filename="../src/app/core/image_controller.cpp" line="367"/>
         <source>Contour: %1 pts</source>
         <translation>Đường viền: %1 điểm</translation>
     </message>
@@ -1015,27 +1027,27 @@ Nhấp Tính một lần nữa để áp dụng thay đổi.</translation>
 <context>
     <name>fluvel::ImageViewerWidget</name>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="484"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="486"/>
         <source>Auto Fit</source>
         <translation>Tự động vừa khít</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1068"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
         <source>Mirror On</source>
         <translation>Đã bật lật gương</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1068"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
         <source>Mirror Off</source>
         <translation>Đã tắt lật gương</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1073"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1075"/>
         <source>Smooth Display On</source>
         <translation>Đã bật hiển thị mượt</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1074"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1076"/>
         <source>Smooth Display Off</source>
         <translation>Đã tắt hiển thị mượt</translation>
     </message>

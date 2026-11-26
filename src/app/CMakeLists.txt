@@ -234,6 +234,8 @@ set(app_src
 
     ${CORE_DIR}/application_settings_types.hpp
 
+    ${CORE_DIR}/color_palette.hpp
+
     ${CORE_DIR}/phi_editor.cpp
     ${CORE_DIR}/phi_editor.hpp
 

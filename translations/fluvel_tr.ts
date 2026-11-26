@@ -533,29 +533,39 @@ R: %3  G: %4  B: %5</translation>
 <context>
     <name>fluvel::ColorSelectorWidget</name>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="25"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="28"/>
         <source>Red</source>
         <translation>Kırmızı</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="26"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="31"/>
         <source>Green</source>
         <translation>Yeşil</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="27"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="33"/>
         <source>Blue</source>
         <translation>Mavi</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="28"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="32"/>
         <source>Cyan</source>
         <translation>Camgöbeği</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/color_selector_widget.cpp" line="29"/>
-        <source>Magenta</source>
-        <translation>Macenta</translation>
+        <source>Orange</source>
+        <translation>Turuncu</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="34"/>
+        <source>Purple</source>
+        <translation>Mor</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="35"/>
+        <source>Pink</source>
+        <translation>Pembe</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/color_selector_widget.cpp" line="30"/>
@@ -563,24 +573,24 @@ R: %3  G: %4  B: %5</translation>
         <translation>Sarı</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="31"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="36"/>
         <source>Black</source>
         <translation>Siyah</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="32"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="37"/>
         <source>White</source>
         <translation>Beyaz</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="33"/>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="74"/>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="105"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="38"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="79"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="110"/>
         <source>Custom</source>
         <translation>Özel</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="69"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="74"/>
         <source>Custom color selection</source>
         <translation>Özel renk seçimi</translation>
     </message>
@@ -870,17 +880,19 @@ Değişikliği uygulamak için Hesapla&apos;ya yeniden tıklayın.</translation>
 <context>
     <name>fluvel::HistogramWidget</name>
     <message>
-        <location filename="../src/app/ui/components/histogram_widget.cpp" line="237"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="239"/>
         <source>No image</source>
         <translation>Görüntü yok</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/histogram_widget.cpp" line="304"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="306"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="323"/>
         <source>Level %1</source>
         <translation>Düzey %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/histogram_widget.cpp" line="311"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="313"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="328"/>
         <source>Gray</source>
         <translation>Gri</translation>
     </message>
@@ -921,93 +933,93 @@ Değişikliği uygulamak için Hesapla&apos;ya yeniden tıklayın.</translation>
 <context>
     <name>fluvel::ImageController</name>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="45"/>
+        <location filename="../src/app/core/image_controller.cpp" line="47"/>
         <source>Unsupported image format.</source>
         <translation>Desteklenmeyen görüntü biçimi.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="58"/>
+        <location filename="../src/app/core/image_controller.cpp" line="60"/>
         <source>Image file extension differs from detected format: .%1 → %2</source>
         <translation>Görüntü dosyası uzantısı algılanan biçimden farklı: .%1 → %2</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="66"/>
+        <location filename="../src/app/core/image_controller.cpp" line="68"/>
         <source>Failed to load image: %1</source>
         <translation>Görüntü yüklenemedi: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="261"/>
+        <location filename="../src/app/core/image_controller.cpp" line="263"/>
         <source>n/a</source>
         <translation>yok</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="279"/>
+        <location filename="../src/app/core/image_controller.cpp" line="281"/>
         <source>Step: %1
 </source>
         <translation>Adım: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="280"/>
+        <location filename="../src/app/core/image_controller.cpp" line="282"/>
         <source>State: %1
 </source>
         <translation>Durum: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="283"/>
+        <location filename="../src/app/core/image_controller.cpp" line="285"/>
         <source>Reason: %1
 </source>
         <translation>Neden: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="285"/>
+        <location filename="../src/app/core/image_controller.cpp" line="287"/>
         <source>Reason: 
 </source>
         <translation>Neden: 
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="289"/>
+        <location filename="../src/app/core/image_controller.cpp" line="291"/>
         <source>Mean in: %1
 </source>
         <translation>İç ortalama: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="291"/>
+        <location filename="../src/app/core/image_controller.cpp" line="293"/>
         <source>Mean out: %1
 </source>
         <translation>Dış ortalama: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="294"/>
+        <location filename="../src/app/core/image_controller.cpp" line="299"/>
         <source>Hausdorff: %1 %
 </source>
         <translation>Hausdorff: %%1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="297"/>
+        <location filename="../src/app/core/image_controller.cpp" line="302"/>
         <source>Compute time: %1 s
 </source>
         <translation>Hesaplama süresi: %1 sn
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="344"/>
-        <location filename="../src/app/core/image_controller.cpp" line="358"/>
-        <location filename="../src/app/core/image_controller.cpp" line="360"/>
+        <location filename="../src/app/core/image_controller.cpp" line="349"/>
+        <location filename="../src/app/core/image_controller.cpp" line="363"/>
+        <location filename="../src/app/core/image_controller.cpp" line="365"/>
         <source>Speed: %1 it/s
 </source>
         <translation>Hız: %1 yin/sn
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="345"/>
-        <location filename="../src/app/core/image_controller.cpp" line="362"/>
+        <location filename="../src/app/core/image_controller.cpp" line="350"/>
+        <location filename="../src/app/core/image_controller.cpp" line="367"/>
         <source>Contour: %1 pts</source>
         <translation>Kontur: %1 nokta</translation>
     </message>
@@ -1015,27 +1027,27 @@ Değişikliği uygulamak için Hesapla&apos;ya yeniden tıklayın.</translation>
 <context>
     <name>fluvel::ImageViewerWidget</name>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="484"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="486"/>
         <source>Auto Fit</source>
         <translation>Otomatik sığdır</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1068"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
         <source>Mirror On</source>
         <translation>Ayna etkin</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1068"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
         <source>Mirror Off</source>
         <translation>Ayna devre dışı</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1073"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1075"/>
         <source>Smooth Display On</source>
         <translation>Yumuşatılmış görüntü etkin</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1074"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1076"/>
         <source>Smooth Display Off</source>
         <translation>Yumuşatılmış görüntü devre dışı</translation>
     </message>

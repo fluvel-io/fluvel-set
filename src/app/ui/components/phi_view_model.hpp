@@ -198,8 +198,8 @@ private:
 
     /// True if interactive mode is enabled.
     bool interactiveMode_{false};
-    QColor outerColor_{64, 0, 255};
-    QColor innerColor_{0, 230, 118};
+    QColor outerColor_;
+    QColor innerColor_;
 
     /// True if overlay is currently visible.
     bool overlayVisible_{false};

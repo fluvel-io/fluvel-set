@@ -533,29 +533,39 @@ R: %3  G: %4  B: %5</translation>
 <context>
     <name>fluvel::ColorSelectorWidget</name>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="25"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="28"/>
         <source>Red</source>
         <translation>Vermelho</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="26"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="31"/>
         <source>Green</source>
         <translation>Verde</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="27"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="33"/>
         <source>Blue</source>
         <translation>Azul</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="28"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="32"/>
         <source>Cyan</source>
         <translation>Ciano</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/color_selector_widget.cpp" line="29"/>
-        <source>Magenta</source>
-        <translation>Magenta</translation>
+        <source>Orange</source>
+        <translation>Laranja</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="34"/>
+        <source>Purple</source>
+        <translation>Roxo</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="35"/>
+        <source>Pink</source>
+        <translation>Rosa</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/color_selector_widget.cpp" line="30"/>
@@ -563,24 +573,24 @@ R: %3  G: %4  B: %5</translation>
         <translation>Amarelo</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="31"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="36"/>
         <source>Black</source>
         <translation>Preto</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="32"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="37"/>
         <source>White</source>
         <translation>Branco</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="33"/>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="74"/>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="105"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="38"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="79"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="110"/>
         <source>Custom</source>
         <translation>Personalizado</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="69"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="74"/>
         <source>Custom color selection</source>
         <translation>Seleção de cor personalizada</translation>
     </message>
@@ -870,17 +880,19 @@ Clique novamente em Calcular para aplicar a alteração.</translation>
 <context>
     <name>fluvel::HistogramWidget</name>
     <message>
-        <location filename="../src/app/ui/components/histogram_widget.cpp" line="237"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="239"/>
         <source>No image</source>
         <translation>Sem imagem</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/histogram_widget.cpp" line="304"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="306"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="323"/>
         <source>Level %1</source>
         <translation>Nível %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/histogram_widget.cpp" line="311"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="313"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="328"/>
         <source>Gray</source>
         <translation>Cinza</translation>
     </message>
@@ -921,93 +933,93 @@ Clique novamente em Calcular para aplicar a alteração.</translation>
 <context>
     <name>fluvel::ImageController</name>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="45"/>
+        <location filename="../src/app/core/image_controller.cpp" line="47"/>
         <source>Unsupported image format.</source>
         <translation>Formato de imagem não suportado.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="58"/>
+        <location filename="../src/app/core/image_controller.cpp" line="60"/>
         <source>Image file extension differs from detected format: .%1 → %2</source>
         <translation>A extensão do arquivo de imagem difere do formato detectado: .%1 → %2</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="66"/>
+        <location filename="../src/app/core/image_controller.cpp" line="68"/>
         <source>Failed to load image: %1</source>
         <translation>Não foi possível carregar a imagem: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="261"/>
+        <location filename="../src/app/core/image_controller.cpp" line="263"/>
         <source>n/a</source>
         <translation>n/d</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="279"/>
+        <location filename="../src/app/core/image_controller.cpp" line="281"/>
         <source>Step: %1
 </source>
         <translation>Passo: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="280"/>
+        <location filename="../src/app/core/image_controller.cpp" line="282"/>
         <source>State: %1
 </source>
         <translation>Estado: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="283"/>
+        <location filename="../src/app/core/image_controller.cpp" line="285"/>
         <source>Reason: %1
 </source>
         <translation>Motivo: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="285"/>
+        <location filename="../src/app/core/image_controller.cpp" line="287"/>
         <source>Reason: 
 </source>
         <translation>Motivo: 
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="289"/>
+        <location filename="../src/app/core/image_controller.cpp" line="291"/>
         <source>Mean in: %1
 </source>
         <translation>Média interna: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="291"/>
+        <location filename="../src/app/core/image_controller.cpp" line="293"/>
         <source>Mean out: %1
 </source>
         <translation>Média externa: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="294"/>
+        <location filename="../src/app/core/image_controller.cpp" line="299"/>
         <source>Hausdorff: %1 %
 </source>
         <translation>Hausdorff: %1%
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="297"/>
+        <location filename="../src/app/core/image_controller.cpp" line="302"/>
         <source>Compute time: %1 s
 </source>
         <translation>Tempo de cálculo: %1 s
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="344"/>
-        <location filename="../src/app/core/image_controller.cpp" line="358"/>
-        <location filename="../src/app/core/image_controller.cpp" line="360"/>
+        <location filename="../src/app/core/image_controller.cpp" line="349"/>
+        <location filename="../src/app/core/image_controller.cpp" line="363"/>
+        <location filename="../src/app/core/image_controller.cpp" line="365"/>
         <source>Speed: %1 it/s
 </source>
         <translation>Velocidade: %1 it/s
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="345"/>
-        <location filename="../src/app/core/image_controller.cpp" line="362"/>
+        <location filename="../src/app/core/image_controller.cpp" line="350"/>
+        <location filename="../src/app/core/image_controller.cpp" line="367"/>
         <source>Contour: %1 pts</source>
         <translation>Contorno: %1 pts</translation>
     </message>
@@ -1015,27 +1027,27 @@ Clique novamente em Calcular para aplicar a alteração.</translation>
 <context>
     <name>fluvel::ImageViewerWidget</name>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="484"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="486"/>
         <source>Auto Fit</source>
         <translation>Ajuste automático</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1068"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
         <source>Mirror On</source>
         <translation>Espelhamento ativado</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1068"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
         <source>Mirror Off</source>
         <translation>Espelhamento desativado</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1073"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1075"/>
         <source>Smooth Display On</source>
         <translation>Exibição suavizada ativada</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1074"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1076"/>
         <source>Smooth Display Off</source>
         <translation>Exibição suavizada desativada</translation>
     </message>

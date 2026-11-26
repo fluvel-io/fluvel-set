@@ -16,6 +16,7 @@
 
 #include "active_contour_types.hpp"
 #include "color.hpp"
+#include "color_palette.hpp"
 #include "contour_types.hpp"
 #include "processing_params.hpp"
 #include "speed_model_types.hpp"
@@ -236,8 +237,8 @@ inline BackgroundImage backgroundImageFromString(std::string_view s)
 struct ContourStyleConfig
 {
     static constexpr bool kDefaultVisible{true};
-    static constexpr fluvel_ip::Rgb_uc kDefaultOuterColor{64u, 0u, 255u};
-    static constexpr fluvel_ip::Rgb_uc kDefaultInnerColor{0u, 230u, 118u};
+    static constexpr fluvel_ip::Rgb_uc kDefaultOuterColor{palette::kDefaultOuterContour};
+    static constexpr fluvel_ip::Rgb_uc kDefaultInnerColor{palette::kDefaultInnerContour};
 
     bool outerVisible = kDefaultVisible;
     fluvel_ip::Rgb_uc outerColor{kDefaultOuterColor};

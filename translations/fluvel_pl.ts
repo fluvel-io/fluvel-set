@@ -533,29 +533,39 @@ R: %3  G: %4  B: %5</translation>
 <context>
     <name>fluvel::ColorSelectorWidget</name>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="25"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="28"/>
         <source>Red</source>
         <translation>Czerwony</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="26"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="31"/>
         <source>Green</source>
         <translation>Zielony</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="27"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="33"/>
         <source>Blue</source>
         <translation>Niebieski</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="28"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="32"/>
         <source>Cyan</source>
         <translation>Cyjan</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/color_selector_widget.cpp" line="29"/>
-        <source>Magenta</source>
-        <translation>Magenta</translation>
+        <source>Orange</source>
+        <translation>Pomarańczowy</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="34"/>
+        <source>Purple</source>
+        <translation>Fioletowy</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="35"/>
+        <source>Pink</source>
+        <translation>Różowy</translation>
     </message>
     <message>
         <location filename="../src/app/ui/components/color_selector_widget.cpp" line="30"/>
@@ -563,24 +573,24 @@ R: %3  G: %4  B: %5</translation>
         <translation>Żółty</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="31"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="36"/>
         <source>Black</source>
         <translation>Czarny</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="32"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="37"/>
         <source>White</source>
         <translation>Biały</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="33"/>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="74"/>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="105"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="38"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="79"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="110"/>
         <source>Custom</source>
         <translation>Niestandardowy</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="69"/>
+        <location filename="../src/app/ui/components/color_selector_widget.cpp" line="74"/>
         <source>Custom color selection</source>
         <translation>Wybór koloru niestandardowego</translation>
     </message>
@@ -870,17 +880,19 @@ Kliknij ponownie Oblicz, aby zastosować zmianę.</translation>
 <context>
     <name>fluvel::HistogramWidget</name>
     <message>
-        <location filename="../src/app/ui/components/histogram_widget.cpp" line="237"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="239"/>
         <source>No image</source>
         <translation>Brak obrazu</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/histogram_widget.cpp" line="304"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="306"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="323"/>
         <source>Level %1</source>
         <translation>Poziom %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/histogram_widget.cpp" line="311"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="313"/>
+        <location filename="../src/app/ui/components/histogram_widget.cpp" line="328"/>
         <source>Gray</source>
         <translation>Szary</translation>
     </message>
@@ -921,93 +933,93 @@ Kliknij ponownie Oblicz, aby zastosować zmianę.</translation>
 <context>
     <name>fluvel::ImageController</name>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="45"/>
+        <location filename="../src/app/core/image_controller.cpp" line="47"/>
         <source>Unsupported image format.</source>
         <translation>Nieobsługiwany format obrazu.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="58"/>
+        <location filename="../src/app/core/image_controller.cpp" line="60"/>
         <source>Image file extension differs from detected format: .%1 → %2</source>
         <translation>Rozszerzenie pliku obrazu różni się od wykrytego formatu: .%1 → %2</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="66"/>
+        <location filename="../src/app/core/image_controller.cpp" line="68"/>
         <source>Failed to load image: %1</source>
         <translation>Nie udało się wczytać obrazu: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="261"/>
+        <location filename="../src/app/core/image_controller.cpp" line="263"/>
         <source>n/a</source>
         <translation>b/d</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="279"/>
+        <location filename="../src/app/core/image_controller.cpp" line="281"/>
         <source>Step: %1
 </source>
         <translation>Krok: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="280"/>
+        <location filename="../src/app/core/image_controller.cpp" line="282"/>
         <source>State: %1
 </source>
         <translation>Stan: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="283"/>
+        <location filename="../src/app/core/image_controller.cpp" line="285"/>
         <source>Reason: %1
 </source>
         <translation>Przyczyna: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="285"/>
+        <location filename="../src/app/core/image_controller.cpp" line="287"/>
         <source>Reason: 
 </source>
         <translation>Przyczyna: 
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="289"/>
+        <location filename="../src/app/core/image_controller.cpp" line="291"/>
         <source>Mean in: %1
 </source>
         <translation>Średnia wewnętrzna: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="291"/>
+        <location filename="../src/app/core/image_controller.cpp" line="293"/>
         <source>Mean out: %1
 </source>
         <translation>Średnia zewnętrzna: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="294"/>
+        <location filename="../src/app/core/image_controller.cpp" line="299"/>
         <source>Hausdorff: %1 %
 </source>
         <translation>Hausdorff: %1%
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="297"/>
+        <location filename="../src/app/core/image_controller.cpp" line="302"/>
         <source>Compute time: %1 s
 </source>
         <translation>Czas obliczeń: %1 s
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="344"/>
-        <location filename="../src/app/core/image_controller.cpp" line="358"/>
-        <location filename="../src/app/core/image_controller.cpp" line="360"/>
+        <location filename="../src/app/core/image_controller.cpp" line="349"/>
+        <location filename="../src/app/core/image_controller.cpp" line="363"/>
+        <location filename="../src/app/core/image_controller.cpp" line="365"/>
         <source>Speed: %1 it/s
 </source>
         <translation>Szybkość: %1 it./s
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="345"/>
-        <location filename="../src/app/core/image_controller.cpp" line="362"/>
+        <location filename="../src/app/core/image_controller.cpp" line="350"/>
+        <location filename="../src/app/core/image_controller.cpp" line="367"/>
         <source>Contour: %1 pts</source>
         <translation>Kontur: %1 pkt</translation>
     </message>
@@ -1015,27 +1027,27 @@ Kliknij ponownie Oblicz, aby zastosować zmianę.</translation>
 <context>
     <name>fluvel::ImageViewerWidget</name>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="484"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="486"/>
         <source>Auto Fit</source>
         <translation>Dopasuj automatycznie</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1068"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
         <source>Mirror On</source>
         <translation>Lustro włączone</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1068"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
         <source>Mirror Off</source>
         <translation>Lustro wyłączone</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1073"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1075"/>
         <source>Smooth Display On</source>
         <translation>Wygładzone wyświetlanie włączone</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1074"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1076"/>
         <source>Smooth Display Off</source>
         <translation>Wygładzone wyświetlanie wyłączone</translation>
     </message>
