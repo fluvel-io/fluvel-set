@@ -49,6 +49,8 @@ Configuration
 
 .. doxygenfile:: color_palette.hpp
 
+.. doxygenfile:: display_adjustment.hpp
+
 
 Video Sources
 -------------

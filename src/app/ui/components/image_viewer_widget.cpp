@@ -22,6 +22,7 @@
 #include <QWheelEvent>
 
 #include <cassert>
+#include <cmath>
 
 namespace
 {
@@ -32,6 +33,10 @@ const QColor kShapeMainColor{fluvel::toQColor(fluvel::palette::kDefaultInnerCont
 const QColor kShapeOutlineColor{fluvel::toQColor(fluvel::palette::kDefaultOuterContour)};
 constexpr qreal kShapeMainWidth{2.0};
 constexpr qreal kShapeOutlineWidth{4.0};
+
+// Share of the new auto-contrast range taken at each frame (the rest comes from the previous
+// frames): avoids flicker on video.
+constexpr double kAutoRangeSmoothing{0.2};
 
 /// Path item drawn with anti-aliasing (the view itself does not enable it,
 /// which is right for the pixels of the image and of the contour points).
@@ -381,9 +386,12 @@ void ImageViewerWidget::updatePixmapItem(const QImage& img)
 {
     assert(pixmapItem_);
 
-    pixmapItem_->setPixmap(QPixmap::fromImage(img));
+    // The adjusted copy is only for the screen: lastDisplayedImage_ keeps the original.
+    const QImage shown = adjustedForDisplay(img, true);
 
-    thumbnail_ = img;
+    pixmapItem_->setPixmap(QPixmap::fromImage(shown));
+
+    thumbnail_ = shown;
 
     updateMiniMapThumbnail();
 
@@ -395,6 +403,56 @@ void ImageViewerWidget::updatePixmapItem(const QImage& img)
 #endif
 
     lastDisplayedImage_ = img;
+}
+
+void ImageViewerWidget::refreshDisplayedPixmap()
+{
+    assert(pixmapItem_);
+
+    if (lastDisplayedImage_.isNull())
+        return;
+
+    // Same image as before: the range is measured again, without smoothing.
+    const QImage shown = adjustedForDisplay(lastDisplayedImage_, false);
+
+    pixmapItem_->setPixmap(QPixmap::fromImage(shown));
+
+    thumbnail_ = shown;
+
+    updateMiniMapThumbnail();
+}
+
+QImage ImageViewerWidget::adjustedForDisplay(const QImage& img, bool smoothRange)
+{
+    if (display::isNeutral(viewConfig_))
+    {
+        hasAutoRange_ = false;
+        return img;
+    }
+
+    display::IntensityRange range;
+
+    if (viewConfig_.autoContrast)
+    {
+        range = display::measureRange(img);
+
+        if (smoothRange && hasAutoRange_)
+        {
+            range.low = static_cast<int>(
+                std::lround(autoRange_.low + kAutoRangeSmoothing * (range.low - autoRange_.low)));
+            range.high = static_cast<int>(
+                std::lround(autoRange_.high + kAutoRangeSmoothing * (range.high - autoRange_.high)));
+        }
+
+        autoRange_ = range;
+        hasAutoRange_ = true;
+    }
+    else
+    {
+        hasAutoRange_ = false;
+    }
+
+    return display::applyAdjustments(img, viewConfig_, range);
 }
 
 void ImageViewerWidget::updateSceneRect(const QImage& img)
@@ -1050,8 +1108,14 @@ void ImageViewerWidget::applyViewConfig(const ViewConfig& view)
     const bool previousMirrorMode = viewConfig_.mirrorMode;
     const bool previousSmoothDisplay = viewConfig_.smoothDisplay;
     const int previousMiniMapSize = viewConfig_.miniMapSize;
+    const bool adjustmentChanged = viewConfig_.brightness != view.brightness ||
+                                   viewConfig_.contrast != view.contrast ||
+                                   viewConfig_.autoContrast != view.autoContrast;
 
     viewConfig_ = view;
+
+    if (adjustmentChanged)
+        refreshDisplayedPixmap();
 
     if (previousMiniMapSize != viewConfig_.miniMapSize)
     {

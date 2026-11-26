@@ -9,6 +9,7 @@
 
 #include <QCheckBox>
 #include <QComboBox>
+#include <QLabel>
 #include <QGroupBox>
 #include <QPointer>
 #include <QPushButton>
@@ -16,6 +17,7 @@
 #include <QWidget>
 
 class QPropertyAnimation;
+class QSlider;
 
 namespace fluvel
 {
@@ -30,6 +32,7 @@ class ColorSelectorWidget;
  * - pipeline source selection (raw / preprocessed)
  * - contour colors
  * - display options (flip, smoothing, overlay)
+ * - brightness, contrast and auto-contrast of the displayed image (screen only)
  *
  * It emits displayConfigChanged() whenever the configuration is updated.
  */
@@ -111,6 +114,16 @@ private:
      */
     void animate(bool open);
 
+    /**
+     * @brief Sets brightness, contrast and auto-contrast, and emits the new configuration once.
+     */
+    void setAdjustments(int brightness, int contrast, bool autoContrast);
+
+    /**
+     * @brief Refreshes the value labels and the reset button from the configuration.
+     */
+    void updateAdjustmentControls();
+
     QPointer<QPropertyAnimation> animation_;
 
     QGroupBox* backgroundGroupBox_{nullptr};
@@ -122,6 +135,13 @@ private:
 
     QCheckBox* mirrorModeCheckBox_{nullptr};
     QCheckBox* smoothDisplayCheckBox_{nullptr};
+
+    QSlider* brightnessSlider_{nullptr};
+    QSlider* contrastSlider_{nullptr};
+    QLabel* brightnessValueLabel_{nullptr};
+    QLabel* contrastValueLabel_{nullptr};
+    QCheckBox* autoContrastCheckBox_{nullptr};
+    QPushButton* resetAdjustmentsButton_{nullptr};
 
     QCheckBox* overlayCheckBox_{nullptr};
     QCheckBox* miniMapCheckBox_{nullptr};

@@ -236,6 +236,9 @@ set(app_src
 
     ${CORE_DIR}/color_palette.hpp
 
+    ${CORE_DIR}/display_adjustment.cpp
+    ${CORE_DIR}/display_adjustment.hpp
+
     ${CORE_DIR}/phi_editor.cpp
     ${CORE_DIR}/phi_editor.hpp
 

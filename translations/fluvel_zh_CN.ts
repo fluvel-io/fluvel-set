@@ -616,57 +616,77 @@ R: %3  G: %4  B: %5</translation>
 <context>
     <name>fluvel::DisplaySettingsWidget</name>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="26"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="29"/>
         <source>Image:</source>
         <translation>图像：</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="27"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="30"/>
         <source>Source</source>
         <translation>原始</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="28"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="31"/>
         <source>Preprocessed</source>
         <translation>已预处理</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="47"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="50"/>
         <source>Outer Contour</source>
         <translation>外轮廓</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="59"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="62"/>
         <source>Inner Contour</source>
         <translation>内轮廓</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="67"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="70"/>
         <source>Selfie Mirror</source>
         <translation>镜像（自拍）</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="70"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="73"/>
         <source>Smooth Display</source>
         <translation>平滑显示</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="73"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="101"/>
+        <source>Brightness</source>
+        <translation>亮度</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="104"/>
+        <source>Contrast</source>
+        <translation>对比度</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="95"/>
+        <source>Auto contrast</source>
+        <translation>自动对比度</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="98"/>
+        <source>Reset</source>
+        <translation>重置</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="114"/>
         <source>Rendering:</source>
         <translation>渲染：</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="79"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="123"/>
         <source>Overlay</source>
         <translation>叠加</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="82"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="126"/>
         <source>Mini-map</source>
         <translation>小地图</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="85"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="129"/>
         <source>View</source>
         <translation>视图</translation>
     </message>
@@ -1027,27 +1047,27 @@ Click on Compute again to apply the change.</source>
 <context>
     <name>fluvel::ImageViewerWidget</name>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="486"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="544"/>
         <source>Auto Fit</source>
         <translation>自动调整</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1134"/>
         <source>Mirror On</source>
         <translation>镜像已启用</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1134"/>
         <source>Mirror Off</source>
         <translation>镜像已禁用</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1075"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1139"/>
         <source>Smooth Display On</source>
         <translation>平滑显示已启用</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1076"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1140"/>
         <source>Smooth Display Off</source>
         <translation>平滑显示已禁用</translation>
     </message>

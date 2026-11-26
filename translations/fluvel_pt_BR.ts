@@ -616,57 +616,77 @@ R: %3  G: %4  B: %5</translation>
 <context>
     <name>fluvel::DisplaySettingsWidget</name>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="26"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="29"/>
         <source>Image:</source>
         <translation>Imagem:</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="27"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="30"/>
         <source>Source</source>
         <translation>Original</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="28"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="31"/>
         <source>Preprocessed</source>
         <translation>Pré-processada</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="47"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="50"/>
         <source>Outer Contour</source>
         <translation>Contorno externo</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="59"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="62"/>
         <source>Inner Contour</source>
         <translation>Contorno interno</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="67"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="70"/>
         <source>Selfie Mirror</source>
         <translation>Espelhar (selfie)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="70"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="73"/>
         <source>Smooth Display</source>
         <translation>Exibição suavizada</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="73"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="101"/>
+        <source>Brightness</source>
+        <translation>Brilho</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="104"/>
+        <source>Contrast</source>
+        <translation>Contraste</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="95"/>
+        <source>Auto contrast</source>
+        <translation>Contraste automático</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="98"/>
+        <source>Reset</source>
+        <translation>Redefinir</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="114"/>
         <source>Rendering:</source>
         <translation>Renderização:</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="79"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="123"/>
         <source>Overlay</source>
         <translation>Sobreposição</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="82"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="126"/>
         <source>Mini-map</source>
         <translation>Minimapa</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="85"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="129"/>
         <source>View</source>
         <translation>Exibir</translation>
     </message>
@@ -1027,27 +1047,27 @@ Clique novamente em Calcular para aplicar a alteração.</translation>
 <context>
     <name>fluvel::ImageViewerWidget</name>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="486"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="544"/>
         <source>Auto Fit</source>
         <translation>Ajuste automático</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1134"/>
         <source>Mirror On</source>
         <translation>Espelhamento ativado</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1134"/>
         <source>Mirror Off</source>
         <translation>Espelhamento desativado</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1075"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1139"/>
         <source>Smooth Display On</source>
         <translation>Exibição suavizada ativada</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1076"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1140"/>
         <source>Smooth Display Off</source>
         <translation>Exibição suavizada desativada</translation>
     </message>

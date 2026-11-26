@@ -616,57 +616,77 @@ R: %3  G: %4  B: %5</translation>
 <context>
     <name>fluvel::DisplaySettingsWidget</name>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="26"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="29"/>
         <source>Image:</source>
         <translation>Görüntü:</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="27"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="30"/>
         <source>Source</source>
         <translation>Orijinal</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="28"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="31"/>
         <source>Preprocessed</source>
         <translation>Ön işlenmiş</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="47"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="50"/>
         <source>Outer Contour</source>
         <translation>Dış kontur</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="59"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="62"/>
         <source>Inner Contour</source>
         <translation>İç kontur</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="67"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="70"/>
         <source>Selfie Mirror</source>
         <translation>Ayna (selfie)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="70"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="73"/>
         <source>Smooth Display</source>
         <translation>Yumuşatılmış görüntü</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="73"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="101"/>
+        <source>Brightness</source>
+        <translation>Parlaklık</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="104"/>
+        <source>Contrast</source>
+        <translation>Kontrast</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="95"/>
+        <source>Auto contrast</source>
+        <translation>Otomatik kontrast</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="98"/>
+        <source>Reset</source>
+        <translation>Sıfırla</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="114"/>
         <source>Rendering:</source>
         <translation>Oluşturma:</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="79"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="123"/>
         <source>Overlay</source>
         <translation>Bindirme</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="82"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="126"/>
         <source>Mini-map</source>
         <translation>Mini harita</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="85"/>
+        <location filename="../src/app/ui/components/display_settings_widget.cpp" line="129"/>
         <source>View</source>
         <translation>Görünüm</translation>
     </message>
@@ -1027,27 +1047,27 @@ Değişikliği uygulamak için Hesapla&apos;ya yeniden tıklayın.</translation>
 <context>
     <name>fluvel::ImageViewerWidget</name>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="486"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="544"/>
         <source>Auto Fit</source>
         <translation>Otomatik sığdır</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1134"/>
         <source>Mirror On</source>
         <translation>Ayna etkin</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1070"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1134"/>
         <source>Mirror Off</source>
         <translation>Ayna devre dışı</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1075"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1139"/>
         <source>Smooth Display On</source>
         <translation>Yumuşatılmış görüntü etkin</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1076"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1140"/>
         <source>Smooth Display Off</source>
         <translation>Yumuşatılmış görüntü devre dışı</translation>
     </message>

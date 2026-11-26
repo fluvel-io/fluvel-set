@@ -4,12 +4,15 @@
 #include "display_settings_widget.hpp"
 #include "color_adapters.hpp"
 #include "color_selector_widget.hpp"
+#include "jump_slider.hpp"
 
 #include <QColorDialog>
+#include <QGridLayout>
 #include <QGroupBox>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPropertyAnimation>
+#include <QSignalBlocker>
 #include <QVBoxLayout>
 
 #include <cassert>
@@ -70,10 +73,51 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
     smoothDisplayCheckBox_ = new QCheckBox(tr("Smooth Display"));
     smoothDisplayCheckBox_->setChecked(config_.view.smoothDisplay);
 
+    // Brightness and contrast only change what is drawn on screen.
+    constexpr int kLimit = ViewConfig::kAdjustmentLimit;
+
+    brightnessSlider_ = new JumpSlider(this, Qt::Horizontal);
+    brightnessSlider_->setRange(-kLimit, kLimit);
+    brightnessSlider_->setValue(config_.view.brightness);
+
+    contrastSlider_ = new JumpSlider(this, Qt::Horizontal);
+    contrastSlider_->setRange(-kLimit, kLimit);
+    contrastSlider_->setValue(config_.view.contrast);
+
+    brightnessValueLabel_ = new QLabel;
+    contrastValueLabel_ = new QLabel;
+    for (QLabel* label : {brightnessValueLabel_, contrastValueLabel_})
+    {
+        label->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+        label->setMinimumWidth(label->fontMetrics().horizontalAdvance(QStringLiteral("+100")));
+    }
+
+    autoContrastCheckBox_ = new QCheckBox(tr("Auto contrast"));
+    autoContrastCheckBox_->setChecked(config_.view.autoContrast);
+
+    resetAdjustmentsButton_ = new QPushButton(tr("Reset"));
+
+    auto* adjustmentLayout = new QGridLayout;
+    adjustmentLayout->addWidget(new QLabel(tr("Brightness")), 0, 0);
+    adjustmentLayout->addWidget(brightnessSlider_, 0, 1);
+    adjustmentLayout->addWidget(brightnessValueLabel_, 0, 2);
+    adjustmentLayout->addWidget(new QLabel(tr("Contrast")), 1, 0);
+    adjustmentLayout->addWidget(contrastSlider_, 1, 1);
+    adjustmentLayout->addWidget(contrastValueLabel_, 1, 2);
+    adjustmentLayout->setColumnMinimumWidth(1, 110);
+
+    auto* autoContrastLayout = new QHBoxLayout;
+    autoContrastLayout->addWidget(autoContrastCheckBox_);
+    autoContrastLayout->addStretch();
+    autoContrastLayout->addWidget(resetAdjustmentsButton_);
+
     QGroupBox* renderingGroupBox = new QGroupBox(tr("Rendering:"));
     QVBoxLayout* renderingLayout = new QVBoxLayout;
     renderingLayout->addWidget(mirrorModeCheckBox_);
     renderingLayout->addWidget(smoothDisplayCheckBox_);
+    renderingLayout->addSpacing(6);
+    renderingLayout->addLayout(adjustmentLayout);
+    renderingLayout->addLayout(autoContrastLayout);
     renderingGroupBox->setLayout(renderingLayout);
 
     overlayCheckBox_ = new QCheckBox(tr("Overlay"));
@@ -175,6 +219,58 @@ DisplaySettingsWidget::DisplaySettingsWidget(const DisplayConfig& config, QWidge
                 config_.view.smoothDisplay = checked;
                 emit displayConfigChanged(config_);
             });
+
+    connect(brightnessSlider_, &QSlider::valueChanged, this,
+            [this](int value)
+            { setAdjustments(value, config_.view.contrast, config_.view.autoContrast); });
+
+    connect(contrastSlider_, &QSlider::valueChanged, this,
+            [this](int value)
+            { setAdjustments(config_.view.brightness, value, config_.view.autoContrast); });
+
+    connect(autoContrastCheckBox_, &QCheckBox::toggled, this,
+            [this](bool checked)
+            { setAdjustments(config_.view.brightness, config_.view.contrast, checked); });
+
+    connect(resetAdjustmentsButton_, &QPushButton::clicked, this,
+            [this]() { setAdjustments(0, 0, false); });
+
+    updateAdjustmentControls();
+}
+
+void DisplaySettingsWidget::setAdjustments(int brightness, int contrast, bool autoContrast)
+{
+    config_.view.brightness = brightness;
+    config_.view.contrast = contrast;
+    config_.view.autoContrast = autoContrast;
+
+    // The controls follow the configuration (needed by the reset button), without
+    // triggering their own handlers: the configuration is emitted once, below.
+    {
+        const QSignalBlocker brightnessBlocker(brightnessSlider_);
+        const QSignalBlocker contrastBlocker(contrastSlider_);
+        const QSignalBlocker autoBlocker(autoContrastCheckBox_);
+
+        brightnessSlider_->setValue(brightness);
+        contrastSlider_->setValue(contrast);
+        autoContrastCheckBox_->setChecked(autoContrast);
+    }
+
+    updateAdjustmentControls();
+
+    emit displayConfigChanged(config_);
+}
+
+void DisplaySettingsWidget::updateAdjustmentControls()
+{
+    const auto signedText = [](int value)
+    { return value > 0 ? QStringLiteral("+%1").arg(value) : QString::number(value); };
+
+    brightnessValueLabel_->setText(signedText(config_.view.brightness));
+    contrastValueLabel_->setText(signedText(config_.view.contrast));
+
+    resetAdjustmentsButton_->setEnabled(config_.view.brightness != 0 ||
+                                        config_.view.contrast != 0 || config_.view.autoContrast);
 }
 
 void DisplaySettingsWidget::updateBackgroundAvailability(bool hasPreprocessing)

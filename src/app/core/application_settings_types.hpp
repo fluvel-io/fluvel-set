@@ -256,8 +256,20 @@ struct ViewConfig
     static constexpr bool kDefaultOverlayEnabled{true};
     static constexpr int kDefaultMiniMapSize{160};
 
+    /// Limit of the brightness and contrast adjustments (they go from -limit to +limit).
+    static constexpr int kAdjustmentLimit{100};
+
     bool mirrorMode{kDefaultOptionDisabled};
     bool smoothDisplay{kDefaultOptionDisabled};
+
+    /// Brightness added to the displayed image (0 = unchanged). Screen only, not saved.
+    int brightness{0};
+
+    /// Contrast of the displayed image (0 = unchanged). Screen only, not saved.
+    int contrast{0};
+
+    /// Stretches the intensities of the displayed image to the full scale. Screen only, not saved.
+    bool autoContrast{kDefaultOptionDisabled};
 
     bool algorithmOverlayEnabled{kDefaultOverlayEnabled};
     bool miniMapEnabled{kDefaultOverlayEnabled};
