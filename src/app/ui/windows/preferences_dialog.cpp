@@ -34,6 +34,15 @@ namespace fluvel
 namespace
 {
 
+// A path typed by hand gets no access inside the Flatpak sandbox: only a folder
+// picked with the file dialog (through the portal) is granted. The directory
+// fields are therefore read-only there, and "Browse..." stays the only way in.
+void lockDirectoryEditInFlatpak(QLineEdit* edit)
+{
+    if (qEnvironmentVariableIsSet("FLATPAK_ID"))
+        edit->setReadOnly(true);
+}
+
 QString previewTimestamp()
 {
     return "_" + QDateTime::currentDateTime().toString("yyyy-MM-dd_hh-mm-ss");
@@ -163,6 +172,7 @@ QWidget* PreferencesDialog::createSnapshotSection()
     auto* layout = new QFormLayout(group);
 
     snapshotDirectoryEdit_ = new QLineEdit(group);
+    lockDirectoryEditInFlatpak(snapshotDirectoryEdit_);
     snapshotBaseNameEdit_ = new QLineEdit(group);
     snapshotFormatCombo_ = new QComboBox(group);
     snapshotTimestampCheck_ = new QCheckBox(tr("Append timestamp"), group);
@@ -207,6 +217,7 @@ QWidget* PreferencesDialog::createVideoRecordingSection()
     auto* layout = new QFormLayout(group);
 
     videoDirectoryEdit_ = new QLineEdit(group);
+    lockDirectoryEditInFlatpak(videoDirectoryEdit_);
     videoBaseNameEdit_ = new QLineEdit(group);
     videoCodecCombo_ = new QComboBox(group);
     videoTimestampCheck_ = new QCheckBox(tr("Append timestamp"), group);
