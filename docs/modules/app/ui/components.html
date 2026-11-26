@@ -541,6 +541,7 @@ independent behaviors that can be combined and extended.</p>
 <li><p>pipeline source selection (raw / preprocessed)</p></li>
 <li><p>contour colors</p></li>
 <li><p>display options (flip, smoothing, overlay)</p></li>
+<li><p>brightness, contrast and auto-contrast of the displayed image (screen only)</p></li>
 </ul>
 </p>
 <p>It emits <a class="reference internal" href="#classfluvel_1_1DisplaySettingsWidget_1a5aef30560b309c915aeed4ce189de78b"><span class="std std-ref">displayConfigChanged()</span></a> whenever the configuration is updated. </p>
@@ -645,6 +646,18 @@ independent behaviors that can be combined and extended.</p>
 <dd><p>Animates panel visibility changes. </p>
 </dd></dl>
 
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel21DisplaySettingsWidget14setAdjustmentsEiib">
+<span id="_CPPv3N6fluvel21DisplaySettingsWidget14setAdjustmentsEiib"></span><span id="_CPPv2N6fluvel21DisplaySettingsWidget14setAdjustmentsEiib"></span><span id="fluvel::DisplaySettingsWidget::setAdjustments__i.i.b"></span><span class="target" id="classfluvel_1_1DisplaySettingsWidget_1a0e7b0b626a5520026c197374265ed594"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setAdjustments</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">brightness</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">contrast</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">autoContrast</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel21DisplaySettingsWidget14setAdjustmentsEiib" title="Link to this definition">#</a><br /></dt>
+<dd><p>Sets brightness, contrast and auto-contrast, and emits the new configuration once. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel21DisplaySettingsWidget24updateAdjustmentControlsEv">
+<span id="_CPPv3N6fluvel21DisplaySettingsWidget24updateAdjustmentControlsEv"></span><span id="_CPPv2N6fluvel21DisplaySettingsWidget24updateAdjustmentControlsEv"></span><span id="fluvel::DisplaySettingsWidget::updateAdjustmentControls"></span><span class="target" id="classfluvel_1_1DisplaySettingsWidget_1a5718561b9f88930733cc35337b664bec"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updateAdjustmentControls</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel21DisplaySettingsWidget24updateAdjustmentControlsEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Refreshes the value labels and the reset button from the configuration. </p>
+</dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
@@ -686,6 +699,36 @@ independent behaviors that can be combined and extended.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel21DisplaySettingsWidget22smoothDisplayCheckBox_E">
 <span id="_CPPv3N6fluvel21DisplaySettingsWidget22smoothDisplayCheckBox_E"></span><span id="_CPPv2N6fluvel21DisplaySettingsWidget22smoothDisplayCheckBox_E"></span><span id="fluvel::DisplaySettingsWidget::smoothDisplayCheckBox___QCheckBoxP"></span><span class="target" id="classfluvel_1_1DisplaySettingsWidget_1adf4735ec60a44eeba7d8ec98e28b1943"></span><span class="n"><span class="pre">QCheckBox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">smoothDisplayCheckBox_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">nullptr</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel21DisplaySettingsWidget22smoothDisplayCheckBox_E" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel21DisplaySettingsWidget17brightnessSlider_E">
+<span id="_CPPv3N6fluvel21DisplaySettingsWidget17brightnessSlider_E"></span><span id="_CPPv2N6fluvel21DisplaySettingsWidget17brightnessSlider_E"></span><span id="fluvel::DisplaySettingsWidget::brightnessSlider___QSliderP"></span><span class="target" id="classfluvel_1_1DisplaySettingsWidget_1a6f845374c077b70f0d12babe5e9b90a5"></span><span class="n"><span class="pre">QSlider</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">brightnessSlider_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">nullptr</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel21DisplaySettingsWidget17brightnessSlider_E" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel21DisplaySettingsWidget15contrastSlider_E">
+<span id="_CPPv3N6fluvel21DisplaySettingsWidget15contrastSlider_E"></span><span id="_CPPv2N6fluvel21DisplaySettingsWidget15contrastSlider_E"></span><span id="fluvel::DisplaySettingsWidget::contrastSlider___QSliderP"></span><span class="target" id="classfluvel_1_1DisplaySettingsWidget_1a50e3618f867d8e82e8b90680e1c81e44"></span><span class="n"><span class="pre">QSlider</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">contrastSlider_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">nullptr</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel21DisplaySettingsWidget15contrastSlider_E" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel21DisplaySettingsWidget21brightnessValueLabel_E">
+<span id="_CPPv3N6fluvel21DisplaySettingsWidget21brightnessValueLabel_E"></span><span id="_CPPv2N6fluvel21DisplaySettingsWidget21brightnessValueLabel_E"></span><span id="fluvel::DisplaySettingsWidget::brightnessValueLabel___QLabelP"></span><span class="target" id="classfluvel_1_1DisplaySettingsWidget_1a038b762bee0034b41196b5ce83e39d8b"></span><span class="n"><span class="pre">QLabel</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">brightnessValueLabel_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">nullptr</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel21DisplaySettingsWidget21brightnessValueLabel_E" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel21DisplaySettingsWidget19contrastValueLabel_E">
+<span id="_CPPv3N6fluvel21DisplaySettingsWidget19contrastValueLabel_E"></span><span id="_CPPv2N6fluvel21DisplaySettingsWidget19contrastValueLabel_E"></span><span id="fluvel::DisplaySettingsWidget::contrastValueLabel___QLabelP"></span><span class="target" id="classfluvel_1_1DisplaySettingsWidget_1a2b224c181e1d2776c5acc76acb93661c"></span><span class="n"><span class="pre">QLabel</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">contrastValueLabel_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">nullptr</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel21DisplaySettingsWidget19contrastValueLabel_E" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel21DisplaySettingsWidget21autoContrastCheckBox_E">
+<span id="_CPPv3N6fluvel21DisplaySettingsWidget21autoContrastCheckBox_E"></span><span id="_CPPv2N6fluvel21DisplaySettingsWidget21autoContrastCheckBox_E"></span><span id="fluvel::DisplaySettingsWidget::autoContrastCheckBox___QCheckBoxP"></span><span class="target" id="classfluvel_1_1DisplaySettingsWidget_1aee7330c21239b77e6cde00ab1d7bd360"></span><span class="n"><span class="pre">QCheckBox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">autoContrastCheckBox_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">nullptr</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel21DisplaySettingsWidget21autoContrastCheckBox_E" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel21DisplaySettingsWidget23resetAdjustmentsButton_E">
+<span id="_CPPv3N6fluvel21DisplaySettingsWidget23resetAdjustmentsButton_E"></span><span id="_CPPv2N6fluvel21DisplaySettingsWidget23resetAdjustmentsButton_E"></span><span id="fluvel::DisplaySettingsWidget::resetAdjustmentsButton___QPushButtonP"></span><span class="target" id="classfluvel_1_1DisplaySettingsWidget_1aeb03c6c27791b6e89b2639c7b3d8278b"></span><span class="n"><span class="pre">QPushButton</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">resetAdjustmentsButton_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">nullptr</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6fluvel21DisplaySettingsWidget23resetAdjustmentsButton_E" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -1848,6 +1891,16 @@ independent behaviors that can be combined and extended.</p>
 <dd></dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget10showPixmapERK6QImage">
+<span id="_CPPv3N6fluvel17ImageViewerWidget10showPixmapERK6QImage"></span><span id="_CPPv2N6fluvel17ImageViewerWidget10showPixmapERK6QImage"></span><span id="fluvel::ImageViewerWidget::showPixmap__QImageCR"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1ae5b877d05a2944a712c032308ab11520"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">showPixmap</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QImage</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">shown</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget10showPixmapERK6QImage" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget22refreshDisplayedPixmapEv">
+<span id="_CPPv3N6fluvel17ImageViewerWidget22refreshDisplayedPixmapEv"></span><span id="_CPPv2N6fluvel17ImageViewerWidget22refreshDisplayedPixmapEv"></span><span id="fluvel::ImageViewerWidget::refreshDisplayedPixmap"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1a81870fc12d3ca03cea013c8f4483a7d9"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">refreshDisplayedPixmap</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget22refreshDisplayedPixmapEv" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget15updateSceneRectERK6QImage">
 <span id="_CPPv3N6fluvel17ImageViewerWidget15updateSceneRectERK6QImage"></span><span id="_CPPv2N6fluvel17ImageViewerWidget15updateSceneRectERK6QImage"></span><span id="fluvel::ImageViewerWidget::updateSceneRect__QImageCR"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1a4d42e15ca1f0dcb1d9fde87db2c8d89e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updateSceneRect</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QImage</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">img</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget15updateSceneRectERK6QImage" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
@@ -1963,6 +2016,18 @@ independent behaviors that can be combined and extended.</p>
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN6fluvel17ImageViewerWidget18keepOverlayInPlaceEvRR6Action">
+<span id="_CPPv3I0EN6fluvel17ImageViewerWidget18keepOverlayInPlaceERR6Action"></span><span id="_CPPv2I0EN6fluvel17ImageViewerWidget18keepOverlayInPlaceERR6Action"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Action</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classfluvel_1_1ImageViewerWidget_1ab0eae236b251a5a89028b157c0aeb961"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">keepOverlayInPlace</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN6fluvel17ImageViewerWidget18keepOverlayInPlaceEvRR6Action" title="fluvel::ImageViewerWidget::keepOverlayInPlace::Action"><span class="n"><span class="pre">Action</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">action</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6fluvel17ImageViewerWidget18keepOverlayInPlaceEvRR6Action" title="Link to this definition">#</a><br /></dt>
+<dd><p>Runs an action that moves or scales the view, and keeps the info overlay in place. </p>
+<p>The info overlay is an item of the scene, so it would follow the scene when the view scrolls or zooms. Its position on the screen is read before the action and restored after it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>action</strong> – Callable without parameters, for example a lambda. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget13anchorOverlayEP15OverlayTextItem15OverlayPositionRK7QPointF">
 <span id="_CPPv3N6fluvel17ImageViewerWidget13anchorOverlayEP15OverlayTextItem15OverlayPositionRK7QPointF"></span><span id="_CPPv2N6fluvel17ImageViewerWidget13anchorOverlayEP15OverlayTextItem15OverlayPositionRK7QPointF"></span><span id="fluvel::ImageViewerWidget::anchorOverlay__OverlayTextItemP.OverlayPosition.QPointFCR"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1a17377c6251aac5588ae3ac46a5e857f8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">anchorOverlay</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">OverlayTextItem</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">overlay</span></span>, <a class="reference internal" href="#_CPPv4N6fluvel17ImageViewerWidget15OverlayPositionE" title="fluvel::ImageViewerWidget::OverlayPosition"><span class="n"><span class="pre">OverlayPosition</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6fluvel17ImageViewerWidget15OverlayPositionE" title="fluvel::ImageViewerWidget::OverlayPosition"><span class="n"><span class="pre">OverlayPosition</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6fluvel17ImageViewerWidget15OverlayPosition8TopRightE" title="fluvel::ImageViewerWidget::OverlayPosition::TopRight"><span class="n"><span class="pre">TopRight</span></span></a>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QPointF</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">offset</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget13anchorOverlayEP15OverlayTextItem15OverlayPositionRK7QPointF" title="Link to this definition">#</a><br /></dt>
 <dd><p>Anchors an overlay to a predefined viewport location. </p>
@@ -1999,7 +2064,14 @@ independent behaviors that can be combined and extended.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget19lastDisplayedImage_E">
 <span id="_CPPv3N6fluvel17ImageViewerWidget19lastDisplayedImage_E"></span><span id="_CPPv2N6fluvel17ImageViewerWidget19lastDisplayedImage_E"></span><span id="fluvel::ImageViewerWidget::lastDisplayedImage___QImage"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1ab5549d659b47478d12195f1ce04d6c49"></span><span class="n"><span class="pre">QImage</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lastDisplayedImage_</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget19lastDisplayedImage_E" title="Link to this definition">#</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Original image: pixel values, color picking and exports always read this one. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget16displayAdjuster_E">
+<span id="_CPPv3N6fluvel17ImageViewerWidget16displayAdjuster_E"></span><span id="_CPPv2N6fluvel17ImageViewerWidget16displayAdjuster_E"></span><span id="fluvel::ImageViewerWidget::displayAdjuster___display::DisplayAdjuster"></span><span class="target" id="classfluvel_1_1ImageViewerWidget_1a63277e02852cc15b7ca69c2b5a5a2b7a"></span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel7displayE" title="fluvel::display"><span class="n"><span class="pre">display</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../app_core.html#_CPPv4N6fluvel7display15DisplayAdjusterE" title="fluvel::display::DisplayAdjuster"><span class="n"><span class="pre">DisplayAdjuster</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">displayAdjuster_</span></span></span><a class="headerlink" href="#_CPPv4N6fluvel17ImageViewerWidget16displayAdjuster_E" title="Link to this definition">#</a><br /></dt>
+<dd><p>Prepares the image drawn on screen (brightness, contrast, auto-contrast). </p>
+</dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6fluvel17ImageViewerWidget11viewConfig_E">
@@ -6795,6 +6867,8 @@ used throughout the application.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget15setPanelVisibleEb"><code class="docutils literal notranslate"><span class="pre">setPanelVisible</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget20displayConfigChangedERKN6fluvel13DisplayConfigE"><code class="docutils literal notranslate"><span class="pre">displayConfigChanged</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget7animateEb"><code class="docutils literal notranslate"><span class="pre">animate()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget14setAdjustmentsEiib"><code class="docutils literal notranslate"><span class="pre">setAdjustments()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget24updateAdjustmentControlsEv"><code class="docutils literal notranslate"><span class="pre">updateAdjustmentControls()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget10animation_E"><code class="docutils literal notranslate"><span class="pre">animation_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget19backgroundGroupBox_E"><code class="docutils literal notranslate"><span class="pre">backgroundGroupBox_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget18sourceRadioButton_E"><code class="docutils literal notranslate"><span class="pre">sourceRadioButton_</span></code></a></li>
@@ -6803,6 +6877,12 @@ used throughout the application.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget26innerContourColorSelector_E"><code class="docutils literal notranslate"><span class="pre">innerContourColorSelector_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget19mirrorModeCheckBox_E"><code class="docutils literal notranslate"><span class="pre">mirrorModeCheckBox_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget22smoothDisplayCheckBox_E"><code class="docutils literal notranslate"><span class="pre">smoothDisplayCheckBox_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget17brightnessSlider_E"><code class="docutils literal notranslate"><span class="pre">brightnessSlider_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget15contrastSlider_E"><code class="docutils literal notranslate"><span class="pre">contrastSlider_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget21brightnessValueLabel_E"><code class="docutils literal notranslate"><span class="pre">brightnessValueLabel_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget19contrastValueLabel_E"><code class="docutils literal notranslate"><span class="pre">contrastValueLabel_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget21autoContrastCheckBox_E"><code class="docutils literal notranslate"><span class="pre">autoContrastCheckBox_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget23resetAdjustmentsButton_E"><code class="docutils literal notranslate"><span class="pre">resetAdjustmentsButton_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget16overlayCheckBox_E"><code class="docutils literal notranslate"><span class="pre">overlayCheckBox_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget16miniMapCheckBox_E"><code class="docutils literal notranslate"><span class="pre">miniMapCheckBox_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel21DisplaySettingsWidget7config_E"><code class="docutils literal notranslate"><span class="pre">config_</span></code></a></li>
@@ -6971,6 +7051,8 @@ used throughout the application.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget15displayFrameNowERK12DisplayFrame"><code class="docutils literal notranslate"><span class="pre">displayFrameNow()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget12updatePixmapERK6QImage"><code class="docutils literal notranslate"><span class="pre">updatePixmap()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget16updatePixmapItemERK6QImage"><code class="docutils literal notranslate"><span class="pre">updatePixmapItem()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget10showPixmapERK6QImage"><code class="docutils literal notranslate"><span class="pre">showPixmap()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget22refreshDisplayedPixmapEv"><code class="docutils literal notranslate"><span class="pre">refreshDisplayedPixmap()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget15updateSceneRectERK6QImage"><code class="docutils literal notranslate"><span class="pre">updateSceneRect()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget22handleImageSizeChangedEv"><code class="docutils literal notranslate"><span class="pre">handleImageSizeChanged()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget22handleInteractionWheelEP11QWheelEvent"><code class="docutils literal notranslate"><span class="pre">handleInteractionWheel()</span></code></a></li>
@@ -6990,11 +7072,13 @@ used throughout the application.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget17createOverlayItemEv"><code class="docutils literal notranslate"><span class="pre">createOverlayItem()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK6fluvel17ImageViewerWidget15overlayPositionEPK15OverlayTextItem"><code class="docutils literal notranslate"><span class="pre">overlayPosition()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget11moveOverlayEP15OverlayTextItemRK6QPoint"><code class="docutils literal notranslate"><span class="pre">moveOverlay()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN6fluvel17ImageViewerWidget18keepOverlayInPlaceEvRR6Action"><code class="docutils literal notranslate"><span class="pre">keepOverlayInPlace()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget13anchorOverlayEP15OverlayTextItem15OverlayPositionRK7QPointF"><code class="docutils literal notranslate"><span class="pre">anchorOverlay()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget6scene_E"><code class="docutils literal notranslate"><span class="pre">scene_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget12contentRoot_E"><code class="docutils literal notranslate"><span class="pre">contentRoot_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget11pixmapItem_E"><code class="docutils literal notranslate"><span class="pre">pixmapItem_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget19lastDisplayedImage_E"><code class="docutils literal notranslate"><span class="pre">lastDisplayedImage_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget16displayAdjuster_E"><code class="docutils literal notranslate"><span class="pre">displayAdjuster_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget11viewConfig_E"><code class="docutils literal notranslate"><span class="pre">viewConfig_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget14shapeClipItem_E"><code class="docutils literal notranslate"><span class="pre">shapeClipItem_</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N6fluvel17ImageViewerWidget17shapeOutlineItem_E"><code class="docutils literal notranslate"><span class="pre">shapeOutlineItem_</span></code></a></li>

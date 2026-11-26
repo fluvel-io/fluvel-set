@@ -565,8 +565,11 @@ three listeners react independently:</p>
 <li><p>the <strong>controller</strong> forwards the processing settings to the thread or worker
 (they are applied from the next frame) and restyles the current layers, so
 a display change is visible immediately, even when the video is paused;</p></li>
-<li><p>the <strong>window</strong> applies the view settings (mirror, smoothing, minimap,
-overlay) directly to the viewer, without going through the controller;</p></li>
+<li><p>the <strong>window</strong> applies the view settings (mirror, smoothing, brightness,
+contrast, auto-contrast, minimap, overlay) directly to the viewer, without
+going through the controller. The viewer only hands its images to a
+<code class="docutils literal notranslate"><span class="pre">DisplayAdjuster</span></code>, which prepares the copy drawn on screen and keeps the
+original untouched;</p></li>
 <li><p>the <strong>window</strong> also refreshes its own widgets;</p></li>
 <li><p>the <strong>capture controller</strong> keeps its own copy of the snapshot and recording
 preferences. It never reads the singleton: the window gives it the values at
@@ -636,6 +639,7 @@ apply to this dialog.</p>
 <li class="toctree-l2"><a class="reference internal" href="app_core.html#controllers">Controllers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="app_core.html#execution">Execution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="app_core.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_core.html#display">Display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="app_core.html#video-sources">Video Sources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="app_core.html#video-processing">Video Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="app_core.html#display-layers">Display Layers</a></li>
