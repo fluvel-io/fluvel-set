@@ -24,10 +24,8 @@
     "--socket=pulseaudio",
     "--device=dri",
     "--device=all",
-    "--filesystem=home",
-    "--filesystem=/media",
-    "--filesystem=/run/media",
-    "--filesystem=/mnt"
+    "--filesystem=xdg-pictures",
+    "--filesystem=xdg-videos"
   ],
 
   "modules": [
