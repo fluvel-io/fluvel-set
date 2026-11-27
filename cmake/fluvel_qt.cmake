@@ -26,7 +26,7 @@ if(FLUVEL_USE_QML)
     )
 endif()
 
-find_package(Qt6 REQUIRED COMPONENTS ${QT_COMPONENTS})
+find_package(Qt6 6.7 REQUIRED COMPONENTS ${QT_COMPONENTS})
 
 if(COMMAND qt_policy)
     qt_policy(SET QTP0002 NEW)

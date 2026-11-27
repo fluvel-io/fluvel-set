@@ -213,7 +213,7 @@ Some components (such as additional UI technologies and language integrations) a
 Additional dependencies:
 
 - Qt6 (Core, Gui, Widgets, Multimedia, MultimediaWidgets, Svg, LinguistTools),
-  tested with Qt 6.9 and 6.11
+  Qt 6.7 or later (required for `QIcon::ThemeIcon`), tested with Qt 6.9 and 6.11
 
 Optional:
 
