@@ -67,6 +67,8 @@ Video Sources
 
 .. doxygenfile:: media_video_source.hpp
 
+.. doxygenfile:: media_resume_store.hpp
+
 
 Video Processing
 ----------------
