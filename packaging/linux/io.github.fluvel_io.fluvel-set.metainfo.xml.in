@@ -8,7 +8,7 @@
 
   <summary>Level-set image segmentation</summary>
 
-  <summary xml:lang="fr">Segmentation d’image par level-set</summary>
+  <summary xml:lang="fr">Segmentation d’images par level-set</summary>
 
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>CECILL-2.1-only</project_license>
@@ -29,13 +29,13 @@
     </p>
 
     <p xml:lang="fr">
-      Fluvel Set est une application de segmentation d’image orientée recherche,
+      Fluvel Set est une application de segmentation d’images orientée recherche,
       conçue pour des expérimentations rapides et efficaces avec des méthodes
-      de contours actifs basées sur les ensembles de niveaux.
+      de contours actifs de type level-set.
     </p>
 
     <p xml:lang="fr">
-      Elle propose un traitement d’image en temps réel, la gestion de flux vidéo,
+      Elle propose un traitement d’images en temps réel, la gestion de flux vidéo,
       des outils de prétraitement ainsi que des métriques d’évaluation
       quantitatives telles que la distance de Hausdorff pour l’analyse
       de segmentation.
