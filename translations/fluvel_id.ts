@@ -1393,32 +1393,32 @@ atau pilih Berkas → Buka</translation>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="217"/>
         <source>Media playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Pemutaran media</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="220"/>
         <source>Ask</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanya</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="221"/>
         <source>Always resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Selalu lanjutkan</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="222"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan pernah</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="224"/>
         <source>What to do when a media file that was left unfinished is opened again. With &quot;Never&quot;, playback positions are not remembered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tindakan saat file media yang belum selesai diputar dibuka kembali. Dengan “Jangan pernah”, posisi pemutaran tidak diingat.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="228"/>
         <source>Resume playback:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lanjutkan pemutaran:</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="235"/>
@@ -2119,12 +2119,12 @@ atau klik Buka...</translation>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2089"/>
         <source>Resume playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Lanjutkan pemutaran</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2090"/>
         <source>Resume from %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Lanjutkan dari %1?</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2095"/>
@@ -2134,7 +2134,7 @@ atau klik Buka...</translation>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2096"/>
         <source>Start over</source>
-        <translation type="unfinished"></translation>
+        <translation>Mulai dari awal</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2217"/>

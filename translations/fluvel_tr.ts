@@ -1393,32 +1393,32 @@ veya Dosya → Aç&apos;ı seçin</translation>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="217"/>
         <source>Media playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Medya oynatma</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="220"/>
         <source>Ask</source>
-        <translation type="unfinished"></translation>
+        <translation>Sor</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="221"/>
         <source>Always resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Her zaman devam et</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="222"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Asla</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="224"/>
         <source>What to do when a media file that was left unfinished is opened again. With &quot;Never&quot;, playback positions are not remembered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yarım bırakılmış bir medya dosyası yeniden açıldığında ne yapılacağını belirler. “Asla” seçildiğinde oynatma konumları hatırlanmaz.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="228"/>
         <source>Resume playback:</source>
-        <translation type="unfinished"></translation>
+        <translation>Oynatmaya devam et:</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="235"/>
@@ -2119,12 +2119,12 @@ veya Aç&apos;a tıklayın...</translation>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2089"/>
         <source>Resume playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Oynatmaya devam et</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2090"/>
         <source>Resume from %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 konumundan devam edilsin mi?</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2095"/>
@@ -2134,7 +2134,7 @@ veya Aç&apos;a tıklayın...</translation>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2096"/>
         <source>Start over</source>
-        <translation type="unfinished"></translation>
+        <translation>Baştan başla</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2217"/>

@@ -1393,32 +1393,32 @@ o scegli File → Apri</translation>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="217"/>
         <source>Media playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Riproduzione multimediale</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="220"/>
         <source>Ask</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiedi</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="221"/>
         <source>Always resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Riprendi sempre</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="222"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Mai</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="224"/>
         <source>What to do when a media file that was left unfinished is opened again. With &quot;Never&quot;, playback positions are not remembered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cosa fare quando si riapre un file multimediale lasciato a metà. Con «Mai», le posizioni di riproduzione non vengono memorizzate.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="228"/>
         <source>Resume playback:</source>
-        <translation type="unfinished"></translation>
+        <translation>Riprendi la riproduzione:</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="235"/>
@@ -2119,12 +2119,12 @@ o fai clic su Apri...</translation>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2089"/>
         <source>Resume playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Riprendi la riproduzione</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2090"/>
         <source>Resume from %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Riprendere da %1?</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2095"/>
@@ -2134,7 +2134,7 @@ o fai clic su Apri...</translation>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2096"/>
         <source>Start over</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricomincia dall&apos;inizio</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2217"/>

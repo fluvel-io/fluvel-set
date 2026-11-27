@@ -1393,32 +1393,32 @@ oder Datei → Öffnen wählen</translation>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="217"/>
         <source>Media playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Medienwiedergabe</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="220"/>
         <source>Ask</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachfragen</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="221"/>
         <source>Always resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Immer fortsetzen</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="222"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="224"/>
         <source>What to do when a media file that was left unfinished is opened again. With &quot;Never&quot;, playback positions are not remembered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Was geschehen soll, wenn eine nicht zu Ende abgespielte Mediendatei erneut geöffnet wird. Bei „Nie“ werden Wiedergabepositionen nicht gespeichert.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="228"/>
         <source>Resume playback:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiedergabe fortsetzen:</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="235"/>
@@ -2119,12 +2119,12 @@ oder auf Öffnen klicken...</translation>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2089"/>
         <source>Resume playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiedergabe fortsetzen</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2090"/>
         <source>Resume from %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ab %1 fortsetzen?</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2095"/>
@@ -2134,7 +2134,7 @@ oder auf Öffnen klicken...</translation>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2096"/>
         <source>Start over</source>
-        <translation type="unfinished"></translation>
+        <translation>Von vorn beginnen</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2217"/>

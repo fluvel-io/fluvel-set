@@ -1393,32 +1393,32 @@ hoặc chọn Tệp → Mở</translation>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="217"/>
         <source>Media playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Phát phương tiện</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="220"/>
         <source>Ask</source>
-        <translation type="unfinished"></translation>
+        <translation>Hỏi</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="221"/>
         <source>Always resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Luôn tiếp tục</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="222"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Không bao giờ</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="224"/>
         <source>What to do when a media file that was left unfinished is opened again. With &quot;Never&quot;, playback positions are not remembered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Việc cần làm khi mở lại tệp phương tiện đang xem dở. Với “Không bao giờ”, vị trí phát sẽ không được ghi nhớ.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="228"/>
         <source>Resume playback:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiếp tục phát:</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="235"/>
@@ -2119,12 +2119,12 @@ hoặc nhấp Mở...</translation>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2089"/>
         <source>Resume playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiếp tục phát</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2090"/>
         <source>Resume from %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiếp tục từ %1?</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2095"/>
@@ -2134,7 +2134,7 @@ hoặc nhấp Mở...</translation>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2096"/>
         <source>Start over</source>
-        <translation type="unfinished"></translation>
+        <translation>Phát lại từ đầu</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2217"/>
