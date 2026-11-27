@@ -1028,8 +1028,8 @@ Returns -1 for interior side, +1 for exterior side. </p>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9fluvel_ip11speed_value16getDiscreteSpeedEi">
-<span id="_CPPv3N9fluvel_ip11speed_value16getDiscreteSpeedEi"></span><span id="_CPPv2N9fluvel_ip11speed_value16getDiscreteSpeedEi"></span><span id="fluvel_ip::speed_value::getDiscreteSpeed__iCE"></span><span class="target" id="namespacefluvel__ip_1_1speed__value_1a8046720a6e4890584054661c72a60c26"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N9fluvel_ip10SpeedValueE" title="fluvel_ip::SpeedValue"><span class="n"><span class="pre">SpeedValue</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getDiscreteSpeed</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9fluvel_ip11speed_value16getDiscreteSpeedEi" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N9fluvel_ip11speed_value16getDiscreteSpeedE7int64_t">
+<span id="_CPPv3N9fluvel_ip11speed_value16getDiscreteSpeedE7int64_t"></span><span id="_CPPv2N9fluvel_ip11speed_value16getDiscreteSpeedE7int64_t"></span><span id="fluvel_ip::speed_value::getDiscreteSpeed__int64_tCE"></span><span class="target" id="namespacefluvel__ip_1_1speed__value_1a535ad613745fafceb981966146aed046"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N9fluvel_ip10SpeedValueE" title="fluvel_ip::SpeedValue"><span class="n"><span class="pre">SpeedValue</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getDiscreteSpeed</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9fluvel_ip11speed_value16getDiscreteSpeedE7int64_t" title="Link to this definition">#</a><br /></dt>
 <dd><p>Convert an integer speed to a discrete speed value. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2342,6 +2342,13 @@ Returns -1 for interior side, +1 for exterior side. </p>
 <dd><p>Default weight for outside region. </p>
 </dd></dl>
 
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9fluvel_ip12RegionParams10kMaxWeightE">
+<span id="_CPPv3N9fluvel_ip12RegionParams10kMaxWeightE"></span><span id="_CPPv2N9fluvel_ip12RegionParams10kMaxWeightE"></span><span id="fluvel_ip::RegionParams::kMaxWeight__i"></span><span class="target" id="structfluvel__ip_1_1RegionParams_1ad4d1685552298bb6ebdbc7e31096849a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">kMaxWeight</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">100</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N9fluvel_ip12RegionParams10kMaxWeightE" title="Link to this definition">#</a><br /></dt>
+<dd><p>Upper bound of the weights (lambdas and per-channel weights). </p>
+<p>The weights are integers in [1, kMaxWeight]: two of them can differ by a factor 100 at most. The speed is computed on integers, and this bound keeps it far from the limits of the integer types (see the speed models). </p>
+</dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-static-functions">Protected Static Functions</p>
@@ -2349,7 +2356,7 @@ Returns -1 for interior side, +1 for exterior side. </p>
 <dt class="sig sig-object cpp" id="_CPPv4N9fluvel_ip12RegionParams9normalizeEi">
 <span id="_CPPv3N9fluvel_ip12RegionParams9normalizeEi"></span><span id="_CPPv2N9fluvel_ip12RegionParams9normalizeEi"></span><span id="fluvel_ip::RegionParams::normalize__i"></span><span class="target" id="structfluvel__ip_1_1RegionParams_1acdec83de7ff9b3f3bd5df599b0db1441"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">normalize</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">weight</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9fluvel_ip12RegionParams9normalizeEi" title="Link to this definition">#</a><br /></dt>
 <dd><p>Normalize a weight value. </p>
-<p>Ensures that weights are strictly positive.</p>
+<p>Ensures that weights are in [1, kMaxWeight].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>weight</strong> – Input weight. </p>
@@ -3305,7 +3312,7 @@ Returns -1 for interior side, +1 for exterior side. </p>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip11speed_valueE"><code class="docutils literal notranslate"><span class="pre">fluvel_ip::speed_value</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip11speed_value16getDiscreteSpeedEi"><code class="docutils literal notranslate"><span class="pre">getDiscreteSpeed()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip11speed_value16getDiscreteSpeedE7int64_t"><code class="docutils literal notranslate"><span class="pre">getDiscreteSpeed()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip27kInitialSpeedArrayAllocSizeE"><code class="docutils literal notranslate"><span class="pre">kInitialSpeedArrayAllocSize</span></code></a></li>
@@ -3498,6 +3505,7 @@ Returns -1 for interior side, +1 for exterior side. </p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip12RegionParams9lambdaOutE"><code class="docutils literal notranslate"><span class="pre">lambdaOut</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip12RegionParams16kDefaultLambdaInE"><code class="docutils literal notranslate"><span class="pre">kDefaultLambdaIn</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip12RegionParams17kDefaultLambdaOutE"><code class="docutils literal notranslate"><span class="pre">kDefaultLambdaOut</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip12RegionParams10kMaxWeightE"><code class="docutils literal notranslate"><span class="pre">kMaxWeight</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip12RegionParams9normalizeEi"><code class="docutils literal notranslate"><span class="pre">normalize()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N9fluvel_ip12RegionParams9normalizeEv"><code class="docutils literal notranslate"><span class="pre">normalize()</span></code></a></li>
 </ul>
