@@ -321,14 +321,16 @@ struct Components_3i
 using Color_3i = Components_3i;
 
 /**
- * @brief Scale normalized values to [0,255] and round.
+ * @brief Round three components to the nearest integers.
+ *
+ * Used for the Lab and Luv values, which are not normalized: L is in [0, 100]
+ * and the other two components are roughly in [-130, 230]. They stay in the
+ * same order of magnitude as the RGB and YUV components, in [0, 255].
  */
-inline Color_3i scaleAndRound(float c1, float c2, float c3)
+inline Color_3i roundComponents(float c1, float c2, float c3)
 {
-    constexpr float scale{255.f};
-
-    return {static_cast<int>(std::lround(scale * c1)), static_cast<int>(std::lround(scale * c2)),
-            static_cast<int>(std::lround(scale * c3))};
+    return {static_cast<int>(std::lround(c1)), static_cast<int>(std::lround(c2)),
+            static_cast<int>(std::lround(c3))};
 }
 
 namespace color

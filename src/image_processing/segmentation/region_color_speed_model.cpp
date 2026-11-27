@@ -17,8 +17,8 @@ namespace
 
 /// Sum over the components of weight * (a - b)^2, computed on 64 bits.
 ///
-/// The Lab and Luv components are scaled by 255 (see scaleAndRound): the square
-/// of a difference reaches several billions, which does not fit in an int.
+/// With 64 bits, the sum cannot overflow whatever the color space: at most
+/// kMaxWeight * 3 * (a few hundreds)^2.
 int64_t weightedSquaredDistance(const Color_3i& weights, const Color_3i& a, const Color_3i& b)
 {
     const auto term = [](int weight, int ca, int cb)
@@ -121,13 +121,13 @@ Color_3i RegionColorSpeedModel::rgbToColor(const Rgb_uc& rgb) const
         case ColorSpaceOption::Lab:
         {
             const auto col = color::rgbToLab(rgb);
-            return scaleAndRound(col.L, col.a, col.b);
+            return roundComponents(col.L, col.a, col.b);
         }
 
         case ColorSpaceOption::Luv:
         {
             const auto col = color::rgbToLuv(rgb);
-            return scaleAndRound(col.L, col.u, col.v);
+            return roundComponents(col.L, col.u, col.v);
         }
 
         case ColorSpaceOption::RGB:
