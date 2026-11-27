@@ -86,9 +86,18 @@ void validateActiveContourParams(const fluvel_ip::ActiveContourParams& params)
 
 void validateRegionParams(const fluvel_ip::RegionColorParams& params)
 {
+    constexpr int kMax = fluvel_ip::RegionParams::kMaxWeight;
+    const std::string maxText = std::to_string(kMax);
+
     if (params.lambdaIn < 0 || params.lambdaOut < 0)
         throw py::value_error("lambda_in and lambda_out must be >= 0");
 
+    if (params.lambdaIn > kMax || params.lambdaOut > kMax)
+        throw py::value_error("lambda_in and lambda_out must be <= " + maxText);
+
     if (params.weights.c1 < 0 || params.weights.c2 < 0 || params.weights.c3 < 0)
         throw py::value_error("weights must be >= 0");
+
+    if (params.weights.c1 > kMax || params.weights.c2 > kMax || params.weights.c3 > kMax)
+        throw py::value_error("weights must be <= " + maxText);
 }

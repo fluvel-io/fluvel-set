@@ -187,6 +187,9 @@ ColorSpaceOption:
 Larger values increase the contribution of the corresponding
 channel to the region energy computation.
 
+When used as weights, each component is an integer in [1, 100]
+(a ratio of 100 at most between two channels).
+
 Parameters
 ----------
 c1
@@ -280,13 +283,13 @@ multi-channel images.
 Attributes
 ----------
 lambda_in : int
-    Weight of the inside homogeneity term (λ₁).
+    Weight of the inside homogeneity term (λ₁), in [1, 100].
 
     Larger values increase the influence of the region inside
     the contour during energy minimization.
 
 lambda_out : int
-    Weight of the outside homogeneity term (λ₂).
+    Weight of the outside homogeneity term (λ₂), in [1, 100].
 
     Larger values increase the influence of the region outside
     the contour during energy minimization.
@@ -295,7 +298,8 @@ color_space : ColorSpaceOption
     Color space used for region statistics and energy computation.
 
 weights : Components3i
-    Per-channel weights used during energy computation.
+    Per-channel weights used during energy computation,
+    each in [1, 100].
 
     The interpretation of each component depends on the selected
     color space:

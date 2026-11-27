@@ -12,6 +12,24 @@
 namespace fluvel_ip
 {
 
+namespace
+{
+
+/// Sum over the components of weight * (a - b)^2, computed on 64 bits.
+///
+/// The Lab and Luv components are scaled by 255 (see scaleAndRound): the square
+/// of a difference reaches several billions, which does not fit in an int.
+int64_t weightedSquaredDistance(const Color_3i& weights, const Color_3i& a, const Color_3i& b)
+{
+    const auto term = [](int weight, int ca, int cb)
+    { return int64_t{weight} * math::square(int64_t{ca} - cb); };
+
+    return term(weights.c1, a.c1, b.c1) + term(weights.c2, a.c2, b.c2) +
+           term(weights.c3, a.c3, b.c3);
+}
+
+} // namespace
+
 RegionColorSpeedModel::RegionColorSpeedModel(const RegionColorParams& params)
     : params_(params)
 {
@@ -126,21 +144,16 @@ void RegionColorSpeedModel::computeSpeed(ContourPoint& point, const DiscreteLeve
 
     const auto col = rgbToColor(rgb);
 
-    const int lambdaOut = params_.lambdaOut;
-    const int lambdaIn = params_.lambdaIn;
+    // Only the sign of the speed is used. The weights are at most
+    // RegionParams::kMaxWeight: with 64 bits the sum below stays far from the
+    // limit, even for the extreme values of Lab and Luv.
+    const int64_t lambdaOut = params_.lambdaOut;
+    const int64_t lambdaIn = params_.lambdaIn;
 
-    const auto weights = params_.weights;
-    const auto meanColorOut = meanColorOut_;
-    const auto meanColorIn = meanColorIn_;
+    const int64_t speedOut = weightedSquaredDistance(params_.weights, col, meanColorOut_);
+    const int64_t speedIn = weightedSquaredDistance(params_.weights, col, meanColorIn_);
 
-    const Color_3i speedOut = weights * math::square(col - meanColorOut);
-    const Color_3i speedIn = weights * math::square(col - meanColorIn);
-
-    const int scalarSpeedOut = speedOut.scalar();
-    const int scalarSpeedIn = speedIn.scalar();
-
-    point.setSpeed(
-        speed_value::getDiscreteSpeed(lambdaOut * scalarSpeedOut - lambdaIn * scalarSpeedIn));
+    point.setSpeed(speed_value::getDiscreteSpeed(lambdaOut * speedOut - lambdaIn * speedIn));
 }
 
 void RegionColorSpeedModel::onSwitch(const ContourPoint& point, SwitchDirection direction)

@@ -256,6 +256,32 @@ def test_invalid_region_parameters():
         fluvel.active_contour(make_bgr(), region_model_params=region)
 
 
+@pytest.mark.parametrize("field", ["lambda_in", "lambda_out"])
+def test_region_lambda_above_the_maximum_is_refused(field):
+    region = fluvel.RegionModelParams()
+    setattr(region, field, 101)
+
+    with pytest.raises(ValueError):
+        fluvel.active_contour(make_gray(), region_model_params=region)
+
+
+def test_region_weight_above_the_maximum_is_refused():
+    region = fluvel.RegionModelParams()
+    region.weights = fluvel.Components3i(1, 101, 1)
+
+    with pytest.raises(ValueError):
+        fluvel.active_contour(make_bgr(), region_model_params=region)
+
+
+def test_region_parameters_at_the_maximum_are_accepted():
+    region = fluvel.RegionModelParams()
+    region.lambda_in = 100
+    region.lambda_out = 100
+    region.weights = fluvel.Components3i(100, 100, 100)
+
+    fluvel.active_contour(make_bgr(), region_model_params=region)
+
+
 @pytest.mark.parametrize("radius", [0, -3])
 def test_invalid_radius(radius):
     with pytest.raises(ValueError):

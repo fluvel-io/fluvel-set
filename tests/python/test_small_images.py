@@ -407,6 +407,38 @@ def test_active_contour_color_spaces_on_tiny_images(shape, space):
     check_well_formed(fluvel.active_contour(image, region_model_params=params), shape)
 
 
+def extreme_region_params(space=None):
+    params = fluvel.RegionModelParams()
+    params.lambda_in = 100
+    params.lambda_out = 100
+    params.weights = fluvel.Components3i(100, 100, 100)
+
+    if space is not None:
+        params.color_space = space
+
+    return params
+
+
+@pytest.mark.parametrize("space", list(fluvel.ColorSpaceOption.__members__.values()))
+@pytest.mark.parametrize("shape", [(2, 2), (4, 6), (16, 16)])
+def test_active_contour_with_the_maximum_weights_on_extreme_colors(shape, space):
+    # Black and white pixels give the largest color differences: the speed
+    # must not overflow, whatever the color space.
+    image = np.where(random_image(shape, 3, seed=5) > 127, 255, 0).astype(np.uint8)
+    params = extreme_region_params(space)
+
+    check_well_formed(fluvel.active_contour(image, region_model_params=params), shape)
+
+
+@pytest.mark.parametrize("shape", [(2, 2), (4, 6), (16, 16)])
+def test_active_contour_with_the_maximum_weights_on_extreme_gray(shape):
+    image = np.where(random_image(shape, None, seed=5) > 127, 255, 0).astype(np.uint8)
+
+    check_well_formed(
+        fluvel.active_contour(image, region_model_params=extreme_region_params()), shape
+    )
+
+
 @pytest.mark.parametrize("channels", CHANNELS)
 @pytest.mark.parametrize("name", ["dilate", "erode"])
 @pytest.mark.parametrize("radius", [1, 2, 3, 7, 40])

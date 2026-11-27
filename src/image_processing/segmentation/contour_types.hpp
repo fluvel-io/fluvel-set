@@ -6,6 +6,7 @@
 #include "grid2d.hpp"
 
 #include <cassert>
+#include <cstdint>
 #include <string_view>
 #include <vector>
 
@@ -122,9 +123,9 @@ namespace speed_value
  * @param speed Signed speed value.
  * @return Corresponding discrete speed.
  */
-constexpr SpeedValue getDiscreteSpeed(int speed);
+constexpr SpeedValue getDiscreteSpeed(int64_t speed);
 
-constexpr SpeedValue getDiscreteSpeed(int speed)
+constexpr SpeedValue getDiscreteSpeed(int64_t speed)
 {
     if (speed < 0)
         return SpeedValue::GoInward;

@@ -10,9 +10,15 @@
 
 #include <cassert>
 #include <cmath>
+#include <cstdint>
+#include <limits>
 
 namespace fluvel_ip
 {
+
+// The speed is computed on int: the largest term is kMaxWeight * 255^2.
+static_assert(int64_t{RegionParams::kMaxWeight} * 255 * 255 <= std::numeric_limits<int>::max(),
+              "the gray speed must fit in an int");
 
 RegionGraySpeedModel::RegionGraySpeedModel(
     const RegionParams& params) /* optional parameter with RegionParams() */
@@ -91,6 +97,8 @@ void RegionGraySpeedModel::computeSpeed(ContourPoint& point, const DiscreteLevel
     const int diffOut = pxl - meanOutside_;
     const int diffIn = pxl - meanInside_;
 
+    // The weights are at most RegionParams::kMaxWeight and a difference is at
+    // most 255: the speed fits in an int (checked at the top of this file).
     const int speed =
         params_.lambdaOut * (math::square(diffOut)) - params_.lambdaIn * (math::square(diffIn));
 

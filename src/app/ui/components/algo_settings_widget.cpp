@@ -45,13 +45,13 @@ AlgoSettingsWidget::AlgoSettingsWidget(ActiveContourConfig& config, QWidget* par
     lambdaOutSpin_ = new QSpinBox;
     lambdaOutSpin_->setSingleStep(1);
     lambdaOutSpin_->setMinimum(1);
-    lambdaOutSpin_->setMaximum(100000);
+    lambdaOutSpin_->setMaximum(fluvel_ip::RegionParams::kMaxWeight);
     lambdaOutSpin_->setToolTip(tr("Weight of the outside homogeneity criterion."));
 
     lambdaInSpin_ = new QSpinBox;
     lambdaInSpin_->setSingleStep(1);
     lambdaInSpin_->setMinimum(1);
-    lambdaInSpin_->setMaximum(100000);
+    lambdaInSpin_->setMaximum(fluvel_ip::RegionParams::kMaxWeight);
     lambdaInSpin_->setToolTip(tr("Weight of the inside homogeneity criterion."));
 
     QFormLayout* lambdaLayout = new QFormLayout;
@@ -82,17 +82,17 @@ AlgoSettingsWidget::AlgoSettingsWidget(ActiveContourConfig& config, QWidget* par
     alphaSpin_ = new QSpinBox;
     alphaSpin_->setSingleStep(1);
     alphaSpin_->setMinimum(1);
-    alphaSpin_->setMaximum(100000);
+    alphaSpin_->setMaximum(fluvel_ip::RegionParams::kMaxWeight);
 
     betaSpin_ = new QSpinBox;
     betaSpin_->setSingleStep(1);
     betaSpin_->setMinimum(1);
-    betaSpin_->setMaximum(100000);
+    betaSpin_->setMaximum(fluvel_ip::RegionParams::kMaxWeight);
 
     gammaSpin_ = new QSpinBox;
     gammaSpin_->setSingleStep(1);
     gammaSpin_->setMinimum(1);
-    gammaSpin_->setMaximum(100000);
+    gammaSpin_->setMaximum(fluvel_ip::RegionParams::kMaxWeight);
 
     QFormLayout* colorWeightsLayout = new QFormLayout;
     colorWeightsLayout->addRow(tr("1st component weight: "), alphaSpin_);

@@ -95,7 +95,8 @@ void validateActiveContourParams(const fluvel_ip::ActiveContourParams& params);
 /**
  * @brief Validate the parameters of the region-based model.
  *
- * Requires lambda_in >= 0, lambda_out >= 0 and non-negative weights.
+ * Requires lambda_in, lambda_out and the weights to be in [0, 100]
+ * (RegionParams::kMaxWeight is the upper bound; 0 is raised to 1 by the model).
  *
  * @throws py::value_error If a parameter is out of range.
  */

@@ -5,6 +5,7 @@
 
 #include "color.hpp"
 
+#include <algorithm>
 #include <compare>
 #include <string_view>
 
@@ -24,6 +25,15 @@ struct RegionParams
 
     /// Default weight for outside region.
     static constexpr int kDefaultLambdaOut{1};
+
+    /**
+     * @brief Upper bound of the weights (lambdas and per-channel weights).
+     *
+     * The weights are integers in [1, kMaxWeight]: two of them can differ by
+     * a factor 100 at most. The speed is computed on integers, and this bound
+     * keeps it far from the limits of the integer types (see the speed models).
+     */
+    static constexpr int kMaxWeight{100};
 
     /**
      * @brief Weight of the inside homogeneity term (λ₁ in Chan-Vese).
@@ -88,17 +98,14 @@ protected:
     /**
      * @brief Normalize a weight value.
      *
-     * Ensures that weights are strictly positive.
+     * Ensures that weights are in [1, kMaxWeight].
      *
      * @param weight Input weight.
      * @return Normalized weight.
      */
     static int normalize(int weight)
     {
-        if (weight < 1)
-            weight = 1;
-
-        return weight;
+        return std::clamp(weight, 1, kMaxWeight);
     }
 
 private:
