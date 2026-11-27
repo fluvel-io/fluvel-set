@@ -280,6 +280,12 @@ void ImageWindow::setupActions()
     videoSessionAct_->setChecked(false);
     videoSessionAct_->setStatusTip(tr("Open a video session."));
 
+    volumeSessionAct_ = new QAction(tr("Vo&lume"), this);
+    volumeSessionAct_->setShortcut(tr("Ctrl+Shift+V"));
+    volumeSessionAct_->setCheckable(true);
+    volumeSessionAct_->setChecked(false);
+    volumeSessionAct_->setStatusTip(tr("Open a volume session."));
+
     quitAct_ = new QAction(tr("&Quit"), this);
     quitAct_->setShortcut(QKeySequence::Quit);
 
@@ -344,6 +350,7 @@ void ImageWindow::setupMenus()
     sessionMenu_ = new QMenu(tr("&Session"), this);
     sessionMenu_->addAction(imageSessionAct_);
     sessionMenu_->addAction(videoSessionAct_);
+    sessionMenu_->addAction(volumeSessionAct_);
     sessionMenu_->addSeparator();
     sessionMenu_->addAction(quitAct_);
 
@@ -418,6 +425,7 @@ void ImageWindow::setupChildWindows()
 #if defined(FLUVEL_ENABLE_CAMERA_SOURCE) && defined(FLUVEL_ENABLE_MEDIA_SOURCE)
     videoWindow_ = std::make_unique<VideoWindow>();
 #endif
+    volumeWindow_ = std::make_unique<VolumeWindow>();
     hausdorffWindow_ = std::make_unique<HausdorffWindow>();
     histogramWindow_ = std::make_unique<HistogramWindow>();
 
@@ -455,6 +463,12 @@ void ImageWindow::setupConnections()
     connect(videoWindow_.get(), &VideoWindow::videoWindowClosed, this,
             &ImageWindow::onVideoWindowClosed);
 #endif
+
+    // Same for the volume session action.
+    connect(volumeWindow_.get(), &VolumeWindow::volumeWindowShown, this,
+            &ImageWindow::onVolumeWindowShown);
+    connect(volumeWindow_.get(), &VolumeWindow::volumeWindowClosed, this,
+            &ImageWindow::onVolumeWindowClosed);
 
     setupFileEventConnections();
 
@@ -662,6 +676,9 @@ void ImageWindow::setupUserActionsConnections()
     connect(videoSessionAct_, &QAction::triggered, this, &ImageWindow::onStartVideoActionTriggered);
 #endif
 
+    connect(volumeSessionAct_, &QAction::triggered, this,
+            &ImageWindow::onStartVolumeActionTriggered);
+
     connect(quitAct_, &QAction::triggered, this, &ImageWindow::close);
 
     // ---   2nd menu   ---
@@ -848,6 +865,18 @@ void ImageWindow::onStartVideoActionTriggered()
 }
 #endif
 
+void ImageWindow::onStartVolumeActionTriggered()
+{
+    assert(volumeWindow_);
+
+    if (!volumeWindow_->isVisible())
+        volumeWindow_->show();
+    else
+        volumeWindow_->activateWindow();
+
+    volumeSessionAct_->setChecked(volumeWindow_->isVisible());
+}
+
 void ImageWindow::closeEvent(QCloseEvent* event)
 {
     auto& config = ApplicationSettings::instance();
@@ -952,6 +981,16 @@ void ImageWindow::onVideoWindowShown()
 void ImageWindow::onVideoWindowClosed()
 {
     videoSessionAct_->setChecked(false);
+}
+
+void ImageWindow::onVolumeWindowShown()
+{
+    volumeSessionAct_->setChecked(true);
+}
+
+void ImageWindow::onVolumeWindowClosed()
+{
+    volumeSessionAct_->setChecked(false);
 }
 
 void ImageWindow::showErrorMessage(const QString& msg)

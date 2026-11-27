@@ -7,6 +7,7 @@
 #include "hausdorff_window.hpp"
 #include "histogram_window.hpp"
 #include "video_window.hpp"
+#include "volume_window.hpp"
 
 #include <QIcon>
 #include <QImage>
@@ -139,6 +140,8 @@ private:
     void onStateChanged(fluvel::WorkerState state);
     void onVideoWindowShown();
     void onVideoWindowClosed();
+    void onVolumeWindowShown();
+    void onVolumeWindowClosed();
 
     // --- Setup ---
     void setupUi();
@@ -166,6 +169,7 @@ private:
     void showWarningMessage(const QString& msg);
 
     void onImageSessionActionTriggered();
+    void onStartVolumeActionTriggered();
 
 #if defined(FLUVEL_ENABLE_CAMERA_SOURCE) && defined(FLUVEL_ENABLE_MEDIA_SOURCE)
     void onStartVideoActionTriggered();
@@ -185,6 +189,7 @@ private:
 #if defined(FLUVEL_ENABLE_CAMERA_SOURCE) && defined(FLUVEL_ENABLE_MEDIA_SOURCE)
     std::unique_ptr<VideoWindow> videoWindow_;
 #endif
+    std::unique_ptr<VolumeWindow> volumeWindow_;
     std::unique_ptr<HausdorffWindow> hausdorffWindow_;
     std::unique_ptr<HistogramWindow> histogramWindow_;
     SettingsDialog* settingsDialog_{nullptr};
@@ -228,6 +233,7 @@ private:
 
     QAction* imageSessionAct_{nullptr};
     QAction* videoSessionAct_{nullptr};
+    QAction* volumeSessionAct_{nullptr};
     QAction* hausdorffAct_{nullptr};
     QAction* histogramAct_{nullptr};
 

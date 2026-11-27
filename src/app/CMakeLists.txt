@@ -25,6 +25,10 @@ set(app_src
 
     ${UI_WIN_DIR}/histogram_window.cpp
     ${UI_WIN_DIR}/histogram_window.hpp
+    ${UI_COMP_DIR}/volume_slice_view.cpp
+    ${UI_COMP_DIR}/volume_slice_view.hpp
+    ${UI_WIN_DIR}/volume_window.cpp
+    ${UI_WIN_DIR}/volume_window.hpp
 
     ${UI_WIN_DIR}/settings_dialog.cpp
     ${UI_WIN_DIR}/settings_dialog.hpp
