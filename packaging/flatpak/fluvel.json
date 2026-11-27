@@ -1,21 +1,9 @@
 {
   "id": "io.github.fluvel_io.fluvel-set",
   "runtime": "org.kde.Platform",
-  "runtime-version": "6.9",
+  "runtime-version": "6.11",
   "sdk": "org.kde.Sdk",
   "command": "fluvel-set",
-
-  "add-extensions": {
-    "org.freedesktop.Platform.ffmpeg-full": {
-      "version": "24.08",
-      "directory": "lib/ffmpeg",
-      "add-ld-path": "."
-    }
-  },
-
-  "cleanup-commands": [
-    "mkdir -p /app/lib/ffmpeg"
-  ],
 
   "finish-args": [
     "--share=ipc",

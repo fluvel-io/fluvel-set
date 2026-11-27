@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # =========================
 # BUILD ARGS (cache control)
 # =========================
-ARG QT_VERSION=6.9.3
+ARG QT_VERSION=6.11.3
 ARG LINUXDEPLOY_VERSION=1-alpha-20251107-1
 ARG LINUXDEPLOY_PLUGIN_QT_VERSION=1-alpha-20250213-1
 
@@ -75,8 +75,8 @@ RUN apt update && apt install -y \
 # FLATPAK (separate cache layer)
 # =========================
 RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && \
-    flatpak install -y flathub org.kde.Platform//6.9 && \
-    flatpak install -y flathub org.kde.Sdk//6.9
+    flatpak install -y flathub org.kde.Platform//6.11 && \
+    flatpak install -y flathub org.kde.Sdk//6.11
 
 # =========================
 # PYTHON + AQT
