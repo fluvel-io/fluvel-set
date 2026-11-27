@@ -1047,27 +1047,27 @@ Nhấp Tính một lần nữa để áp dụng thay đổi.</translation>
 <context>
     <name>fluvel::ImageViewerWidget</name>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="544"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="497"/>
         <source>Auto Fit</source>
         <translation>Tự động vừa khít</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1134"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1086"/>
         <source>Mirror On</source>
         <translation>Đã bật lật gương</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1134"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1086"/>
         <source>Mirror Off</source>
         <translation>Đã tắt lật gương</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1139"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1091"/>
         <source>Smooth Display On</source>
         <translation>Đã bật hiển thị mượt</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1140"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1092"/>
         <source>Smooth Display Off</source>
         <translation>Đã tắt hiển thị mượt</translation>
     </message>
@@ -1311,192 +1311,222 @@ hoặc chọn Tệp → Mở</translation>
 <context>
     <name>fluvel::PreferencesDialog</name>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="81"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="90"/>
         <source>Preferences</source>
         <translation>Tùy chọn</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="116"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="126"/>
         <source>Language</source>
         <translation>Ngôn ngữ</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="123"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="133"/>
         <source>System (%1)</source>
         <translation>Hệ thống (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="126"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="136"/>
         <source>English</source>
         <translation>Tiếng Anh</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="127"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="137"/>
         <source>French</source>
         <translation>Tiếng Pháp</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="150"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="160"/>
         <source>The language change will take effect after restarting the application.</source>
         <translation>Thay đổi ngôn ngữ sẽ có hiệu lực sau khi khởi động lại ứng dụng.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="162"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="172"/>
         <source>Snapshots</source>
         <translation>Ảnh chụp</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="168"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="212"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="179"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="242"/>
         <source>Append timestamp</source>
         <translation>Thêm dấu thời gian</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="230"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="260"/>
         <source>Convert to standard MP4 when recording ends</source>
         <translation>Chuyển sang MP4 chuẩn khi ghi xong</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="232"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="262"/>
         <source>MP4 files are recorded in a fragmented form so they stay playable after a crash. This option rewrites them as standard MP4 files when the recording ends, which improves compatibility with some players and editors. The conversion does not re-encode the video, but it rewrites the whole file: it takes extra time and extra disk writes, especially for long recordings.</source>
         <translation>Các tệp MP4 được ghi ở dạng phân mảnh để vẫn phát được sau khi xảy ra sự cố. Tùy chọn này ghi lại chúng thành các tệp MP4 chuẩn khi ghi xong, giúp cải thiện khả năng tương thích với một số trình phát và trình chỉnh sửa. Việc chuyển đổi không mã hóa lại video nhưng ghi lại toàn bộ tệp: cần thêm thời gian và nhiều lượt ghi đĩa hơn, đặc biệt với các bản ghi dài.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="171"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="215"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="182"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="245"/>
         <source>Browse...</source>
         <translation>Duyệt...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="184"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="254"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="195"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="284"/>
         <source>Directory:</source>
         <translation>Thư mục: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="185"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="255"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="196"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="285"/>
         <source>Base name:</source>
         <translation>Tên cơ sở: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="186"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="197"/>
         <source>Format:</source>
         <translation>Định dạng: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="188"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="258"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="199"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="288"/>
         <source>Preview:</source>
         <translation>Xem trước: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="206"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="217"/>
+        <source>Media playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="220"/>
+        <source>Ask</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="221"/>
+        <source>Always resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="222"/>
+        <source>Never</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="224"/>
+        <source>What to do when a media file that was left unfinished is opened again. With &quot;Never&quot;, playback positions are not remembered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="228"/>
+        <source>Resume playback:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="235"/>
         <source>Video recording</source>
         <translation>Ghi video</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="239"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="269"/>
         <source>Single file</source>
         <translation>Một tệp duy nhất</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="240"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="270"/>
         <source>Circular</source>
         <translation>Vòng tròn</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="242"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="272"/>
         <source>Retention time:</source>
         <translation>Thời gian lưu giữ: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="245"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="275"/>
         <source> min</source>
         <translation> phút</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="247"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="277"/>
         <source>Segments:</source>
         <translation>Đoạn: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="251"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="281"/>
         <source>Segment duration:</source>
         <translation>Thời lượng đoạn: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="256"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="286"/>
         <source>Codec:</source>
         <translation>Codec: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="259"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="289"/>
         <source>Recording mode:</source>
         <translation>Chế độ ghi: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="296"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="326"/>
         <source>Recording buffer</source>
         <translation>Bộ đệm ghi</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="302"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="332"/>
         <source> MiB</source>
         <translation> MiB</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="306"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="336"/>
         <source> GiB</source>
         <translation> GiB</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="309"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="339"/>
         <source>Stop recording</source>
         <translation>Dừng ghi</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="312"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="342"/>
         <source>Discard oldest frames</source>
         <translation>Loại bỏ các khung hình cũ nhất</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="315"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="345"/>
         <source>Maximum RAM usage:</source>
         <translation>Mức dùng RAM tối đa: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="316"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="346"/>
         <source>Maximum temporary storage usage:</source>
         <translation>Mức dùng bộ nhớ tạm tối đa: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="317"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="347"/>
         <source>When buffer is full:</source>
         <translation>Khi bộ đệm đầy: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="425"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="464"/>
         <source>Select snapshot directory</source>
         <translation>Chọn thư mục ảnh chụp</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="434"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="473"/>
         <source>Select video recording directory</source>
         <translation>Chọn thư mục ghi video</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="549"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="591"/>
         <source>%1 min</source>
         <translation>%1 phút</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="552"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="594"/>
         <source> %1 s</source>
         <translation> %1 giây</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="556"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="598"/>
         <source>%1 s</source>
         <translation>%1 giây</translation>
     </message>
@@ -1839,12 +1869,12 @@ hoặc chọn Tệp → Mở</translation>
 <context>
     <name>fluvel::VideoController</name>
     <message>
-        <location filename="../src/app/core/video_controller.cpp" line="364"/>
+        <location filename="../src/app/core/video_controller.cpp" line="384"/>
         <source>Camera not found</source>
         <translation>Không tìm thấy camera</translation>
     </message>
     <message>
-        <location filename="../src/app/core/video_controller.cpp" line="283"/>
+        <location filename="../src/app/core/video_controller.cpp" line="303"/>
         <source>In | Proc | Disp: %1 | %2 | %3 fps
 Lat: %4 ms (proc %5) | Drop: %6 %
 Contour: %7 pts</source>
@@ -2027,33 +2057,33 @@ or click Open...</source>
 hoặc nhấp Mở...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1230"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1238"/>
         <source>Recommended format</source>
         <translation>Định dạng khuyến nghị</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1431"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1439"/>
         <source>Started</source>
         <translation>Đã bắt đầu</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1436"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1444"/>
         <source>Camera started: %1</source>
         <translation>Đã bắt đầu camera: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1446"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1454"/>
         <source>Opened video: %1</source>
         <translation>Đã mở video: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1542"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1550"/>
         <source>Stopped</source>
         <translation>Đã dừng</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1556"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1578"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1564"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1586"/>
         <source>Source: %1
 
 %2</source>
@@ -2062,113 +2092,133 @@ hoặc nhấp Mở...</translation>
 %2</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1558"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1566"/>
         <source>Camera error</source>
         <translation>Lỗi camera</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1580"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1588"/>
         <source>Media error</source>
         <translation>Lỗi đa phương tiện</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1691"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1699"/>
         <source>Start</source>
         <translation>Bắt đầu</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1692"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1700"/>
         <source>Start selected source.</source>
         <translation>Bắt đầu nguồn đã chọn.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1703"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1711"/>
         <source>Stop active source.</source>
         <translation>Dừng nguồn đang hoạt động.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2182"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2089"/>
+        <source>Resume playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2090"/>
+        <source>Resume from %1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2095"/>
+        <source>Resume</source>
+        <translation type="unfinished">Tiếp tục</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2096"/>
+        <source>Start over</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2217"/>
         <source>Volume: %1%</source>
         <translation>Âm lượng: %1%</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2418"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2443"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2453"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2478"/>
         <source>Volume %1%</source>
         <translation>Âm lượng: %1%</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2458"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2493"/>
         <source>Muted</source>
         <translation>Đã tắt tiếng</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2458"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2493"/>
         <source>Unmuted</source>
         <translation>Đã bật âm thanh</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2470"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2505"/>
         <source>Play</source>
         <translation>Phát</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2474"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2509"/>
         <source>Pause</source>
         <translation>Tạm dừng</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1506"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1942"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1514"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1950"/>
         <source>Video</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1614"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1622"/>
         <source>Source startup failed</source>
         <translation>Lỗi khi bắt đầu nguồn</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1615"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1623"/>
         <source>The source did not produce a valid frame within %1 seconds.
 The source may be unavailable or not responding.</source>
         <translation>Nguồn không tạo ra khung hình hợp lệ nào trong %1 giây.
 Nguồn có thể không khả dụng hoặc không phản hồi.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1632"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1640"/>
         <source>Source stream lost</source>
         <translation>Mất luồng của nguồn</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1633"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1641"/>
         <source>No valid frame was received for %1 seconds.
 The source stream may have stalled or become unavailable.</source>
         <translation>Không nhận được khung hình hợp lệ nào trong %1 giây.
 Luồng của nguồn có thể đã dừng hoặc không còn khả dụng.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1957"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1965"/>
         <source>Open Video File</source>
         <translation>Mở tệp video</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2010"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2018"/>
         <source>Clear source history</source>
         <translation>Xóa lịch sử nguồn</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1702"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1710"/>
         <source>Stop</source>
         <translation>Dừng</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1712"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1720"/>
         <source>Starting...</source>
         <translation>Đang bắt đầu...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1713"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1721"/>
         <source>Camera startup in progress.</source>
         <translation>Camera đang được khởi động.</translation>
     </message>

@@ -947,6 +947,14 @@ void VideoWindow::bindApplicationSettingsToController()
     connect(&app, &ApplicationSettings::videoDisplaySettingsChanged, videoController_,
             &VideoController::onVideoDisplaySettingsChanged);
 
+    videoController_->setMediaResumeMode(app.mediaResumeMode());
+
+    connect(&app, &ApplicationSettings::mediaResumeModeChanged, videoController_,
+            &VideoController::setMediaResumeMode);
+
+    connect(videoController_, &VideoController::resumeAvailable, this,
+            &VideoWindow::onResumeAvailable);
+
     // Restyled layers (contour colors or visibility changed).
     connect(videoController_, &VideoController::layersUpdated, imageViewer_,
             &ImageViewerWidget::setLayers);
@@ -2072,6 +2080,33 @@ void VideoWindow::onPlaybackPositionChanged(qint64 pos)
     fullscreenBar_->positionLabel()->setText(position);
 
     updateDurationLabel();
+}
+
+void VideoWindow::onResumeAvailable(qint64 positionMs)
+{
+    assert(videoController_);
+
+    auto* box = new QMessageBox(QMessageBox::Question, tr("Resume playback"),
+                                tr("Resume from %1?").arg(time_utils::formatDuration(positionMs)),
+                                QMessageBox::NoButton, this);
+
+    box->setAttribute(Qt::WA_DeleteOnClose);
+
+    auto* resumeButton = box->addButton(tr("Resume"), QMessageBox::AcceptRole);
+    box->addButton(tr("Start over"), QMessageBox::RejectRole);
+    box->setDefaultButton(resumeButton);
+
+    connect(box, &QDialog::finished, this,
+            [this, box, resumeButton]
+            {
+                if (box->clickedButton() == resumeButton)
+                    videoController_->acceptResume();
+                else
+                    videoController_->declineResume();
+            });
+
+    // Window-modal and non-blocking: the media keeps playing meanwhile.
+    box->open();
 }
 
 void VideoWindow::onMediaInfoChanged(const MediaInfo& info)

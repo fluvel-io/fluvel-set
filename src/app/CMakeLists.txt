@@ -315,6 +315,8 @@ endif()
 
 if(FLUVEL_ENABLE_MEDIA_SOURCE)
     list(APPEND app_src
+        ${CORE_DIR}/media_resume_store.cpp
+        ${CORE_DIR}/media_resume_store.hpp
         ${CORE_DIR}/media_video_source.cpp
         ${CORE_DIR}/media_video_source.hpp
     )

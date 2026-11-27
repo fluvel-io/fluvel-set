@@ -109,6 +109,7 @@ PreferencesDialog::PreferencesDialog(QWidget* parent)
     auto* layout = new QVBoxLayout(this);
 
     layout->addWidget(createLanguageSection());
+    layout->addWidget(createMediaSection());
     layout->addWidget(createSnapshotSection());
     layout->addWidget(createVideoRecordingSection());
     layout->addWidget(createRecordingBufferSection());
@@ -207,6 +208,24 @@ QWidget* PreferencesDialog::createSnapshotSection()
 
     connect(snapshotTimestampCheck_, &QCheckBox::toggled, this,
             &PreferencesDialog::updateSnapshotPreview);
+
+    return group;
+}
+
+QWidget* PreferencesDialog::createMediaSection()
+{
+    auto* group = new QGroupBox(tr("Media playback"), this);
+
+    mediaResumeCombo_ = new QComboBox(group);
+    mediaResumeCombo_->addItem(tr("Ask"), int(MediaResumeMode::Ask));
+    mediaResumeCombo_->addItem(tr("Always resume"), int(MediaResumeMode::Always));
+    mediaResumeCombo_->addItem(tr("Never"), int(MediaResumeMode::Never));
+    mediaResumeCombo_->setToolTip(
+        tr("What to do when a media file that was left unfinished is opened again. "
+           "With \"Never\", playback positions are not remembered."));
+
+    auto* layout = new QFormLayout(group);
+    layout->addRow(tr("Resume playback:"), mediaResumeCombo_);
 
     return group;
 }
@@ -334,7 +353,7 @@ void PreferencesDialog::loadFromSettings()
 {
     const auto& settings = ApplicationSettings::instance();
 
-    showValues(settings.appLanguage(), settings.snapshotPreferences(),
+    showValues(settings.appLanguage(), settings.mediaResumeMode(), settings.snapshotPreferences(),
                settings.videoRecordingPreferences(), settings.recordingBufferSettings());
 }
 
@@ -342,11 +361,13 @@ void PreferencesDialog::restoreDefaults()
 {
     // The language goes back to the system one; as for any language change,
     // it only takes effect after restarting the application.
-    showValues(Language::System, ApplicationSettings::defaultSnapshotPreferences(),
+    showValues(Language::System, MediaResumeMode::Ask,
+               ApplicationSettings::defaultSnapshotPreferences(),
                ApplicationSettings::defaultVideoRecordingPreferences(), RecordingBufferSettings{});
 }
 
-void PreferencesDialog::showValues(Language language, const SnapshotPreferences& snapshot,
+void PreferencesDialog::showValues(Language language, MediaResumeMode mediaResumeMode,
+                                   const SnapshotPreferences& snapshot,
                                    const VideoRecordingPreferences& video,
                                    const RecordingBufferSettings& buffer)
 {
@@ -356,6 +377,13 @@ void PreferencesDialog::showValues(Language language, const SnapshotPreferences&
 
     if (languageIndex >= 0)
         languageCombo_->setCurrentIndex(languageIndex);
+
+    // Media playback
+
+    const int resumeIndex = mediaResumeCombo_->findData(int(mediaResumeMode));
+
+    if (resumeIndex >= 0)
+        mediaResumeCombo_->setCurrentIndex(resumeIndex);
 
     // Snapshots
 
@@ -490,6 +518,9 @@ void PreferencesDialog::accept()
     auto& settings = ApplicationSettings::instance();
 
     settings.setAppLanguage(static_cast<Language>(languageCombo_->currentData().toInt()));
+
+    settings.setMediaResumeMode(
+        static_cast<MediaResumeMode>(mediaResumeCombo_->currentData().toInt()));
 
     SnapshotPreferences snapshotPreferences;
     snapshotPreferences.directory = snapshotDirectoryEdit_->text();

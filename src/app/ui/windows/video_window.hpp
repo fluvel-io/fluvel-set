@@ -288,6 +288,16 @@ private:
 
     void onMediaInfoChanged(const MediaInfo& info);
 
+    /**
+     * @brief Asks whether to resume an unfinished media.
+     *
+     * The question does not block playback: the media plays from the start
+     * until the user answers.
+     *
+     * @param positionMs Position at which playback can resume.
+     */
+    void onResumeAvailable(qint64 positionMs);
+
     //
     // Media playback
     //

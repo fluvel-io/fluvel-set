@@ -85,7 +85,14 @@ VideoController::VideoController(const VideoSessionSettings& session, QObject* p
             {
                 emit playbackStateChanged(state);
                 emit pausedChanged(state == QMediaPlayer::PausedState);
+
+                if (state == QMediaPlayer::PausedState)
+                    saveResumePosition();
             });
+
+    resumeSaveTimer_.setInterval(kResumeSavePeriodMs);
+
+    connect(&resumeSaveTimer_, &QTimer::timeout, this, &VideoController::saveResumePosition);
 
     connect(&mediaSource_, &MediaVideoSource::mediaInfoChanged, this,
             &VideoController::mediaInfoChanged);
@@ -158,6 +165,14 @@ void VideoController::stop()
     watchdogTimer_.stop();
     diagnosticsTimer_.stop();
 
+#ifdef FLUVEL_ENABLE_MEDIA_SOURCE
+    // Before the source is torn down: its position and URL are gone afterwards.
+    saveResumePosition();
+
+    resumeSaveTimer_.stop();
+    pendingResumeMs_ = -1;
+#endif
+
 #ifdef FLUVEL_ENABLE_CAMERA_SOURCE
     cameraSource_.stop();
 #endif
@@ -206,6 +221,11 @@ void VideoController::onFrameReceived(const QVideoFrame& frame)
         streamingInfo_.sourceFrameRate = frame.streamFrameRate();
 
         emit streamingStarted(streamingInfo_);
+
+#ifdef FLUVEL_ENABLE_MEDIA_SOURCE
+        if (startupInfo_.type == SourceType::Media)
+            handleResume();
+#endif
     }
 
     frameStats_.frameReceived();
@@ -565,6 +585,79 @@ void VideoController::resume()
         return;
 
     mediaSource_.resume();
+}
+
+void VideoController::setMediaResumeMode(MediaResumeMode mode)
+{
+    resumeMode_ = mode;
+
+    if (mode == MediaResumeMode::Never)
+    {
+        resumeSaveTimer_.stop();
+        pendingResumeMs_ = -1;
+    }
+    else if (isMediaActive() && !resumeSaveTimer_.isActive())
+    {
+        resumeSaveTimer_.start();
+    }
+}
+
+void VideoController::acceptResume()
+{
+    const qint64 position = std::exchange(pendingResumeMs_, -1);
+
+    if (position >= 0)
+        seek(position);
+}
+
+void VideoController::declineResume()
+{
+    pendingResumeMs_ = -1;
+}
+
+void VideoController::saveResumePosition()
+{
+    // While an offer waits for an answer, the position is the start of the
+    // media: saving it would erase what the user may still want to resume.
+    if (resumeMode_ == MediaResumeMode::Never || pendingResumeMs_ >= 0 || !isMediaActive())
+        return;
+
+    const MediaInfo info = mediaSource_.mediaInfo();
+
+    if (!info.seekable || info.durationMs <= 0)
+        return;
+
+    resumeStore_.save(mediaSource_.sourceInfo().sourceUrl, mediaSource_.positionMs(),
+                      info.durationMs);
+}
+
+void VideoController::handleResume()
+{
+    if (resumeMode_ == MediaResumeMode::Never)
+        return;
+
+    const MediaInfo info = mediaSource_.mediaInfo();
+
+    // Live streams and non-seekable media cannot be resumed.
+    if (!info.seekable || info.durationMs <= 0)
+        return;
+
+    resumeSaveTimer_.start();
+
+    const auto position =
+        resumeStore_.positionFor(mediaSource_.sourceInfo().sourceUrl, info.durationMs);
+
+    if (!position)
+        return;
+
+    if (resumeMode_ == MediaResumeMode::Always)
+    {
+        seek(*position);
+        return;
+    }
+
+    pendingResumeMs_ = *position;
+    emit resumeAvailable(*position);
 }
 
 #endif

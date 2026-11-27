@@ -151,6 +151,16 @@ public:
     void setVideoRecordingPreferences(const VideoRecordingPreferences& preferences);
 
     /**
+     * @brief Returns what to do when an unfinished media is opened again.
+     */
+    MediaResumeMode mediaResumeMode() const;
+
+    /**
+     * @brief Sets what to do when an unfinished media is opened again.
+     */
+    void setMediaResumeMode(MediaResumeMode mode);
+
+    /**
      * @brief Returns the recording buffer settings.
      *
      * These settings control the amount of RAM and temporary disk space used
@@ -211,6 +221,11 @@ signals:
      * @brief Emitted when the video recording preferences change.
      */
     void videoRecordingPreferencesChanged(const fluvel::VideoRecordingPreferences& preferences);
+
+    /**
+     * @brief Emitted when the media resume mode changes.
+     */
+    void mediaResumeModeChanged(fluvel::MediaResumeMode mode);
 
     /**
      * @brief Emitted when the recording buffer settings change.
@@ -285,6 +300,8 @@ private:
      * buffer duration.
      */
     RecordingBufferSettings recordingBufferSettings_{};
+
+    MediaResumeMode mediaResumeMode_{MediaResumeMode::Ask};
 };
 
 } // namespace fluvel

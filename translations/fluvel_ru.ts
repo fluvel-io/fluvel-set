@@ -1047,27 +1047,27 @@ Click on Compute again to apply the change.</source>
 <context>
     <name>fluvel::ImageViewerWidget</name>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="544"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="497"/>
         <source>Auto Fit</source>
         <translation>Автоподбор</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1134"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1086"/>
         <source>Mirror On</source>
         <translation>Зеркало включено</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1134"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1086"/>
         <source>Mirror Off</source>
         <translation>Зеркало выключено</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1139"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1091"/>
         <source>Smooth Display On</source>
         <translation>Сглаженное отображение включено</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1140"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1092"/>
         <source>Smooth Display Off</source>
         <translation>Сглаженное отображение выключено</translation>
     </message>
@@ -1311,192 +1311,222 @@ or choose File → Open</source>
 <context>
     <name>fluvel::PreferencesDialog</name>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="81"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="90"/>
         <source>Preferences</source>
         <translation>Параметры</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="116"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="126"/>
         <source>Language</source>
         <translation>Язык</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="123"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="133"/>
         <source>System (%1)</source>
         <translation>Системный (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="126"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="136"/>
         <source>English</source>
         <translation>Английский</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="127"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="137"/>
         <source>French</source>
         <translation>Французский</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="150"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="160"/>
         <source>The language change will take effect after restarting the application.</source>
         <translation>Смена языка вступит в силу после перезапуска приложения.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="162"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="172"/>
         <source>Snapshots</source>
         <translation>Снимки</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="168"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="212"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="179"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="242"/>
         <source>Append timestamp</source>
         <translation>Добавлять метку времени</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="230"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="260"/>
         <source>Convert to standard MP4 when recording ends</source>
         <translation>Преобразовать в стандартный MP4 по окончании записи</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="232"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="262"/>
         <source>MP4 files are recorded in a fragmented form so they stay playable after a crash. This option rewrites them as standard MP4 files when the recording ends, which improves compatibility with some players and editors. The conversion does not re-encode the video, but it rewrites the whole file: it takes extra time and extra disk writes, especially for long recordings.</source>
         <translation>Файлы MP4 записываются во фрагментированном виде, чтобы их можно было воспроизвести после сбоя. Эта опция по окончании записи перезаписывает их как стандартные файлы MP4, что улучшает совместимость с некоторыми проигрывателями и редакторами. Преобразование не перекодирует видео, но перезаписывает весь файл: это требует дополнительного времени и большего числа операций записи на диск, особенно для длинных записей.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="171"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="215"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="182"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="245"/>
         <source>Browse...</source>
         <translation>Обзор...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="184"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="254"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="195"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="284"/>
         <source>Directory:</source>
         <translation>Каталог: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="185"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="255"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="196"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="285"/>
         <source>Base name:</source>
         <translation>Базовое имя: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="186"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="197"/>
         <source>Format:</source>
         <translation>Формат: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="188"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="258"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="199"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="288"/>
         <source>Preview:</source>
         <translation>Предпросмотр: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="206"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="217"/>
+        <source>Media playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="220"/>
+        <source>Ask</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="221"/>
+        <source>Always resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="222"/>
+        <source>Never</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="224"/>
+        <source>What to do when a media file that was left unfinished is opened again. With &quot;Never&quot;, playback positions are not remembered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="228"/>
+        <source>Resume playback:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="235"/>
         <source>Video recording</source>
         <translation>Видеозапись</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="239"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="269"/>
         <source>Single file</source>
         <translation>Один файл</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="240"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="270"/>
         <source>Circular</source>
         <translation>Циклическая</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="242"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="272"/>
         <source>Retention time:</source>
         <translation>Время хранения: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="245"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="275"/>
         <source> min</source>
         <translation> мин</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="247"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="277"/>
         <source>Segments:</source>
         <translation>Сегменты: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="251"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="281"/>
         <source>Segment duration:</source>
         <translation>Длительность сегмента: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="256"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="286"/>
         <source>Codec:</source>
         <translation>Кодек: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="259"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="289"/>
         <source>Recording mode:</source>
         <translation>Режим записи: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="296"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="326"/>
         <source>Recording buffer</source>
         <translation>Буфер записи</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="302"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="332"/>
         <source> MiB</source>
         <translation> МиБ</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="306"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="336"/>
         <source> GiB</source>
         <translation> ГиБ</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="309"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="339"/>
         <source>Stop recording</source>
         <translation>Остановить запись</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="312"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="342"/>
         <source>Discard oldest frames</source>
         <translation>Отбрасывать самые старые кадры</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="315"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="345"/>
         <source>Maximum RAM usage:</source>
         <translation>Максимальное использование ОЗУ: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="316"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="346"/>
         <source>Maximum temporary storage usage:</source>
         <translation>Максимальное использование временного хранилища: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="317"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="347"/>
         <source>When buffer is full:</source>
         <translation>Когда буфер заполнен: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="425"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="464"/>
         <source>Select snapshot directory</source>
         <translation>Выберите каталог для снимков</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="434"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="473"/>
         <source>Select video recording directory</source>
         <translation>Выберите каталог для видеозаписей</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="549"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="591"/>
         <source>%1 min</source>
         <translation>%1 мин</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="552"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="594"/>
         <source> %1 s</source>
         <translation> %1 с</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="556"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="598"/>
         <source>%1 s</source>
         <translation>%1 с</translation>
     </message>
@@ -1839,12 +1869,12 @@ or choose File → Open</source>
 <context>
     <name>fluvel::VideoController</name>
     <message>
-        <location filename="../src/app/core/video_controller.cpp" line="364"/>
+        <location filename="../src/app/core/video_controller.cpp" line="384"/>
         <source>Camera not found</source>
         <translation>Камера не найдена</translation>
     </message>
     <message>
-        <location filename="../src/app/core/video_controller.cpp" line="283"/>
+        <location filename="../src/app/core/video_controller.cpp" line="303"/>
         <source>In | Proc | Disp: %1 | %2 | %3 fps
 Lat: %4 ms (proc %5) | Drop: %6 %
 Contour: %7 pts</source>
@@ -2027,33 +2057,33 @@ or click Open...</source>
 или нажмите «Открыть»...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1230"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1238"/>
         <source>Recommended format</source>
         <translation>Рекомендуемый формат</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1431"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1439"/>
         <source>Started</source>
         <translation>Запущено</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1436"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1444"/>
         <source>Camera started: %1</source>
         <translation>Камера запущена: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1446"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1454"/>
         <source>Opened video: %1</source>
         <translation>Видео открыто: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1542"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1550"/>
         <source>Stopped</source>
         <translation>Остановлено</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1556"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1578"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1564"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1586"/>
         <source>Source: %1
 
 %2</source>
@@ -2062,113 +2092,133 @@ or click Open...</source>
 %2</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1558"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1566"/>
         <source>Camera error</source>
         <translation>Ошибка камеры</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1580"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1588"/>
         <source>Media error</source>
         <translation>Ошибка мультимедиа</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1691"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1699"/>
         <source>Start</source>
         <translation>Пуск</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1692"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1700"/>
         <source>Start selected source.</source>
         <translation>Запустить выбранный источник.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1703"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1711"/>
         <source>Stop active source.</source>
         <translation>Остановить активный источник.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2182"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2089"/>
+        <source>Resume playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2090"/>
+        <source>Resume from %1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2095"/>
+        <source>Resume</source>
+        <translation type="unfinished">Продолжить</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2096"/>
+        <source>Start over</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2217"/>
         <source>Volume: %1%</source>
         <translation>Громкость: %1%</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2418"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2443"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2453"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2478"/>
         <source>Volume %1%</source>
         <translation>Громкость: %1%</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2458"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2493"/>
         <source>Muted</source>
         <translation>Звук отключён</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2458"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2493"/>
         <source>Unmuted</source>
         <translation>Звук включён</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2470"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2505"/>
         <source>Play</source>
         <translation>Воспроизвести</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2474"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2509"/>
         <source>Pause</source>
         <translation>Пауза</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1506"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1942"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1514"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1950"/>
         <source>Video</source>
         <translation>Видео</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1614"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1622"/>
         <source>Source startup failed</source>
         <translation>Ошибка запуска источника</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1615"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1623"/>
         <source>The source did not produce a valid frame within %1 seconds.
 The source may be unavailable or not responding.</source>
         <translation>Источник не выдал ни одного допустимого кадра за %1 с.
 Возможно, источник недоступен или не отвечает.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1632"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1640"/>
         <source>Source stream lost</source>
         <translation>Поток источника потерян</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1633"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1641"/>
         <source>No valid frame was received for %1 seconds.
 The source stream may have stalled or become unavailable.</source>
         <translation>Допустимые кадры не поступали в течение %1 с.
 Возможно, поток источника остановился или больше не доступен.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1957"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1965"/>
         <source>Open Video File</source>
         <translation>Открыть видеофайл</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2010"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2018"/>
         <source>Clear source history</source>
         <translation>Очистить историю источников</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1702"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1710"/>
         <source>Stop</source>
         <translation>Остановить</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1712"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1720"/>
         <source>Starting...</source>
         <translation>Запуск...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1713"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1721"/>
         <source>Camera startup in progress.</source>
         <translation>Камера запускается.</translation>
     </message>

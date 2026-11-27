@@ -81,6 +81,9 @@ private:
     /// Creates the language preferences section.
     QWidget* createLanguageSection();
 
+    /// Creates the media playback preferences section.
+    QWidget* createMediaSection();
+
     /// Creates the snapshot preferences section.
     QWidget* createSnapshotSection();
 
@@ -105,8 +108,9 @@ private:
      * Nothing is written to the application settings: the values only reach
      * them when the user accepts the dialog.
      */
-    void showValues(Language language, const SnapshotPreferences& snapshot,
-                    const VideoRecordingPreferences& video, const RecordingBufferSettings& buffer);
+    void showValues(Language language, MediaResumeMode mediaResumeMode,
+                    const SnapshotPreferences& snapshot, const VideoRecordingPreferences& video,
+                    const RecordingBufferSettings& buffer);
 
     /// Fills every widget with the factory values (applied only on OK).
     void restoreDefaults();
@@ -138,6 +142,8 @@ private:
     void updateSegmentDuration();
 
     QComboBox* languageCombo_{nullptr};
+
+    QComboBox* mediaResumeCombo_{nullptr};
 
     QLineEdit* snapshotDirectoryEdit_{nullptr};
     QLineEdit* snapshotBaseNameEdit_{nullptr};

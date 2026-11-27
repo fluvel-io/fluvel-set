@@ -1047,27 +1047,27 @@ Click on Compute again to apply the change.</source>
 <context>
     <name>fluvel::ImageViewerWidget</name>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="544"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="497"/>
         <source>Auto Fit</source>
         <translation>자동 맞춤</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1134"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1086"/>
         <source>Mirror On</source>
         <translation>미러 켜짐</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1134"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1086"/>
         <source>Mirror Off</source>
         <translation>미러 꺼짐</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1139"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1091"/>
         <source>Smooth Display On</source>
         <translation>부드러운 표시 켜짐</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1140"/>
+        <location filename="../src/app/ui/components/image_viewer_widget.cpp" line="1092"/>
         <source>Smooth Display Off</source>
         <translation>부드러운 표시 꺼짐</translation>
     </message>
@@ -1311,192 +1311,222 @@ or choose File → Open</source>
 <context>
     <name>fluvel::PreferencesDialog</name>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="81"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="90"/>
         <source>Preferences</source>
         <translation>환경설정</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="116"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="126"/>
         <source>Language</source>
         <translation>언어</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="123"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="133"/>
         <source>System (%1)</source>
         <translation>시스템 (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="126"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="136"/>
         <source>English</source>
         <translation>영어</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="127"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="137"/>
         <source>French</source>
         <translation>프랑스어</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="150"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="160"/>
         <source>The language change will take effect after restarting the application.</source>
         <translation>언어 변경은 애플리케이션을 다시 시작한 후에 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="162"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="172"/>
         <source>Snapshots</source>
         <translation>스냅샷</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="168"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="212"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="179"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="242"/>
         <source>Append timestamp</source>
         <translation>타임스탬프 추가</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="230"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="260"/>
         <source>Convert to standard MP4 when recording ends</source>
         <translation>녹화가 끝나면 표준 MP4로 변환</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="232"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="262"/>
         <source>MP4 files are recorded in a fragmented form so they stay playable after a crash. This option rewrites them as standard MP4 files when the recording ends, which improves compatibility with some players and editors. The conversion does not re-encode the video, but it rewrites the whole file: it takes extra time and extra disk writes, especially for long recordings.</source>
         <translation>MP4 파일은 충돌 후에도 재생할 수 있도록 조각난 형태로 녹화됩니다. 이 옵션은 녹화가 끝나면 이를 표준 MP4 파일로 다시 쓰며, 일부 플레이어 및 편집기와의 호환성이 좋아집니다. 변환 과정에서 비디오를 다시 인코딩하지는 않지만 파일 전체를 다시 쓰므로, 특히 긴 녹화의 경우 추가 시간과 더 많은 디스크 쓰기가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="171"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="215"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="182"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="245"/>
         <source>Browse...</source>
         <translation>찾아보기...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="184"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="254"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="195"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="284"/>
         <source>Directory:</source>
         <translation>디렉터리: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="185"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="255"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="196"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="285"/>
         <source>Base name:</source>
         <translation>기본 이름: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="186"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="197"/>
         <source>Format:</source>
         <translation>형식: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="188"/>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="258"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="199"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="288"/>
         <source>Preview:</source>
         <translation>미리 보기: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="206"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="217"/>
+        <source>Media playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="220"/>
+        <source>Ask</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="221"/>
+        <source>Always resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="222"/>
+        <source>Never</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="224"/>
+        <source>What to do when a media file that was left unfinished is opened again. With &quot;Never&quot;, playback positions are not remembered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="228"/>
+        <source>Resume playback:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="235"/>
         <source>Video recording</source>
         <translation>비디오 녹화</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="239"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="269"/>
         <source>Single file</source>
         <translation>단일 파일</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="240"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="270"/>
         <source>Circular</source>
         <translation>순환</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="242"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="272"/>
         <source>Retention time:</source>
         <translation>보관 시간: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="245"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="275"/>
         <source> min</source>
         <translation> 분</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="247"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="277"/>
         <source>Segments:</source>
         <translation>세그먼트: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="251"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="281"/>
         <source>Segment duration:</source>
         <translation>세그먼트 길이: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="256"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="286"/>
         <source>Codec:</source>
         <translation>코덱: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="259"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="289"/>
         <source>Recording mode:</source>
         <translation>녹화 모드: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="296"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="326"/>
         <source>Recording buffer</source>
         <translation>녹화 버퍼</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="302"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="332"/>
         <source> MiB</source>
         <translation> MiB</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="306"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="336"/>
         <source> GiB</source>
         <translation> GiB</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="309"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="339"/>
         <source>Stop recording</source>
         <translation>녹화 중지</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="312"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="342"/>
         <source>Discard oldest frames</source>
         <translation>가장 오래된 프레임 버리기</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="315"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="345"/>
         <source>Maximum RAM usage:</source>
         <translation>최대 RAM 사용량: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="316"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="346"/>
         <source>Maximum temporary storage usage:</source>
         <translation>최대 임시 저장소 사용량: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="317"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="347"/>
         <source>When buffer is full:</source>
         <translation>버퍼가 가득 찼을 때: </translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="425"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="464"/>
         <source>Select snapshot directory</source>
         <translation>스냅샷 디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="434"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="473"/>
         <source>Select video recording directory</source>
         <translation>비디오 녹화 디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="549"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="591"/>
         <source>%1 min</source>
         <translation>%1분</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="552"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="594"/>
         <source> %1 s</source>
         <translation> %1초</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="556"/>
+        <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="598"/>
         <source>%1 s</source>
         <translation>%1초</translation>
     </message>
@@ -1839,12 +1869,12 @@ or choose File → Open</source>
 <context>
     <name>fluvel::VideoController</name>
     <message>
-        <location filename="../src/app/core/video_controller.cpp" line="364"/>
+        <location filename="../src/app/core/video_controller.cpp" line="384"/>
         <source>Camera not found</source>
         <translation>카메라를 찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="../src/app/core/video_controller.cpp" line="283"/>
+        <location filename="../src/app/core/video_controller.cpp" line="303"/>
         <source>In | Proc | Disp: %1 | %2 | %3 fps
 Lat: %4 ms (proc %5) | Drop: %6 %
 Contour: %7 pts</source>
@@ -2027,33 +2057,33 @@ or click Open...</source>
 또는 [열기]를 클릭하세요...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1230"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1238"/>
         <source>Recommended format</source>
         <translation>권장 형식</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1431"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1439"/>
         <source>Started</source>
         <translation>시작됨</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1436"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1444"/>
         <source>Camera started: %1</source>
         <translation>카메라 시작됨: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1446"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1454"/>
         <source>Opened video: %1</source>
         <translation>비디오 열림: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1542"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1550"/>
         <source>Stopped</source>
         <translation>중지됨</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1556"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1578"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1564"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1586"/>
         <source>Source: %1
 
 %2</source>
@@ -2062,113 +2092,133 @@ or click Open...</source>
 %2</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1558"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1566"/>
         <source>Camera error</source>
         <translation>카메라 오류</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1580"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1588"/>
         <source>Media error</source>
         <translation>멀티미디어 오류</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1691"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1699"/>
         <source>Start</source>
         <translation>시작</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1692"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1700"/>
         <source>Start selected source.</source>
         <translation>선택한 소스를 시작합니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1703"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1711"/>
         <source>Stop active source.</source>
         <translation>활성 소스를 중지합니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2182"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2089"/>
+        <source>Resume playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2090"/>
+        <source>Resume from %1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2095"/>
+        <source>Resume</source>
+        <translation type="unfinished">재개</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2096"/>
+        <source>Start over</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2217"/>
         <source>Volume: %1%</source>
         <translation>볼륨: %1%</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2418"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2443"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2453"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2478"/>
         <source>Volume %1%</source>
         <translation>볼륨: %1%</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2458"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2493"/>
         <source>Muted</source>
         <translation>음소거</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2458"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2493"/>
         <source>Unmuted</source>
         <translation>소리 켜짐</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2470"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2505"/>
         <source>Play</source>
         <translation>재생</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2474"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2509"/>
         <source>Pause</source>
         <translation>일시 정지</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1506"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1942"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1514"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1950"/>
         <source>Video</source>
         <translation>비디오</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1614"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1622"/>
         <source>Source startup failed</source>
         <translation>소스 시작 오류</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1615"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1623"/>
         <source>The source did not produce a valid frame within %1 seconds.
 The source may be unavailable or not responding.</source>
         <translation>소스가 %1초 안에 유효한 프레임을 생성하지 않았습니다.
 소스를 사용할 수 없거나 응답하지 않을 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1632"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1640"/>
         <source>Source stream lost</source>
         <translation>소스 스트림 끊김</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1633"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1641"/>
         <source>No valid frame was received for %1 seconds.
 The source stream may have stalled or become unavailable.</source>
         <translation>%1초 동안 유효한 프레임을 받지 못했습니다.
 소스 스트림이 중지되었거나 더 이상 사용할 수 없을 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1957"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1965"/>
         <source>Open Video File</source>
         <translation>비디오 파일 열기</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2010"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2018"/>
         <source>Clear source history</source>
         <translation>소스 기록 지우기</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1702"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1710"/>
         <source>Stop</source>
         <translation>중지</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1712"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1720"/>
         <source>Starting...</source>
         <translation>시작하는 중...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="1713"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1721"/>
         <source>Camera startup in progress.</source>
         <translation>카메라를 시작하는 중입니다.</translation>
     </message>

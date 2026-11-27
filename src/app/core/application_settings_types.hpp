@@ -55,6 +55,16 @@ enum class Language
 };
 
 /**
+ * @brief What to do when a media that was left unfinished is opened again.
+ */
+enum class MediaResumeMode
+{
+    Ask,    ///< Offer to resume from the last position.
+    Always, ///< Resume from the last position without asking.
+    Never   ///< Start from the beginning and do not remember positions.
+};
+
+/**
  * @brief Persistent snapshot preferences.
  */
 struct SnapshotPreferences

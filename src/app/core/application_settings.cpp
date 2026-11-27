@@ -676,6 +676,15 @@ void ApplicationSettings::loadUserPreferences()
     const QString language = settings.value("ui/language", "system").toString();
     appLanguage_ = languageFromString(language.toStdString());
 
+    mediaResumeMode_ = static_cast<MediaResumeMode>(
+        settings.value("preferences/media/resume_mode", int(MediaResumeMode::Ask)).toInt());
+
+    if (mediaResumeMode_ != MediaResumeMode::Ask && mediaResumeMode_ != MediaResumeMode::Always &&
+        mediaResumeMode_ != MediaResumeMode::Never)
+    {
+        mediaResumeMode_ = MediaResumeMode::Ask;
+    }
+
     snapshotPreferences_.directory =
         settings.value("preferences/snapshot/directory", defaultSnapshotPreferences().directory)
             .toString();
@@ -747,6 +756,8 @@ void ApplicationSettings::saveUserPreferences()
 
     settings.setValue("ui/language", to_string(appLanguage_));
 
+    settings.setValue("preferences/media/resume_mode", int(mediaResumeMode_));
+
     settings.setValue("preferences/snapshot/directory", snapshotPreferences_.directory);
     settings.setValue("preferences/snapshot/base_name", snapshotPreferences_.baseName);
     settings.setValue("preferences/snapshot/format", snapshotPreferences_.preferredFormat);
@@ -799,6 +810,20 @@ void ApplicationSettings::setVideoRecordingPreferences(const VideoRecordingPrefe
 {
     videoRecordingPreferences_ = preferences;
     emit videoRecordingPreferencesChanged(videoRecordingPreferences_);
+}
+
+MediaResumeMode ApplicationSettings::mediaResumeMode() const
+{
+    return mediaResumeMode_;
+}
+
+void ApplicationSettings::setMediaResumeMode(MediaResumeMode mode)
+{
+    if (mediaResumeMode_ == mode)
+        return;
+
+    mediaResumeMode_ = mode;
+    emit mediaResumeModeChanged(mediaResumeMode_);
 }
 
 RecordingBufferSettings ApplicationSettings::recordingBufferSettings() const

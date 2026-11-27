@@ -10,6 +10,7 @@
 #include "camera_video_source.hpp"
 #include "frame_pipeline.hpp"
 #include "frame_stats_collector.hpp"
+#include "media_resume_store.hpp"
 #include "media_video_source.hpp"
 #include "stream_watchdog.hpp"
 #include "video_processing_thread.hpp"
@@ -202,6 +203,28 @@ public:
     [[nodiscard]]
     bool isMediaActive() const;
 
+    /**
+     * @brief Sets what to do when an unfinished media is opened again.
+     *
+     * Applies to the media opened from now on. With MediaResumeMode::Never,
+     * positions are not remembered anymore.
+     */
+    void setMediaResumeMode(MediaResumeMode mode);
+
+    /**
+     * @brief Accepts the resume offer made by resumeAvailable().
+     *
+     * Seeks to the offered position and starts remembering positions again.
+     */
+    void acceptResume();
+
+    /**
+     * @brief Declines the resume offer made by resumeAvailable().
+     *
+     * Playback goes on from where it is, and positions are remembered again.
+     */
+    void declineResume();
+
 #endif
 
 signals:
@@ -286,6 +309,16 @@ signals:
      * @param info Updated media information.
      */
     void mediaInfoChanged(const fluvel::MediaInfo& info);
+
+    /**
+     * @brief Emitted when an unfinished media was opened and a resume is offered.
+     *
+     * The caller answers with acceptResume() or declineResume(). No position
+     * is saved until it does, so the offer is not overwritten.
+     *
+     * @param positionMs Position at which playback can resume.
+     */
+    void resumeAvailable(qint64 positionMs);
 
     /**
      * @brief Emitted when media playback is paused or resumed.
@@ -428,11 +461,31 @@ private:
     /// Handles media source errors.
     void onMediaPlayerError(QMediaPlayer::Error error, const QString& errorString);
 
+    /// Saves the playback position of the active media, if it is worth remembering.
+    void saveResumePosition();
+
+    /// Resumes or offers to resume the media that has just started streaming.
+    void handleResume();
+
     /// Audio output used for media playback.
     QAudioOutput audioOutput_;
 
     /// Media video source.
     MediaVideoSource mediaSource_;
+
+    /// Playback positions remembered between two sessions.
+    MediaResumeStore resumeStore_;
+
+    /// Saves the playback position periodically while a media plays.
+    QTimer resumeSaveTimer_;
+
+    /// What to do when an unfinished media is opened again.
+    MediaResumeMode resumeMode_{MediaResumeMode::Ask};
+
+    /// Position offered to the user, or -1 when no offer is waiting for an answer.
+    qint64 pendingResumeMs_{-1};
+
+    static constexpr int kResumeSavePeriodMs{15'000}; // 15 sec
 
 #endif
 
