@@ -104,11 +104,11 @@ const ImageViewerBehavior* InteractionSet::capturingBehavior() const
 Qt::CursorShape InteractionSet::cursor(const ImageViewerWidget& view, bool hasImage, bool isPanRelevant,
                                        const QMouseEvent* e) const
 {
-    // 1️⃣ Action en cours → priorité absolue
+    // 1. An action in progress has absolute priority
     if (const auto* b = capturingBehavior())
         return b->activeCursor();
 
-    // 2️⃣ Sinon : curseur de disponibilité (arbitrage)
+    // 2. Otherwise: the availability cursor (arbitration)
     Qt::CursorShape result = Qt::ArrowCursor;
     int best = std::numeric_limits<int>::min();
 

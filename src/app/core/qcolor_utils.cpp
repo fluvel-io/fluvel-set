@@ -11,25 +11,25 @@ namespace fluvel::qcolor_utils
 
 QColor desaturateAndDarken(const QColor& original, qreal saturationFactor, qreal valueFactor)
 {
-    // Clamp des facteurs pour éviter les aberrations
+    // Clamp the factors to avoid out-of-range results
     saturationFactor = std::clamp(saturationFactor, 0.0, 1.0);
     valueFactor = std::clamp(valueFactor, 0.0, 1.0);
 
     QColor hsv = original.toHsv();
 
-    int h = hsv.hue();        // peut être -1 si gris
+    int h = hsv.hue();        // can be -1 for a gray color
     int s = hsv.saturation(); // 0 → gris pur
     int v = hsv.value();
     int a = hsv.alpha();
 
-    // Si gris pur → on ne touche qu'à la luminosité
+    // Pure gray: only the brightness is changed
     if (s == 0)
     {
         v = static_cast<int>(v * valueFactor);
         return QColor::fromHsv(0, 0, v, a);
     }
 
-    // Couleur normale
+    // Regular color
     s = static_cast<int>(s * saturationFactor);
     v = static_cast<int>(v * valueFactor);
 

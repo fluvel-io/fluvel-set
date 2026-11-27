@@ -104,13 +104,13 @@ uint8_t Median::findMedian(int targetRank)
 
     int cumulative = 0;
 
-    // 1. Cumuler jusqu'à currentMedian
+    // 1. Accumulate up to currentMedian
     for (int i = 0; i <= currentMedian_; ++i)
     {
         cumulative += kernelHisto_[i];
     }
 
-    // 2. Ajuster vers le haut
+    // 2. Adjust upwards
     if (cumulative < targetRank)
     {
         int i = currentMedian_;
@@ -123,7 +123,7 @@ uint8_t Median::findMedian(int targetRank)
     }
     else
     {
-        // 3. Ajuster vers le bas
+        // 3. Adjust downwards
         int i = currentMedian_;
         while (i > 0 && cumulative - kernelHisto_[i] >= targetRank)
         {

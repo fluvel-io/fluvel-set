@@ -50,7 +50,7 @@ QString buildVersionString()
 #ifdef FLUVEL_BUILD_VERSION
     QString buildVersion = FLUVEL_BUILD_VERSION;
 
-    // évite doublon si tag = version
+    // Avoid a duplicate when the tag equals the version
     if (buildVersion != version)
     {
         version += QString(" (%1)").arg(buildVersion);
@@ -119,10 +119,10 @@ QString formattedBuildDate()
     if (!dt.isValid())
         return "Invalid date";
 
-    // 👉 on force UTC
+    // Force UTC
     dt.setTimeZone(QTimeZone::utc());
 
-    // 👉 format fixe en-GB
+    // Fixed en-GB format
     return QLocale(QLocale::English, QLocale::UnitedKingdom)
         .toString(dt, "dd MMM yyyy, HH:mm:ss 'UTC'");
 }

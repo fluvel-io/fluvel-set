@@ -16,7 +16,7 @@ QImage darkenImage(const QImage& image)
     QPainter p(&dark);
     p.setCompositionMode(QPainter::CompositionMode_Multiply);
 
-    // gris sombre plutôt que noir pur
+    // dark gray rather than pure black
     p.fillRect(dark.rect(), QColor(100, 100, 100));
     p.end();
 

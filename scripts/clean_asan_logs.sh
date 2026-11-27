@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "Cleaning ASan logs in: $SCRIPT_DIR"
 
-# Supprime uniquement les fichiers asan_log.*
+# Only removes the asan_log.* files
 find "$SCRIPT_DIR" -type f -name "asan_log.*" -print -delete
 
 echo "Done."

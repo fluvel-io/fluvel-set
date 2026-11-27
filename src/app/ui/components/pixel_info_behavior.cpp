@@ -25,7 +25,7 @@ bool PixelInfoBehavior::mousePress(ImageViewerWidget& view, QMouseEvent* event)
 
     const QPoint pixel = view.imageCoordinatesFromView(event->pos());
 
-    // 👇 clic hors image → on refuse d'activer
+    // Click outside the image: do not activate
     if (pixel.x() < 0)
         return false;
 
@@ -48,7 +48,7 @@ bool PixelInfoBehavior::mouseMove(ImageViewerWidget& view, QMouseEvent* event)
     if (!active_)
         return false;
 
-    // Si le bouton droit n'est plus enfoncé → on stoppe tout
+    // Right button no longer pressed: stop everything
     if (!(event->buttons() & Qt::RightButton))
     {
         active_ = false;

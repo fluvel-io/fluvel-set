@@ -784,7 +784,7 @@ void ImageViewerWidget::mouseMoveEvent(QMouseEvent* event)
     if (itemMovable)
     {
         if (interaction_)
-            interaction_->cancel(); // 👈 stop pixel info
+            interaction_->cancel(); // stop pixel info
 
         QGraphicsView::mouseMoveEvent(event);
         return;
@@ -835,7 +835,7 @@ void ImageViewerWidget::updateCursor(const QMouseEvent* e)
 
     const auto items = this->items(pos);
 
-    // 1️⃣ priorité aux items UI déplaçables
+    // Movable UI items take priority
     for (auto* item : items)
     {
         if (item->flags() & QGraphicsItem::ItemIsMovable)
@@ -851,7 +851,7 @@ void ImageViewerWidget::updateCursor(const QMouseEvent* e)
         return;
     }
 
-    // 3️⃣ sinon les interactions décident
+    // Otherwise the interactions decide
     viewport()->setCursor(interaction_->cursorForEvent(*this, hasImage(), isPanRelevant(), e));
 }
 

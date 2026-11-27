@@ -222,32 +222,32 @@ void BoundaryFactory::buildEllipseMidpointConnected(int x0, int y0, int a, int b
     int x = 0;
     int y = b;
 
-    // Carrés
+    // Squares
     int64_t a2 = static_cast<int64_t>(a) * a;
     int64_t b2 = static_cast<int64_t>(b) * b;
 
     int64_t dx = 0;
     int64_t dy = 2 * a2 * y;
 
-    // Paramètre de décision région 1
+    // Decision parameter, region 1
     int64_t d1 = b2 - (a2 * b) + (a2 / 4);
 
     int prevX = x;
     int prevY = y;
 
-    // -------- Région 1 --------
+    // -------- Region 1 --------
     while (dx < dy)
     {
-        // Ajout du point principal
+        // Add the main point
         add4pointsInEllipse(outerBoundary, x, y, x0, y0);
 
-        // ---- Connexité 8 ----
+        // ---- 8-connectivity ----
         int dxp = x - prevX;
         int dyp = y - prevY;
 
         if (abs(dxp) == 1 && abs(dyp) == 1)
         {
-            // pixel correcteur (choix simple et sûr)
+            // correction pixel (simple and safe choice)
             add4pointsInEllipse(outerBoundary, prevX, y, x0, y0);
         }
 
@@ -269,18 +269,18 @@ void BoundaryFactory::buildEllipseMidpointConnected(int x0, int y0, int a, int b
         }
     }
 
-    // Paramètre région 2
+    // Decision parameter, region 2
     const int64_t xShift = static_cast<int64_t>(x) * 2 + 1; // 2*(x + 0.5)
     const int64_t yShift = static_cast<int64_t>(y) - 1;
 
     int64_t d2 = (b2 * xShift * xShift / 4) + (a2 * yShift * yShift) - (a2 * b2);
 
-    // -------- Région 2 --------
+    // -------- Region 2 --------
     while (y >= 0)
     {
         add4pointsInEllipse(outerBoundary, x, y, x0, y0);
 
-        // ---- Connexité 8 ----
+        // ---- 8-connectivity ----
         int dxp = x - prevX;
         int dyp = y - prevY;
 

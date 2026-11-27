@@ -68,7 +68,7 @@ void MeanSliding::apply(const ImageView& input, int radius)
         {
             int64_t sum = 0;
 
-            // init window (avec clamp uniquement ici)
+            // init window (clamping is only needed here)
             for (int k = -radius; k <= radius; ++k)
             {
                 const int xx = std::clamp(k, 0, width_ - 1);

@@ -93,7 +93,7 @@ void ColorSelectorWidget::setSelectedColor(const QColor& color)
 {
     QSignalBlocker blocker(colorCb_);
 
-    // chercher si la couleur existe déjà
+    // Look for the color in the list first
     for (int i = 0; i < colorCb_->count(); ++i)
     {
         const QVariant v = colorCb_->itemData(i);
@@ -106,7 +106,7 @@ void ColorSelectorWidget::setSelectedColor(const QColor& color)
         }
     }
 
-    // sinon → custom
+    // Otherwise, use the custom entry
     const int customIndex = colorCb_->findText(tr("Custom"));
     if (customIndex >= 0)
     {

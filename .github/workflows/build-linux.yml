@@ -45,7 +45,7 @@ jobs:
       - name: Pull Docker image
         run: docker pull ghcr.io/${{ github.repository }}/qt-builder:qt6.9.3-ubuntu25.10
 
-      # 📦 Build Flatpak dans Docker
+      # 📦 Build Flatpak in Docker
       - name: Build Flatpak
         run: |
           docker run --rm \
@@ -134,7 +134,7 @@ jobs:
       - name: Pull Docker image
         run: docker pull ghcr.io/${{ github.repository }}/qt-builder:qt6.9.3-ubuntu25.10
 
-      # 📦 Build AppImage dans Docker
+      # 📦 Build AppImage in Docker
       - name: Build AppImage
         run: |
           docker run --rm \
@@ -182,7 +182,7 @@ jobs:
               export LD_LIBRARY_PATH=\$QT_ROOT/lib:\$LD_LIBRARY_PATH
               export APPIMAGE_EXTRACT_AND_RUN=1
 
-              # ⚠️ retirer libqtiff
+              # ⚠️ remove libqtiff
               cp -r \$QT_ROOT/plugins qt-plugins
               rm -f qt-plugins/imageformats/libqtiff.so*
 

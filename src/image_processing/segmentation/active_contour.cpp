@@ -274,13 +274,13 @@ void ActiveContour::switchBoundaryPoint(ContourPoint& point)
     // ---------- FAST PATH ----------
     if (x > 0 && x + 1 < w && y > 0 && y + 1 < h)
     {
-        // voisins 4-connectés
+        // 4-connected neighbors
         for (const auto& d : kNeighbors4)
         {
             promoteRegionToBoundary(x + d.dx, y + d.dy);
         }
 
-        // extension diagonale
+        // diagonal extension
         if (connected == Connectivity::Eight)
         {
             for (const auto& d : kNeighbors4Diag)
@@ -291,7 +291,7 @@ void ActiveContour::switchBoundaryPoint(ContourPoint& point)
     }
     else
     {
-        // ---------- SLOW PATH (bords) ----------
+        // ---------- SLOW PATH (borders) ----------
         for (const auto& d : kNeighbors4)
         {
             const int nx = x + d.dx;
@@ -320,10 +320,10 @@ void ActiveContour::switchBoundaryPoint(ContourPoint& point)
 
     const auto& cm = currentMapping();
 
-    // bascule du point courant
+    // switch the current point
     cd_.phi().at(x, y) = cm.currentToAdjacentVal;
 
-    // passage dans la boundary adjacente
+    // move into the adjacent boundary
     cm.toBoundary.emplace_back(x, y);
 
     point = cm.fromBoundary.back();

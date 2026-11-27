@@ -120,7 +120,7 @@ SettingsDialog::SettingsDialog(const ImageComputeConfig& config, QWidget* parent
     // Horizontal content: tabs | image
     QHBoxLayout* contentLayout = new QHBoxLayout;
     contentLayout->addWidget(tabs_);
-    contentLayout->addWidget(imageViewer_, 1); // l'image prend l'espace restant
+    contentLayout->addWidget(imageViewer_, 1); // the image takes the remaining space
 
     // Vertical root layout: content + buttons
     QVBoxLayout* rootLayout = new QVBoxLayout;
@@ -898,10 +898,10 @@ UiShapeInfo SettingsDialog::getUiShapeAt(QPoint position) const
 
 void SettingsDialog::accept()
 {
-    // 1. commit algo widget dans edited
+    // 1. Commit the algorithm widget into the edited config
     algoWidget_->accept();
 
-    // 2. récupérer phi dans edited
+    // 2. Get phi into the edited config
     editedConfig_.initialPhi = imageSettingsController_->commit();
 
     // 3. COPY final

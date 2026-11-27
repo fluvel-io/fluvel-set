@@ -99,7 +99,7 @@ void impulsive(const ImageView& input, ImageOwner& output, float probability)
             {
                 const int idx = x * channels;
 
-                // ===== Couleur : impulsif par canal =====
+                // ===== Color: impulse noise per channel =====
                 for (int c = 0; c < activeChannels; ++c)
                 {
                     if (dist01(rng) < probability)
@@ -180,7 +180,7 @@ void speckleGamma(const ImageView& input, ImageOwner& output, float sigma)
 
     sigma = std::clamp(sigma, kSigmaMin, kSigmaMax);
 
-    // Mapping sigma -> L (nombre de looks)
+    // Mapping sigma -> L (number of looks)
     const float L = 1.f / (sigma * sigma);
 
     // Gamma(L, 1/L) → mean = 1
@@ -204,7 +204,7 @@ void speckleGamma(const ImageView& input, ImageOwner& output, float sigma)
 
             for (int c = 0; c < activeChannels; ++c)
             {
-                const float n = dist(rng); // multiplicatif (mean = 1)
+                const float n = dist(rng); // multiplicative (mean = 1)
 
                 float v = src[idx + c] * n;
 

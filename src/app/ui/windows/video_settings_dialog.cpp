@@ -171,7 +171,7 @@ void VideoSettingsDialog::reject()
 
 void VideoSettingsDialog::restoreToDefaults()
 {
-    editedConfig_ = {};   // reset avec defaults structs
+    editedConfig_ = {};   // reset to the struct defaults
     updateUIFromConfig(); // resync UI
 }
 

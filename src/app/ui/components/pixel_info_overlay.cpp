@@ -30,7 +30,7 @@ PixelInfoOverlay::PixelInfoOverlay(QGraphicsScene* scene)
 
     scene->addItem(this);
 
-    setZValue(10'000); // toujours au-dessus
+    setZValue(10'000); // always on top
     setVisible(false);
     setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
 
@@ -39,7 +39,7 @@ PixelInfoOverlay::PixelInfoOverlay(QGraphicsScene* scene)
     font.setPointSize(13);
     font.setBold(true);
 
-    // chiffres tabulaires
+    // tabular figures
     font.setFeature("tnum", 1);
 
     font_ = font;

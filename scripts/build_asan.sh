@@ -5,17 +5,17 @@
 set -euo pipefail
 
 #######################################
-# PATHS ROBUSTES
+# ROBUST PATHS
 #######################################
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 #######################################
-# CONFIG (MODIFIER ICI UNIQUEMENT)
+# CONFIG (EDIT HERE ONLY)
 #######################################
 
-# 👉 Choix du compilateur (Clang par défaut)
+# Compiler choice (Clang by default)
 USE_CLANG=1
 # USE_GCC=1
 
@@ -23,7 +23,7 @@ QT_PATH="$HOME/Qt/6.11.2/gcc_64"
 BUILD_TYPE="Debug"
 
 #######################################
-# CONFIG AUTO
+# AUTO CONFIG
 #######################################
 
 if [ "$USE_CLANG" = "1" ]; then

@@ -5,30 +5,30 @@
 set -euo pipefail
 
 #######################################
-# PATHS ROBUSTES
+# ROBUST PATHS
 #######################################
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 #######################################
-# CONFIG (MODIFIER ICI UNIQUEMENT)
+# CONFIG (EDIT HERE ONLY)
 #######################################
 
 # MODE="FAST"
 MODE="DEEP"
 
-# 👉 Choix du compilateur
+# Compiler choice
 USE_CLANG=1
 # USE_GCC=1
 
-# Exécutable (relatif au build dir)
+# Executable (relative to the build dir)
 EXECUTABLE_PATH="src/app/fluvel-set"
 
 LSAN_SUPP_FILE="${SCRIPT_DIR}/lsan.supp"
 
 #######################################
-# CONFIG AUTO (ne pas modifier)
+# AUTO CONFIG (do not edit)
 #######################################
 
 if [ "$USE_CLANG" = "1" ]; then
@@ -66,7 +66,7 @@ if [ "$USE_CLANG" = "1" ]; then
     report_objects=1:\
     suppressions=${LSAN_SUPP_FILE}"
 
-    # Vérif optionnelle
+    # Optional check
     if [ ! -f "${LSAN_SUPP_FILE}" ]; then
         echo "⚠️ LSAN suppression file not found: ${LSAN_SUPP_FILE}"
     fi
@@ -88,7 +88,7 @@ else
 fi
 
 #######################################
-# SYMBOLIZER (important pour Clang)
+# SYMBOLIZER (important for Clang)
 #######################################
 
 if command -v llvm-symbolizer >/dev/null 2>&1; then

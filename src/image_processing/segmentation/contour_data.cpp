@@ -292,7 +292,7 @@ bool ContourData::isRedundant(const ContourPoint& point) const
 
     if (fullyInside8(x, y, w, h))
     {
-        // FAST PATH: aucun valid(), aucune branche parasite
+        // FAST PATH: no valid() check, no stray branch
 
         for (const auto& dn : kNeighbors4)
         {
@@ -313,7 +313,7 @@ bool ContourData::isRedundant(const ContourPoint& point) const
     }
     else
     {
-        // SLOW PATH: bords
+        // SLOW PATH: borders
 
         for (const auto& dn : kNeighbors4)
         {

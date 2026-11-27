@@ -5,28 +5,28 @@
 set -euo pipefail
 
 #######################################
-# PATHS ROBUSTES
+# ROBUST PATHS
 #######################################
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 #######################################
-# CONFIG (MODIFIER ICI UNIQUEMENT)
+# CONFIG (EDIT HERE ONLY)
 #######################################
 
-# 👉 Choix du compilateur
+# Compiler choice
 USE_CLANG=1
 
-# 👉 Exécutable (comme ASAN)
+# Executable (same as ASAN)
 EXECUTABLE_PATH="src/app/fluvel-set"
 
-# 👉 Mode (optionnel)
+# Mode (optional)
 # MODE="FAST"
 MODE="DEEP"
 
 #######################################
-# CONFIG AUTO
+# AUTO CONFIG
 #######################################
 
 if [ "$USE_CLANG" = "1" ]; then

@@ -238,8 +238,8 @@ void ImageWindow::setupUi()
     contentLayout->setContentsMargins(0, 0, 0, 0);
     contentLayout->setSpacing(0);
 
-    contentLayout->addWidget(imageViewer_, 1); // prend tout l'espace
-    contentLayout->addWidget(displayBar_, 0); // largeur naturelle
+    contentLayout->addWidget(imageViewer_, 1); // takes all the space
+    contentLayout->addWidget(displayBar_, 0); // natural width
 
     // Assemble the main layout
     vLayout->addWidget(controlBar_);

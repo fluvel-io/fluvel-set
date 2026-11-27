@@ -146,7 +146,7 @@ inline fluvel_ip::ImageView imageViewFromQImage(const QImage& img)
 
         case QImage::Format_ARGB32:
         case QImage::Format_RGB32:
-            // Qt stocke BGRA en mémoire
+            // Qt stores BGRA in memory
             return fluvel_ip::ImageView(data, w, h, fluvel_ip::ImageFormat::Bgr32, stride);
 
         default:
@@ -264,7 +264,7 @@ inline QImage toQImageShared(std::shared_ptr<fluvel_ip::ImageOwner> img)
             return {};
     }
 
-    // heap allocation pour garder le shared_ptr vivant
+    // Heap allocation to keep the shared_ptr alive
     auto* holder = new std::shared_ptr<fluvel_ip::ImageOwner>(std::move(img));
 
     return QImage((*holder)->data(), (*holder)->width(), (*holder)->height(), (*holder)->stride(),
@@ -295,7 +295,7 @@ inline fluvel_ip::ImageView image_view_from_cvmat(const cv::Mat& mat)
             return fluvel_ip::ImageView(data, w, h, fluvel_ip::ImageFormat::Gray8, stride);
 
         case CV_8UC3:
-            // OpenCV = BGR en mémoire
+            // OpenCV stores BGR in memory
             return fluvel_ip::ImageView(data, w, h, fluvel_ip::ImageFormat::Bgr24, stride);
 
         case CV_8UC4:
