@@ -85,6 +85,19 @@ public:
         return view().at(x, y, z);
     }
 
+    /**
+     * @brief Pointer to the first voxel of the axial slice @p z (mutable).
+     *
+     * The slice holds width() * height() tightly packed voxels, row by row.
+     */
+    std::uint8_t* sliceData(int z) noexcept
+    {
+        assert(z >= 0 && z < depth_);
+
+        return data_.data() + static_cast<std::size_t>(z) * static_cast<std::size_t>(width_) *
+                                  static_cast<std::size_t>(height_);
+    }
+
     /// Non-owning view over the volume (empty view if the volume is empty).
     [[nodiscard]]
     VolumeView view() const noexcept

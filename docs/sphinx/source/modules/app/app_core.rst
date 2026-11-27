@@ -122,6 +122,12 @@ Image Editing
 .. doxygenfile:: shape_type.hpp
 
 
+Volumes
+-------
+
+.. doxygenfile:: volume_loader.hpp
+
+
 Utilities
 ---------
 

@@ -3,13 +3,24 @@
 
 #include "volume_window.hpp"
 
+#include "volume_loader.hpp"
 #include "volume_slice_view.hpp"
 
+#include "file_utils.hpp"
+
+#include <QAction>
 #include <QCloseEvent>
+#include <QDir>
 #include <QDockWidget>
+#include <QFileDialog>
+#include <QFileInfo>
 #include <QLabel>
+#include <QMenuBar>
+#include <QMessageBox>
+#include <QProgressDialog>
 #include <QSettings>
 #include <QShowEvent>
+#include <QStatusBar>
 
 #include <algorithm>
 #include <utility>
@@ -79,6 +90,7 @@ VolumeWindow::VolumeWindow(QWidget* parent)
     setCentralWidget(central);
     setDockNestingEnabled(true);
 
+    setupMenus();
     setupDocks();
 
     setVolume(std::make_shared<const fluvel_ip::VolumeOwner>(makeTestVolume(96)));
@@ -125,6 +137,104 @@ void VolumeWindow::setupDocks()
 
     addDockWidget(Qt::BottomDockWidgetArea, sagittalDock);
     splitDockWidget(sagittalDock, viewer3dDock, Qt::Horizontal);
+}
+
+void VolumeWindow::setupMenus()
+{
+    openSeriesAct_ = new QAction(tr("Open image &series..."), this);
+    openSeriesAct_->setShortcut(QKeySequence::Open);
+    openSeriesAct_->setStatusTip(
+        tr("Load several images (or one multi-page TIFF) as a volume, one image per slice."));
+
+    openFolderAct_ = new QAction(tr("Open &folder..."), this);
+    openFolderAct_->setStatusTip(tr("Load all the images of a folder as a volume."));
+
+    auto* fileMenu = menuBar()->addMenu(tr("&File"));
+    fileMenu->addAction(openSeriesAct_);
+    fileMenu->addAction(openFolderAct_);
+
+    connect(openSeriesAct_, &QAction::triggered, this, &VolumeWindow::openImageSeries);
+    connect(openFolderAct_, &QAction::triggered, this, &VolumeWindow::openFolder);
+}
+
+void VolumeWindow::openImageSeries()
+{
+    QSettings settings;
+    const QString start =
+        settings.value("history/last_volume_directory", QDir::homePath()).toString();
+
+    const QString filter = tr("Images (%1)").arg(file_utils::supportedImageExtensions());
+
+    const QStringList files = QFileDialog::getOpenFileNames(this, tr("Open image series"), start, filter);
+
+    if (files.isEmpty())
+        return;
+
+    settings.setValue("history/last_volume_directory", QFileInfo(files.first()).absolutePath());
+
+    // A single file is a multi-page file: its pages are the slices.
+    const QStringList ordered =
+        files.size() == 1 ? files : volume_loader::sortedNaturally(files);
+
+    loadFiles(ordered, QFileInfo(ordered.first()).fileName());
+}
+
+void VolumeWindow::openFolder()
+{
+    QSettings settings;
+    const QString start =
+        settings.value("history/last_volume_directory", QDir::homePath()).toString();
+
+    const QString folder = QFileDialog::getExistingDirectory(this, tr("Open folder"), start);
+
+    if (folder.isEmpty())
+        return;
+
+    settings.setValue("history/last_volume_directory", folder);
+
+    const QStringList files = volume_loader::imageFilesInFolder(folder);
+
+    if (files.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Error"), tr("No supported image found in this folder."));
+        return;
+    }
+
+    loadFiles(files, QFileInfo(folder).fileName());
+}
+
+void VolumeWindow::loadFiles(const QStringList& files, const QString& sourceName)
+{
+    QProgressDialog progress(tr("Loading the volume..."), tr("Cancel"), 0, 100, this);
+    progress.setWindowModality(Qt::WindowModal);
+    progress.setMinimumDuration(400);
+
+    const auto result = volume_loader::loadImageSeries(files, [&progress](int done, int total) {
+        progress.setMaximum(total);
+        progress.setValue(done);
+
+        return !progress.wasCanceled();
+    });
+
+    progress.close();
+
+    if (result.cancelled)
+        return;
+
+    if (!result.ok())
+    {
+        QMessageBox::warning(this, tr("Error"), result.error);
+        return;
+    }
+
+    setVolume(result.volume);
+
+    setWindowTitle(tr("Fluvel Set - Volume - %1").arg(sourceName));
+    statusBar()->showMessage(tr("Volume loaded: %1 x %2 x %3")
+                                 .arg(result.volume->width())
+                                 .arg(result.volume->height())
+                                 .arg(result.volume->depth()),
+                             8000);
 }
 
 void VolumeWindow::setVolume(std::shared_ptr<const fluvel_ip::VolumeOwner> volume)

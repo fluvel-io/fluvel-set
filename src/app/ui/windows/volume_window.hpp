@@ -10,6 +10,7 @@
 #include <memory>
 
 class QCloseEvent;
+class QAction;
 class QDockWidget;
 class QShowEvent;
 
@@ -49,6 +50,13 @@ protected:
     void closeEvent(QCloseEvent* event) override;
 
 private:
+    void setupMenus();
+    void openImageSeries();
+    void openFolder();
+
+    /// Loads the files (with a progress dialog) and displays the volume.
+    void loadFiles(const QStringList& files, const QString& sourceName);
+
     QDockWidget* addSliceDock(const QString& title, const QString& objectName, fluvel_ip::VolumeAxis axis,
                               VolumeSliceView*& view);
     void setupDocks();
@@ -58,6 +66,9 @@ private:
     VolumeSliceView* axialView_{nullptr};
     VolumeSliceView* coronalView_{nullptr};
     VolumeSliceView* sagittalView_{nullptr};
+
+    QAction* openSeriesAct_{nullptr};
+    QAction* openFolderAct_{nullptr};
 };
 
 } // namespace fluvel
