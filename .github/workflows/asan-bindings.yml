@@ -1,0 +1,137 @@
+# SPDX-License-Identifier: CeCILL-2.1
+# Copyright (C) 2010-2026 Fabien Bessy
+
+name: Python bindings with sanitizers
+
+# Builds the Python wheel with AddressSanitizer and UndefinedBehaviorSanitizer
+# (ENABLE_ASAN), installs it in a clean environment and runs the same tests as
+# the wheels workflow (tests/python). The leak detection is active too.
+#
+# The job fails if a test fails, if a sanitizer reports an error, or if a leak
+# comes from the code of Fluvel. Leaks of the Python interpreter and of NumPy
+# are ignored (see .github/scripts/check-asan-logs.py).
+#
+# Manual only. The wheel built here is never published: the wheels workflow
+# builds the real ones, without sanitizers.
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: "CMake build type (Debug enables the asserts of the library)"
+        type: choice
+        options:
+          - RelWithDebInfo
+          - Debug
+          - Release
+        default: RelWithDebInfo
+      python_version:
+        description: "Python version"
+        type: string
+        default: "3.12"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: asan-bindings-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  asan:
+    name: ASan + UBSan (${{ inputs.build_type }}, Python ${{ inputs.python_version }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python_version }}
+
+      - name: Build the wheel with the sanitizers
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip wheel . --no-deps -w asan-wheelhouse \
+            -Ccmake.define.ENABLE_ASAN=ON \
+            -Ccmake.build-type=${{ inputs.build_type }}
+
+      - name: Install the wheel in a clean environment
+        run: |
+          python -m venv asan-venv
+          asan-venv/bin/python -m pip install asan-wheelhouse/*.whl pytest
+
+      # Python is not built with the sanitizers: the runtime of AddressSanitizer
+      # has to be preloaded, with libstdc++ so that the C++ exceptions of the
+      # module work. The preload is set for the Python command only.
+      #
+      # --capture=sys: the messages of the sanitizers are written by the C++
+      # code directly on the standard error and must not be captured by pytest,
+      # because the process stops right after them.
+      #
+      # PYTHONMALLOC=malloc gives every allocation of Python to the sanitizer.
+      # The leak detection must not change the exit status (exitcode=0): it
+      # could hide a failing test. The logs are checked by the next step.
+      # exitcode=0 is shared by all the sanitizers of the runtime: an error of
+      # AddressSanitizer stops the process with abort() (abort_on_error=1) so
+      # that it still gives a non-zero status.
+      - name: Run the tests
+        id: tests
+        run: |
+          ASAN_LIB="$(gcc -print-file-name=libasan.so)"
+          STDCXX_LIB="$(gcc -print-file-name=libstdc++.so)"
+
+          for lib in "$ASAN_LIB" "$STDCXX_LIB"
+          do
+            if [ ! -f "$lib" ]
+            then
+              echo "::error::Library not found: $lib"
+              exit 1
+            fi
+          done
+
+          mkdir -p asan-logs
+
+          set +e
+          env \
+            PYTHONMALLOC=malloc \
+            LD_PRELOAD="$ASAN_LIB $STDCXX_LIB" \
+            ASAN_OPTIONS="halt_on_error=1:detect_leaks=1:symbolize=1:strict_string_checks=1:check_initialization_order=1:detect_stack_use_after_return=1:detect_stack_use_after_scope=1:detect_odr_violation=1:abort_on_error=1:malloc_context_size=30:log_path=$PWD/asan-logs/asan" \
+            LSAN_OPTIONS="exitcode=0:report_objects=1" \
+            UBSAN_OPTIONS="print_stacktrace=1:halt_on_error=1" \
+            asan-venv/bin/python -m pytest tests/python -q -p no:cacheprovider --capture=sys
+          status=$?
+          set -e
+
+          echo "pytest exit status: $status"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+
+      - name: Check the sanitizer logs
+        id: logs
+        run: |
+          set +e
+          python .github/scripts/check-asan-logs.py asan-logs "${{ steps.tests.outputs.status }}"
+          status=$?
+          set -e
+
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: asan-logs
+          path: asan-logs
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Result
+        run: |
+          echo "tests / sanitizer error: ${{ steps.tests.outputs.status }}"
+          echo "leaks and sanitizer logs: ${{ steps.logs.outputs.status }}"
+
+          if [ "${{ steps.tests.outputs.status }}" != "0" ] || [ "${{ steps.logs.outputs.status }}" != "0" ]
+          then
+            echo "::error::A test failed, or a sanitizer reported an error or a leak"
+            exit 1
+          fi
