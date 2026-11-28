@@ -25,10 +25,13 @@ set(app_src
 
     ${UI_WIN_DIR}/histogram_window.cpp
     ${UI_WIN_DIR}/histogram_window.hpp
-    ${CORE_DIR}/volume_loader.cpp
-    ${CORE_DIR}/volume_loader.hpp
+
     ${UI_COMP_DIR}/volume_slice_view.cpp
     ${UI_COMP_DIR}/volume_slice_view.hpp
+
+    ${UI_WIN_DIR}/raw_volume_dialog.cpp
+    ${UI_WIN_DIR}/raw_volume_dialog.hpp
+
     ${UI_WIN_DIR}/volume_window.cpp
     ${UI_WIN_DIR}/volume_window.hpp
 
@@ -297,6 +300,9 @@ set(app_src
     ${CORE_DIR}/recording_types.hpp
 
     ${CORE_DIR}/recording_buffer_settings.hpp
+
+    ${CORE_DIR}/volume_loader.cpp
+    ${CORE_DIR}/volume_loader.hpp
 
     ${MEDIA_DIR}/video_export_settings.hpp
     ${MEDIA_DIR}/video_exporter_backend.hpp
