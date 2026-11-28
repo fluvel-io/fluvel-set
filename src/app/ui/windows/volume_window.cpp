@@ -3,6 +3,7 @@
 
 #include "volume_window.hpp"
 
+#include "raw_volume_dialog.hpp"
 #include "volume_loader.hpp"
 #include "volume_slice_view.hpp"
 
@@ -118,11 +119,12 @@ QDockWidget* VolumeWindow::addSliceDock(const QString& title, const QString& obj
 
 void VolumeWindow::setupDocks()
 {
-    auto* axialDock = addSliceDock(tr("Axial"), "volume_dock_axial", fluvel_ip::VolumeAxis::Axial, axialView_);
-    auto* coronalDock =
-        addSliceDock(tr("Coronal"), "volume_dock_coronal", fluvel_ip::VolumeAxis::Coronal, coronalView_);
-    auto* sagittalDock =
-        addSliceDock(tr("Sagittal"), "volume_dock_sagittal", fluvel_ip::VolumeAxis::Sagittal, sagittalView_);
+    auto* axialDock =
+        addSliceDock(tr("Axial"), "volume_dock_axial", fluvel_ip::VolumeAxis::Axial, axialView_);
+    auto* coronalDock = addSliceDock(tr("Coronal"), "volume_dock_coronal",
+                                     fluvel_ip::VolumeAxis::Coronal, coronalView_);
+    auto* sagittalDock = addSliceDock(tr("Sagittal"), "volume_dock_sagittal",
+                                      fluvel_ip::VolumeAxis::Sagittal, sagittalView_);
 
     auto* viewer3dDock = new QDockWidget(tr("3D"), this);
     viewer3dDock->setObjectName("volume_dock_3d");
@@ -149,12 +151,19 @@ void VolumeWindow::setupMenus()
     openFolderAct_ = new QAction(tr("Open &folder..."), this);
     openFolderAct_->setStatusTip(tr("Load all the images of a folder as a volume."));
 
+    openRawAct_ = new QAction(tr("Open &raw volume..."), this);
+    openRawAct_->setStatusTip(tr("Load a raw file of 8-bit voxels. Its sizes are asked, since the "
+                                 "file does not contain them."));
+
     auto* fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(openSeriesAct_);
     fileMenu->addAction(openFolderAct_);
+    fileMenu->addSeparator();
+    fileMenu->addAction(openRawAct_);
 
     connect(openSeriesAct_, &QAction::triggered, this, &VolumeWindow::openImageSeries);
     connect(openFolderAct_, &QAction::triggered, this, &VolumeWindow::openFolder);
+    connect(openRawAct_, &QAction::triggered, this, &VolumeWindow::openRawVolume);
 }
 
 void VolumeWindow::openImageSeries()
@@ -165,7 +174,8 @@ void VolumeWindow::openImageSeries()
 
     const QString filter = tr("Images (%1)").arg(file_utils::supportedImageExtensions());
 
-    const QStringList files = QFileDialog::getOpenFileNames(this, tr("Open image series"), start, filter);
+    const QStringList files =
+        QFileDialog::getOpenFileNames(this, tr("Open image series"), start, filter);
 
     if (files.isEmpty())
         return;
@@ -173,8 +183,7 @@ void VolumeWindow::openImageSeries()
     settings.setValue("history/last_volume_directory", QFileInfo(files.first()).absolutePath());
 
     // A single file is a multi-page file: its pages are the slices.
-    const QStringList ordered =
-        files.size() == 1 ? files : volume_loader::sortedNaturally(files);
+    const QStringList ordered = files.size() == 1 ? files : volume_loader::sortedNaturally(files);
 
     loadFiles(ordered, QFileInfo(ordered.first()).fileName());
 }
@@ -205,16 +214,64 @@ void VolumeWindow::openFolder()
 
 void VolumeWindow::loadFiles(const QStringList& files, const QString& sourceName)
 {
+    runLoad(
+        [&files](const volume_loader::ProgressCallback& progress)
+        {
+            return volume_loader::loadImageSeries(files, progress);
+        },
+        sourceName);
+}
+
+void VolumeWindow::openRawVolume()
+{
+    QSettings settings;
+    const QString start =
+        settings.value("history/last_volume_directory", QDir::homePath()).toString();
+
+    const QString filter = tr("Raw volumes (*.raw *.bin *.vol *.img *.dat);;All files (*)");
+
+    const QString path = QFileDialog::getOpenFileName(this, tr("Open raw volume"), start, filter);
+
+    if (path.isEmpty())
+        return;
+
+    settings.setValue("history/last_volume_directory", QFileInfo(path).absolutePath());
+
+    if (const QString problem = file_utils::readableFileError(path); !problem.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Error"), problem);
+        return;
+    }
+
+    const auto parameters = RawVolumeDialog::ask(path, this);
+
+    if (!parameters.has_value())
+        return;
+
+    runLoad(
+        [&path, &parameters](const volume_loader::ProgressCallback& progress)
+        {
+            return volume_loader::loadRaw(path, *parameters, progress);
+        },
+        QFileInfo(path).fileName());
+}
+
+void VolumeWindow::runLoad(
+    const std::function<volume_loader::Result(const volume_loader::ProgressCallback&)>& job,
+    const QString& sourceName)
+{
     QProgressDialog progress(tr("Loading the volume..."), tr("Cancel"), 0, 100, this);
     progress.setWindowModality(Qt::WindowModal);
     progress.setMinimumDuration(400);
 
-    const auto result = volume_loader::loadImageSeries(files, [&progress](int done, int total) {
-        progress.setMaximum(total);
-        progress.setValue(done);
+    const auto result = job(
+        [&progress](int done, int total)
+        {
+            progress.setMaximum(total);
+            progress.setValue(done);
 
-        return !progress.wasCanceled();
-    });
+            return !progress.wasCanceled();
+        });
 
     progress.close();
 

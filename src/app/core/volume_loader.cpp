@@ -6,9 +6,11 @@
 #include "file_utils.hpp"
 
 #include <QDir>
+#include <QFile>
 #include <QFileInfo>
 #include <QImage>
 #include <QImageReader>
+#include <QRegularExpression>
 
 #include <algorithm>
 #include <cstring>
@@ -123,7 +125,10 @@ int naturalCompare(const QString& a, const QString& b)
 QStringList sortedNaturally(QStringList files)
 {
     std::sort(files.begin(), files.end(),
-              [](const QString& a, const QString& b) { return naturalCompare(a, b) < 0; });
+              [](const QString& a, const QString& b)
+              {
+                  return naturalCompare(a, b) < 0;
+              });
 
     return files;
 }
@@ -132,7 +137,8 @@ QStringList imageFilesInFolder(const QString& folder)
 {
     const QDir dir(folder);
 
-    const QStringList patterns = file_utils::supportedImageExtensions().split(' ', Qt::SkipEmptyParts);
+    const QStringList patterns =
+        file_utils::supportedImageExtensions().split(' ', Qt::SkipEmptyParts);
 
     QStringList files;
 
@@ -140,6 +146,110 @@ QStringList imageFilesInFolder(const QString& folder)
         files << info.absoluteFilePath();
 
     return sortedNaturally(files);
+}
+
+std::optional<RawParameters> guessRawParameters(const QString& fileName)
+{
+    static const QRegularExpression re(QStringLiteral("(\\d+)x(\\d+)x(\\d+)"),
+                                       QRegularExpression::CaseInsensitiveOption);
+
+    const auto match = re.match(QFileInfo(fileName).fileName());
+
+    if (!match.hasMatch())
+        return std::nullopt;
+
+    bool okW = false;
+    bool okH = false;
+    bool okD = false;
+
+    const int w = match.captured(1).toInt(&okW);
+    const int h = match.captured(2).toInt(&okH);
+    const int d = match.captured(3).toInt(&okD);
+
+    if (!okW || !okH || !okD || w <= 0 || h <= 0 || d <= 0)
+        return std::nullopt;
+
+    RawParameters p;
+    p.width = w;
+    p.height = h;
+    p.depth = d;
+    return p;
+}
+
+bool nameSuggestsOtherVoxelType(const QString& fileName)
+{
+    static const QRegularExpression re(QStringLiteral("u?int(16|32|64)|float|double"),
+                                       QRegularExpression::CaseInsensitiveOption);
+
+    return re.match(QFileInfo(fileName).fileName()).hasMatch();
+}
+
+Result loadRaw(const QString& path, const RawParameters& p, const ProgressCallback& progress)
+{
+    if (p.width <= 0 || p.height <= 0 || p.depth <= 0 || p.headerBytes < 0)
+        return failure(QObject::tr("The sizes of the volume must be strictly positive."));
+
+    const qint64 sliceBytes = static_cast<qint64>(p.width) * p.height;
+    const qint64 voxels = sliceBytes * p.depth;
+
+    if (voxels > kMaxVoxels)
+        return failure(QObject::tr("The volume is too large (%1 x %2 x %3 voxels).")
+                           .arg(p.width)
+                           .arg(p.height)
+                           .arg(p.depth));
+
+    QFile file(path);
+
+    if (!file.open(QIODevice::ReadOnly))
+        return failure(QObject::tr("Cannot open %1: %2").arg(path, file.errorString()));
+
+    const qint64 actual = file.size();
+    const qint64 expected = p.expectedFileSize();
+
+    if (actual != expected)
+    {
+        QString message = QObject::tr("The file has %1 bytes but %2 are expected for %3 x %4 x %5 "
+                                      "voxels of 8 bits.")
+                              .arg(actual)
+                              .arg(expected)
+                              .arg(p.width)
+                              .arg(p.height)
+                              .arg(p.depth);
+
+        const qint64 payload = actual - p.headerBytes;
+
+        if (payload > 0 && voxels > 0 && payload % voxels == 0 && payload / voxels > 1)
+            message += QLatin1Char('\n') +
+                       QObject::tr("The file probably holds voxels of %1 bits: only 8 bits are "
+                                   "supported for now.")
+                           .arg(8 * (payload / voxels));
+
+        return failure(message);
+    }
+
+    if (!file.seek(p.headerBytes))
+        return failure(QObject::tr("Cannot read %1: %2").arg(path, file.errorString()));
+
+    auto volume = std::make_shared<fluvel_ip::VolumeOwner>(p.width, p.height, p.depth);
+
+    for (int z = 0; z < p.depth; ++z)
+    {
+        char* dst = reinterpret_cast<char*>(volume->sliceData(z));
+
+        if (file.read(dst, sliceBytes) != sliceBytes)
+            return failure(QObject::tr("Cannot read %1: %2").arg(path, file.errorString()));
+
+        if (progress && !progress(z + 1, p.depth))
+        {
+            Result r;
+            r.cancelled = true;
+            return r;
+        }
+    }
+
+    Result r;
+    r.volume = std::move(volume);
+    return r;
 }
 
 Result loadImageSeries(const QStringList& files, const ProgressCallback& progress)

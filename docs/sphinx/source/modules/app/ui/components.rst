@@ -149,6 +149,8 @@ Miscellaneous Widgets
 
 .. doxygenfile:: histogram_widget.hpp
 
+.. doxygenfile:: volume_slice_view.hpp
+
 
 UI Infrastructure
 -----------------

@@ -10,6 +10,7 @@
 
 #include <functional>
 #include <memory>
+#include <optional>
 
 namespace fluvel::volume_loader
 {
@@ -55,6 +56,56 @@ QStringList imageFilesInFolder(const QString& folder);
  * @brief Sorts file paths in natural order (numbers compared by value, not by digits).
  */
 QStringList sortedNaturally(QStringList files);
+
+/**
+ * @brief Layout of a raw volume file: the voxels one after the other, without any header.
+ *
+ * A raw file does not describe itself, so the sizes must be given by the user. Only 8-bit
+ * voxels are supported for now. The voxels are stored row by row, then slice by slice.
+ */
+struct RawParameters
+{
+    int width{0};
+    int height{0};
+    int depth{0};
+
+    /// Number of bytes to skip at the beginning of the file.
+    qint64 headerBytes{0};
+
+    /// Size in bytes the file must have for these parameters.
+    qint64 expectedFileSize() const
+    {
+        return headerBytes + static_cast<qint64>(width) * height * depth;
+    }
+};
+
+/**
+ * @brief Guesses the sizes of a raw volume from its file name.
+ *
+ * Recognizes names like "tooth_103x94x161_uint8.raw" (width x height x depth).
+ *
+ * @return The sizes found, with no header, or std::nullopt if the name does not contain them.
+ */
+std::optional<RawParameters> guessRawParameters(const QString& fileName);
+
+/**
+ * @brief Tells whether the file name announces voxels that are not 8-bit (uint16, float...).
+ */
+bool nameSuggestsOtherVoxelType(const QString& fileName);
+
+/**
+ * @brief Loads a raw 8-bit volume.
+ *
+ * The file size must match the parameters exactly, which catches most mistakes on the
+ * sizes. When the file is 2 or 4 times too large, the error says it probably holds 16-bit
+ * or 32-bit voxels.
+ *
+ * @param path Raw file.
+ * @param parameters Sizes and header of the file.
+ * @param progress Optional progress and cancellation callback (called after each slice).
+ */
+Result loadRaw(const QString& path, const RawParameters& parameters,
+               const ProgressCallback& progress = {});
 
 /**
  * @brief Loads a stack of images as an 8-bit grayscale volume.

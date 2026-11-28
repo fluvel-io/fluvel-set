@@ -20,6 +20,8 @@ Main Windows
 
 .. doxygenfile:: histogram_window.hpp
 
+.. doxygenfile:: volume_window.hpp
+
 
 Dialogs
 -------
@@ -31,4 +33,6 @@ Dialogs
 .. doxygenfile:: preferences_dialog.hpp
 
 .. doxygenfile:: about_dialog.hpp
+
+.. doxygenfile:: raw_volume_dialog.hpp
 

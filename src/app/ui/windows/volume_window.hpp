@@ -3,10 +3,12 @@
 
 #pragma once
 
+#include "volume_loader.hpp"
 #include "volume_owner.hpp"
 
 #include <QMainWindow>
 
+#include <functional>
 #include <memory>
 
 class QCloseEvent;
@@ -53,12 +55,18 @@ private:
     void setupMenus();
     void openImageSeries();
     void openFolder();
+    void openRawVolume();
 
     /// Loads the files (with a progress dialog) and displays the volume.
     void loadFiles(const QStringList& files, const QString& sourceName);
 
-    QDockWidget* addSliceDock(const QString& title, const QString& objectName, fluvel_ip::VolumeAxis axis,
-                              VolumeSliceView*& view);
+    /// Runs a loading job with a progress dialog, then displays the volume or the error.
+    void
+    runLoad(const std::function<volume_loader::Result(const volume_loader::ProgressCallback&)>& job,
+            const QString& sourceName);
+
+    QDockWidget* addSliceDock(const QString& title, const QString& objectName,
+                              fluvel_ip::VolumeAxis axis, VolumeSliceView*& view);
     void setupDocks();
 
     std::shared_ptr<const fluvel_ip::VolumeOwner> volume_;
@@ -69,6 +77,7 @@ private:
 
     QAction* openSeriesAct_{nullptr};
     QAction* openFolderAct_{nullptr};
+    QAction* openRawAct_{nullptr};
 };
 
 } // namespace fluvel
