@@ -37,11 +37,11 @@ namespace
  *
  * Only meant for development, until real volumes can be loaded.
  */
-fluvel_ip::VolumeOwner makeTestVolume(int size)
+fluvel_ip::VolumeOwner<std::uint8_t> makeTestVolume(int size)
 {
     size = std::max(size, 8);
 
-    fluvel_ip::VolumeOwner volume(size, size, size, 20);
+    fluvel_ip::VolumeOwner<std::uint8_t> volume(size, size, size, 20);
 
     const double c = (size - 1) / 2.0;
     const double outer = size * 0.36;
@@ -94,7 +94,7 @@ VolumeWindow::VolumeWindow(QWidget* parent)
     setupMenus();
     setupDocks();
 
-    setVolume(std::make_shared<const fluvel_ip::VolumeOwner>(makeTestVolume(96)));
+    setVolume(std::make_shared<const AnyVolume>(makeTestVolume(96)));
 
     QSettings settings;
 
@@ -294,7 +294,7 @@ void VolumeWindow::runLoad(
                              8000);
 }
 
-void VolumeWindow::setVolume(std::shared_ptr<const fluvel_ip::VolumeOwner> volume)
+void VolumeWindow::setVolume(std::shared_ptr<const AnyVolume> volume)
 {
     volume_ = std::move(volume);
 

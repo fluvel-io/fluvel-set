@@ -125,6 +125,8 @@ Image Editing
 Volumes
 -------
 
+.. doxygenfile:: any_volume.hpp
+
 .. doxygenfile:: volume_loader.hpp
 
 

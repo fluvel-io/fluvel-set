@@ -3,8 +3,8 @@
 
 #pragma once
 
+#include "any_volume.hpp"
 #include "volume_loader.hpp"
-#include "volume_owner.hpp"
 
 #include <QMainWindow>
 
@@ -38,7 +38,7 @@ public:
     explicit VolumeWindow(QWidget* parent = nullptr);
 
     /// Replaces the displayed volume.
-    void setVolume(std::shared_ptr<const fluvel_ip::VolumeOwner> volume);
+    void setVolume(std::shared_ptr<const AnyVolume> volume);
 
 signals:
     /// Emitted each time the window is shown.
@@ -69,7 +69,7 @@ private:
                               fluvel_ip::VolumeAxis axis, VolumeSliceView*& view);
     void setupDocks();
 
-    std::shared_ptr<const fluvel_ip::VolumeOwner> volume_;
+    std::shared_ptr<const AnyVolume> volume_;
 
     VolumeSliceView* axialView_{nullptr};
     VolumeSliceView* coronalView_{nullptr};

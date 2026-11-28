@@ -26,6 +26,9 @@ segmentation and analysis algorithms.
 .. doxygenfile:: volume_owner.hpp
 
 
+.. doxygenfile:: volume_display.hpp
+
+
 .. doxygenfile:: image_conversions.hpp
 
 .. doxygenfile:: image_alpha.hpp

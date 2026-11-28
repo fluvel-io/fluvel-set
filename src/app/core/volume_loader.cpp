@@ -230,7 +230,8 @@ Result loadRaw(const QString& path, const RawParameters& p, const ProgressCallba
     if (!file.seek(p.headerBytes))
         return failure(QObject::tr("Cannot read %1: %2").arg(path, file.errorString()));
 
-    auto volume = std::make_shared<fluvel_ip::VolumeOwner>(p.width, p.height, p.depth);
+    auto volume =
+        std::make_shared<fluvel_ip::VolumeOwner<std::uint8_t>>(p.width, p.height, p.depth);
 
     for (int z = 0; z < p.depth; ++z)
     {
@@ -248,7 +249,7 @@ Result loadRaw(const QString& path, const RawParameters& p, const ProgressCallba
     }
 
     Result r;
-    r.volume = std::move(volume);
+    r.volume = std::make_shared<const AnyVolume>(std::move(*volume));
     return r;
 }
 
@@ -269,7 +270,7 @@ Result loadImageSeries(const QStringList& files, const ProgressCallback& progres
     }
 
     QSize size;
-    std::shared_ptr<fluvel_ip::VolumeOwner> volume;
+    std::shared_ptr<fluvel_ip::VolumeOwner<std::uint8_t>> volume;
 
     // For a multi-page file the same reader is kept: each read() gives the next page.
     QImageReader pageReader(files.first());
@@ -297,7 +298,8 @@ Result loadImageSeries(const QStringList& files, const ProgressCallback& progres
                                    .arg(size.height())
                                    .arg(total));
 
-            volume = std::make_shared<fluvel_ip::VolumeOwner>(size.width(), size.height(), total);
+            volume = std::make_shared<fluvel_ip::VolumeOwner<std::uint8_t>>(size.width(),
+                                                                            size.height(), total);
         }
         else if (image.size() != size)
         {
@@ -321,7 +323,7 @@ Result loadImageSeries(const QStringList& files, const ProgressCallback& progres
     }
 
     Result r;
-    r.volume = std::move(volume);
+    r.volume = std::make_shared<const AnyVolume>(std::move(*volume));
     return r;
 }
 

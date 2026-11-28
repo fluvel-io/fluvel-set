@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "volume_owner.hpp"
+#include "any_volume.hpp"
 
 #include <QImage>
 #include <QWidget>
@@ -49,7 +49,7 @@ public:
     explicit VolumeSliceView(fluvel_ip::VolumeAxis axis, QWidget* parent = nullptr);
 
     /// Gives the view the volume to display (shared, not copied). The slider goes to the middle.
-    void setVolume(std::shared_ptr<const fluvel_ip::VolumeOwner> volume);
+    void setVolume(std::shared_ptr<const AnyVolume> volume);
 
     int sliceIndex() const;
 
@@ -61,7 +61,8 @@ private:
     void refresh();
 
     fluvel_ip::VolumeAxis axis_;
-    std::shared_ptr<const fluvel_ip::VolumeOwner> volume_;
+    fluvel_ip::VoxelWindow window_;
+    std::shared_ptr<const AnyVolume> volume_;
 
     SliceCanvas* canvas_{nullptr};
     QSlider* slider_{nullptr};

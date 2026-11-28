@@ -72,17 +72,20 @@ VolumeSliceView::VolumeSliceView(fluvel_ip::VolumeAxis axis, QWidget* parent)
     layout->addWidget(canvas_, 1);
     layout->addLayout(sliderRow);
 
-    connect(slider_, &QSlider::valueChanged, this, [this](int index) {
-        refresh();
-        emit sliceChanged(index);
-    });
+    connect(slider_, &QSlider::valueChanged, this,
+            [this](int index)
+            {
+                refresh();
+                emit sliceChanged(index);
+            });
 }
 
-void VolumeSliceView::setVolume(std::shared_ptr<const fluvel_ip::VolumeOwner> volume)
+void VolumeSliceView::setVolume(std::shared_ptr<const AnyVolume> volume)
 {
     volume_ = std::move(volume);
 
-    const int count = volume_ ? volume_->view().sliceCount(axis_) : 0;
+    const int count = volume_ ? volume_->sliceCount(axis_) : 0;
+    window_ = volume_ ? volume_->defaultWindow() : fluvel_ip::VoxelWindow{};
 
     // Block the signals so the display is refreshed only once, after the new range is set.
     slider_->blockSignals(true);
@@ -109,24 +112,12 @@ void VolumeSliceView::refresh()
         return;
     }
 
-    const fluvel_ip::VolumeView view = volume_->view();
     const int index = slider_->value();
 
-    // Axial and coronal slices are views on the volume: only the QImage is allocated.
-    switch (axis_)
-    {
-        case fluvel_ip::VolumeAxis::Axial:
-            canvas_->setImage(toQImageCopy(view.axialSlice(index)));
-            break;
-        case fluvel_ip::VolumeAxis::Coronal:
-            canvas_->setImage(toQImageCopy(view.coronalSlice(index)));
-            break;
-        case fluvel_ip::VolumeAxis::Sagittal:
-            canvas_->setImage(toQImageCopy(view.sagittalSlice(index)));
-            break;
-    }
+    canvas_->setImage(toQImageCopy(volume_->sliceToGray8(axis_, index, window_)));
 
-    indexLabel_->setText(QStringLiteral("%1 / %2").arg(slider_->value() + 1).arg(slider_->maximum() + 1));
+    indexLabel_->setText(
+        QStringLiteral("%1 / %2").arg(slider_->value() + 1).arg(slider_->maximum() + 1));
 }
 
 } // namespace fluvel

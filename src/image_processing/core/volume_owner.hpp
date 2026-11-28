@@ -14,11 +14,14 @@ namespace fluvel_ip
 {
 
 /**
- * @brief Owning 8-bit grayscale volume stored in contiguous memory.
+ * @brief Owning grayscale volume stored in contiguous memory.
+ *
+ * @tparam T Voxel type (see Voxel).
  *
  * The volume is tightly packed: rowStride = width and sliceStride = width * height.
  * Use view() to give it to the algorithms.
  */
+template <Voxel T>
 class VolumeOwner
 {
 public:
@@ -30,10 +33,12 @@ public:
      *
      * @pre All the sizes are strictly positive.
      */
-    VolumeOwner(int widthVoxels, int heightVoxels, int depthVoxels, std::uint8_t fill = 0)
+    VolumeOwner(int widthVoxels, int heightVoxels, int depthVoxels, T fill = T{},
+                VoxelSpacing voxelSpacing = {})
         : width_(widthVoxels)
         , height_(heightVoxels)
         , depth_(depthVoxels)
+        , spacing_(voxelSpacing)
         , data_(static_cast<std::size_t>(widthVoxels) * static_cast<std::size_t>(heightVoxels) *
                     static_cast<std::size_t>(depthVoxels),
                 fill)
@@ -65,8 +70,19 @@ public:
         return depth_;
     }
 
+    [[nodiscard]]
+    const VoxelSpacing& spacing() const noexcept
+    {
+        return spacing_;
+    }
+
+    void setSpacing(const VoxelSpacing& voxelSpacing) noexcept
+    {
+        spacing_ = voxelSpacing;
+    }
+
     /// Access a voxel (mutable).
-    std::uint8_t& at(int x, int y, int z) noexcept
+    T& at(int x, int y, int z) noexcept
     {
         assert(x >= 0 && x < width_);
         assert(y >= 0 && y < height_);
@@ -80,7 +96,7 @@ public:
 
     /// Access a voxel (const).
     [[nodiscard]]
-    std::uint8_t at(int x, int y, int z) const noexcept
+    T at(int x, int y, int z) const noexcept
     {
         return view().at(x, y, z);
     }
@@ -90,7 +106,7 @@ public:
      *
      * The slice holds width() * height() tightly packed voxels, row by row.
      */
-    std::uint8_t* sliceData(int z) noexcept
+    T* sliceData(int z) noexcept
     {
         assert(z >= 0 && z < depth_);
 
@@ -100,19 +116,20 @@ public:
 
     /// Non-owning view over the volume (empty view if the volume is empty).
     [[nodiscard]]
-    VolumeView view() const noexcept
+    VolumeView<T> view() const noexcept
     {
         if (data_.empty())
             return {};
 
-        return VolumeView(data_.data(), width_, height_, depth_);
+        return VolumeView<T>(data_.data(), width_, height_, depth_, 0, 0, spacing_);
     }
 
 private:
     int width_{0};
     int height_{0};
     int depth_{0};
-    std::vector<std::uint8_t> data_;
+    VoxelSpacing spacing_;
+    std::vector<T> data_;
 };
 
 } // namespace fluvel_ip

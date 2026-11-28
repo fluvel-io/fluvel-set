@@ -95,6 +95,7 @@ set(ip_src
     ${CORE_DIR}/image_owner.hpp
     ${CORE_DIR}/volume_view.hpp
     ${CORE_DIR}/volume_owner.hpp
+    ${CORE_DIR}/volume_display.hpp
     ${CORE_DIR}/image_conversions.hpp
     ${CORE_DIR}/point.hpp
     ${CORE_DIR}/point_hash.hpp

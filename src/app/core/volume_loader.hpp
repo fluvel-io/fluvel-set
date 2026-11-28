@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "volume_owner.hpp"
+#include "any_volume.hpp"
 
 #include <QString>
 #include <QStringList>
@@ -23,7 +23,7 @@ namespace fluvel::volume_loader
  */
 struct Result
 {
-    std::shared_ptr<fluvel_ip::VolumeOwner> volume;
+    std::shared_ptr<const AnyVolume> volume;
     QString error;
     bool cancelled{false};
 

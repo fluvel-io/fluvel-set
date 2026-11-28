@@ -301,6 +301,9 @@ set(app_src
 
     ${CORE_DIR}/recording_buffer_settings.hpp
 
+    ${CORE_DIR}/any_volume.cpp
+    ${CORE_DIR}/any_volume.hpp
+
     ${CORE_DIR}/volume_loader.cpp
     ${CORE_DIR}/volume_loader.hpp
 
