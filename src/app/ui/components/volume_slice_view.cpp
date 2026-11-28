@@ -98,6 +98,12 @@ void VolumeSliceView::setVolume(std::shared_ptr<const AnyVolume> volume)
     emit sliceChanged(slider_->value());
 }
 
+void VolumeSliceView::setWindow(const fluvel_ip::VoxelWindow& window)
+{
+    window_ = window;
+    refresh();
+}
+
 int VolumeSliceView::sliceIndex() const
 {
     return slider_->value();

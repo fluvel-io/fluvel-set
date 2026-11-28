@@ -3,6 +3,7 @@
 
 #include "volume_window.hpp"
 
+#include "contrast_control.hpp"
 #include "raw_volume_dialog.hpp"
 #include "volume_loader.hpp"
 #include "volume_slice_view.hpp"
@@ -133,12 +134,29 @@ void VolumeWindow::setupDocks()
     placeholder->setAlignment(Qt::AlignCenter);
     viewer3dDock->setWidget(placeholder);
 
+    contrastControl_ = new ContrastControl(this);
+
+    auto* contrastDock = new QDockWidget(tr("Contrast"), this);
+    contrastDock->setObjectName("volume_dock_contrast");
+    contrastDock->setWidget(contrastControl_);
+
+    connect(contrastControl_, &ContrastControl::windowChanged, this,
+            [this](const fluvel_ip::VoxelWindow& window)
+            {
+                axialView_->setWindow(window);
+                coronalView_->setWindow(window);
+                sagittalView_->setWindow(window);
+            });
+
     // Default layout: 2 x 2.
     addDockWidget(Qt::TopDockWidgetArea, axialDock);
     splitDockWidget(axialDock, coronalDock, Qt::Horizontal);
 
     addDockWidget(Qt::BottomDockWidgetArea, sagittalDock);
     splitDockWidget(sagittalDock, viewer3dDock, Qt::Horizontal);
+
+    // The contrast sits under the 3D view, in the bottom right cell of the 2 x 2 grid.
+    splitDockWidget(viewer3dDock, contrastDock, Qt::Vertical);
 }
 
 void VolumeWindow::setupMenus()
@@ -302,6 +320,14 @@ void VolumeWindow::setVolume(std::shared_ptr<const AnyVolume> volume)
     axialView_->setVolume(volume_);
     coronalView_->setVolume(volume_);
     sagittalView_->setVolume(volume_);
+
+    // The views start with the default window of the volume: the control must show the same.
+    if (volume_ && !volume_->isEmpty())
+    {
+        const auto [lowest, highest] = volume_->valueRange();
+        contrastControl_->setLimits(lowest, highest, volume_->defaultWindow(),
+                                    volume_->type() != VoxelType::Float32);
+    }
 }
 
 void VolumeWindow::showEvent(QShowEvent* event)

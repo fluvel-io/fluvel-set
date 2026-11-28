@@ -26,6 +26,9 @@ set(app_src
     ${UI_WIN_DIR}/histogram_window.cpp
     ${UI_WIN_DIR}/histogram_window.hpp
 
+    ${UI_COMP_DIR}/contrast_control.cpp
+    ${UI_COMP_DIR}/contrast_control.hpp
+
     ${UI_COMP_DIR}/volume_slice_view.cpp
     ${UI_COMP_DIR}/volume_slice_view.hpp
 

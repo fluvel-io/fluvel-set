@@ -53,6 +53,9 @@ public:
 
     int sliceIndex() const;
 
+    /// Sets the range of voxel values shown from black to white.
+    void setWindow(const fluvel_ip::VoxelWindow& window);
+
 signals:
     /// Emitted when the displayed slice changes.
     void sliceChanged(int index);

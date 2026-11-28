@@ -19,13 +19,15 @@ class QShowEvent;
 namespace fluvel
 {
 
+class ContrastControl;
 class VolumeSliceView;
 
 /**
  * @brief Window of the volume session.
  *
  * Shows a volume through three orthogonal slice views (axial, coronal, sagittal), each with
- * its own slider, and a fourth dock reserved for the future 3D view. The views are dock
+ * its own slider, a dock to choose the range of values shown, and a dock reserved for the
+ * future 3D view. The views are dock
  * widgets: they can be moved, floated or closed, and the layout is saved with the window.
  *
  * Until volumes can be loaded, the window displays a synthetic test volume.
@@ -74,6 +76,7 @@ private:
     VolumeSliceView* axialView_{nullptr};
     VolumeSliceView* coronalView_{nullptr};
     VolumeSliceView* sagittalView_{nullptr};
+    ContrastControl* contrastControl_{nullptr};
 
     QAction* openSeriesAct_{nullptr};
     QAction* openFolderAct_{nullptr};
