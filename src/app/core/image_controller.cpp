@@ -18,6 +18,31 @@
 namespace fluvel
 {
 
+namespace
+{
+
+/// True for the QImage formats storing more than 8 bits per channel.
+bool hasMoreThan8BitsPerChannel(QImage::Format format)
+{
+    switch (format)
+    {
+        case QImage::Format_Grayscale16:
+        case QImage::Format_RGBX64:
+        case QImage::Format_RGBA64:
+        case QImage::Format_RGBA64_Premultiplied:
+        case QImage::Format_BGR30:
+        case QImage::Format_A2BGR30_Premultiplied:
+        case QImage::Format_RGB30:
+        case QImage::Format_A2RGB30_Premultiplied:
+            return true;
+
+        default:
+            return false;
+    }
+}
+
+} // namespace
+
 ImageController::ImageController(const ImageSessionSettings& session, QObject* parent)
     : QObject(parent)
 {
@@ -41,6 +66,12 @@ void ImageController::loadImage(const QString& path)
 {
     if (path.isEmpty())
         return;
+
+    if (const QString problem = file_utils::readableFileError(path); !problem.isEmpty())
+    {
+        emit errorOccurred(problem);
+        return;
+    }
 
     if (!file_utils::isSupportedImage(path))
     {
@@ -68,6 +99,11 @@ void ImageController::loadImage(const QString& path)
         emit errorOccurred(tr("Failed to load image: %1").arg(reader.errorString()));
         return;
     }
+
+    // The processing works on 8 bits per channel: tell the user when precision is lost.
+    if (hasMoreThan8BitsPerChannel(img.format()))
+        emit warningOccurred(tr("The image has more than 8 bits per channel: it is converted "
+                                "to 8 bits."));
 
     inputImage_ = img;
 

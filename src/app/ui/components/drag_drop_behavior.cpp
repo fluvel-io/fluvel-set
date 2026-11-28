@@ -7,6 +7,7 @@
 #include <QDragEnterEvent>
 #include <QDragLeaveEvent>
 #include <QDragMoveEvent>
+#include <QCoreApplication>
 #include <QDropEvent>
 #include <QMimeData>
 #include <QString>
@@ -72,6 +73,14 @@ bool DragDropBehavior::drop(ImageViewerWidget& view, QDropEvent* e)
         return false;
 
     const QString path = urls.first().toLocalFile();
+
+    // Only the first file is opened: say so instead of ignoring the others silently.
+    if (urls.size() > 1)
+    {
+        view.showNotification(QCoreApplication::translate(
+            "fluvel::DragDropBehavior", "%n files dropped: only the first one is opened.", nullptr,
+            static_cast<int>(urls.size())));
+    }
 
     QTimer::singleShot(0, &view,
                        [path, &view]()

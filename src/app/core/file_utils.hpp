@@ -120,6 +120,17 @@ QString defaultExtensionFromFilter(const QString& selectedFilter);
 bool isSupportedImage(const QString& path);
 
 /**
+ * @brief Checks that a path designates a regular file that can be opened for reading.
+ *
+ * Meant to be called before opening a file, to report a precise reason to the user
+ * (missing file, folder, no read permission) instead of a generic "unsupported format".
+ *
+ * @param path File path to test.
+ * @return An empty string if the file can be read, otherwise a translated message.
+ */
+QString readableFileError(const QString& path);
+
+/**
  * @brief Extract the base name of a file without path.
  *
  * @param fullFilename Full file path.
