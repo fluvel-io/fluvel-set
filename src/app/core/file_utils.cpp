@@ -95,6 +95,23 @@ bool isSupportedImage(const QString& path)
     return reader.canRead();
 }
 
+QString readableFileError(const QString& path)
+{
+    const QFileInfo info(path);
+
+    if (!info.exists())
+        return QObject::tr("File not found: %1").arg(QDir::toNativeSeparators(path));
+
+    if (!info.isFile())
+        return QObject::tr("%1 is not a file.").arg(QDir::toNativeSeparators(path));
+
+    if (!info.isReadable())
+        return QObject::tr("Cannot read %1: permission denied.")
+            .arg(QDir::toNativeSeparators(path));
+
+    return {};
+}
+
 QString strippedName(const QString& fullFilename)
 {
     return QFileInfo(fullFilename).fileName();

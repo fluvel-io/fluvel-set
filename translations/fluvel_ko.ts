@@ -9,13 +9,28 @@
         <translation>이미지 파일 (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/core/file_utils.cpp" line="158"/>
+        <location filename="../src/app/core/file_utils.cpp" line="103"/>
+        <source>File not found: %1</source>
+        <translation>파일을 찾을 수 없습니다: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/file_utils.cpp" line="106"/>
+        <source>%1 is not a file.</source>
+        <translation>%1은(는) 파일이 아닙니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/file_utils.cpp" line="109"/>
+        <source>Cannot read %1: permission denied.</source>
+        <translation>%1을(를) 읽을 수 없습니다: 권한이 거부되었습니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/file_utils.cpp" line="175"/>
         <source>Video Files (%1)</source>
         <translation>비디오 파일 (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/core/file_utils.cpp" line="237"/>
-        <location filename="../src/app/core/file_utils.cpp" line="299"/>
+        <location filename="../src/app/core/file_utils.cpp" line="254"/>
+        <location filename="../src/app/core/file_utils.cpp" line="316"/>
         <source>Unspecified</source>
         <translation>지정되지 않음</translation>
     </message>
@@ -692,6 +707,14 @@ R: %3  G: %4  B: %5</translation>
     </message>
 </context>
 <context>
+    <name>fluvel::DragDropBehavior</name>
+    <message>
+        <location filename="../src/app/ui/components/drag_drop_behavior.cpp" line="80"/>
+        <source>Several files dropped: only the first one is opened.</source>
+        <translation>여러 파일이 드롭되었습니다. 첫 번째 파일만 열립니다.</translation>
+    </message>
+</context>
+<context>
     <name>fluvel::HausdorffWidget</name>
     <message>
         <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="64"/>
@@ -953,93 +976,98 @@ Click on Compute again to apply the change.</source>
 <context>
     <name>fluvel::ImageController</name>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="47"/>
+        <location filename="../src/app/core/image_controller.cpp" line="78"/>
         <source>Unsupported image format.</source>
         <translation>지원되지 않는 이미지 형식입니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="60"/>
+        <location filename="../src/app/core/image_controller.cpp" line="91"/>
         <source>Image file extension differs from detected format: .%1 → %2</source>
         <translation>이미지 파일 확장자가 감지된 형식과 다릅니다: .%1 → %2</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="68"/>
+        <location filename="../src/app/core/image_controller.cpp" line="99"/>
         <source>Failed to load image: %1</source>
         <translation>이미지를 불러오지 못했습니다: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="263"/>
+        <location filename="../src/app/core/image_controller.cpp" line="105"/>
+        <source>The image has more than 8 bits per channel: it is converted to 8 bits.</source>
+        <translation>이미지의 채널당 비트 수가 8비트를 초과합니다. 8비트로 변환됩니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/image_controller.cpp" line="299"/>
         <source>n/a</source>
         <translation>해당 없음</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="281"/>
+        <location filename="../src/app/core/image_controller.cpp" line="317"/>
         <source>Step: %1
 </source>
         <translation>단계: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="282"/>
+        <location filename="../src/app/core/image_controller.cpp" line="318"/>
         <source>State: %1
 </source>
         <translation>상태: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="285"/>
+        <location filename="../src/app/core/image_controller.cpp" line="321"/>
         <source>Reason: %1
 </source>
         <translation>이유: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="287"/>
+        <location filename="../src/app/core/image_controller.cpp" line="323"/>
         <source>Reason: 
 </source>
         <translation>이유: 
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="291"/>
+        <location filename="../src/app/core/image_controller.cpp" line="327"/>
         <source>Mean in: %1
 </source>
         <translation>내부 평균: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="293"/>
+        <location filename="../src/app/core/image_controller.cpp" line="329"/>
         <source>Mean out: %1
 </source>
         <translation>외부 평균: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="299"/>
+        <location filename="../src/app/core/image_controller.cpp" line="335"/>
         <source>Hausdorff: %1 %
 </source>
         <translation>하우스도르프: %1%
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="302"/>
+        <location filename="../src/app/core/image_controller.cpp" line="338"/>
         <source>Compute time: %1 s
 </source>
         <translation>계산 시간: %1초
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="349"/>
-        <location filename="../src/app/core/image_controller.cpp" line="363"/>
-        <location filename="../src/app/core/image_controller.cpp" line="365"/>
+        <location filename="../src/app/core/image_controller.cpp" line="385"/>
+        <location filename="../src/app/core/image_controller.cpp" line="399"/>
+        <location filename="../src/app/core/image_controller.cpp" line="401"/>
         <source>Speed: %1 it/s
 </source>
         <translation>속도: %1 회/초
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="350"/>
-        <location filename="../src/app/core/image_controller.cpp" line="367"/>
+        <location filename="../src/app/core/image_controller.cpp" line="386"/>
+        <location filename="../src/app/core/image_controller.cpp" line="403"/>
         <source>Contour: %1 pts</source>
         <translation>윤곽선: %1점</translation>
     </message>
@@ -2117,53 +2145,58 @@ or click Open...</source>
         <translation>활성 소스를 중지합니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2089"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1984"/>
+        <source>Unsupported video format: %1</source>
+        <translation>지원되지 않는 동영상 형식: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2099"/>
         <source>Resume playback</source>
         <translation>이어서 재생</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2090"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2100"/>
         <source>Resume from %1?</source>
         <translation>%1부터 이어서 재생할까요?</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2095"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2105"/>
         <source>Resume</source>
         <translation type="unfinished">재개</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2096"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2106"/>
         <source>Start over</source>
         <translation>처음부터 재생</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2217"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2227"/>
         <source>Volume: %1%</source>
         <translation>볼륨: %1%</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2453"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2478"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2463"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2488"/>
         <source>Volume %1%</source>
         <translation>볼륨: %1%</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2493"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2503"/>
         <source>Muted</source>
         <translation>음소거</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2493"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2503"/>
         <source>Unmuted</source>
         <translation>소리 켜짐</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2505"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2515"/>
         <source>Play</source>
         <translation>재생</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2509"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2519"/>
         <source>Pause</source>
         <translation>일시 정지</translation>
     </message>
@@ -2199,11 +2232,13 @@ The source stream may have stalled or become unavailable.</source>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="1965"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1977"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1983"/>
         <source>Open Video File</source>
         <translation>비디오 파일 열기</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2018"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2028"/>
         <source>Clear source history</source>
         <translation>소스 기록 지우기</translation>
     </message>

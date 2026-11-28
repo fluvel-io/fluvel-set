@@ -1972,8 +1972,18 @@ void VideoWindow::openMediaFile(const QString& filename)
     if (filename.isEmpty())
         return;
 
-    if (!file_utils::isSupportedVideoFile(filename))
+    if (const QString problem = file_utils::readableFileError(filename); !problem.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Open Video File"), problem);
         return;
+    }
+
+    if (!file_utils::isSupportedVideoFile(filename))
+    {
+        QMessageBox::warning(this, tr("Open Video File"),
+                             tr("Unsupported video format: %1").arg(QFileInfo(filename).fileName()));
+        return;
+    }
 
     int index = sourceTypeCombo_->findData(QVariant::fromValue(SourceType::Media));
     sourceTypeCombo_->setCurrentIndex(index);

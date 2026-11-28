@@ -9,13 +9,28 @@
         <translation>图像文件 (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/core/file_utils.cpp" line="158"/>
+        <location filename="../src/app/core/file_utils.cpp" line="103"/>
+        <source>File not found: %1</source>
+        <translation>未找到文件：%1</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/file_utils.cpp" line="106"/>
+        <source>%1 is not a file.</source>
+        <translation>%1 不是文件。</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/file_utils.cpp" line="109"/>
+        <source>Cannot read %1: permission denied.</source>
+        <translation>无法读取 %1：权限被拒绝。</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/file_utils.cpp" line="175"/>
         <source>Video Files (%1)</source>
         <translation>视频文件 (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/core/file_utils.cpp" line="237"/>
-        <location filename="../src/app/core/file_utils.cpp" line="299"/>
+        <location filename="../src/app/core/file_utils.cpp" line="254"/>
+        <location filename="../src/app/core/file_utils.cpp" line="316"/>
         <source>Unspecified</source>
         <translation>未指定</translation>
     </message>
@@ -692,6 +707,14 @@ R: %3  G: %4  B: %5</translation>
     </message>
 </context>
 <context>
+    <name>fluvel::DragDropBehavior</name>
+    <message>
+        <location filename="../src/app/ui/components/drag_drop_behavior.cpp" line="80"/>
+        <source>Several files dropped: only the first one is opened.</source>
+        <translation>拖入了多个文件：仅打开第一个。</translation>
+    </message>
+</context>
+<context>
     <name>fluvel::HausdorffWidget</name>
     <message>
         <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="64"/>
@@ -953,93 +976,98 @@ Click on Compute again to apply the change.</source>
 <context>
     <name>fluvel::ImageController</name>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="47"/>
+        <location filename="../src/app/core/image_controller.cpp" line="78"/>
         <source>Unsupported image format.</source>
         <translation>不支持的图像格式。</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="60"/>
+        <location filename="../src/app/core/image_controller.cpp" line="91"/>
         <source>Image file extension differs from detected format: .%1 → %2</source>
         <translation>图像文件扩展名与检测到的格式不一致：.%1 → %2</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="68"/>
+        <location filename="../src/app/core/image_controller.cpp" line="99"/>
         <source>Failed to load image: %1</source>
         <translation>无法加载图像：%1</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="263"/>
+        <location filename="../src/app/core/image_controller.cpp" line="105"/>
+        <source>The image has more than 8 bits per channel: it is converted to 8 bits.</source>
+        <translation>图像每通道超过 8 位：将转换为 8 位。</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/image_controller.cpp" line="299"/>
         <source>n/a</source>
         <translation>不适用</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="281"/>
+        <location filename="../src/app/core/image_controller.cpp" line="317"/>
         <source>Step: %1
 </source>
         <translation>步骤：%1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="282"/>
+        <location filename="../src/app/core/image_controller.cpp" line="318"/>
         <source>State: %1
 </source>
         <translation>状态：%1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="285"/>
+        <location filename="../src/app/core/image_controller.cpp" line="321"/>
         <source>Reason: %1
 </source>
         <translation>原因：%1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="287"/>
+        <location filename="../src/app/core/image_controller.cpp" line="323"/>
         <source>Reason: 
 </source>
         <translation>原因：
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="291"/>
+        <location filename="../src/app/core/image_controller.cpp" line="327"/>
         <source>Mean in: %1
 </source>
         <translation>内部均值：%1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="293"/>
+        <location filename="../src/app/core/image_controller.cpp" line="329"/>
         <source>Mean out: %1
 </source>
         <translation>外部均值：%1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="299"/>
+        <location filename="../src/app/core/image_controller.cpp" line="335"/>
         <source>Hausdorff: %1 %
 </source>
         <translation>豪斯多夫：%1%
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="302"/>
+        <location filename="../src/app/core/image_controller.cpp" line="338"/>
         <source>Compute time: %1 s
 </source>
         <translation>计算时间：%1 秒
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="349"/>
-        <location filename="../src/app/core/image_controller.cpp" line="363"/>
-        <location filename="../src/app/core/image_controller.cpp" line="365"/>
+        <location filename="../src/app/core/image_controller.cpp" line="385"/>
+        <location filename="../src/app/core/image_controller.cpp" line="399"/>
+        <location filename="../src/app/core/image_controller.cpp" line="401"/>
         <source>Speed: %1 it/s
 </source>
         <translation>速度：%1 次/秒
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="350"/>
-        <location filename="../src/app/core/image_controller.cpp" line="367"/>
+        <location filename="../src/app/core/image_controller.cpp" line="386"/>
+        <location filename="../src/app/core/image_controller.cpp" line="403"/>
         <source>Contour: %1 pts</source>
         <translation>轮廓：%1 点</translation>
     </message>
@@ -2117,53 +2145,58 @@ or click Open...</source>
         <translation>停止当前源。</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2089"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1984"/>
+        <source>Unsupported video format: %1</source>
+        <translation>不支持的视频格式：%1</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2099"/>
         <source>Resume playback</source>
         <translation>继续播放</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2090"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2100"/>
         <source>Resume from %1?</source>
         <translation>从 %1 继续播放？</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2095"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2105"/>
         <source>Resume</source>
         <translation type="unfinished">继续</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2096"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2106"/>
         <source>Start over</source>
         <translation>从头开始</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2217"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2227"/>
         <source>Volume: %1%</source>
         <translation>音量：%1%</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2453"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2478"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2463"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2488"/>
         <source>Volume %1%</source>
         <translation>音量：%1%</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2493"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2503"/>
         <source>Muted</source>
         <translation>已静音</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2493"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2503"/>
         <source>Unmuted</source>
         <translation>声音已开启</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2505"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2515"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2509"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2519"/>
         <source>Pause</source>
         <translation>暂停</translation>
     </message>
@@ -2199,11 +2232,13 @@ The source stream may have stalled or become unavailable.</source>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="1965"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1977"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1983"/>
         <source>Open Video File</source>
         <translation>打开视频文件</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2018"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2028"/>
         <source>Clear source history</source>
         <translation>清除源历史记录</translation>
     </message>
