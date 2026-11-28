@@ -107,6 +107,49 @@ R: %3  G: %4  B: %5</translation>
         <source> · Discarded frames: %1% (%2)</source>
         <translation> · 버려진 프레임: %1% (%2)</translation>
     </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="190"/>
+        <source>The sizes of the volume must be strictly positive.</source>
+        <translation>볼륨의 크기는 양수여야 합니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="196"/>
+        <location filename="../src/app/core/volume_loader.cpp" line="295"/>
+        <source>The volume is too large (%1 x %2 x %3 voxels).</source>
+        <translation>볼륨이 너무 큽니다(%1 x %2 x %3 복셀).</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="204"/>
+        <source>Cannot open %1: %2</source>
+        <translation>%1을(를) 열 수 없습니다: %2</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="211"/>
+        <source>The file has %1 bytes but %2 are expected for %3 x %4 x %5 voxels of 8 bits.</source>
+        <translation>파일은 %1바이트이지만 8비트 %3 x %4 x %5 복셀에는 %2바이트가 필요합니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="223"/>
+        <source>The file probably holds voxels of %1 bits: only 8 bits are supported for now.</source>
+        <translation>이 파일에는 %1비트 복셀이 들어 있을 수 있습니다. 현재는 8비트만 지원합니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="231"/>
+        <location filename="../src/app/core/volume_loader.cpp" line="240"/>
+        <location filename="../src/app/core/volume_loader.cpp" line="286"/>
+        <source>Cannot read %1: %2</source>
+        <translation>%1을(를) 읽을 수 없습니다: %2</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="258"/>
+        <source>No image to load.</source>
+        <translation>불러올 이미지가 없습니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="304"/>
+        <source>%1 is %2 x %3 but the first image is %4 x %5. All the images must have the same size.</source>
+        <translation>%1의 크기는 %2 x %3이지만 첫 번째 이미지는 %4 x %5입니다. 모든 이미지의 크기가 같아야 합니다.</translation>
+    </message>
 </context>
 <context>
     <name>fluvel::AboutDialog</name>
@@ -1105,52 +1148,52 @@ Click on Compute again to apply the change.</source>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="105"/>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1097"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1136"/>
         <source>Start</source>
         <translation>시작</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="106"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1099"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1138"/>
         <source>Run the active contour.</source>
         <translation>능동 윤곽선을 실행합니다.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="109"/>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1114"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1153"/>
         <source>Resume</source>
         <translation>재개</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="113"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1116"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1155"/>
         <source>Resume the active contour execution.</source>
         <translation>능동 윤곽선 실행을 재개합니다.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="116"/>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1123"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1162"/>
         <source>Step</source>
         <translation>단계</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="117"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1125"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1164"/>
         <source>Advance the active contour by one iteration.</source>
         <translation>능동 윤곽선을 한 번 반복합니다.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="128"/>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1131"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1170"/>
         <source>Converge</source>
         <translation>수렴</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="129"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1134"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1173"/>
         <source>Run until completion without displaying intermediate steps.</source>
         <translation>중간 단계를 표시하지 않고 끝까지 실행합니다.</translation>
     </message>
@@ -1180,66 +1223,81 @@ or choose File → Open</source>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="283"/>
+        <source>Vo&amp;lume</source>
+        <translation>볼륨(&amp;L)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="284"/>
+        <source>Ctrl+Shift+V</source>
+        <translation>Ctrl+Shift+V</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="287"/>
+        <source>Open a volume session.</source>
+        <translation>볼륨 세션을 엽니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="289"/>
         <source>&amp;Quit</source>
         <translation>종료(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="291"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="297"/>
         <source>&amp;Open...</source>
         <translation>열기(&amp;O)...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="319"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="325"/>
         <source>Ha&amp;usdorff distance...</source>
         <translation>하우스도르프 거리(&amp;U)...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="361"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="368"/>
         <source>&amp;Analysis</source>
         <translation>분석(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="320"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="326"/>
         <source>Compute the Hausdorff distance.</source>
         <translation>하우스도르프 거리를 계산합니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="321"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="327"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="326"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="332"/>
         <source>&amp;Histogram</source>
         <translation>히스토그램(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="327"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="333"/>
         <source>Show the histogram of the displayed image.</source>
         <translation>표시된 이미지의 히스토그램을 표시합니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="328"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="334"/>
         <source>Ctrl+H</source>
         <translation>Ctrl+H</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="333"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="339"/>
         <source>&amp;About</source>
         <translation>정보(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="410"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="417"/>
         <source>Start recording automatically when the processing starts.</source>
         <translation>처리가 시작될 때 녹화를 자동으로 시작합니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="901"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="930"/>
         <source>Image</source>
         <translation>이미지</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="294"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="300"/>
         <source>Supported image formats: %1</source>
         <translation>지원되는 이미지 형식: %1</translation>
     </message>
@@ -1259,79 +1317,79 @@ or choose File → Open</source>
         <translation>비디오 세션을 엽니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="301"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="307"/>
         <source>Clear recent files</source>
         <translation>최근 파일 지우기</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="334"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="340"/>
         <source>Application information, license and home page.</source>
         <translation>애플리케이션 정보, 라이선스, 홈페이지.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="344"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="350"/>
         <source>&amp;Session</source>
         <translation>세션(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="350"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="357"/>
         <source>&amp;File</source>
         <translation>파일(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="365"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="372"/>
         <source>&amp;Help</source>
         <translation>도움말(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="674"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="691"/>
         <source>Open Image</source>
         <translation>이미지 열기</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="807"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="824"/>
         <source>&amp;%1</source>
         <translation>&amp;%1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="966"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1005"/>
         <source>Information</source>
         <translation>정보</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="880"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="909"/>
         <source>Opened image: %1</source>
         <translation>이미지 열림: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="925"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="954"/>
         <source>Gray</source>
         <translation>회색</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1091"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1130"/>
         <source>Restart</source>
         <translation>초기화</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1093"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1132"/>
         <source>Restart the active contour from its initial state.</source>
         <translation>능동 윤곽선을 초기 상태로 되돌립니다.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1108"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1147"/>
         <source>Pause</source>
         <translation>일시 정지</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1110"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1149"/>
         <source>Suspend execution and display the current state.</source>
         <translation>실행을 일시 중지하고 현재 상태를 표시합니다.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="959"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="998"/>
         <source>Error</source>
         <translation>오류</translation>
     </message>
@@ -1557,6 +1615,74 @@ or choose File → Open</source>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="598"/>
         <source>%1 s</source>
         <translation>%1초</translation>
+    </message>
+</context>
+<context>
+    <name>fluvel::RawVolumeDialog</name>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="35"/>
+        <source>Open raw volume</source>
+        <translation>원시 볼륨 열기</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="50"/>
+        <source> bytes</source>
+        <translation> 바이트</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="51"/>
+        <source>Number of bytes to skip at the beginning of the file.</source>
+        <translation>파일 시작 부분에서 건너뛸 바이트 수입니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="53"/>
+        <source>8-bit voxels (one byte per voxel)</source>
+        <translation>8비트 복셀(복셀당 1바이트)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="56"/>
+        <source>File:</source>
+        <translation>파일:</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="57"/>
+        <source>Width:</source>
+        <translation>너비:</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="58"/>
+        <source>Height:</source>
+        <translation>높이:</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="59"/>
+        <source>Depth (number of slices):</source>
+        <translation>깊이(슬라이스 수):</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="60"/>
+        <source>Header:</source>
+        <translation>헤더:</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="61"/>
+        <source>Data type:</source>
+        <translation>데이터 형식:</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="116"/>
+        <source>The sizes match the file (%1 bytes).</source>
+        <translation>크기가 파일과 일치합니다(%1바이트).</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="120"/>
+        <source>The sizes do not match the file: %1 bytes expected, %2 bytes in the file.</source>
+        <translation>크기가 파일과 일치하지 않습니다: %1바이트가 필요하지만 파일은 %2바이트입니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="126"/>
+        <source>The file name suggests voxels that are not 8-bit: only 8-bit voxels are supported for now.</source>
+        <translation>파일 이름으로 보아 8비트가 아닌 복셀로 추정됩니다. 현재는 8비트 복셀만 지원합니다.</translation>
     </message>
 </context>
 <context>
@@ -2162,7 +2288,7 @@ or click Open...</source>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2105"/>
         <source>Resume</source>
-        <translation type="unfinished">재개</translation>
+        <translation>재개</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2106"/>
@@ -2261,6 +2387,131 @@ The source stream may have stalled or become unavailable.</source>
         <location filename="../src/app/ui/windows/video_window.cpp" line="146"/>
         <source>Camera</source>
         <translation>카메라</translation>
+    </message>
+</context>
+<context>
+    <name>fluvel::VolumeWindow</name>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="85"/>
+        <source>Fluvel Set - Volume</source>
+        <translation>Fluvel Set - 볼륨</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="123"/>
+        <source>Axial</source>
+        <translation>횡단면</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="124"/>
+        <source>Coronal</source>
+        <translation>관상면</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="126"/>
+        <source>Sagittal</source>
+        <translation>시상면</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="129"/>
+        <source>3D</source>
+        <translation>3D</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="132"/>
+        <source>3D view (work in progress)</source>
+        <translation>3D 보기(개발 중)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="146"/>
+        <source>Open image &amp;series...</source>
+        <translation>이미지 시리즈 열기(&amp;S)...</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="149"/>
+        <source>Load several images (or one multi-page TIFF) as a volume, one image per slice.</source>
+        <translation>여러 이미지(또는 여러 페이지의 TIFF)를 볼륨으로 불러옵니다. 이미지 한 장이 슬라이스 하나가 됩니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="151"/>
+        <source>Open &amp;folder...</source>
+        <translation>폴더 열기(&amp;F)...</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="152"/>
+        <source>Load all the images of a folder as a volume.</source>
+        <translation>폴더의 모든 이미지를 볼륨으로 불러옵니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="154"/>
+        <source>Open &amp;raw volume...</source>
+        <translation>원시 볼륨 열기(&amp;R)...</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="155"/>
+        <source>Load a raw file of 8-bit voxels. Its sizes are asked, since the file does not contain them.</source>
+        <translation>8비트 복셀의 원시 파일을 불러옵니다. 파일에 크기 정보가 없으므로 입력해야 합니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="158"/>
+        <source>&amp;File</source>
+        <translation>파일(&amp;F)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="175"/>
+        <source>Images (%1)</source>
+        <translation>이미지 (%1)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="178"/>
+        <source>Open image series</source>
+        <translation>이미지 시리즈 열기</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="197"/>
+        <source>Open folder</source>
+        <translation>폴더 열기</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="208"/>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="242"/>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="283"/>
+        <source>Error</source>
+        <translation>오류</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="208"/>
+        <source>No supported image found in this folder.</source>
+        <translation>이 폴더에서 지원되는 이미지를 찾을 수 없습니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="231"/>
+        <source>Raw volumes (*.raw *.bin *.vol *.img *.dat);;All files (*)</source>
+        <translation>원시 볼륨 (*.raw *.bin *.vol *.img *.dat);;모든 파일 (*)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="233"/>
+        <source>Open raw volume</source>
+        <translation>원시 볼륨 열기</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="263"/>
+        <source>Loading the volume...</source>
+        <translation>볼륨을 불러오는 중...</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="263"/>
+        <source>Cancel</source>
+        <translation>취소</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="289"/>
+        <source>Fluvel Set - Volume - %1</source>
+        <translation>Fluvel Set - 볼륨 - %1</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="290"/>
+        <source>Volume loaded: %1 x %2 x %3</source>
+        <translation>볼륨을 불러왔습니다: %1 x %2 x %3</translation>
     </message>
 </context>
 </TS>

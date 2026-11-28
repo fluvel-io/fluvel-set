@@ -107,6 +107,49 @@ R: %3  G: %4  B: %5</translation>
         <source> · Discarded frames: %1% (%2)</source>
         <translation> · Odrzucone klatki: %1% (%2)</translation>
     </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="190"/>
+        <source>The sizes of the volume must be strictly positive.</source>
+        <translation>Wymiary woluminu muszą być dodatnie.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="196"/>
+        <location filename="../src/app/core/volume_loader.cpp" line="295"/>
+        <source>The volume is too large (%1 x %2 x %3 voxels).</source>
+        <translation>Wolumin jest zbyt duży (%1 x %2 x %3 vokseli).</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="204"/>
+        <source>Cannot open %1: %2</source>
+        <translation>Nie można otworzyć %1: %2</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="211"/>
+        <source>The file has %1 bytes but %2 are expected for %3 x %4 x %5 voxels of 8 bits.</source>
+        <translation>Plik ma %1 bajtów, a dla %3 x %4 x %5 vokseli 8-bitowych oczekiwano %2.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="223"/>
+        <source>The file probably holds voxels of %1 bits: only 8 bits are supported for now.</source>
+        <translation>Plik prawdopodobnie zawiera voksele %1-bitowe: na razie obsługiwane jest tylko 8 bitów.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="231"/>
+        <location filename="../src/app/core/volume_loader.cpp" line="240"/>
+        <location filename="../src/app/core/volume_loader.cpp" line="286"/>
+        <source>Cannot read %1: %2</source>
+        <translation>Nie można odczytać %1: %2</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="258"/>
+        <source>No image to load.</source>
+        <translation>Brak obrazów do wczytania.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/volume_loader.cpp" line="304"/>
+        <source>%1 is %2 x %3 but the first image is %4 x %5. All the images must have the same size.</source>
+        <translation>%1 ma rozmiar %2 x %3, a pierwszy obraz %4 x %5. Wszystkie obrazy muszą mieć ten sam rozmiar.</translation>
+    </message>
 </context>
 <context>
     <name>fluvel::AboutDialog</name>
@@ -1105,52 +1148,52 @@ Kliknij ponownie Oblicz, aby zastosować zmianę.</translation>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="105"/>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1097"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1136"/>
         <source>Start</source>
         <translation>Start</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="106"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1099"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1138"/>
         <source>Run the active contour.</source>
         <translation>Uruchom kontur aktywny.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="109"/>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1114"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1153"/>
         <source>Resume</source>
         <translation>Wznów</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="113"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1116"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1155"/>
         <source>Resume the active contour execution.</source>
         <translation>Wznów działanie konturu aktywnego.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="116"/>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1123"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1162"/>
         <source>Step</source>
         <translation>Krok</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="117"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1125"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1164"/>
         <source>Advance the active contour by one iteration.</source>
         <translation>Wykonaj jedną iterację konturu aktywnego.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="128"/>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1131"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1170"/>
         <source>Converge</source>
         <translation>Zbieżność</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="129"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1134"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1173"/>
         <source>Run until completion without displaying intermediate steps.</source>
         <translation>Uruchom do końca bez pokazywania kroków pośrednich.</translation>
     </message>
@@ -1180,66 +1223,81 @@ lub wybierz Plik → Otwórz</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="283"/>
+        <source>Vo&amp;lume</source>
+        <translation>Wo&amp;lumin</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="284"/>
+        <source>Ctrl+Shift+V</source>
+        <translation>Ctrl+Shift+V</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="287"/>
+        <source>Open a volume session.</source>
+        <translation>Otwórz sesję woluminu.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="289"/>
         <source>&amp;Quit</source>
         <translation>&amp;Zakończ</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="291"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="297"/>
         <source>&amp;Open...</source>
         <translation>&amp;Otwórz...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="319"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="325"/>
         <source>Ha&amp;usdorff distance...</source>
         <translation>Odległość &amp;Hausdorffa...</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="361"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="368"/>
         <source>&amp;Analysis</source>
         <translation>&amp;Analiza</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="320"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="326"/>
         <source>Compute the Hausdorff distance.</source>
         <translation>Oblicz odległość Hausdorffa.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="321"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="327"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="326"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="332"/>
         <source>&amp;Histogram</source>
         <translation>&amp;Histogram</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="327"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="333"/>
         <source>Show the histogram of the displayed image.</source>
         <translation>Pokaż histogram wyświetlanego obrazu.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="328"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="334"/>
         <source>Ctrl+H</source>
         <translation>Ctrl+H</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="333"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="339"/>
         <source>&amp;About</source>
         <translation>&amp;O programie</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="410"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="417"/>
         <source>Start recording automatically when the processing starts.</source>
         <translation>Automatycznie rozpoczynaj nagrywanie po rozpoczęciu przetwarzania.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="901"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="930"/>
         <source>Image</source>
         <translation>Obraz</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="294"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="300"/>
         <source>Supported image formats: %1</source>
         <translation>Obsługiwane formaty obrazów: %1</translation>
     </message>
@@ -1259,79 +1317,79 @@ lub wybierz Plik → Otwórz</translation>
         <translation>Otwórz sesję wideo.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="301"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="307"/>
         <source>Clear recent files</source>
         <translation>Wyczyść ostatnie pliki</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="334"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="340"/>
         <source>Application information, license and home page.</source>
         <translation>Informacje o aplikacji, licencja i strona główna.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="344"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="350"/>
         <source>&amp;Session</source>
         <translation>&amp;Sesja</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="350"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="357"/>
         <source>&amp;File</source>
         <translation>&amp;Plik</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="365"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="372"/>
         <source>&amp;Help</source>
         <translation>Po&amp;moc</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="674"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="691"/>
         <source>Open Image</source>
         <translation>Otwórz obraz</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="807"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="824"/>
         <source>&amp;%1</source>
         <translation>&amp;%1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="966"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1005"/>
         <source>Information</source>
         <translation>Informacje</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="880"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="909"/>
         <source>Opened image: %1</source>
         <translation>Otwarto obraz: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="925"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="954"/>
         <source>Gray</source>
         <translation>Szary</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1091"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1130"/>
         <source>Restart</source>
         <translation>Resetuj</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1093"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1132"/>
         <source>Restart the active contour from its initial state.</source>
         <translation>Przywróć kontur aktywny do stanu początkowego.</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/image_window.cpp" line="149"/>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1108"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1147"/>
         <source>Pause</source>
         <translation>Pauza</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="1110"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="1149"/>
         <source>Suspend execution and display the current state.</source>
         <translation>Wstrzymaj działanie i pokaż bieżący stan.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/image_window.cpp" line="959"/>
+        <location filename="../src/app/ui/windows/image_window.cpp" line="998"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
@@ -1557,6 +1615,74 @@ lub wybierz Plik → Otwórz</translation>
         <location filename="../src/app/ui/windows/preferences_dialog.cpp" line="598"/>
         <source>%1 s</source>
         <translation>%1 s</translation>
+    </message>
+</context>
+<context>
+    <name>fluvel::RawVolumeDialog</name>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="35"/>
+        <source>Open raw volume</source>
+        <translation>Otwórz surowy wolumin</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="50"/>
+        <source> bytes</source>
+        <translation> bajtów</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="51"/>
+        <source>Number of bytes to skip at the beginning of the file.</source>
+        <translation>Liczba bajtów do pominięcia na początku pliku.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="53"/>
+        <source>8-bit voxels (one byte per voxel)</source>
+        <translation>Voksele 8-bitowe (jeden bajt na voksel)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="56"/>
+        <source>File:</source>
+        <translation>Plik:</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="57"/>
+        <source>Width:</source>
+        <translation>Szerokość:</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="58"/>
+        <source>Height:</source>
+        <translation>Wysokość:</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="59"/>
+        <source>Depth (number of slices):</source>
+        <translation>Głębokość (liczba przekrojów):</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="60"/>
+        <source>Header:</source>
+        <translation>Nagłówek:</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="61"/>
+        <source>Data type:</source>
+        <translation>Typ danych:</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="116"/>
+        <source>The sizes match the file (%1 bytes).</source>
+        <translation>Wymiary zgadzają się z plikiem (%1 bajtów).</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="120"/>
+        <source>The sizes do not match the file: %1 bytes expected, %2 bytes in the file.</source>
+        <translation>Wymiary nie zgadzają się z plikiem: oczekiwano %1 bajtów, plik ma %2 bajtów.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/raw_volume_dialog.cpp" line="126"/>
+        <source>The file name suggests voxels that are not 8-bit: only 8-bit voxels are supported for now.</source>
+        <translation>Nazwa pliku sugeruje voksele inne niż 8-bitowe: na razie obsługiwane są tylko voksele 8-bitowe.</translation>
     </message>
 </context>
 <context>
@@ -2162,7 +2288,7 @@ lub kliknij Otwórz...</translation>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2105"/>
         <source>Resume</source>
-        <translation type="unfinished">Wznów</translation>
+        <translation>Wznów</translation>
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="2106"/>
@@ -2261,6 +2387,131 @@ Strumień źródła mógł zostać zatrzymany lub przestać być dostępny.</tra
         <location filename="../src/app/ui/windows/video_window.cpp" line="146"/>
         <source>Camera</source>
         <translation>Kamera</translation>
+    </message>
+</context>
+<context>
+    <name>fluvel::VolumeWindow</name>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="85"/>
+        <source>Fluvel Set - Volume</source>
+        <translation>Fluvel Set - Wolumin</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="123"/>
+        <source>Axial</source>
+        <translation>Poprzeczny</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="124"/>
+        <source>Coronal</source>
+        <translation>Czołowy</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="126"/>
+        <source>Sagittal</source>
+        <translation>Strzałkowy</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="129"/>
+        <source>3D</source>
+        <translation>3D</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="132"/>
+        <source>3D view (work in progress)</source>
+        <translation>Widok 3D (w opracowaniu)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="146"/>
+        <source>Open image &amp;series...</source>
+        <translation>Otwórz &amp;serię obrazów...</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="149"/>
+        <source>Load several images (or one multi-page TIFF) as a volume, one image per slice.</source>
+        <translation>Wczytaj kilka obrazów (lub wielostronicowy TIFF) jako wolumin, jeden obraz na przekrój.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="151"/>
+        <source>Open &amp;folder...</source>
+        <translation>Otwórz &amp;folder...</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="152"/>
+        <source>Load all the images of a folder as a volume.</source>
+        <translation>Wczytaj wszystkie obrazy z folderu jako wolumin.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="154"/>
+        <source>Open &amp;raw volume...</source>
+        <translation>Otwórz &amp;surowy wolumin...</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="155"/>
+        <source>Load a raw file of 8-bit voxels. Its sizes are asked, since the file does not contain them.</source>
+        <translation>Wczytaj surowy plik z vokselami 8-bitowymi. Wymiary są wymagane, ponieważ plik ich nie zawiera.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="158"/>
+        <source>&amp;File</source>
+        <translation>&amp;Plik</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="175"/>
+        <source>Images (%1)</source>
+        <translation>Obrazy (%1)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="178"/>
+        <source>Open image series</source>
+        <translation>Otwórz serię obrazów</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="197"/>
+        <source>Open folder</source>
+        <translation>Otwórz folder</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="208"/>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="242"/>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="283"/>
+        <source>Error</source>
+        <translation>Błąd</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="208"/>
+        <source>No supported image found in this folder.</source>
+        <translation>W tym folderze nie znaleziono obsługiwanych obrazów.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="231"/>
+        <source>Raw volumes (*.raw *.bin *.vol *.img *.dat);;All files (*)</source>
+        <translation>Surowe woluminy (*.raw *.bin *.vol *.img *.dat);;Wszystkie pliki (*)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="233"/>
+        <source>Open raw volume</source>
+        <translation>Otwórz surowy wolumin</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="263"/>
+        <source>Loading the volume...</source>
+        <translation>Wczytywanie woluminu...</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="263"/>
+        <source>Cancel</source>
+        <translation>Anuluj</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="289"/>
+        <source>Fluvel Set - Volume - %1</source>
+        <translation>Fluvel Set - Wolumin - %1</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/volume_window.cpp" line="290"/>
+        <source>Volume loaded: %1 x %2 x %3</source>
+        <translation>Wczytano wolumin: %1 x %2 x %3</translation>
     </message>
 </context>
 </TS>
