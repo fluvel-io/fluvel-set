@@ -78,8 +78,7 @@ bool DragDropBehavior::drop(ImageViewerWidget& view, QDropEvent* e)
     if (urls.size() > 1)
     {
         view.showNotification(QCoreApplication::translate(
-            "fluvel::DragDropBehavior", "%n files dropped: only the first one is opened.", nullptr,
-            static_cast<int>(urls.size())));
+            "fluvel::DragDropBehavior", "Several files dropped: only the first one is opened."));
     }
 
     QTimer::singleShot(0, &view,

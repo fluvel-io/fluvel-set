@@ -9,13 +9,28 @@
         <translation>Fichiers image (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/core/file_utils.cpp" line="158"/>
+        <location filename="../src/app/core/file_utils.cpp" line="103"/>
+        <source>File not found: %1</source>
+        <translation>Fichier introuvable : %1</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/file_utils.cpp" line="106"/>
+        <source>%1 is not a file.</source>
+        <translation>%1 n’est pas un fichier.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/file_utils.cpp" line="109"/>
+        <source>Cannot read %1: permission denied.</source>
+        <translation>Impossible de lire %1 : permission refusée.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/file_utils.cpp" line="175"/>
         <source>Video Files (%1)</source>
         <translation>Fichiers vidéo (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/core/file_utils.cpp" line="237"/>
-        <location filename="../src/app/core/file_utils.cpp" line="299"/>
+        <location filename="../src/app/core/file_utils.cpp" line="254"/>
+        <location filename="../src/app/core/file_utils.cpp" line="316"/>
         <source>Unspecified</source>
         <translation>Non spécifié</translation>
     </message>
@@ -692,6 +707,14 @@ R : %3  G : %4  B : %5</translation>
     </message>
 </context>
 <context>
+    <name>fluvel::DragDropBehavior</name>
+    <message>
+        <location filename="../src/app/ui/components/drag_drop_behavior.cpp" line="80"/>
+        <source>Several files dropped: only the first one is opened.</source>
+        <translation>Plusieurs fichiers déposés : seul le premier est ouvert.</translation>
+    </message>
+</context>
+<context>
     <name>fluvel::HausdorffWidget</name>
     <message>
         <location filename="../src/app/ui/components/hausdorff_widget.cpp" line="64"/>
@@ -953,93 +976,98 @@ Cliquez à nouveau sur Calculer pour appliquer le changement.</translation>
 <context>
     <name>fluvel::ImageController</name>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="47"/>
+        <location filename="../src/app/core/image_controller.cpp" line="78"/>
         <source>Unsupported image format.</source>
         <translation>Format d’image non pris en charge.</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="60"/>
+        <location filename="../src/app/core/image_controller.cpp" line="91"/>
         <source>Image file extension differs from detected format: .%1 → %2</source>
         <translation>L’extension du fichier image diffère du format détecté : .%1 → %2</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="68"/>
+        <location filename="../src/app/core/image_controller.cpp" line="99"/>
         <source>Failed to load image: %1</source>
         <translation>Impossible de charger l’image : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="263"/>
+        <location filename="../src/app/core/image_controller.cpp" line="105"/>
+        <source>The image has more than 8 bits per channel: it is converted to 8 bits.</source>
+        <translation>L’image a plus de 8 bits par canal : elle est convertie en 8 bits.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/core/image_controller.cpp" line="299"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="281"/>
+        <location filename="../src/app/core/image_controller.cpp" line="317"/>
         <source>Step: %1
 </source>
         <translation>Étape : %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="282"/>
+        <location filename="../src/app/core/image_controller.cpp" line="318"/>
         <source>State: %1
 </source>
         <translation>État : %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="285"/>
+        <location filename="../src/app/core/image_controller.cpp" line="321"/>
         <source>Reason: %1
 </source>
         <translation>Motif : %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="287"/>
+        <location filename="../src/app/core/image_controller.cpp" line="323"/>
         <source>Reason: 
 </source>
         <translation>Motif : 
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="291"/>
+        <location filename="../src/app/core/image_controller.cpp" line="327"/>
         <source>Mean in: %1
 </source>
         <translation>Moy. int. : %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="293"/>
+        <location filename="../src/app/core/image_controller.cpp" line="329"/>
         <source>Mean out: %1
 </source>
         <translation>Moy. ext. : %1
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="299"/>
+        <location filename="../src/app/core/image_controller.cpp" line="335"/>
         <source>Hausdorff: %1 %
 </source>
         <translation>Hausdorff : %1 %
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="302"/>
+        <location filename="../src/app/core/image_controller.cpp" line="338"/>
         <source>Compute time: %1 s
 </source>
         <translation>Temps de calcul : %1 s
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="349"/>
-        <location filename="../src/app/core/image_controller.cpp" line="363"/>
-        <location filename="../src/app/core/image_controller.cpp" line="365"/>
+        <location filename="../src/app/core/image_controller.cpp" line="385"/>
+        <location filename="../src/app/core/image_controller.cpp" line="399"/>
+        <location filename="../src/app/core/image_controller.cpp" line="401"/>
         <source>Speed: %1 it/s
 </source>
         <translation>Vitesse : %1 it/s
 </translation>
     </message>
     <message>
-        <location filename="../src/app/core/image_controller.cpp" line="350"/>
-        <location filename="../src/app/core/image_controller.cpp" line="367"/>
+        <location filename="../src/app/core/image_controller.cpp" line="386"/>
+        <location filename="../src/app/core/image_controller.cpp" line="403"/>
         <source>Contour: %1 pts</source>
         <translation>Contour : %1 pts</translation>
     </message>
@@ -2117,53 +2145,58 @@ ou cliquez sur Ouvrir...</translation>
         <translation>Arrêter la source active.</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2089"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1984"/>
+        <source>Unsupported video format: %1</source>
+        <translation>Format vidéo non pris en charge : %1</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2099"/>
         <source>Resume playback</source>
         <translation>Reprendre la lecture</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2090"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2100"/>
         <source>Resume from %1?</source>
         <translation>Reprendre à %1 ?</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2095"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2105"/>
         <source>Resume</source>
         <translation type="unfinished">Reprendre</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2096"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2106"/>
         <source>Start over</source>
         <translation>Depuis le début</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2217"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2227"/>
         <source>Volume: %1%</source>
         <translation>Volume : %1 %</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2453"/>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2478"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2463"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2488"/>
         <source>Volume %1%</source>
         <translation>Volume : %1 %</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2493"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2503"/>
         <source>Muted</source>
         <translation>Son coupé</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2493"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2503"/>
         <source>Unmuted</source>
         <translation>Son réactivé</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2505"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2515"/>
         <source>Play</source>
         <translation>Lecture</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2509"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2519"/>
         <source>Pause</source>
         <translation>Pause</translation>
     </message>
@@ -2199,11 +2232,13 @@ Le flux de la source est peut-être bloqué ou devenu indisponible.</translation
     </message>
     <message>
         <location filename="../src/app/ui/windows/video_window.cpp" line="1965"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1977"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="1983"/>
         <source>Open Video File</source>
         <translation>Ouvrir un fichier vidéo</translation>
     </message>
     <message>
-        <location filename="../src/app/ui/windows/video_window.cpp" line="2018"/>
+        <location filename="../src/app/ui/windows/video_window.cpp" line="2028"/>
         <source>Clear source history</source>
         <translation>Effacer l&apos;historique des sources</translation>
     </message>
