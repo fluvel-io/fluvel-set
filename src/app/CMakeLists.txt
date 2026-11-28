@@ -26,6 +26,8 @@ set(app_src
     ${UI_WIN_DIR}/histogram_window.cpp
     ${UI_WIN_DIR}/histogram_window.hpp
 
+    ${UI_COMP_DIR}/range_slider.cpp
+    ${UI_COMP_DIR}/range_slider.hpp
     ${UI_COMP_DIR}/contrast_control.cpp
     ${UI_COMP_DIR}/contrast_control.hpp
 

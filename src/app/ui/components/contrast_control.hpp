@@ -9,18 +9,19 @@
 
 class QDoubleSpinBox;
 class QPushButton;
-class QSlider;
 
 namespace fluvel
 {
 
+class RangeSlider;
+
 /**
  * @brief Controls choosing the range of voxel values shown on screen.
  *
- * Two sliders (with spin boxes) set the minimum, displayed black, and the maximum, displayed
- * white. The minimum always stays below the maximum. A button restores the default range.
- * Typical use is a 16-bit or CT volume, where the interesting values only span a small part
- * of the whole range.
+ * A slider with two handles (and two spin boxes) sets the minimum, displayed black, and the
+ * maximum, displayed white. The minimum always stays below the maximum. A button restores the
+ * default range. Typical use is a 16-bit or CT volume, where the interesting values only span a
+ * small part of the whole range.
  */
 class ContrastControl final : public QWidget
 {
@@ -45,6 +46,21 @@ public:
 
     /// Range currently chosen.
     fluvel_ip::VoxelWindow window() const;
+
+    /**
+     * @brief Changes the range from a mouse drag on an image.
+     *
+     * Dragging to the right narrows the range (more contrast), to the left widens it. Dragging
+     * up moves the range toward the low values (brighter image), down toward the high values.
+     * A drag of kDragPixelsForFullRange pixels crosses the whole range of values.
+     *
+     * @param dx Horizontal movement in pixels (positive to the right).
+     * @param dy Vertical movement in pixels (positive downward).
+     */
+    void dragWindow(int dx, int dy);
+
+    /// Pixels of mouse drag that correspond to the whole range of values.
+    static constexpr int kDragPixelsForFullRange = 400;
 
 signals:
     /// Emitted when the user changes the range.
@@ -73,8 +89,7 @@ private:
     fluvel_ip::VoxelWindow default_;
     fluvel_ip::VoxelWindow current_;
 
-    QSlider* lowSlider_{nullptr};
-    QSlider* highSlider_{nullptr};
+    RangeSlider* slider_{nullptr};
     QDoubleSpinBox* lowSpin_{nullptr};
     QDoubleSpinBox* highSpin_{nullptr};
     QPushButton* resetButton_{nullptr};

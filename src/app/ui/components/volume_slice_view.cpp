@@ -7,6 +7,7 @@
 
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QMouseEvent>
 #include <QPainter>
 #include <QSlider>
 #include <QVBoxLayout>
@@ -29,6 +30,12 @@ void SliceCanvas::setImage(const QImage& image)
     update();
 }
 
+void SliceCanvas::setOverlayText(const QString& text)
+{
+    overlayText_ = text;
+    update();
+}
+
 QSize SliceCanvas::sizeHint() const
 {
     return {320, 320};
@@ -48,6 +55,51 @@ void SliceCanvas::paintEvent(QPaintEvent*)
 
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
     painter.drawImage(area, image_);
+
+    if (!overlayText_.isEmpty())
+    {
+        painter.setPen(QColor(255, 235, 59));
+        painter.drawText(rect().adjusted(6, 4, -6, -4), Qt::AlignLeft | Qt::AlignTop, overlayText_);
+    }
+}
+
+void SliceCanvas::mousePressEvent(QMouseEvent* event)
+{
+    if (event->button() != Qt::RightButton)
+    {
+        QWidget::mousePressEvent(event);
+        return;
+    }
+
+    dragging_ = true;
+    lastDragPos_ = event->position().toPoint();
+    event->accept();
+}
+
+void SliceCanvas::mouseMoveEvent(QMouseEvent* event)
+{
+    if (!dragging_)
+    {
+        QWidget::mouseMoveEvent(event);
+        return;
+    }
+
+    const QPoint pos = event->position().toPoint();
+    const QPoint delta = pos - lastDragPos_;
+    lastDragPos_ = pos;
+
+    if (!delta.isNull())
+        emit dragged(delta.x(), delta.y());
+
+    event->accept();
+}
+
+void SliceCanvas::mouseReleaseEvent(QMouseEvent* event)
+{
+    if (event->button() == Qt::RightButton)
+        dragging_ = false;
+
+    QWidget::mouseReleaseEvent(event);
 }
 
 VolumeSliceView::VolumeSliceView(fluvel_ip::VolumeAxis axis, QWidget* parent)
@@ -55,6 +107,8 @@ VolumeSliceView::VolumeSliceView(fluvel_ip::VolumeAxis axis, QWidget* parent)
     , axis_(axis)
 {
     canvas_ = new SliceCanvas(this);
+    canvas_->setToolTip(tr("Right-click and drag to adjust the contrast."));
+    connect(canvas_, &SliceCanvas::dragged, this, &VolumeSliceView::windowDragged);
 
     slider_ = new QSlider(Qt::Horizontal, this);
     slider_->setEnabled(false);
@@ -104,6 +158,15 @@ void VolumeSliceView::setWindow(const fluvel_ip::VoxelWindow& window)
     refresh();
 }
 
+QString VolumeSliceView::windowText() const
+{
+    // The usual way to describe the range: width (W) and level, the center (L).
+    const double width = window_.high - window_.low;
+    const double level = (window_.high + window_.low) / 2.0;
+
+    return QStringLiteral("W: %1  L: %2").arg(width, 0, 'g', 6).arg(level, 0, 'g', 6);
+}
+
 int VolumeSliceView::sliceIndex() const
 {
     return slider_->value();
@@ -114,6 +177,7 @@ void VolumeSliceView::refresh()
     if (!volume_ || volume_->isEmpty())
     {
         canvas_->setImage({});
+        canvas_->setOverlayText({});
         indexLabel_->clear();
         return;
     }
@@ -121,6 +185,7 @@ void VolumeSliceView::refresh()
     const int index = slider_->value();
 
     canvas_->setImage(toQImageCopy(volume_->sliceToGray8(axis_, index, window_)));
+    canvas_->setOverlayText(windowText());
 
     indexLabel_->setText(
         QStringLiteral("%1 / %2").arg(slider_->value() + 1).arg(slider_->maximum() + 1));

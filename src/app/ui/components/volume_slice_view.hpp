@@ -11,6 +11,7 @@
 #include <memory>
 
 class QLabel;
+class QMouseEvent;
 class QPaintEvent;
 class QSlider;
 
@@ -29,13 +30,26 @@ public:
 
     void setImage(const QImage& image);
 
+    /// Text drawn in the top left corner (nothing when empty).
+    void setOverlayText(const QString& text);
+
     QSize sizeHint() const override;
+
+signals:
+    /// Emitted while the right button is dragged, with the movement in pixels.
+    void dragged(int dx, int dy);
 
 protected:
     void paintEvent(QPaintEvent* event) override;
+    void mousePressEvent(QMouseEvent* event) override;
+    void mouseMoveEvent(QMouseEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent* event) override;
 
 private:
     QImage image_;
+    QString overlayText_;
+    QPoint lastDragPos_;
+    bool dragging_{false};
 };
 
 /**
@@ -60,8 +74,14 @@ signals:
     /// Emitted when the displayed slice changes.
     void sliceChanged(int index);
 
+    /// Emitted while the right button is dragged on the image, with the movement in pixels.
+    void windowDragged(int dx, int dy);
+
 private:
     void refresh();
+
+    /// "W: width  L: level" of the displayed range.
+    QString windowText() const;
 
     fluvel_ip::VolumeAxis axis_;
     fluvel_ip::VoxelWindow window_;

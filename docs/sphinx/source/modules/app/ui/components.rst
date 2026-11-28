@@ -151,6 +151,8 @@ Miscellaneous Widgets
 
 .. doxygenfile:: volume_slice_view.hpp
 
+.. doxygenfile:: range_slider.hpp
+
 .. doxygenfile:: contrast_control.hpp
 
 

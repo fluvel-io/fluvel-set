@@ -3,12 +3,13 @@
 
 #include "contrast_control.hpp"
 
+#include "range_slider.hpp"
+
 #include <QDoubleSpinBox>
 #include <QGridLayout>
 #include <QLabel>
 #include <QPushButton>
 #include <QSignalBlocker>
-#include <QSlider>
 
 #include <algorithm>
 #include <cmath>
@@ -27,11 +28,8 @@ constexpr int kSliderSteps = 1000;
 ContrastControl::ContrastControl(QWidget* parent)
     : QWidget(parent)
 {
-    lowSlider_ = new QSlider(Qt::Horizontal, this);
-    highSlider_ = new QSlider(Qt::Horizontal, this);
-
-    for (QSlider* slider : {lowSlider_, highSlider_})
-        slider->setRange(0, kSliderSteps);
+    slider_ = new RangeSlider(this);
+    slider_->setRange(0, kSliderSteps);
 
     lowSpin_ = new QDoubleSpinBox(this);
     highSpin_ = new QDoubleSpinBox(this);
@@ -44,21 +42,20 @@ ContrastControl::ContrastControl(QWidget* parent)
         tr("Values below the minimum are shown black, values above the maximum white."));
 
     auto* grid = new QGridLayout(this);
-    grid->addWidget(new QLabel(tr("Minimum"), this), 0, 0);
-    grid->addWidget(lowSpin_, 0, 1);
-    grid->addWidget(lowSlider_, 1, 0, 1, 2);
+    grid->addWidget(slider_, 0, 0, 1, 2);
+    grid->addWidget(new QLabel(tr("Minimum"), this), 1, 0);
+    grid->addWidget(lowSpin_, 1, 1);
     grid->addWidget(new QLabel(tr("Maximum"), this), 2, 0);
     grid->addWidget(highSpin_, 2, 1);
-    grid->addWidget(highSlider_, 3, 0, 1, 2);
-    grid->addWidget(resetButton_, 4, 0, 1, 2);
-    grid->setRowStretch(5, 1);
+    grid->addWidget(resetButton_, 3, 0, 1, 2);
+    grid->setRowStretch(4, 1);
 
-    connect(lowSlider_, &QSlider::valueChanged, this,
+    connect(slider_, &RangeSlider::lowValueChanged, this,
             [this](int position)
             {
                 moveEdge(Edge::Low, fromSliderPosition(position));
             });
-    connect(highSlider_, &QSlider::valueChanged, this,
+    connect(slider_, &RangeSlider::highValueChanged, this,
             [this](int position)
             {
                 moveEdge(Edge::High, fromSliderPosition(position));
@@ -156,15 +153,55 @@ void ContrastControl::moveEdge(Edge edge, double value)
 
 void ContrastControl::showWindow()
 {
-    const QSignalBlocker b1(lowSlider_);
-    const QSignalBlocker b2(highSlider_);
-    const QSignalBlocker b3(lowSpin_);
-    const QSignalBlocker b4(highSpin_);
+    const QSignalBlocker b1(lowSpin_);
+    const QSignalBlocker b2(highSpin_);
 
-    lowSlider_->setValue(toSliderPosition(current_.low));
-    highSlider_->setValue(toSliderPosition(current_.high));
+    slider_->setValues(toSliderPosition(current_.low), toSliderPosition(current_.high));
     lowSpin_->setValue(current_.low);
     highSpin_->setValue(current_.high);
+}
+
+void ContrastControl::dragWindow(int dx, int dy)
+{
+    if (!isEnabled())
+        return;
+
+    const double span = highest_ - lowest_;
+    const double unit = span / kDragPixelsForFullRange;
+
+    double width = (current_.high - current_.low) - dx * unit;
+    double level = (current_.high + current_.low) / 2.0 + dy * unit;
+
+    width = std::clamp(width, minGap_, span);
+    level = std::clamp(level, lowest_, highest_);
+
+    fluvel_ip::VoxelWindow next{level - width / 2.0, level + width / 2.0};
+
+    // Keep the range inside the limits by shifting it, so its width is preserved.
+    if (next.low < lowest_)
+    {
+        next.high += lowest_ - next.low;
+        next.low = lowest_;
+    }
+
+    if (next.high > highest_)
+    {
+        next.low -= next.high - highest_;
+        next.high = highest_;
+    }
+
+    if (integerValues_)
+    {
+        next.low = std::round(next.low);
+        next.high = std::round(next.high);
+    }
+
+    if (next.low == current_.low && next.high == current_.high)
+        return;
+
+    current_ = next;
+    showWindow();
+    emit windowChanged(current_);
 }
 
 int ContrastControl::toSliderPosition(double value) const

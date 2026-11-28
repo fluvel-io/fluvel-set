@@ -140,6 +140,10 @@ void VolumeWindow::setupDocks()
     contrastDock->setObjectName("volume_dock_contrast");
     contrastDock->setWidget(contrastControl_);
 
+    for (VolumeSliceView* view : {axialView_, coronalView_, sagittalView_})
+        connect(view, &VolumeSliceView::windowDragged, contrastControl_,
+                &ContrastControl::dragWindow);
+
     connect(contrastControl_, &ContrastControl::windowChanged, this,
             [this](const fluvel_ip::VoxelWindow& window)
             {
