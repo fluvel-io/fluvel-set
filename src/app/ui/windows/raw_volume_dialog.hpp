@@ -10,6 +10,7 @@
 
 #include <optional>
 
+class QComboBox;
 class QDialogButtonBox;
 class QLabel;
 class QSpinBox;
@@ -19,12 +20,12 @@ namespace fluvel
 {
 
 /**
- * @brief Dialog asking the sizes of a raw volume file.
+ * @brief Dialog asking the layout of a raw volume file.
  *
- * A raw file contains only voxels: its width, height and depth cannot be read from it. The
- * fields are pre-filled from the file name when it contains them (for example
- * "tooth_103x94x161_uint8.raw"). The dialog compares the size announced by the fields with the
- * size of the file and enables OK only when they match, which avoids loading a skewed volume
+ * A raw file contains only voxels: its width, height, depth, voxel type and byte order cannot
+ * be read from it. The fields are pre-filled from the file name when it contains them (for
+ * example "tooth_103x94x161_uint16.raw"). The dialog compares the size announced by the fields with
+ * the size of the file and enables OK only when they match, which avoids loading a skewed volume
  * because of a wrong dimension.
  */
 class RawVolumeDialog final : public QDialog
@@ -50,14 +51,17 @@ public:
 
 private:
     void updateStatus();
+    void updateByteOrderEnabled();
 
     qint64 fileSize_{0};
-    bool otherTypeSuspected_{false};
+    bool unsupportedTypeSuspected_{false};
 
     QSpinBox* widthSpin_{nullptr};
     QSpinBox* heightSpin_{nullptr};
     QSpinBox* depthSpin_{nullptr};
     QSpinBox* headerSpin_{nullptr};
+    QComboBox* typeCombo_{nullptr};
+    QComboBox* byteOrderCombo_{nullptr};
     QLabel* statusLabel_{nullptr};
     QDialogButtonBox* buttons_{nullptr};
 };

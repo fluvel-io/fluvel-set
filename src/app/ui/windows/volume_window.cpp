@@ -152,8 +152,9 @@ void VolumeWindow::setupMenus()
     openFolderAct_->setStatusTip(tr("Load all the images of a folder as a volume."));
 
     openRawAct_ = new QAction(tr("Open &raw volume..."), this);
-    openRawAct_->setStatusTip(tr("Load a raw file of 8-bit voxels. Its sizes are asked, since the "
-                                 "file does not contain them."));
+    openRawAct_->setStatusTip(
+        tr("Load a raw file of voxels. Its sizes and voxel type are asked, since the "
+           "file does not contain them."));
 
     auto* fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(openSeriesAct_);

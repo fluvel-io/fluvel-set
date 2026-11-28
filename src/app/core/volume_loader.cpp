@@ -13,7 +13,10 @@
 #include <QRegularExpression>
 
 #include <algorithm>
+#include <bit>
+#include <cstdint>
 #include <cstring>
+#include <type_traits>
 
 namespace fluvel::volume_loader
 {
@@ -153,7 +156,8 @@ std::optional<RawParameters> guessRawParameters(const QString& fileName)
     static const QRegularExpression re(QStringLiteral("(\\d+)x(\\d+)x(\\d+)"),
                                        QRegularExpression::CaseInsensitiveOption);
 
-    const auto match = re.match(QFileInfo(fileName).fileName());
+    const QString name = QFileInfo(fileName).fileName();
+    const auto match = re.match(name);
 
     if (!match.hasMatch())
         return std::nullopt;
@@ -173,26 +177,109 @@ std::optional<RawParameters> guessRawParameters(const QString& fileName)
     p.width = w;
     p.height = h;
     p.depth = d;
+
+    // "uint16" must be tested before "int16", which it contains.
+    if (!nameSuggestsUnsupportedVoxelType(name))
+    {
+        const auto has = [&name](const char* word)
+        {
+            return name.contains(QLatin1String(word), Qt::CaseInsensitive);
+        };
+
+        if (has("uint16"))
+            p.type = VoxelType::UInt16;
+        else if (has("int16"))
+            p.type = VoxelType::Int16;
+        else if (has("float"))
+            p.type = VoxelType::Float32;
+    }
+
     return p;
 }
 
-bool nameSuggestsOtherVoxelType(const QString& fileName)
+bool nameSuggestsUnsupportedVoxelType(const QString& fileName)
 {
-    static const QRegularExpression re(QStringLiteral("u?int(16|32|64)|float|double"),
+    static const QRegularExpression re(QStringLiteral("u?int(32|64)|double|float64"),
                                        QRegularExpression::CaseInsensitiveOption);
 
     return re.match(QFileInfo(fileName).fileName()).hasMatch();
 }
+
+namespace
+{
+
+/// Reverses the bytes of each element.
+template <fluvel_ip::Voxel T>
+void swapBytes(T* data, std::size_t count)
+{
+    if constexpr (sizeof(T) > 1)
+    {
+        for (std::size_t i = 0; i < count; ++i)
+        {
+            if constexpr (std::is_same_v<T, float>)
+            {
+                std::uint32_t bits = 0;
+                std::memcpy(&bits, &data[i], sizeof(bits));
+                bits = std::byteswap(bits);
+                std::memcpy(&data[i], &bits, sizeof(bits));
+            }
+            else
+            {
+                data[i] = std::byteswap(data[i]);
+            }
+        }
+    }
+}
+
+/// Reads the voxels of a file already checked against the parameters.
+template <fluvel_ip::Voxel T>
+Result readRawVoxels(QFile& file, const QString& path, const RawParameters& p,
+                     const ProgressCallback& progress)
+{
+    fluvel_ip::VolumeOwner<T> volume(p.width, p.height, p.depth);
+
+    const std::size_t sliceVoxels = static_cast<std::size_t>(p.width) * p.height;
+    const qint64 sliceBytes = static_cast<qint64>(sliceVoxels * sizeof(T));
+
+    // The file is read as it is, then swapped when its byte order is not the one of the machine.
+    const bool fileIsBigEndian = p.bigEndian;
+    const bool machineIsBigEndian = std::endian::native == std::endian::big;
+    const bool mustSwap = fileIsBigEndian != machineIsBigEndian;
+
+    for (int z = 0; z < p.depth; ++z)
+    {
+        T* dst = volume.sliceData(z);
+
+        if (file.read(reinterpret_cast<char*>(dst), sliceBytes) != sliceBytes)
+            return failure(QObject::tr("Cannot read %1: %2").arg(path, file.errorString()));
+
+        if (mustSwap)
+            swapBytes(dst, sliceVoxels);
+
+        if (progress && !progress(z + 1, p.depth))
+        {
+            Result r;
+            r.cancelled = true;
+            return r;
+        }
+    }
+
+    Result r;
+    r.volume = std::make_shared<const AnyVolume>(std::move(volume));
+    return r;
+}
+
+} // namespace
 
 Result loadRaw(const QString& path, const RawParameters& p, const ProgressCallback& progress)
 {
     if (p.width <= 0 || p.height <= 0 || p.depth <= 0 || p.headerBytes < 0)
         return failure(QObject::tr("The sizes of the volume must be strictly positive."));
 
-    const qint64 sliceBytes = static_cast<qint64>(p.width) * p.height;
-    const qint64 voxels = sliceBytes * p.depth;
+    const qint64 voxels = static_cast<qint64>(p.width) * p.height * p.depth;
+    const int bytes = bytesPerVoxel(p.type);
 
-    if (voxels > kMaxVoxels)
+    if (voxels * bytes > kMaxVolumeBytes)
         return failure(QObject::tr("The volume is too large (%1 x %2 x %3 voxels).")
                            .arg(p.width)
                            .arg(p.height)
@@ -209,20 +296,27 @@ Result loadRaw(const QString& path, const RawParameters& p, const ProgressCallba
     if (actual != expected)
     {
         QString message = QObject::tr("The file has %1 bytes but %2 are expected for %3 x %4 x %5 "
-                                      "voxels of 8 bits.")
+                                      "voxels of %6 bits.")
                               .arg(actual)
                               .arg(expected)
                               .arg(p.width)
                               .arg(p.height)
-                              .arg(p.depth);
+                              .arg(p.depth)
+                              .arg(8 * bytes);
 
+        // Another voxel size would fit: this is the most frequent mistake.
         const qint64 payload = actual - p.headerBytes;
 
-        if (payload > 0 && voxels > 0 && payload % voxels == 0 && payload / voxels > 1)
-            message += QLatin1Char('\n') +
-                       QObject::tr("The file probably holds voxels of %1 bits: only 8 bits are "
-                                   "supported for now.")
-                           .arg(8 * (payload / voxels));
+        for (const int other : {1, 2, 4})
+        {
+            if (other != bytes && payload == voxels * other)
+            {
+                message += QLatin1Char('\n') + QObject::tr("The size of the file matches voxels of "
+                                                           "%1 bits.")
+                                                   .arg(8 * other);
+                break;
+            }
+        }
 
         return failure(message);
     }
@@ -230,27 +324,20 @@ Result loadRaw(const QString& path, const RawParameters& p, const ProgressCallba
     if (!file.seek(p.headerBytes))
         return failure(QObject::tr("Cannot read %1: %2").arg(path, file.errorString()));
 
-    auto volume =
-        std::make_shared<fluvel_ip::VolumeOwner<std::uint8_t>>(p.width, p.height, p.depth);
-
-    for (int z = 0; z < p.depth; ++z)
+    switch (p.type)
     {
-        char* dst = reinterpret_cast<char*>(volume->sliceData(z));
-
-        if (file.read(dst, sliceBytes) != sliceBytes)
-            return failure(QObject::tr("Cannot read %1: %2").arg(path, file.errorString()));
-
-        if (progress && !progress(z + 1, p.depth))
-        {
-            Result r;
-            r.cancelled = true;
-            return r;
-        }
+        case VoxelType::UInt8:
+            return readRawVoxels<std::uint8_t>(file, path, p, progress);
+        case VoxelType::UInt16:
+            return readRawVoxels<std::uint16_t>(file, path, p, progress);
+        case VoxelType::Int16:
+            return readRawVoxels<std::int16_t>(file, path, p, progress);
+        case VoxelType::Float32:
+            return readRawVoxels<float>(file, path, p, progress);
     }
 
-    Result r;
-    r.volume = std::make_shared<const AnyVolume>(std::move(*volume));
-    return r;
+    // Unreachable: every voxel type is handled above.
+    return {};
 }
 
 Result loadImageSeries(const QStringList& files, const ProgressCallback& progress)
@@ -292,7 +379,7 @@ Result loadImageSeries(const QStringList& files, const ProgressCallback& progres
 
             const qint64 voxels = static_cast<qint64>(size.width()) * size.height() * total;
 
-            if (voxels > kMaxVoxels)
+            if (voxels > kMaxVolumeBytes)
                 return failure(QObject::tr("The volume is too large (%1 x %2 x %3 voxels).")
                                    .arg(size.width())
                                    .arg(size.height())

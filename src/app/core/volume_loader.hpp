@@ -41,9 +41,9 @@ struct Result
 using ProgressCallback = std::function<bool(int, int)>;
 
 /**
- * @brief Maximum number of voxels accepted (1 byte per voxel).
+ * @brief Maximum size in memory of a loaded volume, in bytes.
  */
-constexpr qint64 kMaxVoxels = 2LL * 1024 * 1024 * 1024;
+constexpr qint64 kMaxVolumeBytes = 2LL * 1024 * 1024 * 1024;
 
 /**
  * @brief Lists the image files of a folder, in natural order (img2 before img10).
@@ -60,8 +60,8 @@ QStringList sortedNaturally(QStringList files);
 /**
  * @brief Layout of a raw volume file: the voxels one after the other, without any header.
  *
- * A raw file does not describe itself, so the sizes must be given by the user. Only 8-bit
- * voxels are supported for now. The voxels are stored row by row, then slice by slice.
+ * A raw file does not describe itself, so the sizes, the voxel type and the byte order must be
+ * given by the user. The voxels are stored row by row, then slice by slice.
  */
 struct RawParameters
 {
@@ -72,36 +72,44 @@ struct RawParameters
     /// Number of bytes to skip at the beginning of the file.
     qint64 headerBytes{0};
 
+    /// Type of the voxels.
+    VoxelType type{VoxelType::UInt8};
+
+    /// Byte order of the voxels of 16 bits or more (false = little endian).
+    bool bigEndian{false};
+
     /// Size in bytes the file must have for these parameters.
     qint64 expectedFileSize() const
     {
-        return headerBytes + static_cast<qint64>(width) * height * depth;
+        return headerBytes + static_cast<qint64>(width) * height * depth * bytesPerVoxel(type);
     }
 };
 
 /**
  * @brief Guesses the sizes of a raw volume from its file name.
  *
- * Recognizes names like "tooth_103x94x161_uint8.raw" (width x height x depth).
+ * Recognizes names like "tooth_103x94x161_uint8.raw" (width x height x depth). The voxel type
+ * is also read from the name when it contains uint8, uint16, int16 or float (uint8 otherwise).
  *
- * @return The sizes found, with no header, or std::nullopt if the name does not contain them.
+ * @return The parameters found, with no header, or std::nullopt if the name does not contain
+ *         the sizes.
  */
 std::optional<RawParameters> guessRawParameters(const QString& fileName);
 
 /**
- * @brief Tells whether the file name announces voxels that are not 8-bit (uint16, float...).
+ * @brief Tells whether the file name announces a voxel type that is not supported
+ *        (32 or 64-bit integers, double).
  */
-bool nameSuggestsOtherVoxelType(const QString& fileName);
+bool nameSuggestsUnsupportedVoxelType(const QString& fileName);
 
 /**
- * @brief Loads a raw 8-bit volume.
+ * @brief Loads a raw volume.
  *
  * The file size must match the parameters exactly, which catches most mistakes on the
- * sizes. When the file is 2 or 4 times too large, the error says it probably holds 16-bit
- * or 32-bit voxels.
+ * sizes and on the voxel type. When the size would match another voxel type, the error says so.
  *
  * @param path Raw file.
- * @param parameters Sizes and header of the file.
+ * @param parameters Sizes, voxel type, byte order and header of the file.
  * @param progress Optional progress and cancellation callback (called after each slice).
  */
 Result loadRaw(const QString& path, const RawParameters& parameters,

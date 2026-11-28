@@ -3,6 +3,7 @@
 
 #include "raw_volume_dialog.hpp"
 
+#include <QComboBox>
 #include <QDialogButtonBox>
 #include <QFileInfo>
 #include <QFormLayout>
@@ -36,7 +37,7 @@ RawVolumeDialog::RawVolumeDialog(const QString& filePath, QWidget* parent)
 
     const QFileInfo info(filePath);
     fileSize_ = info.size();
-    otherTypeSuspected_ = volume_loader::nameSuggestsOtherVoxelType(info.fileName());
+    unsupportedTypeSuspected_ = volume_loader::nameSuggestsUnsupportedVoxelType(info.fileName());
 
     auto* nameLabel = new QLabel(info.fileName(), this);
     nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
@@ -50,7 +51,16 @@ RawVolumeDialog::RawVolumeDialog(const QString& filePath, QWidget* parent)
     headerSpin_->setSuffix(tr(" bytes"));
     headerSpin_->setToolTip(tr("Number of bytes to skip at the beginning of the file."));
 
-    auto* typeLabel = new QLabel(tr("8-bit voxels (one byte per voxel)"), this);
+    typeCombo_ = new QComboBox(this);
+    typeCombo_->addItem(tr("8-bit unsigned"), static_cast<int>(VoxelType::UInt8));
+    typeCombo_->addItem(tr("16-bit unsigned"), static_cast<int>(VoxelType::UInt16));
+    typeCombo_->addItem(tr("16-bit signed"), static_cast<int>(VoxelType::Int16));
+    typeCombo_->addItem(tr("32-bit float"), static_cast<int>(VoxelType::Float32));
+
+    byteOrderCombo_ = new QComboBox(this);
+    byteOrderCombo_->addItem(tr("Little endian (most files)"), false);
+    byteOrderCombo_->addItem(tr("Big endian"), true);
+    byteOrderCombo_->setToolTip(tr("Order of the bytes of the voxels of 16 bits or more."));
 
     auto* form = new QFormLayout;
     form->addRow(tr("File:"), nameLabel);
@@ -58,7 +68,8 @@ RawVolumeDialog::RawVolumeDialog(const QString& filePath, QWidget* parent)
     form->addRow(tr("Height:"), heightSpin_);
     form->addRow(tr("Depth (number of slices):"), depthSpin_);
     form->addRow(tr("Header:"), headerSpin_);
-    form->addRow(tr("Data type:"), typeLabel);
+    form->addRow(tr("Data type:"), typeCombo_);
+    form->addRow(tr("Byte order:"), byteOrderCombo_);
 
     statusLabel_ = new QLabel(this);
     statusLabel_->setWordWrap(true);
@@ -78,14 +89,22 @@ RawVolumeDialog::RawVolumeDialog(const QString& filePath, QWidget* parent)
         widthSpin_->setValue(guess->width);
         heightSpin_->setValue(guess->height);
         depthSpin_->setValue(guess->depth);
+
+        if (const int index = typeCombo_->findData(static_cast<int>(guess->type)); index >= 0)
+            typeCombo_->setCurrentIndex(index);
     }
 
     for (QSpinBox* spin : {widthSpin_, heightSpin_, depthSpin_, headerSpin_})
         connect(spin, &QSpinBox::valueChanged, this, &RawVolumeDialog::updateStatus);
 
+    connect(typeCombo_, &QComboBox::currentIndexChanged, this, &RawVolumeDialog::updateStatus);
+    connect(typeCombo_, &QComboBox::currentIndexChanged, this,
+            &RawVolumeDialog::updateByteOrderEnabled);
+
     connect(buttons_, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttons_, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
+    updateByteOrderEnabled();
     updateStatus();
 }
 
@@ -96,6 +115,8 @@ volume_loader::RawParameters RawVolumeDialog::parameters() const
     p.height = heightSpin_->value();
     p.depth = depthSpin_->value();
     p.headerBytes = headerSpin_->value();
+    p.type = static_cast<VoxelType>(typeCombo_->currentData().toInt());
+    p.bigEndian = byteOrderCombo_->currentData().toBool();
     return p;
 }
 
@@ -122,14 +143,21 @@ void RawVolumeDialog::updateStatus()
                    .arg(fileSize_);
     }
 
-    if (otherTypeSuspected_)
-        text += QLatin1Char('\n') + tr("The file name suggests voxels that are not 8-bit: only "
-                                       "8-bit voxels are supported for now.");
+    if (unsupportedTypeSuspected_)
+        text += QLatin1Char('\n') + tr("The file name suggests a voxel type that is not "
+                                       "supported.");
 
     statusLabel_->setText(text);
 
     if (auto* ok = buttons_->button(QDialogButtonBox::Ok))
         ok->setEnabled(matches);
+}
+
+void RawVolumeDialog::updateByteOrderEnabled()
+{
+    // The byte order only matters for the voxels of 2 bytes or more.
+    const auto type = static_cast<VoxelType>(typeCombo_->currentData().toInt());
+    byteOrderCombo_->setEnabled(bytesPerVoxel(type) > 1);
 }
 
 std::optional<volume_loader::RawParameters> RawVolumeDialog::ask(const QString& filePath,
