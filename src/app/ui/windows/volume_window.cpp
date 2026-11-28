@@ -161,6 +161,12 @@ void VolumeWindow::setupDocks()
 
     // The contrast sits under the 3D view, in the bottom right cell of the 2 x 2 grid.
     splitDockWidget(viewer3dDock, contrastDock, Qt::Vertical);
+
+    // The View menu shows or hides each dock, so a closed dock can always be brought back.
+    auto* viewMenu = menuBar()->addMenu(tr("&View"));
+
+    for (QDockWidget* dock : {axialDock, coronalDock, sagittalDock, viewer3dDock, contrastDock})
+        viewMenu->addAction(dock->toggleViewAction());
 }
 
 void VolumeWindow::setupMenus()
